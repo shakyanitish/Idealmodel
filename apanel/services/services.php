@@ -442,6 +442,54 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                 </div> -->
 
                 <!-- brief end -->
+                <?php if (($typeid == 2) || ($typeid == 3)) { ?>
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Link Type :
+                            </label>
+                        </div>
+                        <div class="form-checkbox-radio col-md-9">
+                            <input id="" class="custom-radio" type="radio" name="linktype" value="0"
+                                onClick="linkTypeSelect(0);" <?php echo !empty($internal) ? $internal : "checked"; ?>>
+                            <label for="">Internal Link</label>
+                            <input id="" class="custom-radio" type="radio" name="linktype" value="1"
+                                onClick="linkTypeSelect(1);" <?php echo !empty($external) ? $external : ""; ?>>
+                            <label for="">External Link</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Link :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-8">
+                            <div class="col-md-4" style="padding-left:0px !important;">
+                                <input placeholder="Link" class="" type="text" name="linksrc" id="linksrc"
+                                    value="<?php echo !empty($advInfo->linksrc) ? $advInfo->linksrc : ""; ?>">
+                            </div>
+                            <div class="col-md-6" style="padding-left:0px !important;">
+                                <?php
+                                $Lpageview = !empty($advInfo->linksrc) ? $advInfo->linksrc : "";
+                                $LinkTypeview = !empty($advInfo->linktype) ? $advInfo->linktype : "";
+                                ?>
+                                <select data-placeholder="Select Link Page" class="col-md-4 chosen-select" <?php echo ($LinkTypeview == 1) ? 'hide' : ''; ?> id="linkPage">
+                                    <option value=""></option>
+                                    <?php
+                                    // Article Page Link
+                                    echo Article::get_internal_link($Lpageview, $LinkTypeview);
+                                    echo Package::get_internal_link($Lpageview, $LinkTypeview);
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+
+
+                
                 <?php if (($typeid == 3) || ($typeid == 2) || ($typeid == 1)) { ?>
                     <div class="form-row">
                         <div class="form-label col-md-8">

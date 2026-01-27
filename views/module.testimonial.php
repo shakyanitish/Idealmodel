@@ -16,43 +16,69 @@ if (!empty($tstRec)) {
         }
         $restst .= '';
         $restst .= '
-        <!-- owl item -->
-                            <div class="mad-grid-item">
-                                <div class="mad-testimonial">
-                                    <div class="mad-testimonial-info">
-                                        <blockquote>
-                                            <p>
-                                                ' . strip_tags($tstRow->content) . '
-                                            </p>
-                                        </blockquote>
-                                    </div>
+                                <div class="swiper-slide">
+                                    <div class="ul-review ul-review-2">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="reviewer-image"><img src="' . IMAGE_PATH . 'testimonial/' . $tstRow->image . '"
+                                                        alt="reviewer image"></div>
+                                            </div>
 
-                                    <div class="mad-author">
-                                        <div class="mad-author-info">
-                                            <span class="mad-author-name">' . $tstRow->name . ' - ' . $tstRow->via_type . '</span>
-                                              <a href="#"><img src="template/web/images/visor2.png" alt="" /></a>
+                                            <div class="col-md-9">
+                                                <div class="ul-review-bottom">
+                                                    <div class="ul-review-reviewer">
+                                                        <div>
+                                                            <h3 class="reviewer-name">' . $tstRow->name . '</h3>
+                                                            <span class="reviewer-role">' . $tstRow->via_type . '</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="impact-text">
+                                                    <p class="ul-review-descr">
+                                                        ' . strip_tags($tstRow->content) . '</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-        <!-- / owl item -->
+                                
                     ';
-
-        $restst .= '';
     }
-    $restst .= '';
 }
 
 $result_last = '
-<div class="mad-section mad-section--stretched mad-colorizer--scheme-color-3 with-svg-img mad-colorizer--scheme-light  content-element-main" data-bg-image-src="footer_4_bg_img.svg">
-                    <!--================ Testimonials ================-->
-                    <div class="mad-testimonials style-2">
-                        <div class="mad-grid mad-grid--cols-1 owl-carousel no-dots nav-size-2">
-                    ' . $restst . '
+        <section class="ul-testimonial-2 ul-section-spacing">
+            <div class="ul-container wow animate__fadeInUp">
+                <div class="ul-section-heading">
+                    <div>
+                        <span class="ul-section-sub-title"> Generous contribution to support communities</span>
+                        <h2 class="ul-section-title">Impact stories</h2>
                     </div>
+                </div>
+
+                <div class="row ul-testimonial-2-row gy-4">
+                    <div class="col-md-9">
+                        <div class="ul-testimonial-2-slider swiper">
+                            <div class="swiper-wrapper">
+                            ' . $restst . '
+                            </div>
+
+                            <div class="ul-testimonial-2-slider-nav">
+                                <button class="prev"><i class="flaticon-back"></i></button>
+                                <button class="next"><i class="flaticon-next"></i></button>
+                            </div>
+                        </div>
                     </div>
-                    <!--================ End of Testimonials ================-->
-                </div>';
+
+                    <div class="col-md-3">
+                        <div class="ul-testimonial-2-overview">
+                            <img src="template/web/assets/img/images.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+';
 
 
 $jVars['module:testimonialList123'] = $result_last;

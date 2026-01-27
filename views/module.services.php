@@ -4,18 +4,14 @@
     */
 
     $rescont = $res = '';
-    $i = 0;
-    $j = 0;
 
-    $subpkgRec = Services::getservice_list(12, 2); // get 12 items (6 for each)
-    // or use getservice_list(6,2) if your DB already gives 6+6
+
+    $subpkgRec = Services::getservice_list(4, 2); 
 
     if (!empty($subpkgRec)) {
 
         foreach ($subpkgRec as $k => $v) {
 
-            // limit res to 6
-            if ($i < 6) {
 
                 // Main image
                 $imglink = '';
@@ -56,15 +52,15 @@
                             <div class="ul-feature-icon">
                                 <img src="' . $iconlink . '">
                             </div>
+                            <a href="' . $linksrc . '"' . $linkTarget . '>
                             <h3 class="ul-feature-title">' . $v->title . '</h3>
+                            </a>
                         </div>
                     </div>
                 ';
 
-                $i++;
             }
         }
-    }
 
     // Wrap the features in the section structure
     $rescont = '
