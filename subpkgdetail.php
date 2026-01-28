@@ -10,7 +10,7 @@ require_once("includes/initialize.php");
 
 $currentTemplate	= Config::getCurrentTemplate('template');
 $jVars 				= array();
-$template 			= "template/{$currentTemplate}/destination.html";
+$template 			= "template/{$currentTemplate}/program-details.html";
 
 require_once('views/modules.php');
 

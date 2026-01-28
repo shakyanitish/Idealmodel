@@ -28,32 +28,61 @@ if (defined('PACKAGE_PAGE') and isset($_REQUEST['slug'])) {
               $imglink= IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
             }
         }
-        // <div id="background" data-bgimage="url(' . $imglink . ') fixed"></div>
 
         $roombreads .= '
-        <div id="background" data-bgimage="url(' . $imglink . ') fixed"></div>';
 
-        $jVars['module:imagebanner'] = $roombreads;
+                                <!-- single slide -->
+                        <div class="swiper-slide">
+                            <div class="ul-service">
+                                <div class="ul-service-img">
+                                    <img src="' . $imglink . '" alt="Service Image">
+                                </div>
+                                <div class="ul-service-txt">
+                                    <h3 class="ul-service-title"><a href="program-details.html">Sponsorship Program</a>
+                                    </h3>
+                                    <p class="ul-service-descr">MT has borne witness to significant rise in the number
+                                        of cardiac patients in Nepal.</p>
+                                    <a href="program-details.html" class="ul-service-btn"><i
+                                            class="flaticon-up-right-arrow"></i> View Details</a>
+                                </div>
+                            </div>
+                        </div>';
+
+
+
+
+
+
 
         $roombread .= '
 
-        <section id="subheader" class="no-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h1>' . $pkgRow->title . '</h1>
+
+        <section class="ul-section-spacing overflow-hidden">
+            <div class="ul-container">
+                <div class="ul-section-heading">
+                    <div>
+                        <span class="ul-section-sub-title">Together we can change lives forever</span>
+                        <h2 class="ul-section-title">Our Programs</h2>
+                    </div>
+
+                    <div class="ul-services-slider-nav ul-slider-nav position-static">
+                        <button class="prev"><i class="flaticon-back"></i></button>
+                        <button class="next"><i class="flaticon-next"></i></button>
+                    </div>
+                </div>
+
+                <div class="ul-services-slider swiper overflow-visible">
+                    <div class="swiper-wrapper">
+                        ' . $roombreads . '
+
+
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-
-
-
-
-
+        </section>
 
 ';
+        $jVars['module:imagebanner'] = $roombread;
 
         $sql = "SELECT *  FROM tbl_package_sub WHERE status='1' AND type = '{$pkgRow->id}' ORDER BY sortorder DESC ";
 

@@ -19,7 +19,7 @@ ErrorDocument 404 /404.php
 RewriteRule ^book/([a-zA-Z0-9-]+)/?$ book.php?slug=$1 [L]
 
 #For inner pages.
-RewriteRule ^about-us/?$ inner.php? [L]
+RewriteRule ^about-us/?$ inner.php?slug=about-us [L]
 
 
 
@@ -39,14 +39,14 @@ RewriteRule ^gallery-list/?$ gallery.php [L]
 #For gallery pages.
 RewriteRule ^video/?$ video.php [L]
 
-#For Destination dropdown pages.
-#RewriteRule ^india/?$ subpkgdetail.php [L]
-#RewriteRule ^nepal/?$ package.php [L]
+
+RewriteRule ^program-details.html/?$ subpkgdetail.php [L]
+
 
 
 
 #For Destination pages.
-RewriteRule ^india/([a-zA-Z0-9-]+)$ destination_list.php?slug=$1 [L]
+
 RewriteRule ^room/?$ destination_list.php [L]
 
 #For contact pages.
@@ -95,7 +95,7 @@ RewriteRule ^blog/?$ blog.php [L]
 RewriteRule ^blog/([a-zA-Z0-9-=]+)$ blog_detail.php?slug=$1 [L]
 
 #For Package and Subpackage Details
-RewriteRule ^package/([a-zA-Z0-9-=]+)$ package.php?slug=$1 [L]
+RewriteRule ^program/([a-zA-Z0-9-=]+)$ package.php?slug=$1 [L]
 RewriteRule ^subpackage/([a-zA-Z0-9-]+)$ subpkgdetail.php?slug=$1 [L]
 
 #RewriteRule ^rooms/page/([0-9]+)?$ room_list.php?pageno=$1 [L]

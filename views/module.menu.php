@@ -307,38 +307,3 @@ $jVars['module:res-menu-uc'] = $result_uc;
 
 // Mobile menu toggle script
 ?>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu dropdown toggle
-    var menuToggles = document.querySelectorAll('.menu-toggle');
-    
-    menuToggles.forEach(function(toggle) {
-        toggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            var submenu = this.nextElementSibling;
-            var isOpen = this.getAttribute('aria-expanded') === 'true';
-            
-            // Close other open submenus
-            menuToggles.forEach(function(otherToggle) {
-                if (otherToggle !== toggle) {
-                    otherToggle.setAttribute('aria-expanded', 'false');
-                    var otherSubmenu = otherToggle.nextElementSibling;
-                    if (otherSubmenu) {
-                        otherSubmenu.style.display = 'none';
-                    }
-                }
-            });
-            
-            // Toggle current submenu
-            if (isOpen) {
-                this.setAttribute('aria-expanded', 'false');
-                submenu.style.display = 'none';
-            } else {
-                this.setAttribute('aria-expanded', 'true');
-                submenu.style.display = 'block';
-            }
-        });
-    });
-});
-</script>
-<?php

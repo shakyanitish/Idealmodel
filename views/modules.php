@@ -20,7 +20,6 @@ $jVars['site:contact-header'] = '<span class="address"><a href="tel:'.$siteRegul
 <span class="address"><a href="mailto:'.$siteRegulars->mail_address.'" data-toggle="tooltip" data-placement="bottom" title="Mail"><i class="fa fa-envelope-o"></i></a></span>';
 
 $jVars['site:phone-news-side'] = '<a href="tel:'.$siteRegulars->contact_info.'" class="phone">'.$siteRegulars->contact_info.'</a>';
-$jVars['site:phone-news-side'] = '<a href="tel:'.$contact_info_clean.'" class="phone">'.$siteRegulars->contact_info.'</a>';
 
 $jVars['site:fevicon']		=  '<link rel="shortcut icon" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'"> 
 							    <link rel="apple-touch-icon" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'"> 
@@ -104,6 +103,7 @@ endforeach;
 // view modules
 
 require_once("views/module.contact.php");
+require_once("views/module.programs.php");
 
 require_once("views/module.reservation.php");
 require_once("views/module.header.php");

@@ -16,15 +16,15 @@ if (!empty($homearticle)) {
 
         if (!empty($imageList[0])) {
             $file_path1 = SITE_ROOT . 'images/articles/' . $imageList[0];
-            $img1 = (file_exists($file_path1)) 
-                ? IMAGE_PATH . 'articles/' . $imageList[0] 
+            $img1 = (file_exists($file_path1))
+                ? IMAGE_PATH . 'articles/' . $imageList[0]
                 : $img1;
         }
 
         if (!empty($imageList[1])) {
             $file_path2 = SITE_ROOT . 'images/articles/' . $imageList[1];
-            $img2 = (file_exists($file_path2)) 
-                ? IMAGE_PATH . 'articles/' . $imageList[1] 
+            $img2 = (file_exists($file_path2))
+                ? IMAGE_PATH . 'articles/' . $imageList[1]
                 : $img2;
         }
     }
@@ -80,13 +80,13 @@ $resinnh = '';
 //     $recInn = Article::homepageArticle();
 //     if (!empty($recInn)) {
 //         foreach ($recInn as $innRow) {
-            
+
 //             $images = ($innRow->image != "a:0:{}") ? unserialize($innRow->image) : [];
-            
+
 //             $imglink1 = (!empty($images[0])) 
 //                         ? IMAGE_PATH . 'articles/' . $images[0] 
 //                         : BASE_URL . 'assets/img/about/01.jpg';
-                        
+
 //             $imglink2 = (!empty($images[1])) 
 //                         ? IMAGE_PATH . 'articles/' . $images[1] 
 //                         : BASE_URL . 'assets/img/about/02.jpg'; 
@@ -102,7 +102,7 @@ $resinnh = '';
 //                     ? '<a href="' . BASE_URL . 'page/' . $innRow->slug . '" title="">Read more...</a>' 
 //                     : '';
 //             }
-            
+
 //             $resinnh .= '
 
 
@@ -110,7 +110,7 @@ $resinnh = '';
 //                             ';
 //         }
 //     }
-    
+
 // }
 
 if (defined('HOME_PAGE')) {
@@ -118,7 +118,7 @@ if (defined('HOME_PAGE')) {
     // pr($recInn);
     if (!empty($recInn)) {
         foreach ($recInn as $innRow) {
-            $image= unserialize($innRow->image);
+            $image = unserialize($innRow->image);
             $content = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($innRow->content));
             $readmore = '';
             if (!empty($innRow->linksrc)) {
@@ -130,12 +130,11 @@ if (defined('HOME_PAGE')) {
             }
             $resinnh .= '
 
-                    ' . $innRow->content . '
+                    ' . $content[0] . '
             
             ';
         }
     }
-    
 }
 
 $jVars['module:home-article'] = $resinnh;
@@ -149,14 +148,14 @@ $abouttbred = '';
 
 
 if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
-// pr('here');
+    // pr('here');
     $slug = addslashes($_REQUEST['slug']);
     $recRow = Article::find_by_slug($slug);
     // pr($slug);
     if (!empty($recRow)) {
         $title = !empty($recRow->title) ? $recRow->title : '';
 
-   // Default article banner
+        // Default article banner
         if (!empty($siteRegulars->article_upload)) {
             $defaultImg = IMAGE_PATH . 'preference/articles/' . $siteRegulars->article_upload;
         } else {
@@ -178,48 +177,13 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
                 $imglink = IMAGE_PATH . 'articles/' . $imageList[$imgno];
             }
         }
-        $aboutdetail .=
-            '
-            <section class="no-top no-bottom jarallax vertical-center">
-                <img id="main-bg-image" src="' . $imglink . '" alt="Main Image" class="img-fluid vh-100 w-100 opacity-50" style="transition: opacity 0.3s; object-fit: cover;">
-                <div class="de-overlay v-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h1 id="section-title">' . $title . '</h1>
-                                <h3 class="subtitle">' . $recRow->sub_title . '</h3>
-                                <p class="lead"> ' .$recRow->brief . '</p>
-                                <div id="category-content" class="mt-4"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($recRow->content));
+        $content = !empty($rescontent[1]) ? $rescontent[1] : $rescontent[0];
 
+        
 
-
-
-            <section id="section-intro" class="pt80" data-bgcolor="#3b1512" style="background-color: rgb(59, 21, 18); background-size: cover;">
-                <div class="container" style="background-size: cover;">
-                    <div class="row align-items-center" style="background-size: cover;">
-                        <div class="col-lg-12 wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; background-size: cover;">
-                            <div class="padding20" style="background-size: cover;">
-                                <h5 id="about-title">' . $recRow->inner_title .'  </h5>
-                                <h2 class="title mb10" id="about-subtitle">' . $recRow->innersub_title .'  <span class="small-border"></span></h2>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 wow fadeIn d-flex justify-content-center animated" style="visibility: visible; animation-name: fadeIn; background-size: cover;">
-                            <div class="row w-100" style="background-size: cover;">
-                                     ' . $recRow->content .'  
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> 
-            ';
-
-    
-    } 
+        $aboutdetail .= $content;
+    }
 }
 
 $jVars['module:inner-about-detail'] = $aboutdetail;

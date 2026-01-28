@@ -123,8 +123,8 @@ if (defined('CONTACT_PAGE')) {
 ';
     $map = '
                         <div class="ul-contact-map">
-                            <iframe
-                                src="' . $siteRegulars->location_map . '"></iframe>
+                        <iframe src="' . $siteRegulars->location_map . '" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            
                         </div>
 ';
 
