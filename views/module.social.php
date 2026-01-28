@@ -6,29 +6,25 @@ $socialRec = SocialNetworking::getSocialNetwork();
 $siteRegulars = Config::find_by_id(1);
 
 $resocl = '';
-$disicon='';
-
-
+$disicon = '';
 
 if (!empty($socialRec)) {
     foreach ($socialRec as $socialRow) {
-        $icon= $socialRow->image;
-if (empty($socialRow->linksrc) || $socialRow->linksrc === '#') {
-    continue;
-}
+        $icon = $socialRow->image;
         
-if(!empty($icon)){
-    $disicon='<a href="' . $socialRow->linksrc . '" target="_blank"><img src="'.IMAGE_PATH.'social/' . $socialRow->image . '"/></a>';
-}
-else{
-    $disicon='<a href="' . $socialRow->linksrc . '" target="_blank"><i class="' . $socialRow->icon . '"></i></a>';
-}
+        // Skip if link is empty or just '#'
+        if (empty($socialRow->linksrc) || $socialRow->linksrc === '#') {
+            continue;
+        }
         
-        $resocl .= '
-        <li>
-        '.$disicon.'
-         </li>
-        ';
+        // Determine icon display method
+        if (!empty($icon)) {
+            $disicon = '<a href="' . $socialRow->linksrc . '" target="_blank" rel="noopener"><img src="' . IMAGE_PATH . 'social/' . $socialRow->image . '"/></a>';
+        } else {
+            $disicon = '<a href="' . $socialRow->linksrc . '" target="_blank" rel="noopener"><i class="' . $socialRow->icon . '"></i></a>';
+        }
+        
+        $resocl .= $disicon;
     }
 }
 

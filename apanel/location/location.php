@@ -180,7 +180,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                 <div id="preview_Image"><input type="hidden" name="imageArrayname" value="" class="" /></div>
             </div>
 
-            <!-- <div class="form-row">
+            <div class="form-row">
                 <div class="form-label col-md-12">
                     <label for="">
                         Brief :
@@ -194,7 +194,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                         <span class="button-content">Read More</span>
                     </a>
                 </div>
-            </div> -->
+            </div>
             <!-- Meta Tags-->
             <div class="form-row">
                 <div class="form-checkbox-radio col-md-9">

@@ -4,7 +4,7 @@
 * Testimonial List Home page
 */
 $restst = '';
-$tstRec = Testimonial::get_alltestimonial(9);
+$tstRec = Testimonial::get_alltestimonial(5);
 if (!empty($tstRec)) {
     $restst .= '';
     foreach ($tstRec as $tstRow) {

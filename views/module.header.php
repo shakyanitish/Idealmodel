@@ -20,7 +20,7 @@ $header = '
                 <!-- actions -->
                 <div class="ul-header-actions">
                     <a href="donate.html" class="ul-btn d-sm-inline-flex"><i
-                            class="flaticon-fast-forward-double-right-arrows-symbol"></i> Donate Now </a>
+                            class="flaticon-fast-forward-double-right-arrows-symbol"></i>  Become A Volunteer </a>
                     <button class="ul-header-sidebar-opener d-lg-none d-inline-flex"><i
                             class="flaticon-menu"></i></button>
                 </div>

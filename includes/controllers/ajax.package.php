@@ -33,7 +33,7 @@ switch($action)
 
         $Package->slug 			= $_REQUEST['slug'];
         $Package->title    		= $_REQUEST['title'];
-        // $Package->sub_title    	= $_REQUEST['sub_title'];
+        $Package->sub_title    	= $_REQUEST['sub_title'];
         $Package->content   	= $_REQUEST['content'];
         $Package->type 		= $_REQUEST['type'];
         $Package->meta_title		= $_REQUEST['meta_title'];
@@ -91,7 +91,7 @@ switch($action)
 
         $Package->slug 	   = $_REQUEST['slug'];
         $Package->title    = $_REQUEST['title'];
-        // $Package->sub_title = $_REQUEST['sub_title'];
+        $Package->sub_title = $_REQUEST['sub_title'];
         $Package->content  = $_REQUEST['content'];
         $Package->status   = $_REQUEST['status'];
         $Package->type 		= $_REQUEST['type'];

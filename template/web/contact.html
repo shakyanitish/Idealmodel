@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jayanti Memorial Trust</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <jcms:site:seotitle/>
+
+    <!-- Fevicon -->
+    <jcms:site:fevicon/>
 
     <!-- libraries CSS -->
     <link rel="stylesheet" href="assets/icon/flaticon_charitics.css">
@@ -43,7 +44,8 @@
             <span class="ul-sidebar-footer-title">Follow us</span>
 
             <div class="ul-sidebar-footer-social">
-                <a href="https://www.facebook.com/JayantiMemorialTrust/" target="_blank" rel="noopener"><i class="flaticon-facebook"></i></a>
+                <a href="https://www.facebook.com/JayantiMemorialTrust/" target="_blank" rel="noopener"><i
+                        class="flaticon-facebook"></i></a>
                 <a href="#"><i class="flaticon-twitter"></i></a>
                 <a href="#"><i class="flaticon-instagram"></i></a>
                 <a href="#"><i class="flaticon-youtube"></i></a>
@@ -53,46 +55,8 @@
     <!-- SIDEBAR SECTION END -->
 
     <!-- HEADER SECTION START -->
-    <header class="ul-header ul-header-2">
-        <div class="ul-header-bottom to-be-sticky">
-            <div class="ul-header-bottom-wrapper ul-header-container">
-                <div class="logo-container">
-                    <a href="index.html" class="d-inline-block">
-                        <img src="assets/img/logo.png" alt="logo" class="logo">
-                    </a>
-                </div>
+        <jcms:module:header/>
 
-                <!-- header nav -->
-                <div class="ul-header-nav-wrapper">
-                    <div class="to-go-to-sidebar-in-mobile">
-                        <nav class="ul-header-nav">
-                            <a href="index.html">Home</a>
-                            <div class="has-sub-menu">
-                                <a role="button">About</a>
-                                <div class="ul-header-submenu">
-                                    <ul>
-                                        <li><a href="about.html">About JMT</a></li>
-                                        <li><a href="team.html">Our Team</a></li>
-                                        <!--<li><a href="partner.html">Our Partners</a></li>-->
-                                    </ul>
-                                </div>
-                            </div>
-                            <a href="program.html">Programs</a>
-                            <a href="impact.html">Impact & Activities</a>
-                            <a href="case.html">Case Study & Research</a>
-                            <a href="contact.html" class="active">Contact Us</a>
-                        </nav>
-                    </div>
-                </div>
-
-                <!-- actions -->
-                <div class="ul-header-actions">
-                    <a href="donate.html" class="ul-btn d-sm-inline-flex"><i class="flaticon-fast-forward-double-right-arrows-symbol"></i> Donate Now </a>
-                    <button class="ul-header-sidebar-opener d-lg-none d-inline-flex"><i class="flaticon-menu"></i></button>
-                </div>
-            </div>
-        </div>
-    </header>
     <!-- HEADER SECTION END -->
 
     <main>
@@ -105,43 +69,7 @@
         <!-- BREADCRUMBS SECTION END -->
 
         <!-- CONTACT INFOS SECTION START -->
-        <div class="ul-contact-infos">
-            <div class="ul-section-spacing ul-container">
-                <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row">
-                    <!-- single info -->
-                    <div class="col">
-                        <div class="ul-contact-info">
-                            <div class="icon"><i class="flaticon-location"></i></div>
-                            <div class="txt">
-                                <span class="title">Office Address</span>
-                                <span class="descr">Gairi Marg-4, Chundevi Opposite Sri lankan Embassy</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single info -->
-                    <div class="col">
-                        <div class="ul-contact-info">
-                            <div class="icon"><i class="flaticon-phone-call"></i></div>
-                            <div class="txt">
-                                <span class="title">Phone number</span>
-                                <a href="tel:+977 01 4720009">+977 01 4720009</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single info -->
-                    <div class="col">
-                        <div class="ul-contact-info">
-                            <div class="icon"><i class="flaticon-comment"></i></div>
-                            <div class="txt">
-                                <span class="title">Email address</span>
-                                <a href="mailto:info@jmt.org.np">info@jmt.org.np</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+        <jcms:module:contact-us/>
         <!-- CONTACT INFOS SECTION END -->
 
         <div class="contact-inner">
@@ -149,9 +77,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <!-- MAPS SECTION START -->
-                        <div class="ul-contact-map">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.428441071338!2d85.3358142!3d27.7349283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19cd6401ee39%3A0xaa92b17ac0901b65!2sJayanti%20Memorial%20Trust!5e0!3m2!1sen!2snp!4v1767772194793!5m2!1sen!2snp" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
+                        <jcms:module:contact-map/>
+
                         <!-- MAPS SECTION END -->
                     </div>
 
@@ -170,31 +97,38 @@
                                     <div class="row row-cols-2 row-cols-xxs-1 ul-bs-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <input type="text" name="name" id="ul-contact-name" placeholder="Your Name">
+                                                <input type="text" name="name" id="ul-contact-name"
+                                                    placeholder="Your Name">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <input type="email" name="email" id="ul-contact-email" placeholder="Email Address">
+                                                <input type="email" name="email" id="ul-contact-email"
+                                                    placeholder="Email Address">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <input type="text" name="Phone" id="ul-contact-subject" placeholder="Phone">
+                                                <input type="text" name="Phone" id="ul-contact-subject"
+                                                    placeholder="Phone">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <input type="text" name="Address" id="ul-contact-subject" placeholder="Address">
+                                                <input type="text" name="Address" id="ul-contact-subject"
+                                                    placeholder="Address">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <textarea name="message" id="ul-contact-msg" placeholder="Type your message"></textarea>
+                                                <textarea name="message" id="ul-contact-msg"
+                                                    placeholder="Type your message"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button class="ul-btn"><i class="flaticon-fast-forward-double-right-arrows-symbol"></i> Get in Touch</button>
+                                            <button class="ul-btn"><i
+                                                    class="flaticon-fast-forward-double-right-arrows-symbol"></i> Get in
+                                                Touch</button>
                                         </div>
                                     </div>
                                 </form>
@@ -208,68 +142,14 @@
     </main>
 
     <!-- FOOTER SECTION START -->
-    <footer class="ul-footer">
-        <div class="ul-footer-middle">
-            <div class="ul-footer-container">
-                <div class="ul-footer-middle-wrapper wow animate__fadeInUp">
-                    <div class="ul-footer-widget ul-nwsltr-widget">
-                        <h3 class="ul-footer-widget-title">Jayanti Memorial Trust</h3>
-                        <div class="ul-footer-widget-links ul-footer-contact-links">
-                            <a href=""><i class="flaticon-pin"></i>Gairi Marg-4, Chundevi Opposite Sri lankan Embassy</a>
-                            <a href="mailto:info@jmt.org.np"><i class="flaticon-mail"></i>info@jmt.org.np</a>
-                            <a href="tel:+977014720009"><i class="flaticon-telephone-call"></i>+977 01 4720009</a>
-                        </div>
-                        <p class="ul-footer-about-txt map3"><a href="https://maps.app.goo.gl/B4xGMGEeonVn5cco9">View Google Map</a></p>
-                        <div class="ul-footer-socials">
-                            <a href="https://www.facebook.com/JayantiMemorialTrust/" target="_blank" rel="noopener"><i class="flaticon-facebook"></i></a>
-                            <a href="#"><i class="flaticon-twitter"></i></a>
-                            <a href="#"><i class="flaticon-linkedin-big-logo"></i></a>
-                            <a href="#"><i class="flaticon-youtube"></i></a>
-                        </div>
-                    </div>
+        <jcms:module:footer/>
 
-                    <div class="ul-footer-widget ul-nwsltr-widget">
-                        <h3 class="ul-footer-widget-title">Patron of the Trust</h3>
-                        <div class="ul-footer-widget-links ul-footer-contact-links">
-                            <a href="#"><img src="assets/img/fishtail.png" alt="" style="width: 200px;background: #ffffff;"></a>
-                        </div>
-                    </div>
-                    
-                    <div class="ul-footer-widget">
-                        <h3 class="ul-footer-widget-title">What’s New</h3>
-                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FJayantiMemorialTrust%2F&tabs=timeline&width=300&height=230&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="300" height="230" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- footer bottom -->
-        <div class="ul-footer-bottom">
-            <div class="ul-footer-container">
-                <div class="ul-footer-bottom-wrapper">
-                    <p class="copyright-txt">&copy;
-                        <span id="footer-copyright-year"></span> Jayanti Memorial Trust. All rights reserved
-                    </p>
-                    <div class="ul-footer-bottom-nav text-white">Developed By:<a href="https://longtail.info/" target="_blank">Longtail e-media</a> </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- vector -->
-        <div class="ul-footer-vectors">
-            <img src="assets/img/footer-vector-img.png" alt="Footer Image" class="ul-footer-vector-1">
-        </div>
-    </footer>
     <!-- FOOTER SECTION END -->
 
-    <div class="whats_app">
-        <a href="https://wa.me/+977" target="_blank" rel="noreferrer" class="whatsapp">
-            <img src="assets/img/icon/whatsapp.png" class="whatsapp_img" alt="whatsapp">
-        </a>
-    </div>
 
-    <button id="backToTop" class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 d-none" aria-label="Back to top">
-          ↑
+    <button id="backToTop" class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 d-none"
+        aria-label="Back to top">
+        ↑
     </button>
 
     <!-- libraries JS -->
@@ -300,8 +180,9 @@
         });
 
         btn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 </body>
+
 </html>

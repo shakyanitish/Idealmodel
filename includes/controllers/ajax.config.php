@@ -143,7 +143,7 @@ endif;
 			// $record->contact_info2 			= $_REQUEST['contact_info2'];
 			// $record->pobox 			= $_REQUEST['pobox'];
 			$record->email_address 	= $_REQUEST['email_address'];
-			// $record->breif 			= $_REQUEST['breif'];
+			$record->breif 			= $_REQUEST['breif'];
 			$record->location_type 	= $_REQUEST['location_type'];					
 			$record->location_map 	= $_REQUEST['location_map'];
 

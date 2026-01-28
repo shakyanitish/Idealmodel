@@ -54,8 +54,8 @@
 			$record->author 	= $_REQUEST['author'];	
 			$record->brief 		= $_REQUEST['brief'];		
 			$record->content	= $_REQUEST['content'];
-			$record->linksrc 		= $_REQUEST['linksrc'];
-			$record->linktype 		= $_REQUEST['linktype'];
+			// $record->linksrc 		= $_REQUEST['linksrc'];
+			// $record->linktype 		= $_REQUEST['linktype'];
 			// $record->type 		= $_REQUEST['type'];
 			// if($_REQUEST['type']==1){
 			// 	$record->image		= $_REQUEST['imageArrayname'];

@@ -44,19 +44,19 @@ if (defined('CONTACT_PAGE')) {
     //     }
     // }
 
-$emailinked = '';
-$emails = explode(",", $siteRegulars->email_address); // use only one field
-$emails = array_map('trim', $emails); // remove spaces
-$totalEmails = count($emails);
-$countEmail = 0;
+    $emailinked = '';
+    $emails = explode(",", $siteRegulars->email_address); // use only one field
+    $emails = array_map('trim', $emails); // remove spaces
+    $totalEmails = count($emails);
+    $countEmail = 0;
 
-foreach ($emails as $email) {
-    $countEmail++;
-    $emailinked .= '<a href="mailto:' . $email . '" target="_blank" rel="noreferrer" title="' . $email . '">' . $email . '</a>';
-    if ($countEmail < $totalEmails) {
-        $emailinked .= ' '; // add comma only between emails
+    foreach ($emails as $email) {
+        $countEmail++;
+        $emailinked .= '<a href="mailto:' . $email . '" target="_blank" rel="noreferrer" title="' . $email . '">' . $email . '</a>';
+        if ($countEmail < $totalEmails) {
+            $emailinked .= ' '; // add comma only between emails
+        }
     }
-}
 
 
     // WhatsApp / phone links
@@ -82,80 +82,54 @@ foreach ($emails as $email) {
     // Section HTML
     $rescont .= '
 
-            <section id="section-main" class="no-bg no-top" aria-label="section-menu">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="de-content-overlay">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <h3>Ma Hospitality</h3>
-                                                <address>
-                                                    <span><strong>Address:</strong> ' . $siteRegulars->fiscal_address . '</span>
-                                                    <span><strong>Phone:</strong> ' . $tellinked . '</span>
-                                                    <span><strong>Email:</strong> ' . $emailinked . '</span>
-                                                </address>
-                                            </div>
-                                        </div>
 
-                                        <div class="spacer-single"></div>
-
-                                        <form name="contactform" id="contact_form" method="post">
-                                            <div class="row">
-                                                <div class="col-md-12 mb10">
-                                                    <h3>Send Us Message</h3>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div id="name_error" class="error">Please enter your name.</div>
-                                                    <div>
-                                                        <input type="text" name="fullname" id="name" class="form-control" placeholder="Your Name" required>
-                                                    </div>
-
-                                                    <div id="email_error" class="error">Please enter your valid E-mail ID.</div>
-                                                    <div>
-                                                        <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required>
-                                                    </div>
-
-                                                    <div id="phone_error" class="error">Please enter your phone number.</div>
-                                                    <div>
-                                                        <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Phone" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div id="message_error" class="error">Please enter your message.</div>
-                                                    <div>
-                                                        <textarea name="message" id="message" class="form-control" placeholder="Your Message" required></textarea>
-                                                    </div>
-                                                </div>
-
-                                                    <div class="col-md-12 mt-2">
-                                                        <div id="result_msg"></div>
-                                                        <div class="g-recaptcha" data-sitekey="6LeeWC0sAAAAAGFgPZKMWCtZOcu__qKxmDyLKUUS"></div>
-                                                        <p class="mt20">
-                                                            <input type="submit" id="send_message" value="Send Message" class="btn btn-line">
-                                                        </p>
-                                                    </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="col-lg-4">
-                                        <div class="map-container map-fullwidth">
-                                            <iframe src="' . $siteRegulars->location_map . '" width="600" height="450" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
+        <div class="ul-contact-infos">
+            <div class="ul-section-spacing ul-container">
+                <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row">
+                    <!-- single info -->
+                    <div class="col">
+                        <div class="ul-contact-info">
+                            <div class="icon"><i class="flaticon-location"></i></div>
+                            <div class="txt">
+                                <span class="title">Office Address</span>
+                                <span class="descr">' . $siteRegulars->fiscal_address . '</span>
                             </div>
                         </div>
-                    </div>                   
+                    </div>
+                    <!-- single info -->
+                    <div class="col">
+                        <div class="ul-contact-info">
+                            <div class="icon"><i class="flaticon-phone-call"></i></div>
+                            <div class="txt">
+                                <span class="title">Phone number</span>
+                                ' . $tellinked . '
+                            </div>
+                        </div>
+                    </div>
+                    <!-- single info -->
+                    <div class="col">
+                        <div class="ul-contact-info">
+                            <div class="icon"><i class="flaticon-comment"></i></div>
+                            <div class="txt">
+                                <span class="title">Email address</span>
+                                ' . $emailinked . '
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </section>';
-
-
+            </div>
+        </div>
+';
+    $map = '
+                        <div class="ul-contact-map">
+                            <iframe
+                                src="' . $siteRegulars->location_map . '"></iframe>
+                        </div>
+';
 
     $jVars['module:contact-us'] = $rescont;
+    $jVars['module:contact-map'] = $map;
 
 
 

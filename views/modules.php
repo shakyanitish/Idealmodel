@@ -4,19 +4,23 @@
 $jVars['site:header'] 		= Config::getField('headers',true);
 $jVars['site:footer'] 		= Config::getField('footer',true);
 $siteRegulars 				= Config::find_by_id(1);
-$jVars['site:copyright'] = str_replace(
-    '{year}',
-    date('Y'),
-    $siteRegulars->copyright
-) . '
-<a href="https://longtail.info/">Longtail e-media</a>
-';
+// $jVars['site:copyright'] = str_replace(
+//     '{year}',
+//     date('Y'),
+//     $siteRegulars->copyright
+// ) . '
+// <a href="https://longtail.info/">Longtail e-media</a>
+// ';
 
 
+$jVars['site:copyright'] = str_replace('{year}', date('Y'), $siteRegulars->copyright);
+
+$jVars['site:infoss'] = $siteRegulars->breif;
 $jVars['site:contact-header'] = '<span class="address"><a href="tel:'.$siteRegulars->contact_info.'" data-toggle="tooltip" data-placement="bottom" title="Call"><i class="fa fa-phone"></i></a></span>
 <span class="address"><a href="mailto:'.$siteRegulars->mail_address.'" data-toggle="tooltip" data-placement="bottom" title="Mail"><i class="fa fa-envelope-o"></i></a></span>';
 
 $jVars['site:phone-news-side'] = '<a href="tel:'.$siteRegulars->contact_info.'" class="phone">'.$siteRegulars->contact_info.'</a>';
+$jVars['site:phone-news-side'] = '<a href="tel:'.$contact_info_clean.'" class="phone">'.$siteRegulars->contact_info.'</a>';
 
 $jVars['site:fevicon']		=  '<link rel="shortcut icon" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'"> 
 							    <link rel="apple-touch-icon" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'"> 

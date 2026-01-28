@@ -53,7 +53,7 @@ RewriteRule ^room/?$ destination_list.php [L]
 RewriteRule ^contact-us/?$ contact.php [L]
 
 #For reservation pages.
-RewriteRule ^reservation/?$ reservation.php [L]
+RewriteRule ^case/?$ case.php [L]
 
 #For news pages
 RewriteRule ^news/?$ news_list.php [L]

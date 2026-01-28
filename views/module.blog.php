@@ -1,36 +1,35 @@
 <?php
 $bl =  '';
-$bl1 = '';  
+$bl1 = '';
 
 
 if (defined('BLOG_PAGE')) {
     $record = Blog::get_allblog();
-    $linkTarget='';
-    $pagelink='';
+    $linkTarget = '';
+    $pagelink = '';
     if (!empty($record)) {
-        
-        
-            $bl1 .= '
+
+
+        $bl1 .= '
             <!--================ Breadcrumb ================-->
 
-        <div class="site-breadcrumb" style="background: url('. BASE_URL .'template/web/assets/img/breadcrumb/01.jpg)">
+        <div class="site-breadcrumb" style="background: url(' . BASE_URL . 'template/web/assets/img/breadcrumb/01.jpg)">
             <div class="container">
                 <h2 class="breadcrumb-title">Inspiration Hub</h2>
             </div>
         </div>';
         $jVars['module:blogbread'] = $bl1;
-        
-            foreach ($record as $homebl) {
-            
-           if(!empty($homebl->linksrc)){
-            // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-            $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-                $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL.$homebl->linksrc;
-           }
-           else{
-                $linksrc= BASE_URL. 'blog/'. $homebl->slug;
-           }
-           $bl .='
+
+        foreach ($record as $homebl) {
+
+            if (!empty($homebl->linksrc)) {
+                // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
+                $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
+                $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL . $homebl->linksrc;
+            } else {
+                $linksrc = BASE_URL . 'blog/' . $homebl->slug;
+            }
+            $bl .= '
 
                     <div class="col-md-6 col-lg-4">
                         <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
@@ -49,14 +48,21 @@ if (defined('BLOG_PAGE')) {
                                 </h4>
                                 <p>' . $homebl->brief . '
                                 </p>
-                                <a class="theme-btn" href=" ' . BASE_URL . 'blog/'.$homebl->slug .'">Read More<i class="fas fa-arrow-right"></i></a>
+                                <a class="theme-btn" href=" ' . BASE_URL . 'blog/' . $homebl->slug . '">Read More<i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                   
            ';
         }
-        $bl.='
+        $bl .= '
+
+
+
+
+
+
+
 
         ';
     } else {
@@ -69,73 +75,72 @@ $jVars['module:bloglist'] = $bl;
 
 
 // Home Page Blog List
-$linkTarget='';
+$linkTarget = '';
 $homebloglist = '';
-$homeblogs ='';
+$homeblogs = '';
 if (defined('HOME_PAGE')) {
-    $homeblog = Blog:: get_latestblog_by(3);
+    $homeblog = Blog::get_latestblog_by(3);
     // $homeblogs = Blog:: get_latestblog_by(3);
     if (!empty($homeblog)) {
-        
+
         foreach ($homeblog as $homebl) {
-            
-           if(!empty($homebl->linksrc)){
-            // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-            $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-                $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL.$homebl->linksrc;
-           }
-           else{
-                $linksrc=  BASE_URL. 'blog/' .$homebl->slug;
-           }
-           $homebloglist .='
-                 <!--================ Entity ================-->
 
-
-                  <div class="col-md-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="blog-item-img">
-                                <img src="' . IMAGE_PATH . 'blog/' . $homebl->image . '" alt="Thumb">
-                            </div>
-                            <div class="blog-item-info">
-                                <div class="blog-item-meta">
-                                    <ul>
-                                        <li><a href="#"><i class="far fa-user-circle"></i>' . $homebl->author . '</a></li>
-                                        <li><a href="#"><i class="far fa-calendar-alt"></i>' . date('d M Y', strtotime($homebl->blog_date)) . '</a></li>
-                                    </ul>
+            if (!empty($homebl->linksrc)) {
+                // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
+                $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
+                $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL . $homebl->linksrc;
+            } else {
+                $linksrc =  BASE_URL . 'blog/' . $homebl->slug;
+            }
+            $homebloglist .= '
+                <!-- single blog -->
+                <div class="col">
+                        <div class="ul-blog ul-blog-2">
+                            <div class="ul-blog-img"><img src="' . IMAGE_PATH . 'blog/' . $homebl->image . '" alt="' . $homebl->title . '">
+                                <div class="date">
+                                    <span class="number">' . date('d', strtotime($homebl->blog_date)) . '</span>
+                                    <span class="txt">' . date('M Y', strtotime($homebl->blog_date)) . '</span>
                                 </div>
-                                <h4 class="blog-title">
-                                    <a href="blog-detail">' . $homebl->title . '</a>
-                                </h4>
-                                <p>' . $homebl->brief . '  
-                                </p>
-                                <a class="theme-btn" href="' . BASE_URL . 'blog/'.$homebl->slug .'">Read More<i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <div class="ul-blog-txt">
+                                <div class="ul-blog-infos">
+                                    <!-- single info -->
+                                    <div class="ul-blog-info">
+                                        <span class="icon"><i class="flaticon-account"></i></span>
+                                        <span class="text font-normal text-[14px] text-etGray">' . $homebl->author . '</span>
+                                    </div>
+                                </div>
+                                <a href="' . BASE_URL . 'blog/' . $homebl->slug . '" class="ul-blog-title">' . $homebl->title . '</a>
+                                <a href="' . BASE_URL . 'blog/' . $homebl->slug . '" class="ul-blog-btn">Read More <span class="icon"><i
+                                            class="flaticon-next"></i></span></a>
                             </div>
                         </div>
                     </div>
-                            <!--================ End of Entity ================-->
            
                   
            ';
         }
-        $homeblogs='
+        $homeblogs = '
 
 
-
-            <div class="blog-area py-120">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 mx-auto">
-                        <div class="site-heading text-center">
-                            <h2 class="site-title">Our Latest News & <span>Blog</span></h2>
-                            <div class="heading-divider"></div>
-                        </div>
+        <section class="ul-blogs-2 ul-section-spacing">
+            <div class="ul-container wow animate__fadeInUp">
+                <div class="ul-section-heading">
+                    <div class="left">
+                        <span class="ul-section-sub-title"> Empowering lives through meaningful activities </span>
+                        <h2 class="ul-section-title">Recent Activities</h2>
                     </div>
+
+                    <a href="impact.html" class="ul-btn"><i
+                            class="flaticon-fast-forward-double-right-arrows-symbol"></i> View All</a>
                 </div>
-                <div class="row g-4">
-                    '.$homebloglist.'
+
+                <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row justify-content-center">
+                    ' . $homebloglist . '
+
                 </div>
             </div>
-        </div>  
+        </section>
 
         ';
     }
@@ -149,23 +154,23 @@ $jVars['module:homebloglist'] = $homeblogs;
 // Blog Detail Page
 
 $blog_detail = $recent_posts = '';
-if (defined("BLOG_DETAIL_PAGE") ) {
+if (defined("BLOG_DETAIL_PAGE")) {
     $slug = !empty($_REQUEST['slug']) ? $_REQUEST['slug'] : '';
     $Blogs = Blog::find_by_slug($slug);
     //pr($Blogs);
-   
+
 
     if (!empty($slug)) {
         $blog_detail .= '
         <!--================ Breadcrumb ================-->
 
-        <div class="site-breadcrumb" style="background: url('. BASE_URL .'template/web/assets/img/breadcrumb/01.jpg)">
+        <div class="site-breadcrumb" style="background: url(' . BASE_URL . 'template/web/assets/img/breadcrumb/01.jpg)">
             <div class="container">
                 <h2 class="breadcrumb-title">Top Fishing Destinations in Nepal</h2>
             </div>
         </div>
         ';
-        
+
         $blog_detail .= '
         <div class="blog-single py-120">
             <div class="container">
@@ -244,20 +249,20 @@ if (defined("BLOG_DETAIL_PAGE") ) {
                             </div>-->
 
    ';
-                                
 
-// Recent Posts Sidebar
-$recent_posts = '';
-$recents = Blog::get_latestblog_by(3);
 
-if (!empty($recents)) {
-    $recent_posts .= '<div class="widget recent-post">
+        // Recent Posts Sidebar
+        $recent_posts = '';
+        $recents = Blog::get_latestblog_by(3);
+
+        if (!empty($recents)) {
+            $recent_posts .= '<div class="widget recent-post">
         <h5 class="widget-title">Recent Posts</h5>';
 
-    foreach ($recents as $Blogs) {
-        // Skip current blog
-        if ($recent->title != $Blogs->title) {
-            $recent_posts .= '
+            foreach ($recents as $Blogs) {
+                // Skip current blog
+                if ($recent->title != $Blogs->title) {
+                    $recent_posts .= '
             <div class="recent-post-single">
                 <div class="recent-post-img">
                     <img src="' . IMAGE_PATH . 'blog/' . $Blogs->image . '" alt="thumb">
@@ -267,20 +272,17 @@ if (!empty($recents)) {
                     <span><i class="far fa-clock"></i>' . date("d M Y", strtotime($Blogs->blog_date)) . '</span>
                 </div>
             </div>';
+                }
+            }
+
+            $recent_posts .= '</div>'; // close widget
         }
-    }
 
-    $recent_posts .= '</div>'; // close widget
-}
-
-$jVars['module:blog-recent-posts'] = $recent_posts;
-
-         
-        
+        $jVars['module:blog-recent-posts'] = $recent_posts;
     } else {
         $blog_detail .= '
         <!--================ Breadcrumb ================-->
-        <div class="mad-breadcrumb with-bg-img with-overlay" data-bg-image-src="'. BASE_URL .'template/web/images/default.jpg">
+        <div class="mad-breadcrumb with-bg-img with-overlay" data-bg-image-src="' . BASE_URL . 'template/web/images/default.jpg">
             <div class="container wide">
                 <h1 class="mad-page-title">About Us</h1>
                 <nav class="mad-breadcrumb-path">
@@ -306,20 +308,19 @@ $jVars['module:blog-recent-posts'] = $recent_posts;
                 ';
         $Blogs = Blog::get_allblog();
         //pr($Blogs);
-         foreach ($Blogs as $homebl) {
-            
-           if(!empty($homebl->linksrc)){
-            // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-            $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-                $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL.$homebl->linksrc;
-           }
-           else{
-                $linksrc= BASE_URL. 'blog/'. $homebl->slug;
-           }
-           $blog_detail .='
+        foreach ($Blogs as $homebl) {
+
+            if (!empty($homebl->linksrc)) {
+                // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
+                $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
+                $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL . $homebl->linksrc;
+            } else {
+                $linksrc = BASE_URL . 'blog/' . $homebl->slug;
+            }
+            $blog_detail .= '
                             <!--================ Entity ================-->
                                 <div class="mad-entity-media mad-owl-center-img">
-                                    <a href="'.$linksrc.'" '.$linkTarget.'>
+                                    <a href="' . $linksrc . '" ' . $linkTarget . '>
                                         <img src="' . IMAGE_PATH . 'blog/' . $homebl->image . '" alt="' . $homebl->title . '" />
                                     </a>
                                 </div>
@@ -331,26 +332,22 @@ $jVars['module:blog-recent-posts'] = $recent_posts;
                                             A Rare Blend Of Nature And Modern Amenities and has become synonymous with Nagarkot.
                                         </p>
                                         <div class="mad-entity-footer">
-                                            <a href="'.$linksrc.'" '.$linkTarget.' class="btn btn-big">View More</a>
+                                            <a href="' . $linksrc . '" ' . $linkTarget . ' class="btn btn-big">View More</a>
                                         </div>
                                     </div>
                                 </div>
                             <!--================ End of Entity ================-->
 
            ';
-    }
-    $blog_detail .='
+        }
+        $blog_detail .= '
     </div>
     
                 </div>
             ';
-    
     }
 }
 
 
 $jVars['module:blog-detail'] = $blog_detail;
 $jVars['module:blog-recent-posts'] = $recent_posts;
-
-
-?>
