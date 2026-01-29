@@ -4,7 +4,7 @@ class Download extends DatabaseObject
 {
 
     protected static $table_name = "tbl_download";
-    protected static $db_fields = array('id', 'slug', 'title', 'status', 'sortorder', 'image');
+    protected static $db_fields = array('id', 'slug', 'title', 'status', 'sortorder', 'image', 'category', 'case_date');
 
     public $id;
     public $slug;
@@ -12,7 +12,8 @@ class Download extends DatabaseObject
     public $status;
     public $sortorder;
     public $image;
-
+    public $category;
+    public $case_date;
 
     //GET ALL Download
     public static function get_alldownload($limit = '')

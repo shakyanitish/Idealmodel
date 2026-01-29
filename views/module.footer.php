@@ -110,7 +110,7 @@ $footer = '
                     <div class="ul-footer-widget ul-nwsltr-widget">
                         <h3 class="ul-footer-widget-title">Patron of the Trust</h3>
                         <div class="ul-footer-widget-links ul-footer-contact-links">
-                            <a href="#"><img src="template/web/assets/img/fishtail.png" alt=""
+                            <a href="#"><img src="' . BASE_URL . 'template/web/assets/img/fishtail.png" alt=""
                                     style="width: 200px;background: #ffffff;"></a>
                         </div>
                     </div>
@@ -151,7 +151,7 @@ $footer = '
 
     <div class="whats_app">
         <a href="https://wa.me/' . $siteRegulars->whatsapp_a . '" target="_blank" rel="noreferrer" class="whatsapp">
-            <img src="template/web/assets/img/icon/whatsapp.png" class="whatsapp_img" alt="whatsapp">
+            <img src="' . BASE_URL . 'template/web/assets/img/icon/whatsapp.png" class="whatsapp_img" alt="whatsapp">
         </a>
     </div>';
 

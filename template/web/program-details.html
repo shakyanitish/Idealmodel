@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jayanti Memorial Trust</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <jcms:site:seotitle/>
+
+    <!-- Fevicon -->
+    <jcms:site:fevicon/>
+
 
     <!-- libraries CSS -->
     <link rel="stylesheet" href="assets/icon/flaticon_charitics.css">
@@ -29,9 +30,7 @@
         <!-- header -->
         <div class="ul-sidebar-header">
             <div class="ul-sidebar-header-logo">
-                <a href="index.html">
-                    <img src="assets/img/logo.png" alt="logo" class="logo">
-                </a>
+            <jcms:module:sidebarlogo/>                
             </div>
             <!-- sidebar closer -->
             <button class="ul-sidebar-closer"><i class="flaticon-close"></i></button>
@@ -43,211 +42,27 @@
             <span class="ul-sidebar-footer-title">Follow us</span>
 
             <div class="ul-sidebar-footer-social">
-                <a href="https://www.facebook.com/JayantiMemorialTrust/" target="_blank" rel="noopener"><i class="flaticon-facebook"></i></a>
-                <a href="#"><i class="flaticon-twitter"></i></a>
-                <a href="#"><i class="flaticon-instagram"></i></a>
-                <a href="#"><i class="flaticon-youtube"></i></a>
+                <jcms:module:socilaLinkbtm/>
             </div>
         </div>
     </div>
     <!-- SIDEBAR SECTION END -->
 
     <!-- HEADER SECTION START -->
-    <header class="ul-header ul-header-2">
-        <div class="ul-header-bottom to-be-sticky">
-            <div class="ul-header-bottom-wrapper ul-header-container">
-                <div class="logo-container">
-                    <a href="index.html" class="d-inline-block">
-                        <img src="assets/img/logo.png" alt="logo" class="logo">
-                    </a>
-                </div>
-
-                <!-- header nav -->
-                <div class="ul-header-nav-wrapper">
-                    <div class="to-go-to-sidebar-in-mobile">
-                        <nav class="ul-header-nav">
-                            <a href="index.html">Home</a>
-                            <div class="has-sub-menu">
-                                <a role="button">About</a>
-                                <div class="ul-header-submenu">
-                                    <ul>
-                                        <li><a href="about.html">About JMT</a></li>
-                                        <li><a href="team.html">Our Team</a></li>
-                                        <!--<li><a href="partner.html">Our Partners</a></li>-->
-                                    </ul>
-                                </div>
-                            </div>
-                            <a href="program.html" class="active">Programs</a>
-                            <a href="impact.html">Impact & Activities</a>
-                            <a href="case.html">Case Study & Research</a>
-                            <a href="contact.html">Contact Us</a>
-                        </nav>
-                    </div>
-                </div>
-
-                <!-- actions -->
-                <div class="ul-header-actions">
-                    <a href="donate.html" class="ul-btn d-sm-inline-flex"><i class="flaticon-fast-forward-double-right-arrows-symbol"></i> Donate Now </a>
-                    <button class="ul-header-sidebar-opener d-lg-none d-inline-flex"><i class="flaticon-menu"></i></button>
-                </div>
-            </div>
-        </div>
-    </header>
+    <jcms:module:header/>
     <!-- HEADER SECTION END -->
 
     <main>
         <!-- BREADCRUMBS SECTION START -->
-        <section class="ul-breadcrumb ul-section-spacing">
-            <div class="ul-container">
-                <h2 class="ul-breadcrumb-title">Sponsorship Program</h2>
-            </div>
-        </section>
+        <jcms:module:program-detail-title/>
         <!-- BREADCRUMBS SECTION END -->
-
-
-        <div class="ul-container ul-section-spacing">
-            <div class="row gy-4 flex-column-reverse flex-lg-row">
-                <!-- event details content -->
-                <div class="col-lg-8">
-                    <div class="ul-event-details ul-donation-details">
-                       <div class="ul-testimonial-2-slider swiper">
-                            <div class="swiper-wrapper">
-                                <!-- single slide -->
-                                <div class="swiper-slide">
-                                    <div class="ul-event-details-img">
-                                        <img src="assets/img/event-details.jpg" alt="Image">
-                                    </div>
-                                </div>
-
-                                <!-- single slide -->
-                                <div class="swiper-slide">
-                                    <div class="ul-event-details-img">
-                                        <img src="assets/img/event-details.jpg" alt="Image">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h2 class="ul-event-details-title">Sponsorship Program</h2>
-                        <p>JMT has borne witness to significant rise in the number of cardiac patients in Nepal. Cardiovascular disease is no longer a "RICH MAN's DISEASE". More so it is largely engulfing people from the lower middle class to lower class bracket of the society.</p>
-
-                        <p>Government of Nepal has been providing aid of Rupees One Lakh per indigent cardiac patient for his/her treatment, while children below the age of 15 years and elderly above the age of 75 years, are exempt from any cardiac treatment cost at the government's two state run cardiac hospitals, namely Shahid Gangalal National Heart Centre(SGNHC) and Manamohan Cardiothoracic Vascular and Transplant Center (MCVTC). Yet , this policy is unable to cater to all the patients given the volume by which they are rising, the cost of surgery and the extremely low per capita income. Thus Jayanti Memorial Trust is doing all it can to ease the burden of the government and serve the less fortunate as best as it can.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- left sidebar -->
-                <div class="col-lg-4">
-                    <div class="ul-inner-sidebar">
-                        <!-- single widget / Recent Posts -->
-                        <div class="ul-inner-sidebar-widget posts">
-                            <h3 class="ul-inner-sidebar-widget-title">Other Programs</h3>
-                            <div class="ul-inner-sidebar-widget-content">
-                                <div class="ul-inner-sidebar-posts">
-                                    <!-- single post -->
-                                    <div class="ul-inner-sidebar-post">
-                                        <div class="img">
-                                            <img src="assets/img/blog-2.jpg" alt="Post Image">
-                                        </div>
-
-                                        <div class="txt">
-                                            <h4 class="title"><a href="program-details.html">Outreach Programs</a></h4>
-                                            <span class="date"> <span>May 12, 2025</span></span>
-                                        </div>
-                                    </div>
-
-                                    <!-- single post -->
-                                    <div class="ul-inner-sidebar-post">
-                                        <div class="img">
-                                            <img src="assets/img/blog-1.jpg" alt="Post Image">
-                                        </div>
-
-                                        <div class="txt">
-                                            <h4 class="title"><a href="program-details.html">Early Identification of Cardiac Cases</a></h4>
-                                            <span class="date"> <span>May 12, 2025</span></span>
-                                        </div>
-                                    </div>
-
-                                    <!-- single post -->
-                                    <div class="ul-inner-sidebar-post">
-                                        <div class="img">
-                                            <img src="assets/img/blog-3.jpg" alt="Post Image">
-                                        </div>
-
-                                        <div class="txt">
-                                            <h4 class="title"><a href="program-details.html">Children and Youth Education Program</a></h4>
-                                            <span class="date"> <span>May 12, 2025</span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <jcms:module:program-detail/>
     </main>
 
     <!-- FOOTER SECTION START -->
-    <footer class="ul-footer">
-        <div class="ul-footer-middle">
-            <div class="ul-footer-container">
-                <div class="ul-footer-middle-wrapper wow animate__fadeInUp">
-                    <div class="ul-footer-widget ul-nwsltr-widget">
-                        <h3 class="ul-footer-widget-title">Jayanti Memorial Trust</h3>
-                        <div class="ul-footer-widget-links ul-footer-contact-links">
-                            <a href=""><i class="flaticon-pin"></i>Gairi Marg-4, Chundevi Opposite Sri lankan Embassy</a>
-                            <a href="mailto:info@jmt.org.np"><i class="flaticon-mail"></i>info@jmt.org.np</a>
-                            <a href="tel:+977014720009"><i class="flaticon-telephone-call"></i>+977 01 4720009</a>
-                        </div>
-                        <p class="ul-footer-about-txt map3"><a href="https://maps.app.goo.gl/B4xGMGEeonVn5cco9">View Google Map</a></p>
-                        <div class="ul-footer-socials">
-                            <a href="https://www.facebook.com/JayantiMemorialTrust/" target="_blank" rel="noopener"><i class="flaticon-facebook"></i></a>
-                            <a href="#"><i class="flaticon-twitter"></i></a>
-                            <a href="#"><i class="flaticon-linkedin-big-logo"></i></a>
-                            <a href="#"><i class="flaticon-youtube"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="ul-footer-widget ul-nwsltr-widget">
-                        <h3 class="ul-footer-widget-title">Patron of the Trust</h3>
-                        <div class="ul-footer-widget-links ul-footer-contact-links">
-                            <a href="#"><img src="assets/img/fishtail.png" alt="" style="width: 200px;background: #ffffff;"></a>
-                        </div>
-                    </div>
-                    
-                    <div class="ul-footer-widget">
-                        <h3 class="ul-footer-widget-title">What’s New</h3>
-                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FJayantiMemorialTrust%2F&tabs=timeline&width=300&height=230&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="300" height="230" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- footer bottom -->
-        <div class="ul-footer-bottom">
-            <div class="ul-footer-container">
-                <div class="ul-footer-bottom-wrapper">
-                    <p class="copyright-txt">&copy;
-                        <span id="footer-copyright-year"></span> Jayanti Memorial Trust. All rights reserved
-                    </p>
-                    <div class="ul-footer-bottom-nav text-white">Developed By:<a href="https://longtail.info/" target="_blank">Longtail e-media</a> </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- vector -->
-        <div class="ul-footer-vectors">
-            <img src="assets/img/footer-vector-img.png" alt="Footer Image" class="ul-footer-vector-1">
-        </div>
-    </footer>
+    <jcms:module:footer/>
     <!-- FOOTER SECTION END -->
 
-    <div class="whats_app">
-        <a href="https://wa.me/+977" target="_blank" rel="noreferrer" class="whatsapp">
-            <img src="assets/img/icon/whatsapp.png" class="whatsapp_img" alt="whatsapp">
-        </a>
-    </div>
 
     <button id="backToTop" class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 d-none" aria-label="Back to top">
           ↑

@@ -91,11 +91,14 @@ RewriteCond %{REQUEST_URI} ^/synhawk/blog/enquery_mail\.php$ [NC]
 RewriteRule ^ - [L]
 
 #For BLOG pages.
-RewriteRule ^blog/?$ blog.php [L]
-RewriteRule ^blog/([a-zA-Z0-9-=]+)$ blog_detail.php?slug=$1 [L]
+RewriteRule ^impact/?$ blog.php [L]
+RewriteRule ^impact/([a-zA-Z0-9-=]+)$ blog_detail.php?slug=$1 [L]
 
-#For Package and Subpackage Details
-RewriteRule ^program/([a-zA-Z0-9-=]+)$ package.php?slug=$1 [L]
+#For Program/Package pages.
+RewriteRule ^program/?$ package.php [L]
+RewriteRule ^program/([a-zA-Z0-9-=]+)$ package_detail.php?slug=$1 [L]
+
+#For Subpackage Details
 RewriteRule ^subpackage/([a-zA-Z0-9-]+)$ subpkgdetail.php?slug=$1 [L]
 
 #RewriteRule ^rooms/page/([0-9]+)?$ room_list.php?pageno=$1 [L]

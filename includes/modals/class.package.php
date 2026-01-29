@@ -2,7 +2,7 @@
 class Package extends DatabaseObject {
 
 	protected static $table_name = "tbl_package";
-	protected static $db_fields = array('id', 'slug', 'image', 'header_image', 'banner_image', 'flag_image', 'title', 'status', 'sortorder', 'detail', 'content', 'meta_title', 'meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date','linksrc','linktype', 'sub_title');
+	protected static $db_fields = array('id', 'slug', 'image', 'header_image', 'banner_image', 'flag_image', 'title', 'status', 'sortorder', 'detail', 'content', 'meta_title', 'meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date','linksrc','linktype', 'sub_title', 'program_date');
 	
 	var $id;
 	var $slug;
@@ -25,6 +25,7 @@ class Package extends DatabaseObject {
 	var $type;
 	var $added_date;
 	var $modified_date;
+	var $program_date;
 
 
 	public static function get_itinerary($pkgid='') {
@@ -149,7 +150,7 @@ class Package extends DatabaseObject {
 	//Find all the rows in the current database table.
 	static function find_all(){
 		global $db;
-		return self::find_by_sql("SELECT * FROM ".self::$table_name." ORDER BY sortorder DESC");
+		return self::find_by_sql("SELECT * FROM ".self::$table_name." ORDER BY sortorder ASC");
 	}
 
 	//Find all the rows in the current database table.

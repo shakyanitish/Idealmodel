@@ -1,7 +1,7 @@
 <?php
 $bl =  '';
-$bl1 = '';
-
+$singleblog = '';
+$singleblog_more = ''; 
 
 if (defined('BLOG_PAGE')) {
     $record = Blog::get_allblog();
@@ -9,62 +9,77 @@ if (defined('BLOG_PAGE')) {
     $pagelink = '';
     if (!empty($record)) {
 
-
-        $bl1 .= '
-            <!--================ Breadcrumb ================-->
-
-        <div class="site-breadcrumb" style="background: url(' . BASE_URL . 'template/web/assets/img/breadcrumb/01.jpg)">
-            <div class="container">
-                <h2 class="breadcrumb-title">Inspiration Hub</h2>
-            </div>
-        </div>';
-        $jVars['module:blogbread'] = $bl1;
-
+        $counter = 0; // NEW: counter to track which blog we're on
+        
         foreach ($record as $homebl) {
 
             if (!empty($homebl->linksrc)) {
-                // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
                 $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
                 $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL . $homebl->linksrc;
             } else {
                 $linksrc = BASE_URL . 'blog/' . $homebl->slug;
             }
-            $bl .= '
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="blog-item-img">
-                                <img src="' . IMAGE_PATH . 'blog/' . $homebl->image . '" alt="' . $homebl->title . '">
-                            </div>
-                            <div class="blog-item-info">
-                                <div class="blog-item-meta">
-                                    <ul>
-                                        <li><a href="#"><i class="far fa-user-circle"></i>' . $homebl->author . '</a></li>
-                                        <li><a href="#"><i class="far fa-calendar-alt"></i> ' . date('d M Y', strtotime($homebl->blog_date)) . '</a></li>
-                                    </ul>
+            $blog_html = '
+                    <!-- single blog -->
+                    <div class="col">
+                        <div class="ul-blog ul-blog-2">
+                            <div class="ul-blog-img"><img src="' . IMAGE_PATH . 'blog/' . $homebl->image . '" alt="' . $homebl->title . '">
+                                <div class="date">
+                                    <span class="number">' . date('d', strtotime($homebl->blog_date)) . '</span>
+                                    <span class="txt">' . date('M Y', strtotime($homebl->blog_date)) . '</span>
                                 </div>
-                                <h4 class="blog-title">
-                                    <a href="blog-detail">' . $homebl->title . '</a>
-                                </h4>
-                                <p>' . $homebl->brief . '
-                                </p>
-                                <a class="theme-btn" href=" ' . BASE_URL . 'blog/' . $homebl->slug . '">Read More<i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <div class="ul-blog-txt">
+                                <div class="ul-blog-infos">
+                                    <!-- single info -->
+                                    <div class="ul-blog-info">
+                                        <span class="icon"><i class="flaticon-account"></i></span>
+                                        <span class="text font-normal text-[14px] text-etGray">' . $homebl->author . '</span>
+                                    </div>
+                                </div>
+                                <a href="' . BASE_URL . 'impact/' . $homebl->slug . '" class="ul-blog-title">' . $homebl->title . '</a>
+                                <a href="' . BASE_URL . 'impact/' . $homebl->slug . '" class="ul-blog-btn">Read More <span class="icon"><i class="flaticon-next"></i></span></a>
                             </div>
                         </div>
-                    </div>
-                  
-           ';
+                    </div>';
+
+            // NEW: Add to first 3 blogs OR to "load more" section
+            if ($counter < 3) {
+                $singleblog .= $blog_html;
+            } else {
+                $singleblog_more .= $blog_html;
+            }
+
+            $counter++; // Increment counter
         }
-        $bl .= '
 
+        // Build the final HTML
+        $bl = '
+        <section class="ul-blogs-2 ul-section-spacing">
+            <div class="ul-container wow animate__fadeInUp">
+                <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row justify-content-center">
+                    ' . $singleblog . '
+                </div>
 
+                <span id="dots">...</span>
+                <span id="more">
+                    <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row justify-content-center mt-4">
+                        ' . $singleblog_more . '
+                    </div>
+                </span>
 
+                <!-- pagination -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="btns-block btns-center">
+                            <button onclick="myFunction()" id="myBtn1" class="ul-btn d-sm-inline-flex px-4 mt-4">Load More</button>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>';
 
-
-
-
-
-        ';
     } else {
         redirect_to(BASE_URL);
     }
@@ -110,8 +125,8 @@ if (defined('HOME_PAGE')) {
                                         <span class="text font-normal text-[14px] text-etGray">' . $homebl->author . '</span>
                                     </div>
                                 </div>
-                                <a href="' . BASE_URL . 'blog/' . $homebl->slug . '" class="ul-blog-title">' . $homebl->title . '</a>
-                                <a href="' . BASE_URL . 'blog/' . $homebl->slug . '" class="ul-blog-btn">Read More <span class="icon"><i
+                                <a href="' . BASE_URL . 'impact/' . $homebl->slug . '" class="ul-blog-title">' . $homebl->title . '</a>
+                                <a href="' . BASE_URL . 'impact/' . $homebl->slug . '" class="ul-blog-btn">Read More <span class="icon"><i
                                             class="flaticon-next"></i></span></a>
                             </div>
                         </div>
@@ -153,7 +168,7 @@ $jVars['module:homebloglist'] = $homeblogs;
 
 // Blog Detail Page
 
-$blog_detail = $recent_posts = '';
+$blog_detail = $recent_posts = $blog_detail_title = '';
 if (defined("BLOG_DETAIL_PAGE")) {
     $slug = !empty($_REQUEST['slug']) ? $_REQUEST['slug'] : '';
     $Blogs = Blog::find_by_slug($slug);
@@ -161,94 +176,71 @@ if (defined("BLOG_DETAIL_PAGE")) {
 
 
     if (!empty($slug)) {
-        $blog_detail .= '
-        <!--================ Breadcrumb ================-->
-
-        <div class="site-breadcrumb" style="background: url(' . BASE_URL . 'template/web/assets/img/breadcrumb/01.jpg)">
-            <div class="container">
-                <h2 class="breadcrumb-title">Top Fishing Destinations in Nepal</h2>
+        $blog_detail_title .= '
+        <section class="ul-breadcrumb ul-section-spacing">
+            <div class="ul-container">
+                <h2 class="ul-breadcrumb-title">' . $Blogs->title . '</h2>
             </div>
-        </div>
+        </section>
         ';
+        $jVars['module:blog-detail-title'] = $blog_detail_title;
 
         $blog_detail .= '
-        <div class="blog-single py-120">
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-lg-8">
-                        <div class="blog-single-wrapper">
-                            <div class="blog-single-content">
-                                <div class="blog-thumb-img">
-                                    <img src="' . IMAGE_PATH . 'blog/' . $Blogs->image . '" alt="' . $Blogs->title . '">
-                                </div>
-                                <div class="blog-info">
-                                    <div class="blog-details">
-                                        <h3 class="blog-details-title mb-20">' . $Blogs->title . '</h3>
-                                        <p class="mb-10">
-                                          ' . $Blogs->content . '
-                                        </p>
-                                    </div>
-                                </div>
-                                  <div class="blog-comments">
-                                    <div class="blog-comments-form">
-                                        <h3>Leave A Comment</h3>
-                                        <form id="contactform">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text"><i class="far fa-user-tie"></i></span>
-                                                        <input type="text" class="form-control" name="name"
-                                                            placeholder="Your Name*" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text"><i class="far fa-envelope"></i></span>
-                                                        <input type="email" class="form-control" name="email"
-                                                            placeholder="Your Email*" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="input-group textarea">
-                                                        <span class="input-group-text"><i class="far fa-pen"></i></span>
-                                                        <textarea name="message" cols="30" rows="5" class="form-control"
-                                                            placeholder="Your Comment*"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div id="result_msg"></div>
-                                                <div class="col-md-12">
-                                                    <button type="submit" class="theme-btn" id="submit">Submit <i class="far fa-paper-plane"></i></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+
+
+
+        <section class="ul-service-details ul-section-spacing">
+            <div class="ul-container">
+                <div>
+                    <div class="ul-service-details-txt">
+                        <h3 class="ul-service-details-inner-title">' . date('M Y', strtotime($Blogs ->blog_date)) . '</h3>
+                         ' . $Blogs->content . '                    
+                    </div>
+                </div>
+
+                <section class="main text-center">
+                    <div class="container-fluid">
+                        <h3 class="text-center" style="color:#d93431;">Memories / Gallery</h3>
+                        <div class="row" id="gallery">
+                            <div class="col-md-3 images" data-src="assets/img/blog-b-1.jpg">
+                                <img src="assets/img/blog-b-1.jpg" class="img-fluid">
+                            </div>
+
+                            <div class="col-md-3 images" data-src="assets/img/blog-b-2.jpg">
+                                <img src="assets/img/blog-b-2.jpg" class="img-fluid">
+                            </div>
+
+                            <div class="col-md-3 images" data-src="assets/img/blog-b-3.jpg">
+                                <img src="assets/img/blog-b-3.jpg" class="img-fluid">
+                            </div>
+
+                            <div class="col-md-3 images" data-src="assets/img/blog-1.jpg">
+                                <img src="assets/img/blog-1.jpg" class="img-fluid">
+                            </div>
+
+                            <div class="col-md-3 images" data-src="assets/img/blog-2.jpg">
+                                <img src="assets/img/blog-2.jpg" class="img-fluid">
+                            </div>
+
+                            <div class="col-md-3 images" data-src="assets/img/blog-3.jpg">
+                                <img src="assets/img/blog-3.jpg" class="img-fluid">
+                            </div>
+
+                            <div class="col-md-3 images" data-src="assets/img/blog-b-3.jpg">
+                                <img src="assets/img/blog-b-3.jpg" class="img-fluid">
+                            </div>
+
+                            <div class="col-md-3 images" data-src="assets/img/blog-1.jpg">
+                                <img src="assets/img/blog-1.jpg" class="img-fluid">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <aside class="sidebar">
-                            <!-- search-->
-                             <!-- <div class="widget search">
-                                <h5 class="widget-title">Find What You Need</h5>
-                                <form class="search-form">
-                                    <input type="text" class="form-control" placeholder="Search Blog...">
-                                    <button type="submit"><i class="far fa-search"></i></button>
-                                </form>
-                            </div> -->
-                            <!-- category -->
-                             <!--<div class="widget category">
-                                <h5 class="widget-title">Category</h5>
-                                <div class="category-list">
-                                    <a href="#"><i class="far fa-arrow-right"></i>Solo & Team Fishing<span>(10)</span></a>
-                                    <a href="#"><i class="far fa-arrow-right"></i>Fishing Tour<span>(15)</span></a>
-                                    <a href="#"><i class="far fa-arrow-right"></i>Fishing Competitions<span>(20)</span></a>
-                                    <a href="#"><i class="far fa-arrow-right"></i>Fishing Guidence<span>(30)</span></a>
-                                    <a href="#"><i class="far fa-arrow-right"></i>Fishing Equipments<span>(25)</span></a>
-                                </div>
-                            </div>-->
+                </section>
+            </div>
+        </section>
 
    ';
+   $jVars['module:blog-detail'] = $blog_detail;
 
 
         // Recent Posts Sidebar
@@ -336,7 +328,6 @@ if (defined("BLOG_DETAIL_PAGE")) {
                                         </div>
                                     </div>
                                 </div>
-                            <!--================ End of Entity ================-->
 
            ';
         }

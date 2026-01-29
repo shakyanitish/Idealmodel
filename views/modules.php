@@ -90,6 +90,7 @@ $jVars['site:pixel-code']	= $siteRegulars->pixel_code;
 
 require_once("views/module.booking.php");
 require_once("views/module.contact.php");
+require_once("views/module.download.php");
 
 // SITE MODULES
 $modulesList = Module::getAllmode();

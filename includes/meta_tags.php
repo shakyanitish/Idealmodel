@@ -45,6 +45,11 @@ function className_metatags()
         return $className;
         exit;
     endif;
+    if ($fileName == 'package_detail'):
+        $className = 'Package';
+        return $className;
+        exit;
+    endif;
 
     if ($fileName != 'index'):
         $className = ucfirst(strtolower($fileName));
@@ -79,13 +84,13 @@ function MetaTagsFor_SEO()
     $addtitle = '';
     $class = className_metatags();
     // pr($class);
-    
-    $pagename=strtolower($class);
+
+    $pagename = strtolower($class);
     global $db;
-    $metasql= $db->query("SELECT * FROM tbl_metadata WHERE page_name='$pagename'");
-    $metadata= $metasql->fetch_object();
-    
-   
+    $metasql = $db->query("SELECT * FROM tbl_metadata WHERE page_name='$pagename'");
+    $metadata = $metasql->fetch_object();
+
+
     // Transaction start
     if (isset($_REQUEST['slug']) and !empty($_REQUEST['slug'])) {
         if ($class == 'Global') {
@@ -102,7 +107,7 @@ function MetaTagsFor_SEO()
                 }
             }
         } else {
-            
+
             $cls = new $class;
             $rec = $cls->find_by_slug(addslashes($_REQUEST['slug']));
             if (!empty($rec)) {
@@ -112,11 +117,10 @@ function MetaTagsFor_SEO()
                     $description = $rec->meta_description;
                 }
             }
-        
         }
-    }else{
-        if(!empty($metadata)){
-                
+    } else {
+        if (!empty($metadata)) {
+
             $addtitle = !empty($metadata->meta_title) ? $metadata->meta_title : $metadata->title;
             if (!empty($metadata->meta_keywords)) {
                 $keywords = $metadata->meta_keywords;
@@ -309,7 +313,7 @@ function MetaTagsFor_SEO()
     $seoSources .= '<meta property="og:url" content="' . BASE_URL . $data . '">' . "\n";
     $seoSources .= '<meta property="og:type" content="website">' . "\n";
     $seoSources .= '<meta property="twitter:card" content="summary_large_image">' . "\n\n";
-//    $seoSources .= '<link rel="canonical" href="' . curPageURL() . '" />' . "\n";
+    //    $seoSources .= '<link rel="canonical" href="' . curPageURL() . '" />' . "\n";
 
     $seoSources .= '<base url="' . BASE_URL . '"/>' . "\n";
     $seoSources .= $config->google_anlytics . "\n";
@@ -318,5 +322,3 @@ function MetaTagsFor_SEO()
 
     return $seoSources;
 }
-
-?>

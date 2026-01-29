@@ -2,6 +2,7 @@
 $siteRegulars = Config::find_by_id(1);
 $booking_code = Config::getField('hotel_code', true);
 $header = ob_get_clean();
+$sidebarlogo = '';
 $header = '
 
 
@@ -31,7 +32,20 @@ $header = '
 
 
 ';
+
 $jVars['module:header'] = $header;
+
+$sidebarlogo = '
+                <a href="' . BASE_URL . 'home' . '">
+                    <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="logo" class="logo">
+                </a>
+
+
+
+';
+
+$jVars['module:sidebarlogo'] = $sidebarlogo;
+
 
 
 

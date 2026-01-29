@@ -127,7 +127,7 @@ if ($menuRec):
             
             foreach ($childMenus as $childMenu):
                 $childActive = ($childMenu->linksrc == $currentPath) ? ' class="active"' : '';
-                $result .= '                        <li><a href="' . $childMenu->linksrc . '"' . $childActive . '>' . $childMenu->name . '</a></li>';
+                $result .= '                        <li><a href="' . BASE_URL . $childMenu->linksrc . '"' . $childActive . '>' . $childMenu->name . '</a></li>';;
             endforeach;
             
             $result .= '                    </ul>';
@@ -135,7 +135,7 @@ if ($menuRec):
             $result .= '            </div>';
         else:
             // Simple menu link
-            $result .= '            <a href="' . $menuRow->linksrc . '"' . ($linkActive ? ' class="' . trim($linkActive) . '"' : '') . '>' . $menuRow->name . '</a>';
+            $result .= '            <a href="' . BASE_URL . $menuRow->linksrc . '"' . ($linkActive ? ' class="' . trim($linkActive) . '"' : '') . '>' . $menuRow->name . '</a>';
         endif;
     
     endforeach;

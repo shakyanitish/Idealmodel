@@ -3,10 +3,23 @@
 $moduleTablename  = "tbl_download"; // Database table name
 $moduleId         = 29;             // module id >>>>> tbl_modules
 $moduleFoldername = "";     // Image folder name
+// Define download categories (similar to service types)
+$download_categories = array(
+    1 => 'Research',
+    2 => 'Case Study',
+    3 => 'Medical Study'
+);
 
 if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     clearImages($moduleTablename, "download/docs");
     clearImages($moduleTablename, "download/docs/thumbnails");
+
+    // Set the category type ID similar to services
+    if (isset($_GET['category']) and !empty($_GET['category'])) {
+        $session->set('category_id_download', $_GET['category']);
+    }
+    $categoryid = ($session->get('category_id_download')) ? $session->get('category_id_download') : 'all';
+    $pagename = strtolower($_GET['page']);
 ?>
     <h3>
         List Download
@@ -26,13 +39,17 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
                         <th style="display:none;"></th>
                         <th class="text-center"><input class="check-all" type="checkbox" /></th>
                         <th class="text-center">Title</th>
+                        <th class="text-center">Category</th>
                         <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <?php $records = Download::find_by_sql("SELECT * FROM " . $moduleTablename . " ORDER BY sortorder DESC ");
-                    foreach ($records as $key => $record): ?>
+                    <?php
+                    $where_clause = ($categoryid == 'all') ? '' : "WHERE category={$categoryid}";
+                    $records = Download::find_by_sql("SELECT * FROM " . $moduleTablename . " {$where_clause} ORDER BY sortorder DESC");
+                    foreach ($records as $key => $record):
+                    ?>
                         <tr id="<?php echo $record->id; ?>">
                             <td style="display:none;"><?php echo $key + 1; ?></td>
                             <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>" /></td>
@@ -41,6 +58,11 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
                                     <a href="javascript:void(0);" onClick="editRecord(<?php echo $record->id; ?>);" class="loadingbar-demo" title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
                                 </div>
                             </td>
+
+                            <td>
+                                <?php echo $download_categories[$record->category] ?? 'N/A'; ?>
+                            </td>
+
 
                             <td class="text-center">
                                 <?php
@@ -86,6 +108,13 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
         $status     = ($downloadInfo->status == 1) ? "checked" : " ";
         $unstatus   = ($downloadInfo->status == 0) ? "checked" : " ";
     endif;
+
+    // Set the category type ID - if editing, use the saved category; if adding, use session or default to 1 (Research)
+    if (isset($downloadInfo) && !empty($downloadInfo->category)):
+        $categoryid = $downloadInfo->category;
+    else:
+        $categoryid = (!empty($session->get('category_id_download'))) ? $session->get('category_id_download') : 1;
+    endif;
 ?>
     <h3>
         <?php echo (isset($_GET['id'])) ? 'Edit download' : 'Add New download'; ?>
@@ -101,6 +130,23 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
     <div class="example-box">
         <div class="example-code">
             <form action="" class="col-md-12 center-margin" id="download_frm">
+                <input type="hidden" name="category" value="<?php echo $categoryid; ?>" />
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Category :
+                        </label>
+                    </div>
+                    <div class="form-checkbox-radio col-md-9">
+                        <?php foreach ($download_categories as $key => $category): ?>
+                            <input id="cat_<?php echo $key; ?>" class="custom-radio" type="radio" name="category" value="<?php echo $key; ?>"
+                                <?php echo ($key == $categoryid ? 'checked' : ''); ?>>
+                            <label for="cat_<?php echo $key; ?>"><?php echo $category; ?></label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -109,6 +155,19 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
                     </div>
                     <div class="form-input col-md-6">
                         <input placeholder="Title" class="col-md-6 validate[required,length[0,200]]" type="text" name="title" id="title" value="<?php echo !empty($downloadInfo->title) ? $downloadInfo->title : ""; ?>">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Date :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <input placeholder="Download Date" class="col-md-6 validate[required] datepicker" type="text"
+                            name="case_date" id="case_date"
+                            value="<?php echo !empty($downloadInfo->case_date) ? $downloadInfo->case_date : ""; ?>">
                     </div>
                 </div>
 
@@ -277,4 +336,13 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
         });
         // ]]>
     </script>
+
+    <script>
+        // Filter downloads by category - similar to services
+        function filterDownloadCategory(categoryId) {
+            // Store the selected category in session or pass via URL
+            window.location.href = '<?php echo BASE_URL; ?>apanel/index.php?page=download&mode=list&category=' + categoryId;
+        }
+    </script>
+
 <?php endif; ?>

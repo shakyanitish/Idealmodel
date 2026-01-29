@@ -171,6 +171,19 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Date :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <input placeholder="Date" class="col-md-6 validate[required] datepicker" type="text"
+                            name="case_date" id="case_date"
+                            value="<?php echo !empty($packageInfo->program_date) ? $packageInfo->program_date : ""; ?>">
+                    </div>
+                </div>
+
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">

@@ -80,15 +80,16 @@ $(document).ready(function () {
     }
 });
 
-    /***************************************** testimonial Create Date *******************************************/
-    //$(document).ready(function(){
-    //	$('#testimonial_date').datepicker({
-    //		changeMonth: true,
-    //		changeYear: true,
-    //		showButtonPanel: true,
-    //		dateFormat: 'yy-mm-dd'
-    //	});
-    //});
+    /***************************************** Download Create Date *******************************************/
+    $(document).ready(function(){
+	$('#case_date').datepicker({
+		changeMonth: true,
+		changeYear: true,
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd',
+        maxDate: 0  
+	});
+    });
 
     /*************************************** Toggle AddEdit Form ********************************************/
     function toggleMetadata() {

@@ -480,7 +480,9 @@ CREATE TABLE `tbl_download` (
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `status` int(11) NOT NULL,
   `sortorder` int(11) NOT NULL,
-  `image` tinytext NOT NULL
+  `image` tinytext NOT NULL,
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `created_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
