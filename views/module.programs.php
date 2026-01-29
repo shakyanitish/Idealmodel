@@ -10,7 +10,7 @@ $programsRec = Package::getHomePackage();
 
 if (!empty($programsRec)) {
     $programsHtml = '';
-    
+
     foreach ($programsRec as $program) {
         // Get main image
         $imglink = '';
@@ -23,43 +23,40 @@ if (!empty($programsRec)) {
                 }
             }
         }
-        
+
         // Fallback to default image if no banner image
         if (empty($imglink)) {
             $siteRegulars = Config::find_by_id(1);
             $imglink = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
         }
-        
+
         // Build program link
-        $programLink = BASE_URL . 'package/' . $program->slug;
-        
+        $programLink = BASE_URL . 'program/' . $program->slug;
+
         // Get title
         $title = !empty($program->title) ? $program->title : 'Program';
-        
-        // Get description from detail or content
-        $description = !empty($program->detail) ? $program->detail : (!empty($program->content) ? $program->content : 'View details for more information.');
-        
-        // Truncate description to reasonable length
-        if (strlen($description) > 150) {
-            $description = substr($description, 0, 150) . '...';
-        }
-        
+
+        // Get description from brief or sub_title
+        $description = $program->sub_title ?? '';
+
+
+
         $programsHtml .= '
                         <!-- single slide -->
                         <div class="swiper-slide">
                             <div class="ul-service">
                                 <div class="ul-service-img">
-                                    <img src="' . $imglink . '" alt="' . htmlspecialchars($title) . '">
+                                    <img src="' . $imglink . '" alt="' . $title . '">
                                 </div>
                                 <div class="ul-service-txt">
-                                    <h3 class="ul-service-title"><a href="' . BASE_URL . 'program/' . $program->slug . '">' . htmlspecialchars($title) . '</a></h3>
+                                    <h3 class="ul-service-title"><a href="' . BASE_URL . 'program/' . $program->slug . '">' . $title . '</a></h3>
                                     <p class="ul-service-descr">' . $description . '</p>
                                     <a href="' . BASE_URL . 'program/' . $program->slug . '" class="ul-service-btn"><i class="flaticon-up-right-arrow"></i> View Details</a>
                                 </div>
                             </div>
                         </div>';
     }
-    
+
     $programsContent = '
         <section class="ul-section-spacing overflow-hidden">
             <div class="ul-container">
@@ -183,7 +180,7 @@ $program_detail = $program_detail_title = '';
 if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
     $slug = !empty($_REQUEST['slug']) ? $_REQUEST['slug'] : '';
     $Package = Package::find_by_slug($slug);
-    
+
     if (!empty($Package)) {
         // Breadcrumb title
         $program_detail_title = '
@@ -206,7 +203,7 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
                 }
             }
         }
-        
+
         // Fallback image
         if (empty($banner_img)) {
             $siteRegulars = Config::find_by_id(1);
@@ -214,38 +211,47 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
         }
 
         $program_detail = '
+
+
         <div class="ul-container ul-section-spacing">
             <div class="row gy-4 flex-column-reverse flex-lg-row">
-                <!-- program details content -->
+                <!-- event details content -->
                 <div class="col-lg-8">
                     <div class="ul-event-details ul-donation-details">
                        <div class="ul-testimonial-2-slider swiper">
                             <div class="swiper-wrapper">
+                                <!-- single slide -->
                                 <div class="swiper-slide">
                                     <div class="ul-event-details-img">
-                                        <img src="' . $banner_img . '" alt="' . htmlspecialchars($Package->title) . '">
+                                        <img src="' . $banner_img . '" alt="' . $Package->title . '">
+                                    </div>
+                                </div>
+
+                                <!-- single slide -->
+                                <div class="swiper-slide">
+                                    <div class="ul-event-details-img">
+                                        <img src="' . $banner_img . '" alt="' . $Package->title . '">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <h2 class="ul-event-details-title">' . htmlspecialchars($Package->title) . '</h2>
-                        <p>' . $Package->content . '</p>
-                        <p>' . $Package->detail . '</p>
+                        <h2 class="ul-event-details-title">' . $Package->title . '</h2>
+                        ' . $Package->content . '
                     </div>
                 </div>
 
                 <!-- left sidebar -->
                 <div class="col-lg-4">
                     <div class="ul-inner-sidebar">
-                        <!-- single widget / Other Programs -->
+                        <!-- single widget / Recent Posts -->
                         <div class="ul-inner-sidebar-widget posts">
                             <h3 class="ul-inner-sidebar-widget-title">Other Programs</h3>
                             <div class="ul-inner-sidebar-widget-content">
                                 <div class="ul-inner-sidebar-posts">';
 
-        // Get other programs
-        $otherPrograms = Package::getHomePackage();
+        // Get other Recent  programs
+        $otherPrograms = Package::get_latestprogram_by(3);
         if (!empty($otherPrograms)) {
             foreach ($otherPrograms as $prog) {
                 // Skip current program
@@ -257,20 +263,24 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
                             $prog_img = IMAGE_PATH . 'package/banner/' . $imgList[0];
                         }
                     }
-                    
+
                     if (empty($prog_img)) {
                         $siteRegulars = Config::find_by_id(1);
                         $prog_img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
                     }
-                    
+
                     $program_detail .= '
+
+
+                                        <!-- single post -->
                                     <div class="ul-inner-sidebar-post">
                                         <div class="img">
-                                            <img src="' . $prog_img . '" alt="' . htmlspecialchars($prog->title) . '">
+                                            <img src="' . $prog_img . '" alt="' .$prog->title . '">
                                         </div>
+
                                         <div class="txt">
-                                            <h4 class="title"><a href="' . BASE_URL . 'package/' . $prog->slug . '">' . htmlspecialchars($prog->title) . '</a></h4>
-                                            <span class="date"><span>' . date("M d, Y", strtotime($prog->program_date)) . '</span></span>
+                                            <h4 class="title"><a href="' . BASE_URL . 'program/' . $prog->slug . '">' .$prog->title . '</a></h4>
+                                            <span class="date"> <span>' . date("M d, Y", strtotime($prog->program_date)) . '</span></span>
                                         </div>
                                     </div>';
                 }
@@ -286,11 +296,7 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
             </div>
         </div>
         ';
-        
+
         $jVars['module:program-detail'] = $program_detail;
     }
 }
-?>
-
-
-

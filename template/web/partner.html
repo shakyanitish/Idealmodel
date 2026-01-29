@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jayanti Memorial Trust</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <jcms:site:seotitle/>
+
+    <!-- Fevicon -->
+    <jcms:site:fevicon/>
 
     <!-- libraries CSS -->
     <link rel="stylesheet" href="assets/icon/flaticon_charitics.css">
@@ -29,9 +29,7 @@
         <!-- header -->
         <div class="ul-sidebar-header">
             <div class="ul-sidebar-header-logo">
-                <a href="index-2.html">
-                    <img src="assets/img/logo.png" alt="logo" class="logo">
-                </a>
+            <jcms:module:sidebarlogo/>                
             </div>
             <!-- sidebar closer -->
             <button class="ul-sidebar-closer"><i class="flaticon-close"></i></button>
@@ -43,56 +41,14 @@
             <span class="ul-sidebar-footer-title">Follow us</span>
 
             <div class="ul-sidebar-footer-social">
-                <a href="https://www.facebook.com/JayantiMemorialTrust/" target="_blank" rel="noopener"><i class="flaticon-facebook"></i></a>
-                <a href="#"><i class="flaticon-twitter"></i></a>
-                <a href="#"><i class="flaticon-instagram"></i></a>
-                <a href="#"><i class="flaticon-youtube"></i></a>
+                <jcms:module:socilaLinkbtm/>
             </div>
         </div>
     </div>
     <!-- SIDEBAR SECTION END -->
 
     <!-- HEADER SECTION START -->
-    <header class="ul-header ul-header-2">
-        <div class="ul-header-bottom to-be-sticky">
-            <div class="ul-header-bottom-wrapper ul-header-container">
-                <div class="logo-container">
-                    <a href="index.html" class="d-inline-block">
-                        <img src="assets/img/logo.png" alt="logo" class="logo">
-                    </a>
-                </div>
-
-                <!-- header nav -->
-                <div class="ul-header-nav-wrapper">
-                    <div class="to-go-to-sidebar-in-mobile">
-                        <nav class="ul-header-nav">
-                            <a href="index.html">Home</a>
-                            <div class="has-sub-menu">
-                                <a role="button" class="active">About</a>
-                                <div class="ul-header-submenu">
-                                    <ul>
-                                        <li><a href="about.html">About JMT</a></li>
-                                        <li><a href="team.html">Our Team</a></li>
-                                        <li><a href="partner.html">Our Partners</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <a href="program.html">Programs</a>
-                            <a href="impact.html">Impact & Activities</a>
-                            <a href="case.html">Case Study & Research</a>
-                            <a href="contact.html">Contact Us</a>
-                        </nav>
-                    </div>
-                </div>
-
-                <!-- actions -->
-                <div class="ul-header-actions">
-                    <a href="donate.html" class="ul-btn d-sm-inline-flex d-none"><i class="flaticon-fast-forward-double-right-arrows-symbol"></i> Donate Now </a>
-                    <button class="ul-header-sidebar-opener d-lg-none d-inline-flex"><i class="flaticon-menu"></i></button>
-                </div>
-            </div>
-        </div>
-    </header>
+    <jcms:module:header/>
     <!-- HEADER SECTION END -->
 
     <main>
@@ -131,64 +87,10 @@
     </main>
 
     <!-- FOOTER SECTION START -->
-    <footer class="ul-footer">
-        <div class="ul-footer-middle">
-            <div class="ul-footer-container">
-                <div class="ul-footer-middle-wrapper wow animate__fadeInUp">
-                    <div class="ul-footer-widget ul-nwsltr-widget">
-                        <h3 class="ul-footer-widget-title">Jayanti Memorial Trust</h3>
-                        <div class="ul-footer-widget-links ul-footer-contact-links">
-                            <a href=""><i class="flaticon-pin"></i>Gairi Marg-4, Chundevi Opposite Sri lankan Embassy</a>
-                            <a href="mailto:info@jmt.org.np"><i class="flaticon-mail"></i>info@jmt.org.np</a>
-                            <a href="tel:+977014720009"><i class="flaticon-telephone-call"></i>+977 01 4720009</a>
-                        </div>
-                        <p class="ul-footer-about-txt map3"><a href="https://maps.app.goo.gl/B4xGMGEeonVn5cco9">View Google Map</a></p>
-                        <div class="ul-footer-socials">
-                            <a href="https://www.facebook.com/JayantiMemorialTrust/" target="_blank" rel="noopener"><i class="flaticon-facebook"></i></a>
-                            <a href="#"><i class="flaticon-twitter"></i></a>
-                            <a href="#"><i class="flaticon-linkedin-big-logo"></i></a>
-                            <a href="#"><i class="flaticon-youtube"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="ul-footer-widget ul-nwsltr-widget">
-                        <h3 class="ul-footer-widget-title">Patron of the Trust</h3>
-                        <div class="ul-footer-widget-links ul-footer-contact-links">
-                            <a href="#"><img src="assets/img/fishtail.png" alt="" style="width: 200px;background: #ffffff;"></a>
-                        </div>
-                    </div>
-                    
-                    <div class="ul-footer-widget">
-                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FJayantiMemorialTrust%2F&tabs=timeline&width=300&height=230&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="300" height="230" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- footer bottom -->
-        <div class="ul-footer-bottom">
-            <div class="ul-footer-container">
-                <div class="ul-footer-bottom-wrapper">
-                    <p class="copyright-txt">&copy;
-                        <span id="footer-copyright-year"></span> Jayanti Memorial Trust. All rights reserved
-                    </p>
-                    <div class="ul-footer-bottom-nav text-white">Developed By:<a href="https://longtail.info/" target="_blank">Longtail e-media</a> </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- vector -->
-        <div class="ul-footer-vectors">
-            <img src="assets/img/footer-vector-img.png" alt="Footer Image" class="ul-footer-vector-1">
-        </div>
-    </footer>
+    <jcms:module:footer/>
     <!-- FOOTER SECTION END -->
 
-    <div class="whats_app">
-        <a href="https://wa.me/+977" target="_blank" rel="noreferrer" class="whatsapp">
-            <img src="assets/img/icon/whatsapp.png" class="whatsapp_img" alt="whatsapp">
-        </a>
-    </div>
+
 
     <button id="backToTop" class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 d-none" aria-label="Back to top">
           ↑

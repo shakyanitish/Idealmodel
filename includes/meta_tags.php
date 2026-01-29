@@ -11,6 +11,17 @@ function className_metatags()
         return $className;
         exit;
     endif;
+    if ($fileName == 'teams'):
+        $className = 'Article';
+        return $className;
+        exit;
+    endif;
+
+    if ($fileName == 'partners'):
+        $className = 'Article';
+        return $className;
+        exit;
+    endif;
 
     if ($fileName == 'career-form'):
         $className = 'vacency';
