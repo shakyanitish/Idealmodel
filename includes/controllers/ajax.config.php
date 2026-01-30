@@ -21,8 +21,8 @@
 			$record->fb_upload		    = $_REQUEST['imageArrayname3'];
 			$record->twitter_upload		= $_REQUEST['imageArrayname4'];
 			$record->gallery_upload		= $_REQUEST['imageArrayname5'];
-			$record->contact_upload		= $_REQUEST['imageArrayname6'];
-			$record->other_upload		= $_REQUEST['imageArrayname7'];
+			// $record->contact_upload		= $_REQUEST['imageArrayname6'];
+			// $record->other_upload		= $_REQUEST['imageArrayname7'];
 			$record->facility_upload		= $_REQUEST['imageArrayname8'];
 			$record->sitename			= $_REQUEST['sitename'];
 			$record->copyright 			= $_REQUEST['copyright'];
@@ -116,10 +116,10 @@ endif;
             $record->fb_upload          = (!empty($_REQUEST['imageArrayname3'])) ? $_REQUEST['imageArrayname3'] : '';
             $record->twitter_upload     = (!empty($_REQUEST['imageArrayname4'])) ? $_REQUEST['imageArrayname4'] : '';
             $record->gallery_upload     = (!empty($_REQUEST['imageArrayname5'])) ? $_REQUEST['imageArrayname5'] : '';
-            $record->contact_upload     = (!empty($_REQUEST['imageArrayname6'])) ? $_REQUEST['imageArrayname6'] : '';
-            $record->other_upload       = (!empty($_REQUEST['imageArrayname7'])) ? $_REQUEST['imageArrayname7'] : '';
+            // $record->contact_upload     = (!empty($_REQUEST['imageArrayname6'])) ? $_REQUEST['imageArrayname6'] : '';
+            // $record->other_upload       = (!empty($_REQUEST['imageArrayname7'])) ? $_REQUEST['imageArrayname7'] : '';
             $record->facility_upload    = (!empty($_REQUEST['imageArrayname8'])) ? $_REQUEST['imageArrayname8'] : '';
-            $record->offer_upload       = (!empty($_REQUEST['imageArrayname9'])) ? $_REQUEST['imageArrayname9'] : '';
+            // $record->offer_upload       = (!empty($_REQUEST['imageArrayname9'])) ? $_REQUEST['imageArrayname9'] : '';
 
 			$db->begin();
 			if($record->save()):$db->commit();

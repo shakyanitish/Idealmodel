@@ -17,12 +17,12 @@ switch($action)
 
         $record->name 		= $_REQUEST['name'];
         $record->title 		= $_REQUEST['title'];
-        $record->facebook 		= $_REQUEST['facebook'];
-        $record->instagram 		= $_REQUEST['instagram'];
+        // $record->facebook 		= $_REQUEST['facebook'];
+        // $record->instagram 		= $_REQUEST['instagram'];
         $record->content	= $_REQUEST['content'];
         // $record->social	= $_REQUEST['social'];
         $record->email	    = $_REQUEST['email'];
-        $record->image	    = (!empty($_REQUEST['imageArrayname'])) ? $_REQUEST['imageArrayname'] : '';
+        // $record->image	    = (!empty($_REQUEST['imageArrayname'])) ? $_REQUEST['imageArrayname'] : '';
         $record->role	    = $_REQUEST['role'];
         $record->status		= $_REQUEST['status'];
         $record->sortorder	= team::find_maximum();
@@ -55,11 +55,11 @@ switch($action)
         }*/
         $record->name 		= $_REQUEST['name'];
         $record->title 		= $_REQUEST['title'];
-        $record->facebook 		= $_REQUEST['facebook'];
-        $record->instagram 		= $_REQUEST['instagram'];
+        // $record->facebook 		= $_REQUEST['facebook'];
+        // $record->instagram 		= $_REQUEST['instagram'];
         $record->content	= $_REQUEST['content'];
         // $record->social	= $_REQUEST['social'];
-        $record->image	    = (!empty($_REQUEST['imageArrayname'])) ? $_REQUEST['imageArrayname'] : '';
+        // $record->image	    = (!empty($_REQUEST['imageArrayname'])) ? $_REQUEST['imageArrayname'] : '';
         $record->role	    = $_REQUEST['role'];
         $record->email	    = $_REQUEST['email'];
         $record->status		= $_REQUEST['status'];

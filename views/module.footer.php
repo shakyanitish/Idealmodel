@@ -7,21 +7,19 @@ $tellinked = '';
 $contact = '';
 
 $tellinked = '';
-
 $telno = array_map('trim', explode(',', $siteRegulars->contact_info));
 
 foreach ($telno as $index => $tel) {
-
     // remove spaces for tel link
     $cleanTel = str_replace(' ', '', $tel);
 
     $tellinked .= '<a href="tel:+977' . $cleanTel . '">
-                        <i class="flaticon-telephone-call"></i>+977 ' . $tel . '
-                   </a>';
+                    <i class="flaticon-telephone-call"></i>+977 ' . $tel . '
+               </a>';
 
     // separator except last item
     if ($index !== array_key_last($telno)) {
-        $tellinked .= ' / ';
+        $tellinked .= ' ';
     }
 }
 
@@ -41,24 +39,17 @@ foreach ($ot as $o) {
 
 
 $emailinked = '';
-$emails = explode(",", $siteRegulars->email_address);
+$emails = array_map('trim', explode(',', $siteRegulars->email_address));
 
 foreach ($emails as $index => $email) {
-    $email = trim($email); // Clean up any stray spaces
-    
-    // Add a comma separator for every email after the first one
-    if ($index > 0) {
-        $emailinked .= ', ';
-    }
+    $emailinked .= '<a href="mailto:' . $email . '">
+                        <i class="flaticon-mail"></i>' . $email . '
+                   </a>';
 
-    $emailinked .= '<a href="mailto:' . $email . '">';
-    
-    // Include the icon only for the very first email to match your static design
-    if ($index === 0) {
-        $emailinked .= '<i class="flaticon-mail"></i>';
+    // separator except last item
+    if ($index !== array_key_last($emails)) {
+        $emailinked .= ' ';
     }
-    
-    $emailinked .= $email . '</a>';
 }
 
 $whatsapp = '';

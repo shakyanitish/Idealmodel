@@ -12,9 +12,9 @@ if (defined('CONTACT_PAGE')) {
     $tellinked = '';
     $telno = explode(",", $siteRegulars->contact_info);
     $lastElement = array_shift($telno);
-    $tellinked .= '<a href="tel:+977' . str_replace(' ', '', $lastElement) . '" target="_blank">' . $lastElement . '</a><br>';
+    $tellinked .= '<a href="tel:+977' . str_replace(' ', '', $lastElement) . '" target="_blank">+977 ' . $lastElement . '</a><br>';
     foreach ($telno as $tel) {
-        $tellinked .= '<a href="tel:+977' . str_replace(' ', '', $tel) . '" target="_blank">' . $tel . '</a>';
+        $tellinked .= '<a href="tel:+977' . str_replace(' ', '', $tel) . '" target="_blank">+977 ' . $tel . '</a>';
         if (end($telno) != $tel) {
             $tellinked .= '/';
         }
@@ -30,19 +30,7 @@ if (defined('CONTACT_PAGE')) {
         $office .= ', <span>' . $o . '</span>';
     }
 
-    // Email links
-    // $emailinked = '';
-    // $emails = explode(",", $siteRegulars->email_address . ',' . $siteRegulars->contact_info2); // merge both emails
-    // $emails = array_map('trim', $emails); // remove spaces
-    // $totalEmails = count($emails);
-    // $countEmail = 0;
-    // foreach ($emails as $email) {
-    //     $countEmail++;
-    //     $emailinked .= '<a href="mailto:' . $email . '" target="_blank" rel="noreferrer" title="' . $email . '">' . $email . '</a>';
-    //     if ($countEmail < $totalEmails) {
-    //         $emailinked .= ', '; // add comma only between emails
-    //     }
-    // }
+
 
     $emailinked = '';
     $emails = explode(",", $siteRegulars->email_address); // use only one field
@@ -54,7 +42,7 @@ if (defined('CONTACT_PAGE')) {
         $countEmail++;
         $emailinked .= '<a href="mailto:' . $email . '" target="_blank" rel="noreferrer" title="' . $email . '">' . $email . '</a>';
         if ($countEmail < $totalEmails) {
-            $emailinked .= ' '; // add comma only between emails
+            $emailinked .= '<br> '; // add comma only between emails
         }
     }
 

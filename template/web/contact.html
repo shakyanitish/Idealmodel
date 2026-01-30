@@ -18,21 +18,7 @@
 
     <!-- custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        /* Validation error messages */
-        span.validate-has-error {
-            color: #dc3545;
-            font-size: 12px;
-            display: block;
-            margin-top: 5px;
-        }
 
-        /* Optional: highlight invalid input fields */
-        input.validate-has-error,
-        textarea.validate-has-error {
-            border-color: #dc3545 !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -217,18 +203,18 @@
                     }
                 },
                 rules: {
-                    name: { required: true },
+                    fullname: { required: true },
                     phone: { required: true, number: true },
                     address: { required: true },
                     email: { required: true, email: true },
-                    message: { required: true }
+                    // message: { required: true }
                 },
                 messages: {
-                    name: { required: "Please enter your Full Name." },
+                    fullname: { required: "Please enter your Full Name." },
                     phone: { required: "Please enter your Phone Number." },
                     address: { required: "Please enter your Address." },
                     email: { required: "Please enter your Email Address." },
-                    message: { required: "Please enter your Message." }
+                    // message: { required: "Please enter your Message." }
                 },
                 submitHandler: function (form) {
                     var recaptcha = $("#g-recaptcha-response").val();

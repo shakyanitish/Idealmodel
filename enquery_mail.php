@@ -4,7 +4,7 @@ $usermail = User::get_UseremailAddress_byId(1);
 $ccusermail = User::field_by_id(1, 'optional_email');
 $sitename = Config::getField('sitename', true);
 
-$recaptcha_secret = '6Lc2FywsAAAAABAGgWueQg3J-tI-MmtZHZcgdQjN';
+$recaptcha_secret = '6LdR7FosAAAAANDYpKT5XbG-8TXXHMaGvQzYkIz6';
 
 foreach ($_POST as $key => $val) {
   $$key = $val;
@@ -58,6 +58,7 @@ if ($_POST['action'] == "forContact"):
                         <strong>Name</strong> : ' . $fullname . '<br />		
                         <strong>E-mail Address</strong>: ' . $email . '<br />
                         <strong>Phone</strong>: ' . $phone . '<br />
+                        <strong>Address</strong>: ' . $address . '<br />
                         <strong>Message</strong>: ' . $message . '<br />
 
                     </p>

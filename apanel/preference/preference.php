@@ -1,4 +1,4 @@
-<link href="<?php echo ASSETS_PATH; ?>uploadify/uploadify.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo ASSETS_PATH; ?>uploadify/uploadify.css" rel="stylesheet" type="text/css" />
 <?php
 $moduleTablename = "tbl_configs"; // Database table name
 $moduleId = 13;             // module id >>>>> tbl_modules
@@ -16,30 +16,30 @@ clearImages($moduleTablename, "preference/offer", "offer_upload");
 clearImages($moduleTablename, "preference/offer/thumbnails", "offer_upload");
 ?>
 <h3>Preference Management</h3>
-<?php $PrefeRow = Config::find_by_id(1); 
+<?php $PrefeRow = Config::find_by_id(1);
 $upcoming = ($PrefeRow->upcoming == 1) ? "checked" : " ";
-$notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " "; 
+$notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
 ?>
 <div class="my-msg"></div>
 <div class="example-box">
     <div class="example-code">
         <form action="" class="col-md-12 center-margin" id="Preference_frm">
-        <div class="form-row">
-                    <div class="form-label col-md-2">
-                        <label for="">
-                            Site Under Construction:
-                        </label>
-                    </div>
-                    <div class="form-checkbox-radio col-md-9">
-                        <input type="radio" class="custom-radio upcoming" name="upcoming" id="check1"
-                               value="1" <?php echo !empty($upcoming) ? $upcoming : ""; ?>>
-                        <label for="">Yes</label>
-                        <input type="radio" class="custom-radio upcoming" name="upcoming" id="check0"
-                               value="0" <?php echo !empty($notupcoming) ? $notupcoming : "checked"; ?>>
-                        <label for="">No</label>
-                    </div>
+            <div class="form-row">
+                <div class="form-label col-md-2">
+                    <label for="">
+                        Site Under Construction:
+                    </label>
                 </div>
-                <div class="form-row upcoming-val <?php echo ($PrefeRow->upcoming == 0) ? 'hide' : ''; ?>">
+                <div class="form-checkbox-radio col-md-9">
+                    <input type="radio" class="custom-radio upcoming" name="upcoming" id="check1"
+                        value="1" <?php echo !empty($upcoming) ? $upcoming : ""; ?>>
+                    <label for="">Yes</label>
+                    <input type="radio" class="custom-radio upcoming" name="upcoming" id="check0"
+                        value="0" <?php echo !empty($notupcoming) ? $notupcoming : "checked"; ?>>
+                    <label for="">No</label>
+                </div>
+            </div>
+            <div class="form-row upcoming-val <?php echo ($PrefeRow->upcoming == 0) ? 'hide' : ''; ?>">
                 <div class="form-label col-md-2">
                     <label for="">
                         Content :
@@ -47,11 +47,11 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 </div>
                 <div class="form-input col-md-6">
                     <textarea placeholder="upcoming content" class="col-md-12 validate[required,length[0,200]]" type="text"
-                           name="upcomingcontent" id="upcomingcontent"
-                           value="<?php echo !empty($PrefeRow->upcomingcontent) ? $PrefeRow->upcomingcontent : ""; ?>"><?php echo !empty($PrefeRow->upcomingcontent) ? $PrefeRow->upcomingcontent : ""; ?></textarea>
+                        name="upcomingcontent" id="upcomingcontent"
+                        value="<?php echo !empty($PrefeRow->upcomingcontent) ? $PrefeRow->upcomingcontent : ""; ?>"><?php echo !empty($PrefeRow->upcomingcontent) ? $PrefeRow->upcomingcontent : ""; ?></textarea>
                 </div>
-                </div>    
-        <div class="form-row">
+            </div>
+            <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
                         Site Title :
@@ -59,8 +59,8 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 </div>
                 <div class="form-input col-md-6">
                     <input placeholder="Site Title" class="col-md-6 validate[required,length[0,200]]" type="text"
-                           name="sitetitle" id="sitetitle"
-                           value="<?php echo !empty($PrefeRow->sitetitle) ? $PrefeRow->sitetitle : ""; ?>">
+                        name="sitetitle" id="sitetitle"
+                        value="<?php echo !empty($PrefeRow->sitetitle) ? $PrefeRow->sitetitle : ""; ?>">
                 </div>
             </div>
 
@@ -72,8 +72,8 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 </div>
                 <div class="form-input col-md-6">
                     <input placeholder="Site Name" class="col-md-6 validate[required,length[0,200]]" type="text"
-                           name="sitename" id="sitename"
-                           value="<?php echo !empty($PrefeRow->sitename) ? $PrefeRow->sitename : ""; ?>">
+                        name="sitename" id="sitename"
+                        value="<?php echo !empty($PrefeRow->sitename) ? $PrefeRow->sitename : ""; ?>">
                 </div>
             </div>
 
@@ -85,9 +85,9 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 </div>
                 <div class="form-input col-md-6">
                     <input placeholder="&#0169; Copyright <?php echo date('Y'); ?> by Longtail-e-media - All Rights Reserved"
-                           class="col-md-6" type="text" name="copyright" id="copyright"
-                           value='<?php echo !empty($PrefeRow->copyright) ? $PrefeRow->copyright : "&#0169; Copyright " . date('Y') . " by Longtail-e-media - All Rights Reserved"; ?>'>
-                    <br/><label>
+                        class="col-md-6" type="text" name="copyright" id="copyright"
+                        value='<?php echo !empty($PrefeRow->copyright) ? $PrefeRow->copyright : "&#0169; Copyright " . date('Y') . " by Longtail-e-media - All Rights Reserved"; ?>'>
+                    <br /><label>
                         <small>Copy this red code for copyright year dynamic <span style="color:red;">{year}</span>
                         </small>
                     </label>
@@ -105,21 +105,21 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     <div class="col-md-1" id="removeSavedimg1">
                         <div class="infobox info-bg">
                             <div class="button-group" data-toggle="buttons">
-                            <span class="float-left">
-                                <?php
-                                if (file_exists(SITE_ROOT . "images/preference/" . $PrefeRow->icon_upload)):
-                                    $filesize = filesize(SITE_ROOT . "images/preference/" . $PrefeRow->icon_upload);
-                                    echo 'Size : ' . getFileFormattedSize($filesize);
-                                endif;
-                                ?>
-                            </span>
+                                <span class="float-left">
+                                    <?php
+                                    if (file_exists(SITE_ROOT . "images/preference/" . $PrefeRow->icon_upload)):
+                                        $filesize = filesize(SITE_ROOT . "images/preference/" . $PrefeRow->icon_upload);
+                                        echo 'Size : ' . getFileFormattedSize($filesize);
+                                    endif;
+                                    ?>
+                                </span>
                                 <a class="btn small float-right" href="javascript:void(0);"
-                                   onclick="deleteSavedPreferenceimage(1);">
+                                    onclick="deleteSavedPreferenceimage(1);">
                                     <i class="glyph-icon icon-trash-o"></i>
                                 </a>
                             </div>
                             <img src="<?php echo IMAGE_PATH . 'preference/thumbnails/' . $PrefeRow->icon_upload; ?>"
-                                 style="width:100%"/>
+                                style="width:100%" />
                         </div>
                     </div>
                 <?php endif; ?>
@@ -132,7 +132,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     </label>
                 </div>
                 <!-- Upload user image preview -->
-                <div id="preview_Image"><input type="hidden" name="imageArrayname" value="" class=""/></div>
+                <div id="preview_Image"><input type="hidden" name="imageArrayname" value="" class="" /></div>
             </div>
 
             <div class="form-row">
@@ -146,21 +146,21 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     <div class="col-md-2" id="removeSavedimg2">
                         <div class="infobox info-bg">
                             <div class="button-group" data-toggle="buttons">
-                            <span class="float-left">
-                                <?php
-                                if (file_exists(SITE_ROOT . "images/preference/" . $PrefeRow->logo_upload)):
-                                    $filesize = filesize(SITE_ROOT . "images/preference/" . $PrefeRow->logo_upload);
-                                    echo 'Size : ' . getFileFormattedSize($filesize);
-                                endif;
-                                ?>
-                            </span>
+                                <span class="float-left">
+                                    <?php
+                                    if (file_exists(SITE_ROOT . "images/preference/" . $PrefeRow->logo_upload)):
+                                        $filesize = filesize(SITE_ROOT . "images/preference/" . $PrefeRow->logo_upload);
+                                        echo 'Size : ' . getFileFormattedSize($filesize);
+                                    endif;
+                                    ?>
+                                </span>
                                 <a class="btn small float-right" href="javascript:void(0);"
-                                   onclick="deleteSavedPreferenceimage(2);">
+                                    onclick="deleteSavedPreferenceimage(2);">
                                     <i class="glyph-icon icon-trash-o"></i>
                                 </a>
                             </div>
                             <img src="<?php echo IMAGE_PATH . 'preference/thumbnails/' . $PrefeRow->logo_upload; ?>"
-                                 style="width:100%"/>
+                                style="width:100%" />
                         </div>
                     </div>
                 <?php endif; ?>
@@ -173,7 +173,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     </label>
                 </div>
                 <!-- Upload user image preview -->
-                <div id="preview_Image2"><input type="hidden" name="imageArrayname2" value="" class=""/></div>
+                <div id="preview_Image2"><input type="hidden" name="imageArrayname2" value="" class="" /></div>
             </div>
 
             <!-- <div class="form-row">
@@ -266,7 +266,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     </label>
                 </div> -->
 
-                <!-- <?php if (!empty($PrefeRow->gallery_upload)): ?>
+            <!-- <?php if (!empty($PrefeRow->gallery_upload)): ?>
                     <div class="col-md-2" id="removeSavedimg5">
                         <div class="infobox info-bg">
                             <div class="button-group" data-toggle="buttons">
@@ -298,11 +298,11 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                         </small>
                     </label>
                 </div> -->
-                <!-- Upload user image preview -->
-                <!-- <div id="preview_Image5"></div>
+            <!-- Upload user image preview -->
+            <!-- <div id="preview_Image5"></div>
             </div> -->
 
-            <div class="form-row">
+            <!-- <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
                         Contact Image :
@@ -341,11 +341,10 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                         </small>
                     </label>
                 </div>
-                <!-- Upload user image preview -->
                 <div id="preview_Image6"></div>
-            </div>
+            </div> -->
 
-            <?php if ($PrefeRow->id == 1) { ?>
+            <!-- <?php if ($PrefeRow->id == 1) { ?>
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -387,7 +386,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     </div>
                     <div id="preview_Image7"></div>
                 </div>
-            <?php } ?>
+            <?php } ?> -->
             <!-- <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
@@ -395,7 +394,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     </label>
                 </div> -->
 
-                <!-- <?php if (!empty($PrefeRow->facility_upload)): ?>
+            <!-- <?php if (!empty($PrefeRow->facility_upload)): ?>
                     <div class="col-md-2" id="removeSavedimg8">
                         <div class="infobox info-bg">
                             <div class="button-group" data-toggle="buttons">
@@ -419,7 +418,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                         </div>
                     </div>
                 <?php endif; ?> -->
-                <!-- <div class="form-input col-md-10 uploader8 <?php echo !empty($PrefeRow->facility_upload) ? "hide" : ""; ?>">
+            <!-- <div class="form-input col-md-10 uploader8 <?php echo !empty($PrefeRow->facility_upload) ? "hide" : ""; ?>">
                     <input type="file" name="facility_upload" id="facility_upload" class="transparent no-shadow">
                     <label>
                         <small>Image Dimensions (<?php echo Module::get_properties($moduleId, 'fimgwidth'); ?> px
@@ -427,11 +426,11 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                         </small>
                     </label>
                 </div> -->
-                <!-- Upload user image preview -->
-                <!-- <div id="preview_Image8"></div>
+            <!-- Upload user image preview -->
+            <!-- <div id="preview_Image8"></div>
             </div> -->
 
-            <div class="form-row">
+            <!-- <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
                         Logo2 :
@@ -454,9 +453,9 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                                     <i class="glyph-icon icon-trash-o"></i>
                                 </a>
                             </div>
-                            <img src="<?php echo IMAGE_PATH . 'preference/offer/thumbnails/' . $PrefeRow->offer_upload; ?>" style="width:100%"/>
+                            <img src="<?php echo IMAGE_PATH . 'preference/offer/thumbnails/' . $PrefeRow->offer_upload; ?>" style="width:100%" />
                             <input type="hidden" name="imageArrayname9"
-                                   value="<?php echo $PrefeRow->offer_upload; ?>"/>
+                                value="<?php echo $PrefeRow->offer_upload; ?>" />
                         </div>
                     </div>
                 <?php endif; ?>
@@ -468,9 +467,8 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                         </small>
                     </label>
                 </div>
-                <!-- Upload user image preview -->
                 <div id="preview_Image9"></div>
-            </div>
+            </div> -->
 
             <!-- <div class="form-row">
                 <div class="form-label col-md-2">
@@ -492,7 +490,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 </div>
                 <div class="form-input col-md-6">
                     <textarea placeholder="Google Analytics Code" name="google_anlytics" id="google_anlytics"
-                              class=""><?php echo !empty($PrefeRow->google_anlytics) ? $PrefeRow->google_anlytics : ""; ?></textarea>
+                        class=""><?php echo !empty($PrefeRow->google_anlytics) ? $PrefeRow->google_anlytics : ""; ?></textarea>
                 </div>
             </div>
 
@@ -534,7 +532,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                               class=""><?php echo !empty($PrefeRow->schema_code) ? $PrefeRow->schema_code : ""; ?></textarea>
                 </div>
             </div> -->
-<!-- 
+            <!-- 
             <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
@@ -622,31 +620,31 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             <div class="form-row <?php echo (!empty($PrefeRow->site_keywords) || !empty($PrefeRow->site_description)) ? '' : 'hide'; ?> metadata">
                 <div class="col-md-6 form-input">
                     <input type="text" placeholder="Meta Title" name="meta_title" id="meta_title" class=""
-                           value="<?php echo !empty($PrefeRow->meta_title) ? $PrefeRow->meta_title : ""; ?>">
+                        value="<?php echo !empty($PrefeRow->meta_title) ? $PrefeRow->meta_title : ""; ?>">
                 </div>
                 <div class="clear"></div>
-                <br/>
+                <br />
                 <div class="col-md-6 form-input">
                     <textarea placeholder="Meta Keyword" name="site_keywords" id="site_keywords"
-                              class="character-keyword validate[required]"><?php echo !empty($PrefeRow->site_keywords) ? $PrefeRow->site_keywords : ""; ?></textarea>
+                        class="character-keyword validate[required]"><?php echo !empty($PrefeRow->site_keywords) ? $PrefeRow->site_keywords : ""; ?></textarea>
                     <div class="keyword-remaining clear input-description">250 characters left</div>
                 </div>
                 <div class="col-md-6 form-input">
                     <textarea placeholder="Meta Description" name="site_description" id="site_description"
-                              class="character-description validate[required]"><?php echo !empty($PrefeRow->site_description) ? $PrefeRow->site_description : ""; ?></textarea>
+                        class="character-description validate[required]"><?php echo !empty($PrefeRow->site_description) ? $PrefeRow->site_description : ""; ?></textarea>
                     <div class="description-remaining clear input-description">160 characters left</div>
                 </div>
             </div>
 
             <button type="submit" name="submit"
-                    class="btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4" id="btn-submit"
-                    title="Save">
+                class="btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4" id="btn-submit"
+                title="Save">
                 <span class="button-content">
                     Save
                 </span>
             </button>
             <input type="hidden" name="idValue" id="idValue"
-                   value="<?php echo !empty($PrefeRow->id) ? $PrefeRow->id : 0; ?>"/>
+                value="<?php echo !empty($PrefeRow->id) ? $PrefeRow->id : 0; ?>" />
         </form>
     </div>
 </div>
@@ -654,19 +652,19 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
 <script type="text/javascript" src="<?php echo ASSETS_PATH; ?>uploadify/jquery.uploadify.min.js"></script>
 <script type="text/javascript">
     // <![CDATA[
-    $(document).ready(function () {
+    $(document).ready(function() {
         // For Icon Image Upload
         $('#icon_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/',
                 thumb_width: 60,
                 thumb_height: 60
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -679,36 +677,37 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 $('#uploadedImageName').val('1');
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_image.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_image.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });
 
         // For Logo upload
         $('#logo_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/',
                 thumb_width: 200,
                 thumb_height: 200
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -721,36 +720,37 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 $('#uploadedImageName').val('1');
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_image2.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_image2.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image2').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });
 
         //For FB image upload
         $('#fb_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/',
                 thumb_width: 200,
                 thumb_height: 200
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -763,36 +763,37 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 $('#uploadedImageName').val('1');
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_fb_image.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_fb_image.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image3').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });
 
         //For Twitter image upload
         $('#twitter_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/',
                 thumb_width: 200,
                 thumb_height: 200
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -805,36 +806,37 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 $('#uploadedImageName').val('1');
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_twitter_image.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_twitter_image.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image4').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });
 
         //For gallery banner upload
         $('#gallery_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/gallery/',
                 thumb_width: 200,
                 thumb_height: 200
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -847,36 +849,37 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 $('#uploadedImageName').val('1');
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_gallery_image.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_gallery_image.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image5').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });
 
         //For contact banner upload
         $('#contact_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/contact/',
                 thumb_width: 200,
                 thumb_height: 200
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -889,34 +892,35 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 $('#uploadedImageName').val('1');
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_contact_image.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_contact_image.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image6').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });
         $('#other_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/other/',
                 thumb_width: 200,
                 thumb_height: 200
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -929,35 +933,36 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 $('#uploadedImageName').val('1');
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_other_image.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_other_image.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image7').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });
 
         $('#facility_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/facility/',
                 thumb_width: 200,
                 thumb_height: 200
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -970,35 +975,36 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 $('#uploadedImageName').val('1');
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_facility_image.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_facility_image.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image8').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });
 
         $('#offer_upload').uploadify({
-            'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-            'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+            'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+            'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
             'formData': {
-                PROJECT: '<?php echo SITE_FOLDER;?>',
+                PROJECT: '<?php echo SITE_FOLDER; ?>',
                 targetFolder: 'images/preference/offer/',
                 thumb_width: 200,
                 thumb_height: 200
             },
             'method': 'post',
-            'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+            'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
             'auto': true,
             'multi': false,
             'hideButton': false,
@@ -1011,19 +1017,20 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/
-            'onUploadSuccess': function (file, data, response) {
+            'onUploadSuccess': function(file, data, response) {
                 var filename = data;
-                $.post('<?php echo BASE_URL;?>apanel/preference/uploaded_offer_image.php', {imagefile: filename}, function (msg) {
+                $.post('<?php echo BASE_URL; ?>apanel/preference/uploaded_offer_image.php', {
+                    imagefile: filename
+                }, function(msg) {
                     $('#preview_Image9').html(msg).show();
                 });
 
             },
-            'onDialogOpen': function (event, ID, fileObj) {
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            'onDialogOpen': function(event, ID, fileObj) {},
+            'onUploadError': function(file, errorCode, errorMsg, errorString) {
                 alert(errorMsg);
             },
-            'onUploadComplete': function (file) {
+            'onUploadComplete': function(file) {
                 //alert('The file ' + file.name + ' was successfully uploaded');
             }
         });

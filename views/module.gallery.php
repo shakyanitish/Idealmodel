@@ -1,6 +1,6 @@
 <?php
 $reslgall = '';
-$res_gallery='';
+$res_gallery = '';
 $gallRec = Gallery::getParentgallery(2);
 if (!empty($gallRec)) {
     foreach ($gallRec as $gallRow) {
@@ -67,7 +67,7 @@ $imglink = $siteRegulars->gallery_upload;
 if (!empty($imglink)) {
     $img = IMAGE_PATH . 'preference/gallery/' . $siteRegulars->gallery_upload;
 } else {
-        $img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
+    $img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
 }
 
 $gallerybread = '
@@ -117,14 +117,9 @@ if ($gallRectit) {
             $file_path = SITE_ROOT . 'images/gallery/galleryimages/' . $row1->image;
             if (file_exists($file_path) and !empty($row1->image)):
                 $thegal .= ' 
-
-                    <div class="col-md-3 images" data-class="' . $row1->galleryid . '" data-src="' . IMAGE_PATH . 'assets/img/gallery/01.jpg" style="display: block;">
-                        <img src="' . IMAGE_PATH . 'gallery/galleryimages/' . $row1->image . '" alt="' . $row1->galleryid . '">
-                    </div>
-                    
-
-                             
-                                
+                    <div class="col-md-3 images" data-class="' . $row1->galleryid . '" data-src="' . IMAGE_PATH . 'gallery/galleryimages/' . $row1->image . '">
+                        <img src="' . IMAGE_PATH . 'gallery/galleryimages/' . $row1->image . '" class="img-fluid">
+                    </div>         
                    
                 ';
             endif;
@@ -143,26 +138,24 @@ $jVars['module:gallery-nav'] = $thegalnav;
 
 
 
-$videomain='';
+$videomain = '';
 if (defined('VIDEO_PAGE')) {
-    $videodatas= Video::getAllVideos();
-    if(!empty($videodatas)){
-        $videomain .='  <section class="section-padding bg-darkbrown">
+    $videodatas = Video::getAllVideos();
+    if (!empty($videodatas)) {
+        $videomain .= '  <section class="section-padding bg-darkbrown">
         <div class="container">
             <div class="row">';
 
-            foreach($videodatas as $videodata){
+        foreach ($videodatas as $videodata) {
 
-            $videomain .=' 
+            $videomain .= ' 
                         <div class="col-md-6">
                             <div class="video-info">
-                                <iframe width="560" height="315" src="'.$videodata->url.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="' . $videodata->url . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
                         </div>
 ';
-            }
-
-
+        }
     }
 
     // pr($videodatas);

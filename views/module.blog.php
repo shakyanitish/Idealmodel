@@ -193,7 +193,7 @@ if (defined("BLOG_DETAIL_PAGE")) {
             <div class="ul-container">
                 <div>
                     <div class="ul-service-details-txt">
-                        <h3 class="ul-service-details-inner-title">' . date('M Y', strtotime($Blogs ->blog_date)) . '</h3>
+                        <h3 class="ul-service-details-inner-title">' . date('M jS Y', strtotime($Blogs ->blog_date)) . '</h3>
                          ' . $Blogs->content . '                    
                     </div>
                 </div>
@@ -202,37 +202,8 @@ if (defined("BLOG_DETAIL_PAGE")) {
                     <div class="container-fluid">
                         <h3 class="text-center" style="color:#d93431;">Memories / Gallery</h3>
                         <div class="row" id="gallery">
-                            <div class="col-md-3 images" data-src="assets/img/blog-b-1.jpg">
-                                <img src="assets/img/blog-b-1.jpg" class="img-fluid">
-                            </div>
+                        ' . $jVars['module:gallery-list'] . '
 
-                            <div class="col-md-3 images" data-src="assets/img/blog-b-2.jpg">
-                                <img src="assets/img/blog-b-2.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-md-3 images" data-src="assets/img/blog-b-3.jpg">
-                                <img src="assets/img/blog-b-3.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-md-3 images" data-src="assets/img/blog-1.jpg">
-                                <img src="assets/img/blog-1.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-md-3 images" data-src="assets/img/blog-2.jpg">
-                                <img src="assets/img/blog-2.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-md-3 images" data-src="assets/img/blog-3.jpg">
-                                <img src="assets/img/blog-3.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-md-3 images" data-src="assets/img/blog-b-3.jpg">
-                                <img src="assets/img/blog-b-3.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-md-3 images" data-src="assets/img/blog-1.jpg">
-                                <img src="assets/img/blog-1.jpg" class="img-fluid">
-                            </div>
                         </div>
                     </div>
                 </section>

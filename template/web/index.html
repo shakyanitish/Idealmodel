@@ -155,7 +155,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#"  id="contactpage" class="ul-contact-form ul-form">
+                    <form action="#" id="contactform" class="ul-contact-form ul-form">
                         <div class="row row-cols-2 row-cols-xxs-1 ul-bs-row">
                             <div class="col">
                                 <div class="form-group">
@@ -170,14 +170,14 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <input type="text" name="Address" id="ul-blog-comment-subject"
+                                    <input type="text" name="address" id="ul-blog-comment-subject"
                                         placeholder="Address">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <input type="text" name="phone" id="ul-blog-comment-subject"
-                                        placeholder="Phone No.">
+                                        placeholder="Phone No."  oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -187,8 +187,17 @@
                                 </div>
                             </div>
                             <div class="col-12">
+                                <div class="g-recaptcha"
+                                    data-sitekey="6LdR7FosAAAAAGAY8PgHauGE2s75kSmG8GsFQfWb"></div>
+                            </div>
+
+                            
+                            <div class="col-12">
                                 <button class="ul-btn"><i class="flaticon-fast-forward-double-right-arrows-symbol"></i>
                                     Get in Touch</button>
+                            </div>
+                            <div class="col-12">
+                                <div id="result_msg" style="display:none;"></div>
                             </div>
                         </div>
                     </form>
@@ -196,7 +205,9 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
 
 
     <!-- libraries JS -->
@@ -220,87 +231,65 @@
     <script src="assets/js/donate-form.js"></script>
 
 
-
-
-    <!-- form start here -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js' integrity="sha512-KFHXdr2oObHKI9w4Hv1XPKc898mE4kgYx58oqsc/JqqdLMDI4YjOLzom+EMlW8HFUd0QfjfAvxSL6sEq/a42fQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-
-            $.validator.addMethod("numbersOnly", function (value, element) {
-                return this.optional(element) || /^[0-9]+$/.test(value);
-            }, "Only numbers are allowed.");
-
-            $('#contactpage').validate({
+            $('#contactform').validate({
                 errorElement: 'span',
                 errorClass: 'validate-has-error',
+                // --- FIX IS HERE ---
+                errorPlacement: function (error, element) {
+                    // Find the closest parent with class 'input-group'
+                    // and insert the error element *after* it.
+                    if (element.closest('.input-group').length) {
+                        error.insertAfter(element.closest('.input-group'));
+                    } else {
+                        // Fallback for fields not in an input-group (if any)
+                        error.insertAfter(element);
+                    }
+                },
                 rules: {
                     fullname: { required: true },
-                    phone: { required: true, numbersOnly: true },
+                    phone: { required: true, number: true },
+                    address: { required: true },
                     email: { required: true, email: true },
-                    Address: { required: true },
-                    message: { required: true }
+                    // message: { required: true }
                 },
                 messages: {
-                    fullname: { required: "Please enter your Name." },
-                    phone: {
-                        required: "Please enter your Phone Number.",
-                        numbersOnly: "Only digits are allowed."
-                    },
-                    email: {
-                        required: "Please enter your Email Address.",
-                        email: "Please enter a valid Email Address."
-                    },
-                    Address: { required: "Please enter your Address." },
-                    message: { required: "Please enter your Message." }
+                    fullname: { required: "Please enter your Full Name." },
+                    phone: { required: "Please enter your Phone Number." },
+                    address: { required: "Please enter your Address." },
+                    email: { required: "Please enter your Email Address." },
+                    // message: { required: "Please enter your Message." }
                 },
                 submitHandler: function (form) {
-
-                    var recaptcha = grecaptcha.getResponse();
+                    var recaptcha = $("#g-recaptcha-response").val();
                     if (recaptcha === "") {
+                        event.preventDefault();
                         alert("Please check the recaptcha");
                         return false;
                     }
 
-                    var $btn = $("#ul-submit-btn");
-                    var Frmval = $(form).serialize();
+                    const formData = new FormData(form);
+                    formData.append("action", "forContact");
 
-                    $btn.attr("disabled", true).html('Processing...');
+                    $("button#submit").attr("disabled", true).text('Processing...');
 
                     $.ajax({
                         type: "POST",
-                        dataType: "JSON",
                         url: "enquery_mail.php",
-                        data: "action=forContact&" + Frmval,
+                        data: formData,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
                         success: function (data) {
-
-                            $btn.removeAttr("disabled")
-                                .html('Get in Touch');
-
-                            if (data.message) {
-                                $('#result_msg')
-                                    .html(data.message)
-                                    .removeClass()
-                                    .addClass('alert alert-success')
-                                    .show()
-                                    .fadeOut(8000);
-                            }
-
-                            $('#contactpage')[0].reset();
+                            $("button#submit").removeAttr("disabled").text('Submit');
+                            $('div#result_msg').html(data.message).css('display', 'block').fadeOut(8000);
+                            form.reset();
                             grecaptcha.reset();
-                        },
-                        error: function () {
-                            $btn.removeAttr("disabled")
-                                .html('Get in Touch');
 
-                            $('#result_msg')
-                                .html('Something went wrong. Please try again.')
-                                .removeClass()
-                                .addClass('alert alert-danger')
-                                .show()
-                                .fadeOut(8000);
                         }
                     });
 
@@ -310,7 +299,6 @@
         });
     </script>
 
-    <!-- form end here -->
 
     <script>
         const btn = document.getElementById("backToTop");

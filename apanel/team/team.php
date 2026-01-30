@@ -200,7 +200,7 @@ if (isset($_GET['page']) && $_GET['page'] == "team" && isset($_GET['mode']) && $
                                value="<?php echo !empty($teamInfo->title) ? $teamInfo->title : ''; ?>">
                     </div>
                 </div>
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Social Media :
@@ -218,7 +218,7 @@ if (isset($_GET['page']) && $_GET['page'] == "team" && isset($_GET['mode']) && $
                                    value="<?php echo !empty($teamInfo->instagram) ? $teamInfo->instagram : ''; ?>">
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-row menu-position">
                     <div class="form-label col-md-2">
@@ -239,7 +239,7 @@ if (isset($_GET['page']) && $_GET['page'] == "team" && isset($_GET['mode']) && $
                     </div>
                 </div>
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Image :
@@ -276,9 +276,8 @@ if (isset($_GET['page']) && $_GET['page'] == "team" && isset($_GET['mode']) && $
                             <small>Image Dimensions (240 px X 240 px)</small>
                         </label>
                     </div>
-                    <!-- Upload user image preview -->
                     <div id="preview_Image"></div>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
