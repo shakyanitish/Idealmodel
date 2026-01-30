@@ -76,42 +76,6 @@ $jVars['module:aboutarticle'] = $t;
 // -----------------------------------------------------------------
 $resinnh = '';
 
-// if (defined('HOME_PAGE')) {
-//     $recInn = Article::homepageArticle();
-//     if (!empty($recInn)) {
-//         foreach ($recInn as $innRow) {
-
-//             $images = ($innRow->image != "a:0:{}") ? unserialize($innRow->image) : [];
-
-//             $imglink1 = (!empty($images[0])) 
-//                         ? IMAGE_PATH . 'articles/' . $images[0] 
-//                         : BASE_URL . 'assets/img/about/01.jpg';
-
-//             $imglink2 = (!empty($images[1])) 
-//                         ? IMAGE_PATH . 'articles/' . $images[1] 
-//                         : BASE_URL . 'assets/img/about/02.jpg'; 
-
-//             $content = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($innRow->content));
-//             $readmore = '';
-//             if (!empty($innRow->linksrc)) {
-//                 $linkTarget = ($innRow->linktype == 1) ? ' target="_blank" ' : '';
-//                 $linksrc = ($innRow->linktype == 1) ? $innRow->linksrc : BASE_URL . $innRow->linksrc;
-//                 $readmore = '<a href="' . $linksrc . '" title="">see more</a>';
-//             } else {
-//                 $readmore = (count($content) > 1) 
-//                     ? '<a href="' . BASE_URL . 'page/' . $innRow->slug . '" title="">Read more...</a>' 
-//                     : '';
-//             }
-
-//             $resinnh .= '
-
-
-//                             ' . $content[0] . '
-//                             ';
-//         }
-//     }
-
-// }
 
 if (defined('HOME_PAGE')) {
     $recInn = Article::homepageArticle();
@@ -183,11 +147,18 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
         
 
         $aboutdetail .= $content;
+
+
+
+
     }
 }
 
+
+
 $jVars['module:inner-about-detail'] = $aboutdetail;
 $jVars['module:inner-about-bread'] = $abouttbred;
+
 
 
 $restyp = '';
@@ -252,44 +223,3 @@ if (defined('HOME_PAGE')) {
 
 $jVars['module:home_facilities'] = $resinnh1;
 
-
-// $resinnh2 = '';
-
-// if (defined('HOME_PAGE')) {
-
-//     $resinnh2 .= '';
-
-
-//     // $recInn2 = Article::find_by_id(16);
-//     $recInn2 = Article::find_all_active_uc();
-
-//     if (!empty($recInn2)) {
-//         foreach ($recInn2 as $recInn) {
-
-//             $resinnh2 .=  '
-//             <section id="' . $recInn->slug . '" class="mod-about">
-//         <div class="modal-toggle">
-//             <a href="#" id="modal-close" title="close">close</a>
-//         </div>
-//            <div class="row about-content">
-//            <div class="row about-header">
-//            <div class="twelve tweleve1 columns">
-//                <div class="icon-wrap">
-//                    <i class="icon"></i></div>
-//                <h1>
-//                    ' . $recInn->title . '</h1>
-//            </div></div>
-//             ';
-//             $resinnh2 .=
-//                 $recInn->content;
-//             if ($recInn->id == 16) {
-//                 $resinnh2 .= '  ' . $jVars['module:contact:home'] . '';
-//             }
-//             $resinnh2 .= '
-// </div>
-//             </section>';
-//         }
-//     }
-// }
-
-// $jVars['module:home_shinee'] = $resinnh2;

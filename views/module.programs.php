@@ -192,22 +192,28 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
         ';
         $jVars['module:program-detail-title'] = $program_detail_title;
 
+
+
         // Get banner image
         $banner_img = '';
-        if (!empty($Package->banner_image) && $Package->banner_image != "a:0:{}") {
-            $imageList = unserialize($Package->banner_image);
-            if (!empty($imageList[0])) {
-                $file_path = SITE_ROOT . 'images/package/galleryimages/' . $imageList[0];
+        $galleryImages = SubPackageImage::getImagelist_by($Package->id);
+        $sliders = '';
+
+        if (!empty($galleryImages)) {
+            foreach ($galleryImages as $galleryImage) {
+                $file_path = SITE_ROOT . 'images/package/galleryimages/' . $galleryImage->image;
                 if (file_exists($file_path)) {
-                    $banner_img = IMAGE_PATH . 'package/galleryimages/' . $imageList[0];
+                    $banner_img = IMAGE_PATH . 'package/galleryimages/' . $galleryImage->image;
+
+                    $sliders .= '
+                        <!-- single slide -->
+                        <div class="swiper-slide">
+                            <div class="ul-event-details-img">
+                                <img src="' . $banner_img . '" alt="' . $Package->title . '">
+                            </div>
+                        </div>';
                 }
             }
-        }
-
-        // Fallback image
-        if (empty($banner_img)) {
-            $siteRegulars = Config::find_by_id(1);
-            $banner_img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
         }
 
         $program_detail = '
@@ -220,19 +226,7 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
                     <div class="ul-event-details ul-donation-details">
                        <div class="ul-testimonial-2-slider swiper">
                             <div class="swiper-wrapper">
-                                <!-- single slide -->
-                                <div class="swiper-slide">
-                                    <div class="ul-event-details-img">
-                                        <img src="' . $banner_img . '" alt="' . $Package->title . '">
-                                    </div>
-                                </div>
-
-                                <!-- single slide -->
-                                <div class="swiper-slide">
-                                    <div class="ul-event-details-img">
-                                        <img src="' . $banner_img . '" alt="' . $Package->title . '">
-                                    </div>
-                                </div>
+                                ' . $sliders . '
                             </div>
                         </div>
                         
@@ -275,11 +269,11 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
                                         <!-- single post -->
                                     <div class="ul-inner-sidebar-post">
                                         <div class="img">
-                                            <img src="' . $prog_img . '" alt="' .$prog->title . '">
+                                            <img src="' . $prog_img . '" alt="' . $prog->title . '">
                                         </div>
 
                                         <div class="txt">
-                                            <h4 class="title"><a href="' . BASE_URL . 'program/' . $prog->slug . '">' .$prog->title . '</a></h4>
+                                            <h4 class="title"><a href="' . BASE_URL . 'program/' . $prog->slug . '">' . $prog->title . '</a></h4>
                                             <span class="date"> <span>' . date("M d, Y", strtotime($prog->program_date)) . '</span></span>
                                         </div>
                                     </div>';

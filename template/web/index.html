@@ -155,11 +155,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" class="ul-contact-form ul-form">
+                    <form action="#"  id="contactpage" class="ul-contact-form ul-form">
                         <div class="row row-cols-2 row-cols-xxs-1 ul-bs-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <input type="text" name="name" id="ul-blog-comment-name" placeholder="Full Name">
+                                    <input type="text" name="fullname" id="ul-blog-comment-name" placeholder="Full Name">
                                 </div>
                             </div>
                             <div class="col">
@@ -170,7 +170,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <input type="text" name="address" id="ul-blog-comment-subject"
+                                    <input type="text" name="Address" id="ul-blog-comment-subject"
                                         placeholder="Address">
                                 </div>
                             </div>
@@ -196,6 +196,8 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 
     <!-- libraries JS -->
     <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
@@ -216,6 +218,99 @@
     <script src="assets/js/accordion.js"></script>
     <script src="assets/js/progressbar.js"></script>
     <script src="assets/js/donate-form.js"></script>
+
+
+
+
+    <!-- form start here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.validator.addMethod("numbersOnly", function (value, element) {
+                return this.optional(element) || /^[0-9]+$/.test(value);
+            }, "Only numbers are allowed.");
+
+            $('#contactpage').validate({
+                errorElement: 'span',
+                errorClass: 'validate-has-error',
+                rules: {
+                    fullname: { required: true },
+                    phone: { required: true, numbersOnly: true },
+                    email: { required: true, email: true },
+                    Address: { required: true },
+                    message: { required: true }
+                },
+                messages: {
+                    fullname: { required: "Please enter your Name." },
+                    phone: {
+                        required: "Please enter your Phone Number.",
+                        numbersOnly: "Only digits are allowed."
+                    },
+                    email: {
+                        required: "Please enter your Email Address.",
+                        email: "Please enter a valid Email Address."
+                    },
+                    Address: { required: "Please enter your Address." },
+                    message: { required: "Please enter your Message." }
+                },
+                submitHandler: function (form) {
+
+                    var recaptcha = grecaptcha.getResponse();
+                    if (recaptcha === "") {
+                        alert("Please check the recaptcha");
+                        return false;
+                    }
+
+                    var $btn = $("#ul-submit-btn");
+                    var Frmval = $(form).serialize();
+
+                    $btn.attr("disabled", true).html('Processing...');
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "JSON",
+                        url: "enquery_mail.php",
+                        data: "action=forContact&" + Frmval,
+                        success: function (data) {
+
+                            $btn.removeAttr("disabled")
+                                .html('Get in Touch');
+
+                            if (data.message) {
+                                $('#result_msg')
+                                    .html(data.message)
+                                    .removeClass()
+                                    .addClass('alert alert-success')
+                                    .show()
+                                    .fadeOut(8000);
+                            }
+
+                            $('#contactpage')[0].reset();
+                            grecaptcha.reset();
+                        },
+                        error: function () {
+                            $btn.removeAttr("disabled")
+                                .html('Get in Touch');
+
+                            $('#result_msg')
+                                .html('Something went wrong. Please try again.')
+                                .removeClass()
+                                .addClass('alert alert-danger')
+                                .show()
+                                .fadeOut(8000);
+                        }
+                    });
+
+                    return false;
+                }
+            });
+        });
+    </script>
+
+    <!-- form end here -->
 
     <script>
         const btn = document.getElementById("backToTop");

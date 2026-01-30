@@ -609,6 +609,7 @@
         });
     }
 
+    $(document).ready(function() {
     $('.imageStatusToggle').on('click', function() {
         var Re = $(this).attr('rowId');
         var status = $(this).attr('status');
@@ -628,6 +629,7 @@
             $('#toggleImg' + Re).removeClass("icon-clock-os-circle-o").addClass("icon-check-circle-o");
         }
     });
+        });
 
     $('.statusItinerary').on('click', function() {
         var id = $(this).attr('moduleId');

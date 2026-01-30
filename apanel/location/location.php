@@ -116,6 +116,20 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                         value="<?php echo !empty($locationRow->whatsapp_a) ? $locationRow->whatsapp_a : ""; ?>">
                 </div>
             </div>
+
+
+            <div class="form-row">
+                <div class="form-label col-md-2">
+                    <label for="">
+                        Footer Map Link :
+                    </label>
+                </div>
+                <div class="form-input col-md-20">
+                    <input placeholder="Map Link" class="col-md-6" type="text" name="mapping"
+                        id="mapping"
+                        value="<?php echo !empty($locationRow->mapping) ? $locationRow->mapping : ""; ?>">
+                </div>
+            </div>
             <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
@@ -186,7 +200,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                         Brief :
                     </label>
                     <textarea name="breif" id="breif"
-                              class="large-textarea"><?php echo !empty($locationRow->breif) ? $locationRow->breif : ""; ?></textarea>
+                        class="large-textarea"><?php echo !empty($locationRow->breif) ? $locationRow->breif : ""; ?></textarea>
                     <a class="btn medium bg-orange mrg5T hide" title="Read More" id="readMore" href="javascript:void(0);">
                         <span class="button-content">Read More</span>
                     </a>
@@ -208,7 +222,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
             </div>
             <?php
             $pagename = "Contact";
-            
+
             // $pagename = strtolower($_GET['page']);
             $metasql = $db->query("SELECT * FROM tbl_metadata WHERE page_name='$pagename'");
             $metadata = $metasql->fetch_object();

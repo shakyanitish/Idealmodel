@@ -20,8 +20,10 @@ RewriteRule ^book/([a-zA-Z0-9-]+)/?$ book.php?slug=$1 [L]
 
 #For inner pages.
 RewriteRule ^about-us/?$ inner.php?slug=about-us [L]
-RewriteRule ^teams/?$ teams.php?slug=teams [L]
+RewriteRule ^team/?$ teams.php?slug=team [L]
 RewriteRule ^partners/?$ partners.php?slug=partners [L]
+
+
 
 
 

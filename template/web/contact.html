@@ -18,6 +18,21 @@
 
     <!-- custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Validation error messages */
+        span.validate-has-error {
+            color: #dc3545;
+            font-size: 12px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Optional: highlight invalid input fields */
+        input.validate-has-error,
+        textarea.validate-has-error {
+            border-color: #dc3545 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,11 +41,11 @@
     </div>
 
     <!-- SIDEBAR SECTION START -->
-        <div class="ul-sidebar">
+    <div class="ul-sidebar">
         <!-- header -->
         <div class="ul-sidebar-header">
             <div class="ul-sidebar-header-logo">
-            <jcms:module:sidebarlogo/>                
+                <jcms:module:sidebarlogo/>
             </div>
             <!-- sidebar closer -->
             <button class="ul-sidebar-closer"><i class="flaticon-close"></i></button>
@@ -49,7 +64,7 @@
     <!-- SIDEBAR SECTION END -->
 
     <!-- HEADER SECTION START -->
-        <jcms:module:header/>
+    <jcms:module:header/>
 
     <!-- HEADER SECTION END -->
 
@@ -87,30 +102,31 @@
                             </div>
 
                             <div class="ul-inner-contact-container">
-                                <form action="#" class="ul-contact-form ul-form">
+                                <form action="#" id="contactform" class="ul-contact-form ul-form" novalidate>
                                     <div class="row row-cols-2 row-cols-xxs-1 ul-bs-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <input type="text" name="name" id="ul-contact-name"
-                                                    placeholder="Your Name">
+                                                <input type="text" name="fullname" id="ul-contact-name"
+                                                    placeholder="Your Name*">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <input type="email" name="email" id="ul-contact-email"
-                                                    placeholder="Email Address">
+                                                    placeholder="Email Address*">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <input type="text" name="Phone" id="ul-contact-subject"
-                                                    placeholder="Phone">
+                                                <input type="text" name="phone" id="ul-contact-phone"
+                                                    placeholder="Phone*"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <input type="text" name="Address" id="ul-contact-subject"
-                                                    placeholder="Address">
+                                                <input type="text" name="address" id="ul-contact-address"
+                                                    placeholder="Address*">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -119,14 +135,23 @@
                                                     placeholder="Type your message"></textarea>
                                             </div>
                                         </div>
+
                                         <div class="col-12">
-                                            <button class="ul-btn"><i
+                                            <div class="g-recaptcha"
+                                                data-sitekey="6LdR7FosAAAAAGAY8PgHauGE2s75kSmG8GsFQfWb"></div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" id="ul-submit-btn" class="ul-btn"><i
                                                     class="flaticon-fast-forward-double-right-arrows-symbol"></i> Get in
                                                 Touch</button>
+                                        </div>
+                                        <div class="col-12">
+                                            <div id="result_msg" style="display:none;"></div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                         <!-- CONTACT SECTION END -->
                     </div>
@@ -136,7 +161,7 @@
     </main>
 
     <!-- FOOTER SECTION START -->
-        <jcms:module:footer/>
+    <jcms:module:footer/>
 
     <!-- FOOTER SECTION END -->
 
@@ -145,6 +170,9 @@
         aria-label="Back to top">
         ↑
     </button>
+
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+
 
     <!-- libraries JS -->
     <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
@@ -166,6 +194,77 @@
     <script src="assets/js/progressbar.js"></script>
     <script src="assets/js/donate-form.js"></script>
 
+
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js' integrity="sha512-KFHXdr2oObHKI9w4Hv1XPKc898mE4kgYx58oqsc/JqqdLMDI4YjOLzom+EMlW8HFUd0QfjfAvxSL6sEq/a42fQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#contactform').validate({
+                errorElement: 'span',
+                errorClass: 'validate-has-error',
+                // --- FIX IS HERE ---
+                errorPlacement: function (error, element) {
+                    // Find the closest parent with class 'input-group'
+                    // and insert the error element *after* it.
+                    if (element.closest('.input-group').length) {
+                        error.insertAfter(element.closest('.input-group'));
+                    } else {
+                        // Fallback for fields not in an input-group (if any)
+                        error.insertAfter(element);
+                    }
+                },
+                rules: {
+                    name: { required: true },
+                    phone: { required: true, number: true },
+                    address: { required: true },
+                    email: { required: true, email: true },
+                    message: { required: true }
+                },
+                messages: {
+                    name: { required: "Please enter your Full Name." },
+                    phone: { required: "Please enter your Phone Number." },
+                    address: { required: "Please enter your Address." },
+                    email: { required: "Please enter your Email Address." },
+                    message: { required: "Please enter your Message." }
+                },
+                submitHandler: function (form) {
+                    var recaptcha = $("#g-recaptcha-response").val();
+                    if (recaptcha === "") {
+                        event.preventDefault();
+                        alert("Please check the recaptcha");
+                        return false;
+                    }
+
+                    const formData = new FormData(form);
+                    formData.append("action", "forContact");
+
+                    $("button#submit").attr("disabled", true).text('Processing...');
+
+                    $.ajax({
+                        type: "POST",
+                        url: "enquery_mail.php",
+                        data: formData,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            $("button#submit").removeAttr("disabled").text('Submit');
+                            $('div#result_msg').html(data.message).css('display', 'block').fadeOut(8000);
+                            form.reset();
+                            grecaptcha.reset();
+
+                        }
+                    });
+
+                    return false;
+                }
+            });
+        });
+    </script>
+
     <script>
         const btn = document.getElementById("backToTop");
 
@@ -177,6 +276,9 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
+
+
+
 </body>
 
 </html>

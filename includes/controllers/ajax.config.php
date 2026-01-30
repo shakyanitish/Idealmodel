@@ -38,6 +38,8 @@
 
 			$record->whatsapp		= $_REQUEST['whatsapp'];	
 			$record->whatsapp_a		= $_REQUEST['whatsapp_a'];	
+			$record->mapping 		= $_REQUEST['mapping'];
+
 
 			!(empty($_REQUEST['pixel_code'])) ? ($record->pixel_code	= $_REQUEST['pixel_code']): ($record->pixel_code	= '');
 
@@ -146,6 +148,7 @@ endif;
 			$record->breif 			= $_REQUEST['breif'];
 			$record->location_type 	= $_REQUEST['location_type'];					
 			$record->location_map 	= $_REQUEST['location_map'];
+			$record->mapping 		= $_REQUEST['mapping'];
 
 			// $record->whatsapp		= $_REQUEST['whatsapp'];	
 			$record->whatsapp_a		= $_REQUEST['whatsapp_a'];	

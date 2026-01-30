@@ -101,7 +101,7 @@ $footer = '
                             ' . $emailinked . '
                             ' . $tellinked . '
                         </div>
-                        <p class="ul-footer-about-txt map3"><a href=" ' . $siteRegulars->location_map . '">View Google Map</a></p>
+                        <p class="ul-footer-about-txt map3"><a href=" ' . $siteRegulars->mapping . '">View Google Map</a></p>
                         <div class="ul-footer-socials">
                             ' . $jVars['module:socilaLinkbtm'] . '
                         </div>
