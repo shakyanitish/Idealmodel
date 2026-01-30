@@ -197,9 +197,9 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
         if (!empty($Package->banner_image) && $Package->banner_image != "a:0:{}") {
             $imageList = unserialize($Package->banner_image);
             if (!empty($imageList[0])) {
-                $file_path = SITE_ROOT . 'images/package/banner/' . $imageList[0];
+                $file_path = SITE_ROOT . 'images/package/galleryimages/' . $imageList[0];
                 if (file_exists($file_path)) {
-                    $banner_img = IMAGE_PATH . 'package/banner/' . $imageList[0];
+                    $banner_img = IMAGE_PATH . 'package/galleryimages/' . $imageList[0];
                 }
             }
         }

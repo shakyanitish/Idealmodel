@@ -2,23 +2,25 @@
 include_once('../../includes/initialize.php');
 if(!isset($_SESSION['imageNameArr'])){ $_SESSION['imageNameArr']=array(); }
 $_SESSION['imageNameArr'][] = $_POST['imagefile']; 
-$imageNameArr =  $_SESSION['imageNameArr'];
+
+// Get only the newly uploaded image
+$newImage = $_POST['imagefile'];
 $deleteid = rand(0,99999);
-if(!empty($imageNameArr)):
-foreach($imageNameArr as $key=>$val):?>
+
+if(!empty($newImage)):?>
 <div class="col-md-3" id="previewUserimage<?php echo $deleteid;?>">
     <div class="infobox info-bg">
-        <img src="<?php echo IMAGE_PATH.'package/galleryimages/thumbnails/'.$val;?>"  style="width:100%"/>
+        <img src="<?php echo IMAGE_PATH.'package/galleryimages/thumbnails/'.$newImage;?>"  style="width:100%"/>
         <a href="javascript:void(0);" onclick="deleteTempimages(<?php echo $deleteid;?>);">
             <span class="badge badge-absolute float-right bg-red" style="right: -10px !important;">
                 <i class="glyph-icon icon-clock-os"></i>
             </span>
         </a>
-        <input type="hidden" name="imageArrayname[]" value="<?php echo $val;?>" class="validate[required,length[0,250]]" />
+        <input type="hidden" name="imageArrayname[]" value="<?php echo $newImage;?>" class="validate[required,length[0,250]]" />
         <input type="text" id="title" name="title[]" placeholder="Title" class="validate[required,length[0,250]]" style="padding: 0;">
     </div> 
 </div>
-<?php endforeach; endif;  
+<?php endif;  
 //uplodify
   if(isset($_SESSION['imageNameArr'])){
    if(count($_SESSION['imageNameArr'])>0){

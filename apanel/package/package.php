@@ -12,6 +12,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
     SerclearImages($moduleTablename, "package/banner/thumbnails", "banner_image");
     SerclearImages($moduleTablename, "package/flag", "flag_image");
     SerclearImages($moduleTablename, "package/flag/thumbnails", "flag_image");
+    clearImages("tbl_subpackage_images", "package/galleryimages");
+    clearImages("tbl_subpackage_images", "package/galleryimages/thumbnails");
 ?>
 
     <h3>
@@ -33,6 +35,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <th style="display:none;"></th>
                         <th class="text-center"><input class="check-all" type="checkbox" /></th>
                         <th class="text-center">Title</th>
+                        <th class="text-center">Images</th>
+
                         <th>Sub Package</th>
                         <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                     </tr>
@@ -48,6 +52,19 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                 <a href="javascript:void(0);" title="" class="user-ico clearfix"
                                     onclick="editRecord(<?php echo $record->id; ?>);">
                                     <span><?php echo $record->title; ?></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="primary-bg medium btn loadingbar-demo" title=""
+                                    onClick="viewsubimagelist(<?php echo $record->id; ?>);" href="javascript:void(0);">
+                                    <span class="button-content">
+                                        <span class="badge bg-orange radius-all-4 mrg5R" title=""
+                                            data-original-title="Badge with tooltip"><?php echo $countImages = SubPackageImage::getTotalImages($record->id);
+                                                                                        //var_dump($countImages);die();
+                                                                                        ?></span>
+
+                                        <span class="text-transform-upr font-bold font-size-11">View Lists</span>
+                                    </span>
                                 </a>
                             </td>
                             <td>
@@ -646,4 +663,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
     </script>
 
 <?php endif;
-include("sub_package.php"); ?>
+
+include("subpackage_images.php");
+
+?>

@@ -87,7 +87,7 @@ class Package extends DatabaseObject
 	{
 		global $db;
 		$cond = !empty($limit) ? ' LIMIT ' . $limit : '';
-		$sql = "SELECT * FROM " . self::$table_name . " WHERE status=1 AND type=0 ORDER BY sortorder ASC $cond";
+		$sql = "SELECT * FROM " . self::$table_name . " WHERE status=1 AND type=0 ORDER BY sortorder DESC $cond";
 		return self::find_by_sql($sql);
 	}
 	// view package Front.
@@ -176,7 +176,7 @@ class Package extends DatabaseObject
 	static function find_all()
 	{
 		global $db;
-		return self::find_by_sql("SELECT * FROM " . self::$table_name . " ORDER BY sortorder ASC");
+		return self::find_by_sql("SELECT * FROM " . self::$table_name . " ORDER BY sortorder DESC");
 	}
 
 	//Find all the rows in the current database table.
