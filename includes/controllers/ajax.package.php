@@ -36,7 +36,7 @@ switch ($action) {
             ? date('Y-m-d', strtotime($_REQUEST['program_date']))
             : NULL;
         $Package->content       = $_REQUEST['content'];
-        $Package->type         = $_REQUEST['type'];
+        // $Package->type         = $_REQUEST['type'];
         $Package->meta_title        = $_REQUEST['meta_title'];
         $Package->meta_keywords        = $_REQUEST['meta_keywords'];
         $Package->meta_description    = $_REQUEST['meta_description'];
@@ -98,7 +98,7 @@ switch ($action) {
             : NULL;
         $Package->content  = $_REQUEST['content'];
         $Package->status   = $_REQUEST['status'];
-        $Package->type         = $_REQUEST['type'];
+        // $Package->type         = $_REQUEST['type'];
         $Package->meta_title        = $_REQUEST['meta_title'];
         $Package->meta_keywords        = $_REQUEST['meta_keywords'];
         $Package->meta_description    = $_REQUEST['meta_description'];
@@ -235,7 +235,7 @@ switch ($action) {
             }
         }
 
-        $record->type             = $_REQUEST['type'];
+        // $record->type             = $_REQUEST['type'];
         $record->slug             = $_REQUEST['slug'];
         $record->title             = $_REQUEST['title'];
         $record->detail         = !empty($_REQUEST['detail']) ? $_REQUEST['detail'] : '';

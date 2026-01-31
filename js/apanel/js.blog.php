@@ -317,6 +317,8 @@ function deleteSavedBlogimage(Re)
 		var popAct=$(this).attr("id");						
 		if(popAct=='yes'){
 			$('#removeSavedimg'+Re).fadeOut(1000,function(){$('#removeSavedimg'+Re).remove(); $('.uploader').fadeIn(500);});
+			// Clear the hidden image field so the image gets removed on save
+			$('#preview_Image').html('<input type="hidden" name="imageArrayname" value="" class="">');
 		}else{Re='';}
 		$('.divMessageBox').fadeOut();
 		$('.MessageBoxContainer').fadeOut(1000);

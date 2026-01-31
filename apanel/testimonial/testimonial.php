@@ -212,7 +212,7 @@ $metadata = $metasql->fetch_object();
                     </div>
                 </div>
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Link :
@@ -223,9 +223,9 @@ $metadata = $metasql->fetch_object();
                                value="<?php echo !empty($testimonialInfo->linksrc) ? $testimonialInfo->linksrc : "";
                                ?>">
                     </div>
-                </div>
+                </div> -->
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Rating :
@@ -244,7 +244,7 @@ $metadata = $metasql->fetch_object();
                             <option value="5">5</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <div class="form-label col-md-2">

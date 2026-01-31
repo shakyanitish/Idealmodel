@@ -314,7 +314,7 @@ endif;
                 	                    
                 </div>
             </div> -->
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Brief :
@@ -325,7 +325,7 @@ endif;
                                   class="medium-textarea character-brief validate[required]"><?php echo !empty($blogInfo->brief) ? $blogInfo->brief : ""; ?></textarea>
                         <div class="brief-remaining clear input-description">250 characters left</div>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-row">
                     <div class="form-label col-md-12">
                         <label for="">

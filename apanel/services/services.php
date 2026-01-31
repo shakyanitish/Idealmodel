@@ -244,7 +244,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
 
 
 
-
+<!-- 
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -294,11 +294,11 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                             }
                         }
                     } ?>
-                </div>
+                </div> -->
 
                 <!-- // image upload -->
 
-                <div class="form-row add-image">
+                <!-- <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
                             Image :
@@ -312,7 +312,6 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                             </small>
                         </label>
                     </div>
-                    <!-- Upload user image preview -->
                     <div id="preview_Image"><input type="hidden" name="imageArrayname[]" /></div>
                     <?php
                     if (!empty($advInfo->image)) {
@@ -348,7 +347,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                             }
                         }
                     } ?>
-                </div>
+                </div> -->
 
 
 

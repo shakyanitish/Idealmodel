@@ -37,7 +37,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <th class="text-center">Title</th>
                         <th class="text-center">Images</th>
 
-                        <th>Sub Package</th>
+                        <!-- <th>Sub Package</th> -->
                         <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                     </tr>
                 </thead>
@@ -67,7 +67,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                     </span>
                                 </a>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewSubpackagelist(<?php echo $record->id; ?>);" href="javascript:void(0);">
                                     <span class="button-content">
@@ -81,7 +81,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                     title="">
                                     <i class="glyph-icon <?php echo $makasroom; ?>"></i>
                                 </a>
-                            </td>
+                            </td> -->
 
                             <td class="text-center">
                                 <?php
@@ -384,7 +384,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Make as Room :
@@ -398,7 +398,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             value="0" <?php echo !empty($unmasrom) ? $unmasrom : "checked"; ?>>
                         <label for="">No</label>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <div class="form-label col-md-2">

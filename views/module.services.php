@@ -32,17 +32,16 @@
                         $iconlink = IMAGE_PATH . 'services/icon/' . $iconList[0];
                     }
                 }
+                // Only create link if linksrc exists in database
                 if (!empty($v->linksrc)) {
                     $linkTarget = ($v->linktype == 1) ? ' target="_blank" ' : '';
                     $linksrc = ($v->linktype == 1) ? $v->linksrc : BASE_URL . $v->linksrc;
-                    $readmore = '<a href="' . $linksrc . '" title="">see more</a>';
+                    $titleHtml = '<a href="' . $linksrc . '"' . $linkTarget . '>
+                            <h3 class="ul-feature-title">' . $v->title . '</h3>
+                            </a>';
                 } else {
-                    $content_data = $content ?? []; // Use an empty array if $content is null/undefined
-                    $linkTarget = '';
-                    $linksrc = BASE_URL . 'services/' . $v->slug;
-                    $readmore = (is_array($content_data) && count($content_data) > 1)
-                        ? '<a href="' . BASE_URL . 'services/' . $v->slug . '" title="">Read more...</a>'
-                        : '';
+                    // No link - just display the title without anchor
+                    $titleHtml = '<h3 class="ul-feature-title">' . $v->title . '</h3>';
                 }
 
                 $res .= '
@@ -52,9 +51,7 @@
                             <div class="ul-feature-icon">
                                 <img src="' . $iconlink . '">
                             </div>
-                            <a href="' . $linksrc . '"' . $linkTarget . '>
-                            <h3 class="ul-feature-title">' . $v->title . '</h3>
-                            </a>
+                            ' . $titleHtml . '
                         </div>
                     </div>
                 ';

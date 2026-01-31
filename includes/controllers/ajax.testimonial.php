@@ -18,11 +18,11 @@
 			$record->name 		= $_REQUEST['name'];
             $record->image		= $_REQUEST['imageArrayname'];
 			$record->content 	= $_REQUEST['content'];			
-            $record->rating 	= $_REQUEST['rating'];
+            // $record->rating 	= $_REQUEST['rating'];
 			$record->status		= $_REQUEST['status'];
 			// $record->country	= $_REQUEST['country'];
 			$record->via_type	= $_REQUEST['via_type'];
-			$record->linksrc	= $_REQUEST['linksrc'];
+			// $record->linksrc	= $_REQUEST['linksrc'];
 			$record->sortorder	= Testimonial::find_maximum();
 			$db->begin();
 			if($record->save()): $db->commit();
@@ -45,11 +45,11 @@
 			$record->name 		= $_REQUEST['name'];
 			$record->image		= $_REQUEST['imageArrayname'];
 			$record->content 	= $_REQUEST['content'];			
-			$record->rating 	= $_REQUEST['rating'];
+			// $record->rating 	= $_REQUEST['rating'];
 			$record->status		= $_REQUEST['status'];
 			//$record->country	= $_REQUEST['country'];
 			$record->via_type	= $_REQUEST['via_type'];
-            $record->linksrc	= $_REQUEST['linksrc'];
+            // $record->linksrc	= $_REQUEST['linksrc'];
 
 			$db->begin();
 			if($record->save()): $db->commit();

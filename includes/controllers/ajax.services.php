@@ -17,7 +17,7 @@ switch ($action) {
 		$record->slug 			= create_slug($_REQUEST['title']);
 		$record->title 			= $_REQUEST['title'];
 		$record->sub_title 			= $_REQUEST['sub_title'];
-		$record->image			= !empty($_REQUEST['imageArrayname']) ? serialize(array_values(array_filter($_REQUEST['imageArrayname']))) : '';
+		// $record->image			= !empty($_REQUEST['imageArrayname']) ? serialize(array_values(array_filter($_REQUEST['imageArrayname']))) : '';
 		$record->icon		= !empty($_REQUEST['icon']) ? $_REQUEST['icon'] : '';
 		$record->linksrc 	= !empty($_REQUEST['linksrc']) ? $_REQUEST['linksrc'] : '';
 		$record->linktype 	= !empty($_REQUEST['linktype']) ? $_REQUEST['linktype'] : '';
@@ -39,8 +39,8 @@ switch ($action) {
 		$record->fiscal_address 	= !empty($_REQUEST['fiscal_address']) ? $_REQUEST['fiscal_address'] : '';
 		$record->email_address 		= !empty($_REQUEST['email_address']) ? $_REQUEST['email_address'] : '';
 		$record->iconimage		= !empty($_REQUEST['iconArrayname']) ? serialize(array_values(array_filter($_REQUEST['iconArrayname']))) : '';
-		$record->bannerimage		= !empty($_REQUEST['bannerArrayname']) ? serialize(array_values(array_filter($_REQUEST['bannerArrayname']))) : '';
-		$record->has_website = !empty($_REQUEST['has_website']) ? (int)$_REQUEST['has_website'] : 0;;
+		// $record->bannerimage		= !empty($_REQUEST['bannerArrayname']) ? serialize(array_values(array_filter($_REQUEST['bannerArrayname']))) : '';
+		// $record->has_website = !empty($_REQUEST['has_website']) ? (int)$_REQUEST['has_website'] : 0;;
 
 
 
@@ -86,7 +86,7 @@ switch ($action) {
 		$record->slug 			= create_slug($_REQUEST['title']);
 		$record->title 			= $_REQUEST['title'];
 		$record->sub_title 			= $_REQUEST['sub_title'];
-		$record->image			= !empty($_REQUEST['imageArrayname']) ? serialize(array_values(array_filter($_REQUEST['imageArrayname']))) : '';
+		// $record->image			= !empty($_REQUEST['imageArrayname']) ? serialize(array_values(array_filter($_REQUEST['imageArrayname']))) : '';
 		$record->icon		= !empty($_REQUEST['icon']) ? $_REQUEST['icon'] : '';
 		$record->linksrc 	= !empty($_REQUEST['linksrc']) ? $_REQUEST['linksrc'] : '';
 		$record->linktype 	= !empty($_REQUEST['linktype']) ? $_REQUEST['linktype'] : '';
@@ -110,8 +110,8 @@ switch ($action) {
 		$record->email_address 		= !empty($_REQUEST['email_address']) ? $_REQUEST['email_address'] : '';
 
 		$record->iconimage		= !empty($_REQUEST['iconArrayname']) ? serialize(array_values(array_filter($_REQUEST['iconArrayname']))) : '';
-		$record->bannerimage		= !empty($_REQUEST['bannerArrayname']) ? serialize(array_values(array_filter($_REQUEST['bannerArrayname']))) : '';
-		$record->has_website = !empty($_REQUEST['has_website']) ? (int)$_REQUEST['has_website'] : 0;
+		// $record->bannerimage		= !empty($_REQUEST['bannerArrayname']) ? serialize(array_values(array_filter($_REQUEST['bannerArrayname']))) : '';
+		// $record->has_website = !empty($_REQUEST['has_website']) ? (int)$_REQUEST['has_website'] : 0;
 
 
 
