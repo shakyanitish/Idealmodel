@@ -3433,6 +3433,9 @@ button {
   -moz-osx-font-smoothing: grayscale;
   padding-right: 10px;
 }
+.ul-footer-widget-links > .no-icon::before {
+  content: none;
+}
 .ul-footer-widget-links > *:hover {
   color: var(--ul-primary);
 }

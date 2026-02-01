@@ -88,7 +88,7 @@ $footer = '
                     <div class="ul-footer-widget ul-nwsltr-widget">
                         <h3 class="ul-footer-widget-title">Jayanti Memorial Trust</h3>
                         <div class="ul-footer-widget-links ul-footer-contact-links">
-                            <span><i class="flaticon-pin"></i> &nbsp;' . $siteRegulars->fiscal_address . '</span>
+                            <span class="no-icon"><i class="flaticon-pin"></i> &nbsp;' . $siteRegulars->fiscal_address . '</span>
                             ' . $emailinked . '
                             ' . $tellinked . '
                         </div>
