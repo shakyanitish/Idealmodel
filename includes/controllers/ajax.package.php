@@ -235,7 +235,7 @@ switch ($action) {
             }
         }
 
-        // $record->type             = $_REQUEST['type'];
+        $record->type             = $_REQUEST['type'];
         $record->slug             = $_REQUEST['slug'];
         $record->title             = $_REQUEST['title'];
         $record->detail         = !empty($_REQUEST['detail']) ? $_REQUEST['detail'] : '';

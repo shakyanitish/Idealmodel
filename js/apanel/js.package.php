@@ -446,7 +446,6 @@
             changeYear: true,
             showButtonPanel: true,
             dateFormat: 'yy-mm-dd',
-            maxDate: 0
         });
 
         $('#applySelected_btn1').on("click", function() {

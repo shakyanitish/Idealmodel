@@ -48,7 +48,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <th class="text-center"><input class="check-all" type="checkbox" /></th>
                         <th>Title</th>
                         <!-- <th>Itinerary</th> -->
-                        <!-- <th class="text-center">Images</th> -->
+                        <th class="text-center">Images</th>
                         <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                     </tr>
                 </thead>
@@ -57,7 +57,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     <?php $records = Subpackage::find_by_sql("SELECT * FROM " . $subpackageTablename . " WHERE type=" . $id . " ORDER BY sortorder DESC ");
                     foreach ($records as $key => $record): ?>
                         <tr id="<?php echo $record->id; ?>">
-                            <td style="display:none;"><?php echo $key + 1; ?></td>                  
+                            <td style="display:none;"><?php echo $key + 1; ?></td>
                             <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>" /></td>
                             <td>
                                 <div class="col-md-7">
@@ -67,16 +67,16 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                         title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
                                 </div>
                             </td>
-                                <!-- <td>
-                                    <a class="primary-bg medium btn loadingbar-demo" title=""
-                                        onClick="viewItinerarylist(<?php echo $record->id; ?>);" href="javascript:void(0);">
-                                        <span class="button-content">
-                                            <span class="badge bg-orange radius-all-4 mrg5R" title=""
-                                                data-original-title="Badge with tooltip"><?php echo $countImages = Itinerary::getTotalSub($record->id); ?></span>
-                                            <span class="text-transform-upr font-bold font-size-11">View Lists</span>
-                                        </span>
-                                    </a>
-                                </td>
+                            <!-- <td>
+                                <a class="primary-bg medium btn loadingbar-demo" title=""
+                                    onClick="viewItinerarylist(<?php echo $record->id; ?>);" href="javascript:void(0);">
+                                    <span class="button-content">
+                                        <span class="badge bg-orange radius-all-4 mrg5R" title=""
+                                            data-original-title="Badge with tooltip"><?php echo $countImages = Itinerary::getTotalSub($record->id); ?></span>
+                                        <span class="text-transform-upr font-bold font-size-11">View Lists</span>
+                                    </span>
+                                </a>
+                            </td> -->
                             <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewsubimagelist(<?php echo $record->id; ?>);" href="javascript:void(0);">
@@ -89,7 +89,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                         <span class="text-transform-upr font-bold font-size-11">View Lists</span>
                                     </span>
                                 </a>
-                            </td> -->
+                            </td>
                             <td class="text-center">
                                 <?php
                                 $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
@@ -120,7 +120,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
         </div>
 
 
-        
+
         <div class="pad0L col-md-2">
             <select name="dropdown" id="groupTaskField" class="custom-select">
                 <option value="0"><?php echo $GLOBALS['basic']['choseAction']; ?></option>
@@ -360,7 +360,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     <div id="preview_Video"></div>
                 </div>
 
-            <?php $pkg = Package::find_by_id($pid); ?>
+                <?php $pkg = Package::find_by_id($pid); ?>
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -413,7 +413,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                 </div>
                 <?php if ($pkg->type == 1) { ?>
 
-                    <!-- <div class="form-row">
+                    <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">
                                 Room Id (Rojai) :
@@ -424,10 +424,10 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                 name="rojai_room_id" id="rojai_room_id"
                                 value="<?php echo !empty($subpackageInfo->rojai_room_id) ? $subpackageInfo->rojai_room_id : ""; ?>">
                         </div>
-                    </div> -->
+                    </div>
                 <?php }
                 if ($pkg->type == 1 || $pkg->id == 8) { ?>
-                    <!-- <div class="form-row">
+                    <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">
                                 Currency Type :
@@ -438,9 +438,9 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                 name="currency" id="currency"
                                 value="<?php echo !empty($subpackageInfo->currency) ? $subpackageInfo->currency : ""; ?>">
                         </div>
-                    </div> -->
+                    </div>
 
-                    <!-- <div class="form-row">
+                    <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">Price :</label>
                         </div>
@@ -449,7 +449,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                 name="onep_price" id="room_price1"
                                 value="<?php echo !empty($subpackageInfo->onep_price) ? $subpackageInfo->onep_price : ''; ?>">
                         </div>
-                    </div> -->
+                    </div>
                 <?php }
                 if ($pkg->type == 1) { ?>
                     <!-- <div class="form-row">
@@ -600,7 +600,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             <label for="">Occupancy:</label>
                         </div>
                         <div class="form-input col-md-6">
-                            <input placeholder="2 Adults" class="col-md-3 validate[length[0,3]]" type="text"
+                            <input placeholder="2 People" class="col-md-3 validate[length[0,3]]" type="text"
                                 name="occupancy" id="occupancy"
                                 value="<?php echo !empty($subpackageInfo->occupancy) ? $subpackageInfo->occupancy : ''; ?>">
                         </div>
@@ -628,16 +628,16 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                     </div>
 
-                    <!-- <div class="form-row">
+                    <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">Room Size:</label>
                         </div>
                         <div class="form-input col-md-6">
-                            <input placeholder="BHK" class="col-md-3 validate[length[0,3]]" type="text"
+                            <input placeholder="120sqm" class="col-md-3 validate[length[0,3]]" type="text"
                                 name="room_size" id="room_size"
                                 value="<?php echo !empty($subpackageInfo->room_size) ? $subpackageInfo->room_size : ''; ?>">
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- <div class="form-row">
                         <div class="form-label col-md-2">
@@ -701,35 +701,35 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                     </div>
                 </div>
-                    <!-- <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Best Season:</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Best Season" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="room_service" id="room_service"
-                                value="<?php echo !empty($subpackageInfo->room_service) ? $subpackageInfo->room_service : ''; ?>">
-                        </div>
-                    </div> -->
-                    <!-- <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Min. Group Size :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="Min. Group Size" class="col-md-12" type="text" name="theatre_style" id="theatre_style"
-                                value="<?php echo !empty($subpackageInfo->theatre_style) ? $subpackageInfo->theatre_style : ''; ?>">
-                        </div>
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Best Season:</label>
                     </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Min. Days:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder=" Min. Days" class="col-md-12" type="text" name="round_table" id="round_table"
-                                value="<?php echo !empty($subpackageInfo->round_table) ? $subpackageInfo->round_table : ''; ?>">
-                        </div>
-                    </div> -->
-                    <!-- <div class="form-row">
+                    <div class="form-input col-md-6">
+                        <input placeholder="Best Season" class="col-md-3 validate[length[0,3]]" type="text"
+                            name="room_service" id="room_service"
+                            value="<?php echo !empty($subpackageInfo->room_service) ? $subpackageInfo->room_service : ''; ?>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Min. Group Size :</label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <input placeholder="Min. Group Size" class="col-md-12" type="text" name="theatre_style" id="theatre_style"
+                            value="<?php echo !empty($subpackageInfo->theatre_style) ? $subpackageInfo->theatre_style : ''; ?>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Min. Days:</label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <input placeholder=" Min. Days" class="col-md-12" type="text" name="round_table" id="round_table"
+                            value="<?php echo !empty($subpackageInfo->round_table) ? $subpackageInfo->round_table : ''; ?>">
+                    </div>
+                </div>
+                <!-- <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">Size :</label>
                         </div>
@@ -740,106 +740,17 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                         
                     </div> -->
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Picture Link:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="Link " class="col-md-10" type="text" name="link_a" id="link_a"
-                                value="<?php echo !empty($subpackageInfo->link_a) ? $subpackageInfo->link_a : ''; ?>">
-                        </div>
-                        <div class="form-label col-md-1">
-                            <label for="">Book Now :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="Booking" class="col-md-10" type="text" name="link_b" id="link_b"
-                                value="<?php echo !empty($subpackageInfo->link_b) ? $subpackageInfo->link_b : ''; ?>">
-                        </div>
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Google embeded :</label>
                     </div>
-
-<!-- //here is upload pdf... -->
-
-
-            <div class="form-row">
-                <div class="form-label col-md-2">
-                    <label for="">Explore Now :</label>
-                </div>
-                <div class="form-checkbox-radio col-md-9">
-
-                    <?php
-                    // safely assign booking link type
-                    $exploreLinkTypeview = isset($subpackageInfo->explorelinktype) ? $subpackageInfo->explorelinktype : 0;
-                    ?>
-
-                    <input id="exploreInternal" class="custom-radio" type="radio" name="explorelinktype" value="0"
-                        onClick="exploreLinkTypeSelect(0);"
-                        <?php echo ($exploreLinkTypeview == 0) ? "checked" : ""; ?>>
-                    <label for="exploreInternal">Internal Link</label>
-
-                    <input id="exploreExternal" class="custom-radio" type="radio" name="explorelinktype" value="1"
-                        onClick="exploreLinkTypeSelect(1);"
-                        <?php echo ($exploreLinkTypeview == 1) ? "checked" : ""; ?>>
-                    <label for="exploreExternal">External Link</label>
-
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-label col-md-2">
-                    <label for="">Explore Link :</label>
-                </div>
-
-                <div class="form-input col-md-8">
-                    <div class="col-md-4" style="padding-left:0px !important;">
-                        <input placeholder="Link" type="text" name="explorelinksrc" id="explorelinksrc"
-                            value="<?php echo isset($subpackageInfo->explorelinksrc) ? $subpackageInfo->explorelinksrc : ''; ?>">
-                    </div>
-
-                    <div class="col-md-6" style="padding-left:0px !important;">
-                        <?php
-                        $exploreLpageview = isset($subpackageInfo->explorelinksrc) ? $subpackageInfo->explorelinksrc : "";
-                        ?>
-
-                        <select data-placeholder="Select explore Link Page" class="col-md-4 chosen-select"
-                                style="<?php echo ($exploreLinkTypeview == 1) ? 'display:none;' : ''; ?>"
-                                id="exploreLinkPage">
-                            <option value=""></option>
-                            <?php
-
-                            $exploreLpageview = !empty($subpackageInfo->explorelinksrc) ? $subpackageInfo->explorelinksrc : "";
-                            $exploreLinkTypeview = !empty($subpackageInfo->explorelinktype) ? $subpackageInfo->explorelinktype : "";
-                            echo Download::get_internal_link($exploreLpageview, $exploreLinkTypeview);
-                            echo Package::get_internal_link($exploreLpageview, $exploreLinkTypeview);
-                            echo Article::get_internal_link($exploreLpageview, $exploreLinkTypeview);
-
-                            ?>
-                        </select>   
+                    <div class="form-input col-md-20">
+                        <input placeholder="Google Embeded link"
+                            class="col-md-3" type="text"
+                            name="google_embeded" id="google_embeded"
+                            value="<?php echo !empty($subpackageInfo->google_embeded) ? $subpackageInfo->google_embeded : ''; ?>">
                     </div>
                 </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-                    <!-- here it end -->
-                    <!-- <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Google embeded :</label>
-                        </div>
-                        <div class="form-input col-md-20">
-                            <input placeholder="Google Embeded link"
-                                class="col-md-3" type="text"
-                                name="google_embeded" id="google_embeded"
-                                value="<?php echo !empty($subpackageInfo->google_embeded) ? $subpackageInfo->google_embeded : ''; ?>">
-                        </div>
-                    </div> -->
 
                 <?php if ($pkg->id == 12) { ?>
                     <div class="form-row">
@@ -1402,10 +1313,10 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                 <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="homepage" id="homepage1"
-                               value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>
+                            value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>
                         <label for="">Homepage</label>
                         <input type="radio" class="custom-radio" name="homepage" id="homepage0"
-                               value="0" <?php echo !empty($nothomepage) ? $nothomepage : "checked"; ?>>
+                            value="0" <?php echo !empty($nothomepage) ? $nothomepage : "checked"; ?>>
                         <label for="">Not at Homepage</label>
                     </div>
                 </div>
@@ -1775,7 +1686,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                 }
             });
         });
-        
+
 
         // ]]>
     </script>

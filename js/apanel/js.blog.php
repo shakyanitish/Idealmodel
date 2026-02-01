@@ -86,7 +86,6 @@ $(document).ready(function(){
 		changeYear: true,
 		showButtonPanel: true,
 		dateFormat: 'yy-mm-dd',
-		maxDate: 0  
 	});
 
 	$(".character-brief").keyup(function(){
@@ -390,8 +389,8 @@ function deleteSavedBlogSubimage(Re) {
 /******************************** Edit Blog Image Title ********************************/
 function editBlogImageTitle(Re) {
     var curTitle = $('.clicked' + Re).text();
-    var content = '<input type="text" name="" id="uptitle' + Re + '" value="' + curTitle + '" class="col-md-6">';
-    content += '<a class="btn small bg-green float-right updateBlogImageTitle" href="javascript:void(0);" rowId="' + Re + '"><i class="glyph-icon icon-save"></i></a>';
+    var content = '<input type="text" id="uptitle' + Re + '" name="ne-title" class="validate[required,length[0,250]] col-md-9" value="' + curTitle + '" imgid="' + Re + '">';
+    content += ' <button type="button" class="col-md-3 updateBlogImageTitle" rowId="' + Re + '">Save</button>';
     $('.clicked' + Re).html(content);
 }
 

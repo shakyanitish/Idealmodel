@@ -87,7 +87,6 @@ $(document).ready(function () {
 		changeYear: true,
 		showButtonPanel: true,
 		dateFormat: 'yy-mm-dd',
-        maxDate: 0  
 	});
     });
 
