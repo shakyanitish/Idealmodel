@@ -125,5 +125,11 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
+
+    <script>
+        const el = document.getElementById("yrs_of_exp1");
+        const startYear = 2002; // the year your org started
+        el.textContent = (new Date().getFullYear() - startYear) + "+";
+    </script>
 </body>
 </html>

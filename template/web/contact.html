@@ -227,7 +227,7 @@
                     const formData = new FormData(form);
                     formData.append("action", "forContact");
 
-                    $("button#submit").attr("disabled", true).text('Processing...');
+                    $("#ul-submit-btn").attr("disabled", true).text('Processing...');
 
                     $.ajax({
                         type: "POST",
@@ -237,10 +237,10 @@
                         contentType: false,
                         processData: false,
                         success: function (data) {
-                            $("button#submit").removeAttr("disabled").text('Submit');
+                            $("#ul-submit-btn").removeAttr("disabled").html('<i class="flaticon-fast-forward-double-right-arrows-symbol"></i> Get in Touch');
                             $('div#result_msg').html(data.message).css('display', 'block').fadeOut(8000);
                             form.reset();
-                            grecaptcha.reset();
+                            grecaptcha.reset(0);
 
                         }
                     });

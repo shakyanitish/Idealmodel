@@ -343,4 +343,173 @@ $(document).ready(function(){
 	})
 })
 
+/***************************************** View Blog Image List *******************************************/
+function viewBlogImagelist(Re) {
+    window.location.href = "<?php echo ADMIN_URL?>blog/blogImageList/" + Re;
+}
+
+/******************************** Remove temp upload blog sub image ********************************/
+function deleteTempBlogimage(Re) {
+    $('#previewUserimage' + Re).fadeOut(1000, function () {
+        $('#previewUserimage' + Re).remove();
+    });
+}
+
+/******************************** Remove saved blog sub images ********************************/
+function deleteSavedBlogSubimage(Re) {
+    $('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'], "image")?>');
+    $('.pText').html('Click on yes button to delete this image permanently.!!');
+    $('.divMessageBox').fadeIn();
+    $('.MessageBoxContainer').fadeIn(1000);
+
+    $(".botTempo").on("click", function () {
+        var popAct = $(this).attr("id");
+        if (popAct == 'yes') {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: getLocation(),
+                data: 'action=deleteBlogSubimage&id=' + Re,
+                success: function (data) {
+                    var msg = eval(data);
+                    if (msg.action == 'success') {
+                        $('.removeSavedimg' + Re).fadeOut(1000, function () {
+                            $('.removeSavedimg' + Re).remove();
+                        });
+                    }
+                }
+            });
+        } else {
+            Re = '';
+        }
+        $('.divMessageBox').fadeOut();
+        $('.MessageBoxContainer').fadeOut(1000);
+    });
+}
+
+/******************************** Edit Blog Image Title ********************************/
+function editBlogImageTitle(Re) {
+    var curTitle = $('.clicked' + Re).text();
+    var content = '<input type="text" name="" id="uptitle' + Re + '" value="' + curTitle + '" class="col-md-6">';
+    content += '<a class="btn small bg-green float-right updateBlogImageTitle" href="javascript:void(0);" rowId="' + Re + '"><i class="glyph-icon icon-save"></i></a>';
+    $('.clicked' + Re).html(content);
+}
+
+/******************************** Update Blog Image Title ********************************/
+$(document).on("click", ".updateBlogImageTitle", function () {
+    var getId = $(this).attr('rowId');
+    var getVal = $('#uptitle' + getId).val();
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: getLocation(),
+        data: 'action=updateBlogImageTitle&id=' + getId + '&title=' + getVal,
+        success: function (data) {
+            var msg = eval(data);
+            $('.clicked' + getId).html(msg.title);
+        }
+    });
+});
+
+/******************************** Toggle Blog Image Status ********************************/
+$(document).on("click", ".blogImageStatusToggle", function () {
+    var getId = $(this).attr('rowId');
+    var getStatus = $(this).attr('status');
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: getLocation(),
+        data: 'action=toggleBlogImageStatus&id=' + getId + '&status=' + getStatus,
+        success: function (data) {
+            var msg = eval(data);
+            if (msg.status == 1) {
+                $('#toggleImg' + getId).removeClass('icon-clock-os-circle-o').addClass('icon-check-circle-o');
+            } else {
+                $('#toggleImg' + getId).removeClass('icon-check-circle-o').addClass('icon-clock-os-circle-o');
+            }
+            $('.blogImageStatusToggle[rowId="' + getId + '"]').attr('status', msg.status);
+        }
+    });
+});
+
+/*************************** Sorting Sub Image Blog Position *******************************/
+$(document).ready(function () {
+    $(function () {
+        $(".subImageblog-sort").sortable({
+            start: function (event, ui) {
+                var start_pos = ui.item.index();
+                ui.item.data('start_pos', start_pos);
+            },
+            update: function (event, ui) {
+                var mySel = "";
+                $('div.oldsort').each(function (i) {
+                    mySel = mySel + ';' + $(this).attr('csort');
+                });
+                var id = ui.item.context.id;
+                var end_pos = ui.item.index();
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: getLocation(),
+                    data: 'action=sortBlogImages&sortIds=' + mySel,
+                    success: function (data) {
+                        var msg = eval(data);
+                        showMessage(msg.action, msg.message);
+                    }
+                });
+            }
+        });
+    });
+});
+
+/*************************** Blog Sub Image Form Submit *******************************/
+$(document).ready(function () {
+    jQuery('#subblog_frm').validationEngine({
+        autoHidePrompt: true,
+        scroll: false,
+        onValidationComplete: function(form, status) {
+            if (status == true) {
+                $('#btn-submit').attr('disabled', 'true');
+                var action = "action=addBlogImage&";
+                var data = $('#subblog_frm').serialize();
+                queryString = action + data;
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: getLocation(),
+                    data: queryString,
+                    success: function(data) {
+                        var msg = eval(data);
+                        if (msg.action == 'warning') {
+                            showMessage(msg.action, msg.message);
+                            $('#btn-submit').removeAttr('disabled');
+                            $('.formButtons').show();
+                            return false
+                        }
+                        if (msg.action == 'success') {
+                            showMessage(msg.action, msg.message);
+                            setTimeout(function() {
+                                window.location.href = window.location.href;
+                            }, 1000);
+                        }
+                        if (msg.action == 'notice') {
+                            showMessage(msg.action, msg.message);
+                            setTimeout(function() {
+                                window.location.href = window.location.href;
+                            }, 1000);
+                        }
+                        if (msg.action == 'error') {
+                            showMessage(msg.action, msg.message);
+                            $('#btn-submit').removeAttr('disabled');
+                            $('.formButtons').show();
+                            return false;
+                        }
+                    }
+                });
+                return false;
+            }
+        }
+    });
+});
+
 </script>

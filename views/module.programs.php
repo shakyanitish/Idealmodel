@@ -245,7 +245,7 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
                                 <div class="ul-inner-sidebar-posts">';
 
         // Get other Recent  programs
-        $otherPrograms = Package::get_latestprogram_by(3);
+        $otherPrograms = Package::get_latestprogram_by(6);
         if (!empty($otherPrograms)) {
             foreach ($otherPrograms as $prog) {
                 // Skip current program

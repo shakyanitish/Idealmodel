@@ -44,7 +44,6 @@ $case = '
                         <div class="case-inner">
                             <h6 class="mt-2 me-2">Category:</h6>
                             <select class="form-select" id="categoryFilter" aria-label="Filter by category" onchange="filterByCategory(this.value)">
-                                <option value="">Select anyone</option>
                                 <option value="">All Categories</option>
                                 <option value="1">Research</option>
                                 <option value="2">Case Study</option>
@@ -85,11 +84,15 @@ $case = '
                     if (categoryId === "" || categoryId === undefined || categoryId === null) {
                         row.style.display = "";
                         visibleCount++;
+                        // Update serial number
+                        row.querySelector("th").textContent = visibleCount;
                     } else {
                         const rowCategory = row.getAttribute("data-category");
                         if (rowCategory === categoryId) {
                             row.style.display = "";
                             visibleCount++;
+                            // Update serial number
+                            row.querySelector("th").textContent = visibleCount;
                         } else {
                             row.style.display = "none";
                         }

@@ -4032,6 +4032,10 @@ button {
   content: none;
 }
 
+.ul-footer-contact-links span::before {
+  content: none;
+}
+
 .ul-footer .ul-nwsltr-form {
   margin-top: clamp(15px, 1.58vw, 30px);
 }

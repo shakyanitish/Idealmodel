@@ -11,7 +11,7 @@ $header = '
         <div class="ul-header-bottom to-be-sticky">
             <div class="ul-header-bottom-wrapper ul-header-container">
                 <div class="logo-container">
-                    <a href="' . BASE_URL . 'home' . '" class="d-inline-block">
+                    <a href="' . BASE_URL . '' . '" class="d-inline-block">
                         <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="logo" class="logo">
                     </a>
                 </div>
@@ -20,7 +20,7 @@ $header = '
                 ' . $jVars['module:res-menu1'] . '
                 <!-- actions -->
                 <div class="ul-header-actions">
-                    <a href="donate.html" class="ul-btn d-sm-inline-flex"><i
+                    <a href="#" class="ul-btn d-sm-inline-flex" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                             class="flaticon-fast-forward-double-right-arrows-symbol"></i>  Become A Volunteer </a>
                     <button class="ul-header-sidebar-opener d-lg-none d-inline-flex"><i
                             class="flaticon-menu"></i></button>

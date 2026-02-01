@@ -193,5 +193,83 @@
 			echo json_encode(array("action" => "notice", "message" => $GLOBALS['basic']['noChanges']));
 		endif;	
 		break;
+
+		/*************************** Blog Image Functions ***************************/
+		case "addBlogImage":
+			$blogid = intval($_REQUEST['blogid']);
+			$imageArrayname = isset($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : array();
+			$titleArray = isset($_REQUEST['title']) ? $_REQUEST['title'] : array();
+			
+			if(!empty($imageArrayname)):
+				$db->begin();
+				$i = 0;
+				foreach($imageArrayname as $imagename):
+					$BlogImage = new BlogImage();
+					$BlogImage->blogid = $blogid;
+					$BlogImage->title = isset($titleArray[$i]) ? addslashes($titleArray[$i]) : '';
+					$BlogImage->detail = '';
+					$BlogImage->status = 1;
+					$BlogImage->sortorder = BlogImage::find_maximum_byparent("sortorder", $blogid);
+					$BlogImage->registered = registered();
+					$BlogImage->image = $imagename;
+					$BlogImage->save();
+					$i++;
+				endforeach;
+				$db->commit();
+				$message = sprintf($GLOBALS['basic']['addedSuccess_'], "Blog Image(s)");
+				echo json_encode(array("action"=>"success","message"=>$message));
+			else:
+				echo json_encode(array("action"=>"error","message"=>"No images to save"));
+			endif;
+		break;
+
+		case "deleteBlogSubimage":
+			$id = intval($_REQUEST['id']);
+			$record = BlogImage::find_by_id($id);
+			if($record):
+				// Delete the image files
+				if(file_exists(SITE_ROOT."images/blog/blogimages/".$record->image)):
+					unlink(SITE_ROOT."images/blog/blogimages/".$record->image);
+				endif;
+				if(file_exists(SITE_ROOT."images/blog/blogimages/thumbnails/".$record->image)):
+					unlink(SITE_ROOT."images/blog/blogimages/thumbnails/".$record->image);
+				endif;
+				
+				$db->begin();
+				$res = $db->query("DELETE FROM tbl_blog_images WHERE id='{$id}'");
+				if($res): $db->commit();
+					reOrderSub("tbl_blog_images", "sortorder", "blogid", $record->blogid);
+					$message = sprintf($GLOBALS['basic']['deletedSuccess_'], "Blog Image");
+					echo json_encode(array("action"=>"success","message"=>$message));
+				else: $db->rollback();
+					echo json_encode(array("action"=>"error","message"=>$GLOBALS['basic']['unableToDelete']));
+				endif;
+			else:
+				echo json_encode(array("action"=>"error","message"=>"Image not found"));
+			endif;
+		break;
+
+		case "updateBlogImageTitle":
+			$id = intval($_REQUEST['id']);
+			$title = addslashes($_REQUEST['title']);
+			$db->query("UPDATE tbl_blog_images SET title='{$title}' WHERE id='{$id}'");
+			echo json_encode(array("action"=>"success","title"=>$title));
+		break;
+
+		case "toggleBlogImageStatus":
+			$id = intval($_REQUEST['id']);
+			$status = intval($_REQUEST['status']);
+			$newStatus = ($status == 1) ? 0 : 1;
+			$db->query("UPDATE tbl_blog_images SET status='{$newStatus}' WHERE id='{$id}'");
+			echo json_encode(array("action"=>"success","status"=>$newStatus));
+		break;
+
+		case "sortBlogImages":
+			$sortIds = $_REQUEST['sortIds'];
+			$record = BlogImage::find_by_id(intval(explode(";", $sortIds)[1]));
+			datatableReordering('tbl_blog_images', $sortIds, "sortorder", 'blogid', $record->blogid);
+			$message = sprintf($GLOBALS['basic']['sorted_'], "Blog Images");
+			echo json_encode(array("action"=>"success","message"=>$message));
+		break;
 	}
 ?>

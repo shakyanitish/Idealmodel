@@ -106,11 +106,24 @@ if ($menuRec):
         if (!empty($currentPath)):
             $linkActive = ($menuRow->linksrc == $currentPath) ? " active" : "";
             
-            // Check if parent is active
+            // Check if parent is active (when a submenu item is selected)
             if (empty($linkActive)):
                 $parentInfo = Menu::find_by_linksrc($currentPath);
                 if ($parentInfo):
                     $linkActive = ($menuRow->id == $parentInfo->parentOf) ? " active" : "";
+                endif;
+            endif;
+            
+            // Also check if any child menu is active (to highlight parent)
+            if (empty($linkActive)):
+                $childMenus = Menu::getMenuByParent($menuRow->id, 1);
+                if ($childMenus):
+                    foreach ($childMenus as $child):
+                        if ($child->linksrc == $currentPath):
+                            $linkActive = " active";
+                            break;
+                        endif;
+                    endforeach;
                 endif;
             endif;
         endif;
@@ -121,7 +134,7 @@ if ($menuRec):
         if ($childMenus && count($childMenus) > 0):
             // Menu with submenu
             $result .= '            <div class="has-sub-menu' . $linkActive . '">';
-            $result .= '                <a role="button" class="menu-toggle" data-toggle="submenu" aria-expanded="false">' . $menuRow->name . '<i class="flaticon-down-arrow"></i></a>';
+            $result .= '                <a role="button" class="menu-toggle' . $linkActive . '" data-toggle="submenu" aria-expanded="false">' . $menuRow->name . '<i class="flaticon-down-arrow"></i></a>';
             $result .= '                <div class="ul-header-submenu">';
             $result .= '                    <ul>';
             

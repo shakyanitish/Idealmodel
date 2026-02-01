@@ -1,7 +1,7 @@
 <?php
 $bl =  '';
 $singleblog = '';
-$singleblog_more = ''; 
+$singleblog_more = '';
 
 if (defined('BLOG_PAGE')) {
     $record = Blog::get_allblog();
@@ -10,7 +10,7 @@ if (defined('BLOG_PAGE')) {
     if (!empty($record)) {
 
         $counter = 0; // NEW: counter to track which blog we're on
-        
+
         foreach ($record as $homebl) {
 
             if (!empty($homebl->linksrc)) {
@@ -79,7 +79,6 @@ if (defined('BLOG_PAGE')) {
                 </div>
             </div>
         </section>';
-
     } else {
         redirect_to(BASE_URL);
     }
@@ -146,7 +145,7 @@ if (defined('HOME_PAGE')) {
                         <h2 class="ul-section-title">Recent Activities</h2>
                     </div>
 
-                    <a href="impact.html" class="ul-btn"><i
+                    <a href="' . BASE_URL . 'impact' . '" class="ul-btn"><i
                             class="flaticon-fast-forward-double-right-arrows-symbol"></i> View All</a>
                 </div>
 
@@ -185,6 +184,35 @@ if (defined("BLOG_DETAIL_PAGE")) {
         ';
         $jVars['module:blog-detail-title'] = $blog_detail_title;
 
+        // Get blog images
+        $blogImages = BlogImage::getImagelist_by($Blogs->id);
+        $galleryHtml = '';
+        if (!empty($blogImages)) {
+            foreach ($blogImages as $blogImg) {
+                $file_path = SITE_ROOT . 'images/blog/blogimages/' . $blogImg->image;
+                if (file_exists($file_path) && !empty($blogImg->image)) {
+                    $galleryHtml .= '
+                            <div class="col-md-3 images" data-class="' . $blogImg->blogid . '" data-src="' . IMAGE_PATH . 'blog/blogimages/' . $blogImg->image . '">
+                                <img src="' . IMAGE_PATH . 'blog/blogimages/' . $blogImg->image . '" class="img-fluid">
+                            </div>';
+                }
+            }
+        }
+
+        // Only show gallery section if there are images
+        $gallerySection = '';
+        if (!empty($galleryHtml)) {
+            $gallerySection = '
+                <section class="main text-center">
+                    <div class="container-fluid">
+                        <h3 class="text-center" style="color:#d93431;">Memories / Gallery</h3>
+                        <div class="row" id="gallery">
+                            ' . $galleryHtml . '
+                        </div>
+                    </div>
+                </section>';
+        }
+
         $blog_detail .= '
 
 
@@ -193,25 +221,17 @@ if (defined("BLOG_DETAIL_PAGE")) {
             <div class="ul-container">
                 <div>
                     <div class="ul-service-details-txt">
-                        <h3 class="ul-service-details-inner-title">' . date('M jS Y', strtotime($Blogs ->blog_date)) . '</h3>
+                        <h3 class="ul-service-details-inner-title">' . date('M jS Y', strtotime($Blogs->blog_date)) . '</h3>
                          ' . $Blogs->content . '                    
                     </div>
                 </div>
 
-                <section class="main text-center">
-                    <div class="container-fluid">
-                        <h3 class="text-center" style="color:#d93431;">Memories / Gallery</h3>
-                        <div class="row" id="gallery">
-                        ' . $jVars['module:gallery-list'] . '
-
-                        </div>
-                    </div>
-                </section>
+                ' . $gallerySection . '
             </div>
         </section>
 
    ';
-   $jVars['module:blog-detail'] = $blog_detail;
+        $jVars['module:blog-detail'] = $blog_detail;
 
 
         // Recent Posts Sidebar
