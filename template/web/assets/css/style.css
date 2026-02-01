@@ -3232,7 +3232,44 @@ button {
   pointer-events: none;
   max-width: clamp(175px, 19.71vw, 375px);
 }
+.tab-buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #f4f4f4;
+  border-right: 1px solid #ccc;
+}
 
+.tab-btn {
+  padding: 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  background: #ddd;
+}
+
+.tab-btn.active {
+  background: #fff;
+  font-weight: bold;
+  border-left: 4px solid #007bff;
+}
+
+.tab-content {
+  padding: 20px;
+  flex: 1;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
 .ul-footer {
   position: relative;
   z-index: 1;
