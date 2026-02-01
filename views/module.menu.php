@@ -106,6 +106,13 @@ if ($menuRec):
         if (!empty($currentPath)):
             $linkActive = ($menuRow->linksrc == $currentPath) ? " active" : "";
             
+            // Check if current path starts with menu link (for detail pages)
+            if (empty($linkActive) && !empty($menuRow->linksrc) && $menuRow->linksrc != 'home' && $menuRow->linksrc != '/'):
+                if (strpos($currentPath, $menuRow->linksrc) === 0):
+                    $linkActive = " active";
+                endif;
+            endif;
+            
             // Check if parent is active (when a submenu item is selected)
             if (empty($linkActive)):
                 $parentInfo = Menu::find_by_linksrc($currentPath);
@@ -119,7 +126,8 @@ if ($menuRec):
                 $childMenus = Menu::getMenuByParent($menuRow->id, 1);
                 if ($childMenus):
                     foreach ($childMenus as $child):
-                        if ($child->linksrc == $currentPath):
+                        // Check exact match or if current path starts with child link
+                        if ($child->linksrc == $currentPath || (!empty($child->linksrc) && strpos($currentPath, $child->linksrc) === 0)):
                             $linkActive = " active";
                             break;
                         endif;
