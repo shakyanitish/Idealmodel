@@ -187,7 +187,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <span id="error"></span>
                     </div>
                 </div>
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">Short Title :</label>
                     </div>
@@ -195,9 +195,9 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <input placeholder="Sub Title" class="col-md-12" type="text" name="short_title" id="short_title"
                             value="<?php echo !empty($subpackageInfo->short_title) ? $subpackageInfo->short_title : ''; ?>">
                     </div>
-                </div>
+                </div> -->
 
-                <div class="form-row add-image hide">
+                <!-- <div class="form-row add-image hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Banner Image :
@@ -211,7 +211,6 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             </small>
                         </label>
                     </div>
-                    <!-- Upload user image preview -->
                     <div id="preview_Image2"></div>
                 </div>
 
@@ -242,9 +241,9 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             </div>
                         </div>
                     <?php endif; ?>
-                </div>
+                </div> -->
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <?php
                     if (!empty($subpackageInfo->image2)):
                         $imageRow2 = $subpackageInfo->image2; ?>
@@ -271,9 +270,9 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             </div>
                         </div>
                     <?php endif; ?>
-                </div>
+                </div> -->
 
-                <div class="form-row hide">
+                <!-- <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             360 Image:
@@ -282,9 +281,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     <div class="form-input col-md-10 uploader360">
                         <input type="file" name="360_image_upload" id="360_image_upload" class="transparent no-shadow">
                     </div>
-                    <!-- Upload user image preview -->
                     <div id="preview_Image_360"></div>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <?php
@@ -329,7 +327,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             word-wrap: break-word;
                         }
                     </style>
-                    <?php if (!empty($subpackageInfo->source_vid)): ?>
+                    <!-- <?php if (!empty($subpackageInfo->source_vid)): ?>
                         <div class="col-md-3" id="removeSavedVid2">
                             <div class="infobox info-bg">
                                 <div class="button-group" data-toggle="buttons">
@@ -358,10 +356,10 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <label><small> Upload .mp4 or .webm files only</small></label>
                     </div>
                     <div id="preview_Video"></div>
-                </div>
+                </div> -->
 
                 <?php $pkg = Package::find_by_id($pid); ?>
-                <div class="form-row add-image">
+                <!-- <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
                             List Image :
@@ -376,9 +374,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             </small>
                         </label>
                     </div>
-                    <!-- Upload user image preview -->
                     <div id="preview_Image"><input type="hidden" name="imageArrayname[]" /></div>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <?php
@@ -701,7 +698,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">Best Season:</label>
                     </div>
@@ -728,7 +725,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <input placeholder=" Min. Days" class="col-md-12" type="text" name="round_table" id="round_table"
                             value="<?php echo !empty($subpackageInfo->round_table) ? $subpackageInfo->round_table : ''; ?>">
                     </div>
-                </div>
+                </div> -->
                 <!-- <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">Size :</label>
@@ -740,7 +737,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                         
                     </div> -->
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">Google embeded :</label>
                     </div>
@@ -750,7 +747,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             name="google_embeded" id="google_embeded"
                             value="<?php echo !empty($subpackageInfo->google_embeded) ? $subpackageInfo->google_embeded : ''; ?>">
                     </div>
-                </div>
+                </div> -->
 
                 <?php if ($pkg->id == 12) { ?>
                     <div class="form-row">

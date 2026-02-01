@@ -32,9 +32,9 @@ switch ($action) {
         $Package->slug             = $_REQUEST['slug'];
         $Package->title            = $_REQUEST['title'];
         $Package->sub_title        = $_REQUEST['sub_title'];
-        $Package->program_date = !empty($_REQUEST['program_date'])
-            ? date('Y-m-d', strtotime($_REQUEST['program_date']))
-            : NULL;
+        // $Package->program_date = !empty($_REQUEST['program_date'])
+            // ? date('Y-m-d', strtotime($_REQUEST['program_date']))
+            // : NULL;
         $Package->content       = $_REQUEST['content'];
         // $Package->type         = $_REQUEST['type'];
         $Package->meta_title        = $_REQUEST['meta_title'];
@@ -93,9 +93,9 @@ switch ($action) {
         $Package->slug        = $_REQUEST['slug'];
         $Package->title    = $_REQUEST['title'];
         $Package->sub_title = $_REQUEST['sub_title'];
-        $Package->program_date = !empty($_REQUEST['program_date'])
-            ? date('Y-m-d', strtotime($_REQUEST['program_date']))
-            : NULL;
+        // $Package->program_date = !empty($_REQUEST['program_date'])
+        //     ? date('Y-m-d', strtotime($_REQUEST['program_date']))
+        //     : NULL;
         $Package->content  = $_REQUEST['content'];
         $Package->status   = $_REQUEST['status'];
         // $Package->type         = $_REQUEST['type'];
@@ -266,7 +266,7 @@ switch ($action) {
         $record->cocktail     = !empty($_REQUEST['cocktail']) ? $_REQUEST['cocktail'] : '';
         $record->seats     = !empty($_REQUEST['seats']) ? $_REQUEST['seats'] : '';
 
-        $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
+        // $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
         $record->time     = !empty($_REQUEST['time']) ? $_REQUEST['time'] : '';
         $record->location     = !empty($_REQUEST['location']) ? $_REQUEST['location'] : '';
         $record->serve     = !empty($_REQUEST['serve']) ? $_REQUEST['serve'] : '';
@@ -375,7 +375,7 @@ switch ($action) {
         $record->twob_price     = !empty($_REQUEST['twob_price']) ? $_REQUEST['twob_price'] : '';
         $record->threeb_price     = !empty($_REQUEST['threeb_price']) ? $_REQUEST['threeb_price'] : '';
 
-        $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
+        // $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
         $record->time     = !empty($_REQUEST['time']) ? $_REQUEST['time'] : '';
         $record->location     = !empty($_REQUEST['location']) ? $_REQUEST['location'] : '';
         $record->serve     = !empty($_REQUEST['serve']) ? $_REQUEST['serve'] : '';

@@ -720,6 +720,12 @@
         });
     }
 
+    function deleteTempimages(Re) {
+        $('#previewUserimage' + Re).fadeOut(1000, function() {
+            $('#previewUserimage' + Re).remove();
+        });
+    }
+
     function deleteTempflag(Re) {
         $('#previewflag' + Re).fadeOut(1000, function() {
             $('#previewflag' + Re).remove();

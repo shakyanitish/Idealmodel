@@ -187,7 +187,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Date :
@@ -198,7 +198,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             name="program_date" id="program_date"
                             value="<?php echo !empty($packageInfo->program_date) ? $packageInfo->program_date : ""; ?>">
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
