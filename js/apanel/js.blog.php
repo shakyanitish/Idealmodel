@@ -303,6 +303,7 @@ function deleteTempimage(Re)
 	$('#previewUserimage'+Re).fadeOut(1000,function(){
 		$('#previewUserimage'+Re).remove(); 
 		$('#preview_Image').html('<input type="hidden" name="imageArrayname" value="" class="">');
+		$('.uploader').fadeIn(500);
 	});
 }
 /******************************** Remove saved advertisment image ********************************/
@@ -318,7 +319,7 @@ function deleteSavedBlogimage(Re)
 		if(popAct=='yes'){
 			$('#removeSavedimg'+Re).fadeOut(1000,function(){$('#removeSavedimg'+Re).remove(); $('.uploader').fadeIn(500);});
 			// Clear the hidden image field so the image gets removed on save
-			$('#preview_Image').html('<input type="hidden" name="imageArrayname" value="" class="">');
+			// $('#preview_Image').html('<input type="hidden" name="imageArrayname" value="" class="">');
 		}else{Re='';}
 		$('.divMessageBox').fadeOut();
 		$('.MessageBoxContainer').fadeOut(1000);

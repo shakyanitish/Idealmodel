@@ -7,8 +7,6 @@ $imageNameArr =  $_SESSION['imageNameArr'];
 $deleteid = rand(0,99999);
 if(!empty($imageNameArr)):
 foreach($imageNameArr as $key=>$val):?>
-<div class="form-row">
-<div class="form-label col-md-2"></div> 
 <div class="col-md-3" id="previewUserimage<?php echo $deleteid;?>">
     <div class="infobox info-bg">
         <img src="<?php echo IMAGE_PATH.'blog/thumbnails/'.$val;?>"  style="width:100%"/>
@@ -19,7 +17,6 @@ foreach($imageNameArr as $key=>$val):?>
         </a>
         <input type="hidden" name="imageArrayname" value="<?php echo $val;?>" class="validate[required,length[0,250]]" />        
     </div> 
-</div>
 </div>
 <?php endforeach; endif;  
 //uplodify

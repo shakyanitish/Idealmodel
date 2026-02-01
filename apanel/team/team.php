@@ -2,7 +2,7 @@
 $moduleTablename = "tbl_team"; // Database table name
 $moduleId = 312;                // module id >>>>> tbl_modules
 $moduleFoldername = "team";        // Image folder name
-$role = ['3' => 'Chairperson','1' => 'Member', '2' => 'Staff'];
+$role = ['4' => 'Past Chairperson','5' => 'Life Time Members','3' => 'Chairperson','1' => 'Member', '2' => 'Staff'];
 
 
 if (isset($_GET['page']) && $_GET['page'] == "team" && isset($_GET['mode']) && $_GET['mode'] == "list"):

@@ -475,6 +475,5 @@ $(document).on('blur', 'input[name="title"], input[name="slug"]', function() {
 
 
 
-
 //***************************************************************** */
 </script>

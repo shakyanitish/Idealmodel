@@ -201,7 +201,7 @@ $metadata = $metasql->fetch_object();
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Via :
+                            Address :
                         </label>
                     </div>
                     <div class="form-input col-md-6">

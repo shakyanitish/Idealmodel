@@ -227,7 +227,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
 
 
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Sub Title :
@@ -238,7 +238,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                             id="sub_title"
                             value="<?php echo !empty($advInfo->sub_title) ? $advInfo->sub_title : ""; ?>">
                     </div>
-                </div>
+                </div> -->
 
 
 

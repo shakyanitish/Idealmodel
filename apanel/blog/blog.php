@@ -273,7 +273,7 @@ endif;
                             </div>
                         </div>
                     <?php endif; ?>
-                    <div class="form-input col-md-10 uploader">
+                    <div class="form-input col-md-10 uploader" <?php echo !empty($blogInfo->image) ? 'style="display:none;"' : ''; ?>>
                         <input type="file" name="gallery_upload" id="gallery_upload" class="transparent no-shadow">
                         <label>
                             <small>Image Dimensions (<?php echo Module::get_properties($moduleId, 'imgwidth'); ?> px
@@ -442,6 +442,7 @@ endif;
                     var filename = data;
                     $.post('<?php echo BASE_URL;?>apanel/blog/uploaded_image.php', {imagefile: filename}, function (msg) {
                         $('#preview_Image').html(msg).show();
+                        $('.uploader').hide();
                     });
 
                 },

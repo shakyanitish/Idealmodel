@@ -204,7 +204,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Banner Image :
+                        Image :
                         </label>
                     </div>
                     <div class="form-input col-md-10 uploader">

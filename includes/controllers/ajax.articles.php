@@ -32,11 +32,11 @@
 			$record->slug 		= $_REQUEST['slug'];
 			$record->title 		= $_REQUEST['title'];
 			$record->upcoming 		= $_REQUEST['upcoming'];
-			$record->sub_title 		= $_REQUEST['sub_title'];
-			$record->image		= serialize(array_values(array_filter($_REQUEST['imageArrayname'])));		
+			// $record->sub_title 		= $_REQUEST['sub_title'];
+			// $record->image		= serialize(array_values(array_filter($_REQUEST['imageArrayname'])));		
 //			$record->linksrc 	= $_REQUEST['linksrc'];
 //			$record->linktype 	= $_REQUEST['linktype'];
-			$record->brief 		= $_REQUEST['brief'];		
+			// $record->brief 		= $_REQUEST['brief'];		
 
 			$record->content	= $_REQUEST['content'];
 			$record->status		= $_REQUEST['status'];
@@ -84,8 +84,8 @@
 			$record->slug 		= $_REQUEST['slug'];
 			$record->title 		= $_REQUEST['title'];
 			$record->upcoming 		= $_REQUEST['upcoming'];
-			$record->sub_title 		= $_REQUEST['sub_title'];
-			$record->image		= serialize(array_values(array_filter($_REQUEST['imageArrayname'])));	
+			// $record->sub_title 		= $_REQUEST['sub_title'];
+			// $record->image		= serialize(array_values(array_filter($_REQUEST['imageArrayname'])));	
 //			$record->linksrc 	= $_REQUEST['linksrc'];
 //			$record->linktype 	= $_REQUEST['linktype'];
 			$record->content	= $_REQUEST['content'];
@@ -95,7 +95,7 @@
 			$record->meta_keywords		= $_REQUEST['meta_keywords'];
 			$record->meta_description	= $_REQUEST['meta_description'];
 			$record->modified_date      = registered();
-			$record->brief 		= $_REQUEST['brief'];		
+			// $record->brief 		= $_REQUEST['brief'];		
 
 			
 			$db->begin();

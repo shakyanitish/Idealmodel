@@ -126,7 +126,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                                value="<?php echo !empty($articlesInfo->title) ? $articlesInfo->title : ""; ?>">
                     </div>
                 </div>
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Sub Title :
@@ -137,7 +137,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                                name="sub_title" id="sub_title"
                                value="<?php echo !empty($articlesInfo->sub_title) ? $articlesInfo->sub_title : ""; ?>">
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
@@ -164,7 +164,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                 </div>                
             </div>   -->
 
-                <div class="form-row add-image">
+                <!-- <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
                         Banner Image :
@@ -179,7 +179,6 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                         </label>
                         
                     </div>
-                    <!-- Upload user image preview -->
                     <div id="preview_Image"><input type="hidden" name="imageArrayname[]"/></div>
                     <?php
                     if (!empty($articlesInfo->image)) {
@@ -215,7 +214,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                             }
                         }
                     } ?>
-                </div>
+                </div> -->
 
                 <!--<div class="form-row">
                     <div class="form-label col-md-2">
@@ -257,7 +256,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                         </div>
                     </div>
                 </div>-->
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Brief :
@@ -268,7 +267,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                                   class="medium-textarea character-brief validate"><?php echo !empty($articlesInfo->brief) ? $articlesInfo->brief : ""; ?></textarea>
                         <div class="brief-remaining clear input-description">250 characters left</div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <div class="form-label col-md-12">

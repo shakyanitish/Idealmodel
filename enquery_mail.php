@@ -40,6 +40,12 @@ if ($_POST['action'] == "forContact"):
     return isset($json_result['success']) && $json_result['success'] == true;
 }
 
+    // Verify reCAPTCHA first
+    $recaptcha_response = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+    if (empty($recaptcha_response) || !verifyRecaptcha($recaptcha_response, $recaptcha_secret)) {
+        echo json_encode(array("action" => "error", "message" => "reCAPTCHA verification failed. Please try again."));
+        exit;
+    }
 
     //-------------------------
     $body = '
