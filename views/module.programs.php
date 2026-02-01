@@ -192,104 +192,100 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
         ';
         $jVars['module:program-detail-title'] = $program_detail_title;
 
-
-
-        // Get banner image
-        $banner_img = '';
-        $galleryImages = SubPackageImage::getImagelist_by($Package->id);
-        $sliders = '';
-
-        if (!empty($galleryImages)) {
-            foreach ($galleryImages as $galleryImage) {
-                $file_path = SITE_ROOT . 'images/package/galleryimages/' . $galleryImage->image;
-                if (file_exists($file_path)) {
-                    $banner_img = IMAGE_PATH . 'package/galleryimages/' . $galleryImage->image;
-
-                    $sliders .= '
-                        <!-- single slide -->
-                        <div class="swiper-slide">
-                            <div class="ul-event-details-img">
-                                <img src="' . $banner_img . '" alt="' . $Package->title . '">
-                            </div>
-                        </div>';
+        // Get all subpackages related to this package
+        $subpackages = Subpackage::getPackage_limit($Package->id);
+        
+        // Generate tab buttons and tab content dynamically
+        $tab_buttons = '';
+        $tab_panels = '';
+        $tab_count = 0;
+        
+        if (!empty($subpackages)) {
+            foreach ($subpackages as $subpkg) {
+                $tab_count++;
+                $tab_id = 'tab' . $tab_count;
+                $active_class = ($tab_count == 1) ? ' active' : '';
+                
+                // Tab button
+                $tab_buttons .= '
+                            <button class="tab-btn' . $active_class . '" data-tab="' . $tab_id . '">' . $subpkg->title . '</button>';
+                
+                // Get gallery images for this subpackage
+                $subpkg_sliders = '';
+                $subpkgGalleryImages = SubPackageImage::getImagelist_by($subpkg->id);
+                
+                if (!empty($subpkgGalleryImages)) {
+                    foreach ($subpkgGalleryImages as $galleryImage) {
+                        $file_path = SITE_ROOT . 'images/package/galleryimages/' . $galleryImage->image;
+                        if (file_exists($file_path) && !empty($galleryImage->image)) {
+                            $img_path = IMAGE_PATH . 'package/galleryimages/' . $galleryImage->image;
+                            $subpkg_sliders .= '
+                                    <!-- single slide -->
+                                    <div class="swiper-slide">
+                                        <div class="ul-event-details-img">
+                                            <img src="' . $img_path . '" alt="' . $subpkg->title . '">
+                                        </div>
+                                    </div>';
+                        }
+                    }
                 }
+                
+                // Fallback to subpackage main image
+                if (empty($subpkg_sliders) && !empty($subpkg->image)) {
+                    $file_path = SITE_ROOT . 'images/subpackage/' . $subpkg->image;
+                    if (file_exists($file_path)) {
+                        $img_path = IMAGE_PATH . 'subpackage/' . $subpkg->image;
+                        $subpkg_sliders = '
+                                    <!-- single slide -->
+                                    <div class="swiper-slide">
+                                        <div class="ul-event-details-img">
+                                            <img src="' . $img_path . '" alt="' . $subpkg->title . '">
+                                        </div>
+                                    </div>';
+                    }
+                }
+                
+                // Tab panel content
+                $tab_panels .= '
+                        <div id="' . $tab_id . '" class="tab-panel' . $active_class . '">
+                            ' . (!empty($subpkg_sliders) ? '
+                            <div class="ul-testimonial-2-slider swiper">
+                                <div class="swiper-wrapper">
+                                    ' . $subpkg_sliders . '
+                                </div>
+                            </div>' : '') . '
+                    
+                            <h2 class="ul-event-details-title">' . $subpkg->title . '</h2>
+                            ' . $subpkg->content . '
+                        </div>';
             }
         }
 
         $program_detail = '
-
-
         <div class="ul-container ul-section-spacing">
             <div class="row gy-4 flex-column-reverse flex-lg-row">
-                <!-- event details content -->
-                <div class="col-lg-8">
-                    <div class="ul-event-details ul-donation-details">
-                       <div class="ul-testimonial-2-slider swiper">
-                            <div class="swiper-wrapper">
-                                ' . $sliders . '
-                            </div>
-                        </div>
-                        
-                        <h2 class="ul-event-details-title">' . $Package->title . '</h2>
-                        ' . $Package->content . '
-                    </div>
+                <div class="col-lg-12">
+                <p>
+                    ' . $Package->content . '
+                </p>
                 </div>
-
                 <!-- left sidebar -->
                 <div class="col-lg-4">
                     <div class="ul-inner-sidebar">
-                        <!-- single widget / Recent Posts -->
-                        <div class="ul-inner-sidebar-widget posts">
-                            <h3 class="ul-inner-sidebar-widget-title">Other Programs</h3>
-                            <div class="ul-inner-sidebar-widget-content">
-                                <div class="ul-inner-sidebar-posts">';
-
-        // Get other Recent  programs
-        $otherPrograms = Package::get_latestprogram_by(6);
-        if (!empty($otherPrograms)) {
-            foreach ($otherPrograms as $prog) {
-                // Skip current program
-                if ($prog->id != $Package->id) {
-                    $prog_img = '';
-                    if (!empty($prog->banner_image) && $prog->banner_image != "a:0:{}") {
-                        $imgList = unserialize($prog->banner_image);
-                        if (!empty($imgList[0])) {
-                            $prog_img = IMAGE_PATH . 'package/banner/' . $imgList[0];
-                        }
-                    }
-
-                    if (empty($prog_img)) {
-                        $siteRegulars = Config::find_by_id(1);
-                        $prog_img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
-                    }
-
-                    $program_detail .= '
-
-
-                                        <!-- single post -->
-                                    <div class="ul-inner-sidebar-post">
-                                        <div class="img">
-                                            <img src="' . $prog_img . '" alt="' . $prog->title . '">
-                                        </div>
-
-                                        <div class="txt">
-                                            <h4 class="title"><a href="' . BASE_URL . 'program/' . $prog->slug . '">' . $prog->title . '</a></h4>
-                                            <span class="date"> <span>' . date("M d, Y", strtotime($prog->program_date)) . '</span></span>
-                                        </div>
-                                    </div>';
-                }
-            }
-        }
-
-        $program_detail .= '
-                                </div>
-                            </div>
+                        <div class="tab-buttons">
+                        ' . $tab_buttons . '
                         </div>
                     </div>
                 </div>
+
+                <!-- event details content -->
+                <div class="col-lg-8">
+                    <div class="ul-event-details ul-donation-details tab-content">
+                    ' . $tab_panels . '
+                    </div>
+                </div>
             </div>
-        </div>
-        ';
+        </div>';
 
         $jVars['module:program-detail'] = $program_detail;
     }
