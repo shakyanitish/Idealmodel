@@ -102,8 +102,14 @@ if ($menuRec):
     foreach ($menuRec as $key => $menuRow):
         $linkActive = '';
         
-        // Check if current link is active
-        if (!empty($currentPath)):
+        // Check if this is the Home menu and we're on the homepage
+        $isHomePage = (empty($currentPath) || $currentPath == '/' || $currentPath == 'index.php');
+        $isHomeMenu = ($menuRow->linksrc == 'home' || $menuRow->linksrc == '' || $menuRow->linksrc == '/');
+        
+        if ($isHomePage && $isHomeMenu):
+            $linkActive = " active";
+        // Check if current link is active for other pages
+        elseif (!empty($currentPath)):
             $linkActive = ($menuRow->linksrc == $currentPath) ? " active" : "";
             
             // Check if current path starts with menu link (for detail pages)

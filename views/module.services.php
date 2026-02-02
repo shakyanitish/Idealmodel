@@ -6,7 +6,7 @@
     $rescont = $res = '';
 
 
-    $subpkgRec = Services::getservice_list(4, 2); 
+    $subpkgRec = Services::getservice_list(1000, 2); 
 
     if (!empty($subpkgRec)) {
 
@@ -41,19 +41,21 @@
                             </a>';
                 } else {
                     // No link - just display the title without anchor
-                    $titleHtml = '<h3 class="ul-feature-title">' . $v->title . '</h3>';
+                    $titleHtml = '
+                    <h3 class="ul-feature-title">' . $v->title . '</h3>';
                 }
 
                 $res .= '
-                    <!-- single feature -->
-                    <div class="col">
-                        <div class="ul-feature">
-                            <div class="ul-feature-icon">
-                                <img src="' . $iconlink . '">
+
+                            <!-- single slide -->
+                        <div class="swiper-slide">
+                            <div class="ul-feature">
+                                <div class="ul-feature-icon">
+                                    <img src="' . $iconlink . '">
+                                </div>
+                                ' . $titleHtml . '
                             </div>
-                            ' . $titleHtml . '
                         </div>
-                    </div>
                 ';
 
             }
@@ -61,10 +63,13 @@
 
     // Wrap the features in the section structure
     $rescont = '
-        <section class="ul-features ul-section-spacing">
+
+            <section class="ul-features ul-section-spacing">
             <div class="ul-container">
-                <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4 justify-content-center">
-                    ' . $res . '
+                <div class="ul-testimonial-2-slider-home swiper">
+                    <div class="swiper-wrapper">
+                     ' . $res . '
+                    </div>
                 </div>
             </div>
         </section>

@@ -27,7 +27,7 @@ if (isset($_GET['page']) && $_GET['page'] == "testimonial" && isset($_GET['mode'
                     <th style="display:none;"></th>
                     <th class="text-center"><input class="check-all" type="checkbox"/></th>
                     <th class="text-center">Name</th>
-                    <th class="text-center">Via Type</th>
+                    <!-- <th class="text-center">Via Type</th> -->
                     <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                 </tr>
                 </thead>
@@ -45,7 +45,7 @@ if (isset($_GET['page']) && $_GET['page'] == "testimonial" && isset($_GET['mode'
                                    title="<?php echo $record->name; ?>"><?php echo $record->name; ?></a>
                             </div>
                         </td>
-                        <td><?php echo $record->via_type; ?></td>
+                        <!-- <td><?php echo $record->via_type; ?></td> -->
                         <td class="text-center">
                             <?php
                             $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
@@ -205,7 +205,7 @@ $metadata = $metasql->fetch_object();
                         </label>
                     </div>
                     <div class="form-input col-md-6">
-                        <input placeholder="Via" class="col-md-6 " type="text" name="via_type" id="via_type"
+                        <input placeholder="Address" class="col-md-6 " type="text" name="via_type" id="via_type"
                                value="<?php echo !empty($testimonialInfo->via_type) ? $testimonialInfo->via_type : "";
                                ?>">
 

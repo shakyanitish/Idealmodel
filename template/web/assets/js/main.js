@@ -957,6 +957,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
             nextEl: ".ul-testimonial-2-slider-nav .next",
         }
     });
+    
+    // index 2 testimonial slider
+    new Swiper(".ul-testimonial-2-slider-home", {
+        slidesPerView: 4,
+        loop: true,
+        autoplay: true,
+        spaceBetween: 20,
+        navigation: {
+            prevEl: ".ul-testimonial-2-slider-nav .prev",
+            nextEl: ".ul-testimonial-2-slider-nav .next",
+        }
+    });
 
     // project details img slider
     new Swiper(".ul-project-details-img-slider", {
