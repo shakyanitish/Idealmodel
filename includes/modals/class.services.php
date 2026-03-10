@@ -2,7 +2,7 @@
 class Services extends DatabaseObject {
 
 	protected static $table_name = "tbl_services";
-	protected static $db_fields = array('id', 'slug','title', 'sub_title', 'image', 'icon', 'linksrc', 'linktype', 'content', 'status', 'added_date', 'sortorder', 'type', 'meta_title', 'service_type','meta_keywords', 'meta_description', 'iconimage','brief','booklinksrc','booklinktype','contact_info','fiscal_address','email_address','facebook_link','x_link','instagram_link','youtube_link', 'linkedin_link','tiktok_link','explorelinksrc','explorelinktype', 'bannerimage');
+	protected static $db_fields = array('id', 'slug','title', 'sub_title', 'image', 'icon', 'linksrc', 'linktype', 'content', 'status', 'added_date', 'sortorder', 'type', 'meta_title', 'service_type','meta_keywords', 'meta_description', 'iconimage','brief','booklinksrc','booklinktype','contact_info','fiscal_address','email_address','facebook_link','x_link','instagram_link','youtube_link', 'linkedin_link','tiktok_link','explorelinksrc','explorelinktype', 'bannerimage','heading');
 	
 	public $id;
 	public $slug;
@@ -37,6 +37,7 @@ class Services extends DatabaseObject {
 	public $linkedin_link;
 	public $tiktok_link;
 	public $bannerimage;
+	public $heading;
 	
 
 		

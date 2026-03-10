@@ -98,34 +98,27 @@ $thegal = $gallerylistbread = $thegalnav = '';
 $gallRectit = Gallery::getParentgallery();
 
 if ($gallRectit) {
-    $thegal .= '';
+    $thegalnav .= '<li class="col-md active" data-class="all">ALL</li>';
     foreach ($gallRectit as $row) {
         $thegalnav .= '
-        <li class="col-md" data-class="' . $row->id . '">' . $row->title . '</li>';
+        <li class="col-md" data-class="' . $row->slug . '">' . $row->title . '</li>';
     }
-    $thegal .= '';
 
-    // $thegal .= '
-    //     <div id="gallery" class="gallery full-gallery de-gallery gallery-3-cols">
-    // ';
     foreach ($gallRectit as $row) {
-
         $gallRec = GalleryImage::getGalleryImages($row->id);
-        foreach ($gallRec as $row1) {
-            // pr($row1);
-
-            $file_path = SITE_ROOT . 'images/gallery/galleryimages/' . $row1->image;
-            if (file_exists($file_path) and !empty($row1->image)):
-                $thegal .= ' 
-                    <div class="col-md-3 images" data-class="' . $row1->galleryid . '" data-src="' . IMAGE_PATH . 'gallery/galleryimages/' . $row1->image . '">
-                        <img src="' . IMAGE_PATH . 'gallery/galleryimages/' . $row1->image . '" class="img-fluid">
-                    </div>         
-                   
-                ';
-            endif;
+        if (!empty($gallRec)) {
+            foreach ($gallRec as $row1) {
+                $file_path = SITE_ROOT . 'images/gallery/galleryimages/' . $row1->image;
+                if (file_exists($file_path) and !empty($row1->image)):
+                    $thegal .= ' 
+                        <div class="col-md-3 images" data-class="' . $row->slug . '" data-src="' . IMAGE_PATH . 'gallery/galleryimages/' . $row1->image . '">
+                            <img src="' . IMAGE_PATH . 'gallery/galleryimages/' . $row1->image . '" alt="' . $row1->title . '">
+                        </div>         
+                    ';
+                endif;
+            }
         }
     }
-    $thegal .= '';
 }
 
 $jVars['module:gallery-list'] = $thegal;

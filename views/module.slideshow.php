@@ -8,75 +8,50 @@ $Records = Slideshow::getSlideshow_by(0);
 if ($Records) {
     $i = 0;
 
-    foreach ($Records as $RecRow) {
-        $linksrc = (!empty($RecRow->linksrc))
-            ? ((strpos($RecRow->linksrc, 'http') === 0) ? $RecRow->linksrc : BASE_URL . $RecRow->linksrc)
-            : 'javascript:void(0);';
-        
-        // ** MODIFICATION: Determine link target based on external URL **
-        // Check if the link source starts with "http" (meaning it's an external link)
-        $isExternalLink = (strpos($RecRow->linksrc, 'https') === 0);
+    // Use the first active record for the single hero section
+    $RecRow = $Records[0];
+    $video_path = IMAGE_PATH . 'slideshow/video/' . $RecRow->source_vid;
 
-        // If it's an external link, set target="_blank". Otherwise, leave it empty.
-        $linkTarget = $isExternalLink ? ' target="_blank"' : ''; 
-
-        // The original linktype logic can be removed or ignored if you use the above.
-        // $linkTarget = ($RecRow->linktype == 1) ? ' target="_blank"' : '';
-
-        // Check if a valid, non-placeholder link was provided
-        $hasLink = !empty($RecRow->linksrc); 
-
-        $file_path = SITE_ROOT . 'images/slideshow/' . $RecRow->image;
-
-        if (file_exists($file_path) && !empty($RecRow->image)) {
-            $i++;
-
-            $reslide .= '
-
-
-
-                <!-- slider item -->
-                    <div class="swiper-slide">
-                        <div class="ul-banner-2-slide">
-                            <!-- bg img -->
-                            <img src="' . IMAGE_PATH . 'slideshow/' . $RecRow->image . '" alt="Slide Background Image"
-                                class="ul-banner-2-slide-bg-img">
-                            <div class="row gy-4 align-items-center ">
-                                <!-- banner text -->
-                                <div class="col-md-7">
-                                    <div class="ul-banner-txt">
-                                        <div class="wow animate__fadeInUp">
-                                            <span class="ul-banner-sub-title ul-section-sub-title">' .$RecRow->title.'</span>
-                                            <h1 class="ul-banner-title">' .$RecRow->content . '
-                                            </h1>
-                                        </div>
-                                    </div>
-                                </div>
+    if ($RecRow->mode == 2) { // Video mode
+        if ($RecRow->type == 0 && !empty($RecRow->source_vid)) { // Uploaded Video
+            $reslide = '
+            <div class="header-video">
+                <div id="hero_video">
+            <video id="video1" width="100%" height="auto" autoplay="" loop="" muted="">
+                        <source src="' . $video_path . '" type="video/mp4">
+                does not support
+                    </video>
+                    <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
+                        <div class="container">
+                            <div class="intro_title wow fadeInUp">
+                                <h3 class="">' . $RecRow->content . '</h3>
                             </div>
                         </div>
-                    </div>';
-
-            // Generate thumbnail for this slide
-            $miniThumbs .= '<div class="swiper-slide"><img src="' . IMAGE_PATH . 'slideshow/' . $RecRow->image . '" alt="Banner Thumb"></div>';
+                    </div>
+                </div>
+            </div>';
+        }
+    } else { // Image mode
+        $file_path = SITE_ROOT . 'images/slideshow/' . $RecRow->image;
+        if (file_exists($file_path) && !empty($RecRow->image)) {
+            $reslide = '
+            <div class="header-video">
+                <div id="hero_video">
+                    <img src="' . IMAGE_PATH . 'slideshow/' . $RecRow->image . '" width="100%" height="auto" alt="' . $RecRow->title . '" style="object-fit: cover; min-height: 100vh;">
+                    <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
+                        <div class="container">
+                            <div class="intro_title wow fadeInUp">
+                                <h3 class="">' . $RecRow->content . '</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>';
         }
     }
 }
 
-// Integrate slideshow-mini with dynamic thumbnails
-$jVars["module:slideshow-mini"] = '
 
-
-            <div class="ul-banner-2-slider-navigation">
-                <button class="prev"><img src="template/web/assets/img/left-arrow.svg" alt="arrow"></button>
-                <div class="ul-banner-2-thumb-slider swiper">
-                    <div class="swiper-wrapper">
-                        ' . $miniThumbs . '
-                    </div>
-                </div>
-                <button class="next"><img src="template/web/assets/img/right-arrow.svg" alt="arrow"></button>
-            </div>
-
-';
 
 $jVars["module:slideshow-uc"] = $reslide;
 ?>

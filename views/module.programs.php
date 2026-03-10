@@ -1,7 +1,5 @@
 <?php
-/*
-* Programs list - Dynamic carousel on homepage
-*/
+/* * Programs list - Dynamic carousel on homepage */
 
 $programsContent = '';
 
@@ -91,15 +89,14 @@ $modalpopup = '';
 $room_package = '';
 $single_more = '';
 
-/*
-* package listing page - LIST VIEW (no slug)
-*/
+/* * package listing page - LIST VIEW (no slug) */
 if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
     $pkgList = Package::find_all();
     if (!empty($pkgList)) {
         $counter = 0;
         $singlepage = '';
         $single_more = '';
+        $single = '';
 
         foreach ($pkgList as $pkgRow) {
             $siteRegulars = Config::find_by_id(1);
@@ -115,57 +112,32 @@ if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
                     }
                 }
 
-                $single = '
-                    <!-- single slide -->
-                    <div class="col">
-                        <div class="ul-service">
-                            <div class="ul-service-img">
-                                <img src="' . $imglink . '" alt="' . $pkgRow->title . '">
-                            </div>
-                            <div class="ul-service-txt">
-                                <h3 class="ul-service-title"><a href="' . BASE_URL . 'program/' . $pkgRow->slug . '">' . $pkgRow->title . '</a></h3>
-                                <p class="ul-service-descr">
-                                ' . $pkgRow->sub_title . '</p>
-                                <a href="' . BASE_URL . 'program/' . $pkgRow->slug . '" class="ul-service-btn"><i class="flaticon-up-right-arrow"></i> View Details</a>
-                            </div>
+                $single .= '
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="ins-main-list">
+                        <img src="' . $imglink . '" alt="' . $pkgRow->title . '">
+                        <div class="ins-names">
+                            <h4><a href="' . BASE_URL . 'facilities/' . $pkgRow->slug . '">' . $pkgRow->title . '</a></h4>
                         </div>
-                    </div>';
+                    </div>
+                </div>
 
-                if ($counter < 6) {
-                    $singlepage .= $single;
-                } else {
-                    $single_more .= $single;
-                }
+';
 
-                $counter++;
             }
         }
 
         $roombread .= '
-        <section class=" ul-section-spacing overflow-hidden">
-            <div class="ul-container">
-                <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row">
-                    ' . $singlepage . '
 
-                </div>
-                
-                <span id="dots">...</span>
-                <span id="more">
-                    <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row mt-4">
-                    ' . $single_more . '
-                    </div>
-                </span>
-
-                <!-- pagination -->
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <div class="btns-block btns-center">
-                            <button onclick="myFunction()" id="myBtn1" class="ul-btn d-sm-inline-flex px-4 mt-4">Load More</button>
-                        </div>
-                    </div> 
-                </div>
+    <section class="instructors">
+        <div class="container">
+            <div class="row instruct-main">
+            '. $single .'
             </div>
-        </section>
+        </div>
+    </section>
+
 
 ';
     }
@@ -173,9 +145,7 @@ if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
 }
 
 
-/*
-* Program Detail Page
-*/
+/* * Program Detail Page */
 $program_detail = $program_detail_title = '';
 if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
     $slug = !empty($_REQUEST['slug']) ? $_REQUEST['slug'] : '';
@@ -184,36 +154,39 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
     if (!empty($Package)) {
         // Breadcrumb title
         $program_detail_title = '
-        <section class="ul-breadcrumb ul-section-spacing">
-            <div class="ul-container">
-                <h2 class="ul-breadcrumb-title">' . $Package->title . '</h2>
+    <section class="breadcrumb-main">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <h2>' . $Package->title . '</h2>
             </div>
-        </section>
+        </div>
+    </section>
+
         ';
         $jVars['module:program-detail-title'] = $program_detail_title;
 
         // Get all subpackages related to this package
         $subpackages = Subpackage::getPackage_limit($Package->id);
-        
+
         // Generate tab buttons and tab content dynamically
         $tab_buttons = '';
         $tab_panels = '';
         $tab_count = 0;
-        
+
         if (!empty($subpackages)) {
             foreach ($subpackages as $subpkg) {
                 $tab_count++;
                 $tab_id = 'tab' . $tab_count;
                 $active_class = ($tab_count == 1) ? ' active' : '';
-                
+
                 // Tab button
                 $tab_buttons .= '
                             <button class="tab-btn' . $active_class . '" data-tab="' . $tab_id . '">' . $subpkg->title . '</button>';
-                
+
                 // Get gallery images for this subpackage
                 $subpkg_sliders = '';
                 $subpkgGalleryImages = SubPackageImage::getImagelist_by($subpkg->id);
-                
+
                 if (!empty($subpkgGalleryImages)) {
                     foreach ($subpkgGalleryImages as $galleryImage) {
                         $file_path = SITE_ROOT . 'images/package/galleryimages/' . $galleryImage->image;
@@ -229,7 +202,7 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
                         }
                     }
                 }
-                
+
                 // Fallback to subpackage main image
                 if (empty($subpkg_sliders) && !empty($subpkg->image)) {
                     $file_path = SITE_ROOT . 'images/subpackage/' . $subpkg->image;
@@ -244,7 +217,7 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
                                     </div>';
                     }
                 }
-                
+
                 // Tab panel content
                 $tab_panels .= '
                         <div id="' . $tab_id . '" class="tab-panel' . $active_class . '">
@@ -261,31 +234,62 @@ if (defined("PACKAGE_DETAIL_PAGE") && isset($_REQUEST['slug'])) {
             }
         }
 
-        $program_detail = '
-        <div class="ul-container ul-section-spacing">
-            <div class="row gy-4 flex-column-reverse flex-lg-row">
-                <div class="col-lg-12">
-                <p>
-                    ' . $Package->content . '
-                </p>
-                </div>
-                <!-- left sidebar -->
-                <div class="col-lg-4">
-                    <div class="ul-inner-sidebar">
-                        <div class="tab-buttons">
-                        ' . $tab_buttons . '
-                        </div>
-                    </div>
-                </div>
+        // Get package gallery images
+        $packageImages = '';
+        $packageGalleryImages = SubPackageImage::getImagelist_by($Package->id);
+        
+        if (!empty($packageGalleryImages)) {
+            foreach ($packageGalleryImages as $galleryImage) {
+                $file_path = SITE_ROOT . 'images/package/galleryimages/' . $galleryImage->image;
+                if (file_exists($file_path) && !empty($galleryImage->image)) {
+                    $img_path = IMAGE_PATH . 'package/galleryimages/' . $galleryImage->image;
+                    $packageImages .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . $img_path . '" alt="' . $Package->title . '" />
+                            </div>
+                        </div>';
+                }
+            }
+        }
+        
+        // Fallback to banner image if no gallery images
+        if (empty($packageImages) && !empty($Package->banner_image) && $Package->banner_image != "a:0:{}") {
+            $imageList = unserialize($Package->banner_image);
+            if (!empty($imageList[0])) {
+                $file_path = SITE_ROOT . 'images/package/banner/' . $imageList[0];
+                if (file_exists($file_path)) {
+                    $img_path = IMAGE_PATH . 'package/banner/' . $imageList[0];
+                    $packageImages = '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . $img_path . '" alt="' . $Package->title . '" />
+                            </div>
+                        </div>';
+                }
+            }
+        }
 
-                <!-- event details content -->
-                <div class="col-lg-8">
-                    <div class="ul-event-details ul-donation-details tab-content">
-                    ' . $tab_panels . '
+        $program_detail = '
+
+
+    <section class="event-detail-cn">
+        <div class="container">
+            <div class="ev-detail-info d-flex flex-column justify-content-center align-items-center text-center h-100">
+                <div class="home-2 testimonial p-0 ev-image">
+                    <div class="row review-slider3 feedback-main wow fadeInUp">
+                        ' . $packageImages . '
                     </div>
+              </div>
+            </div>
+            <div class="ev-detail-content">
+                <div class="evt__section">
+                ' . $Package->content . '
                 </div>
             </div>
-        </div>';
+        </div>
+    </section>
+';
 
         $jVars['module:program-detail'] = $program_detail;
     }

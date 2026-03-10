@@ -3,29 +3,29 @@ $siteRegulars = Config::find_by_id(1);
 $booking_code = Config::getField('hotel_code', true);
 $header = ob_get_clean();
 $sidebarlogo = '';
+$header_class = (!defined('HOME_PAGE')) ? 'header_menu_detail' : '';
+
 $header = '
+    <header class="main_header_area">
+        <div class="header_menu ' . $header_class . '">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-flex d-flex align-items-center justify-content-between w-100">
+                        <div class="navbar-header">
+                            <a class="navbar-brand text-center" href="' . BASE_URL . '' . '">
+                                <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="image" />
+                            </a>
+                        </div>
+                        
 
+                        <div class="navbar-collapse1 w-100" id="bs-example-navbar-collapse-1">
+                           ' . $jVars['module:main-menu'] . '   
+                        </div>
 
-
-    <header class="ul-header ul-header-2">
-        <div class="ul-header-bottom to-be-sticky">
-            <div class="ul-header-bottom-wrapper ul-header-container">
-                <div class="logo-container">
-                    <a href="' . BASE_URL . '' . '" class="d-inline-block">
-                        <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="logo" class="logo">
-                    </a>
+                        <div id="slicknav-mobile"></div>
+                    </div>
                 </div>
-
-                <!-- header nav -->
-                ' . $jVars['module:res-menu1'] . '
-                <!-- actions -->
-                <div class="ul-header-actions">
-                    <a href="#" class="ul-btn d-sm-inline-flex" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                            class="flaticon-fast-forward-double-right-arrows-symbol"></i>  Become A Volunteer </a>
-                    <button class="ul-header-sidebar-opener d-lg-none d-inline-flex"><i
-                            class="flaticon-menu"></i></button>
-                </div>
-            </div>
+            </nav>
         </div>
     </header>
 

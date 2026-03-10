@@ -88,248 +88,153 @@ $jVars['module:bloglist'] = $bl;
 
 
 
-// Home Page Blog List
-$linkTarget = '';
-$homebloglist = '';
-$homeblogs = '';
+
+
+
+// New Home Page Blog List for Ideal Model
+$homelatestblog = '';
 if (defined('HOME_PAGE')) {
-    $homeblog = Blog::get_latestblog_by(3);
-    // $homeblogs = Blog:: get_latestblog_by(3);
-    if (!empty($homeblog)) {
+    $latestBlogs = Blog::get_latestblog_by(3);
+    if (!empty($latestBlogs)) {
+        $blogItems = '';
+        foreach ($latestBlogs as $blog) {
+            $linksrc = BASE_URL . 'blog/' . $blog->slug;
+            $blogDate = date('F d, Y', strtotime($blog->blog_date));
+            $imgsrc = IMAGE_PATH . 'blog/' . $blog->image;
 
-        foreach ($homeblog as $homebl) {
-
-            if (!empty($homebl->linksrc)) {
-                // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-                $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-                $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL . $homebl->linksrc;
-            } else {
-                $linksrc =  BASE_URL . 'blog/' . $homebl->slug;
-            }
-            $homebloglist .= '
-                <!-- single blog -->
-                <div class="col">
-                        <div class="ul-blog ul-blog-2">
-                            <div class="ul-blog-img"><img src="' . IMAGE_PATH . 'blog/' . $homebl->image . '" alt="' . $homebl->title . '">
-                                <div class="date">
-                                    <span class="number">' . date('d', strtotime($homebl->blog_date)) . '</span>
-                                    <span class="txt">' . date('M Y', strtotime($homebl->blog_date)) . '</span>
-                                </div>
-                            </div>
-                            <div class="ul-blog-txt">
-                                <div class="ul-blog-infos">
-                                    <!-- single info -->
-                                    <div class="ul-blog-info">
-                                        <span class="icon"><i class="flaticon-account"></i></span>
-                                        <span class="text font-normal text-[14px] text-etGray">' . $homebl->author . '</span>
-                                    </div>
-                                </div>
-                                <a href="' . BASE_URL . 'impact/' . $homebl->slug . '" class="ul-blog-title">' . $homebl->title . '</a>
-                                <a href="' . BASE_URL . 'impact/' . $homebl->slug . '" class="ul-blog-btn">Read More <span class="icon"><i
-                                            class="flaticon-next"></i></span></a>
-                            </div>
+            $blogItems .= '
+            <div class="col-lg-4 col-md-6 wow fadeInRight">
+                <div class="article-list">
+                    <div class="at-thumbnail">
+                        <a href="' . $linksrc . '">
+                            <img src="' . $imgsrc . '" alt="' . $blog->title . '" />
+                        </a>
+                        <span class="blog-tag"> Education </span>
+                    </div>
+                    <div class="article-content">
+                        <div class="artl-bottom">
+                            <ul class="d-flex justify-content-start">
+                                <li>' . $blogDate . '</li>
+                            </ul>
+                        </div>
+                        <div class="artl-detail">
+                            <a href="' . $linksrc . '"><h4>' . $blog->title . '</h4></a>
+                            <p>' . $blog->brief . '</p>
                         </div>
                     </div>
-           
-                  
-           ';
+                </div>
+            </div>';
         }
-        $homeblogs = '
 
-
-        <section class="ul-blogs-2 ul-section-spacing">
-            <div class="ul-container wow animate__fadeInUp">
-                <div class="ul-section-heading">
-                    <div class="left">
-                        <span class="ul-section-sub-title"> Empowering lives through meaningful activities </span>
-                        <h2 class="ul-section-title">Recent Activities</h2>
+        $homelatestblog = '
+        <section class="home-3 blog-article bg-white">
+            <div class="container">
+                <div class="section-title sc-center justify-content-center text-center borderline wow fadeInLeft">
+                    <div class="title-top">
+                        <div class="title-quote">
+                            <span class="bg-white">Our Blogs</span>
+                        </div>
+                        <h2>LATEST <span class="cl-blue">BLOG</span> & <span class="cl-blue">EVENTS</span></h2>
                     </div>
-
-                    <a href="' . BASE_URL . 'impact' . '" class="ul-btn"><i
-                            class="flaticon-fast-forward-double-right-arrows-symbol"></i> View All</a>
                 </div>
 
-                <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row justify-content-center">
-                    ' . $homebloglist . '
-
+                <div class="blog-wrap">
+                    <div class="row">
+                        ' . $blogItems . '
+                    </div>
                 </div>
             </div>
-        </section>
-
-        ';
+        </section>';
     }
 }
-
-$jVars['module:homebloglist'] = $homeblogs;
+$jVars['module:home-blog-list'] = $homelatestblog;
 
 
 
 
 // Blog Detail Page
 
-$blog_detail = $recent_posts = $blog_detail_title = '';
+$blog_detail_header = $blog_detail_content = '';
 if (defined("BLOG_DETAIL_PAGE")) {
     $slug = !empty($_REQUEST['slug']) ? $_REQUEST['slug'] : '';
     $Blogs = Blog::find_by_slug($slug);
-    //pr($Blogs);
 
+    if (!empty($Blogs)) {
+        $blogDate = date('F d, Y', strtotime($Blogs->blog_date));
+        $imgsrc = IMAGE_PATH . 'blog/' . $Blogs->image;
 
-    if (!empty($slug)) {
-        $blog_detail_title .= '
-        <section class="ul-breadcrumb ul-section-spacing">
-            <div class="ul-container">
-                <h2 class="ul-breadcrumb-title">' . $Blogs->title . '</h2>
+        // Detail Header Section
+        $blog_detail_header = '
+        <section class="blog-top-title">
+            <div class="bg_bar_title">
+                <h1 class="cl-white">' . $Blogs->title . '</h1>
+                <p class="cl-white">' . $blogDate . '</p>
             </div>
-        </section>
-        ';
-        $jVars['module:blog-detail-title'] = $blog_detail_title;
+            <div class="bg__bar_image">
+                <img src="' . $imgsrc . '" alt="' . $Blogs->title . '" />
+            </div>
+        </section>';
 
-        // Get blog images
-        $blogImages = BlogImage::getImagelist_by($Blogs->id);
-        $galleryHtml = '';
-        if (!empty($blogImages)) {
-            foreach ($blogImages as $blogImg) {
-                $file_path = SITE_ROOT . 'images/blog/blogimages/' . $blogImg->image;
-                if (file_exists($file_path) && !empty($blogImg->image)) {
-                    $galleryHtml .= '
-                            <div class="col-md-3 images" data-class="' . $blogImg->blogid . '" data-src="' . IMAGE_PATH . 'blog/blogimages/' . $blogImg->image . '">
-                                <img src="' . IMAGE_PATH . 'blog/blogimages/' . $blogImg->image . '" class="img-fluid">
-                            </div>';
+        // Recent Posts (Sidebar)
+        $recent_posts_html = '';
+        $recentBlogs = Blog::get_latestblog_by(4); // Get 4 to skip current
+        if (!empty($recentBlogs)) {
+            foreach ($recentBlogs as $rec) {
+                if ($rec->id != $Blogs->id) {
+                    $recLink = BASE_URL . 'blog/' . $rec->slug;
+                    $recDate = date('F d, Y', strtotime($rec->blog_date));
+                    $recImg = IMAGE_PATH . 'blog/' . $rec->image;
+                    
+                    $recent_posts_html .= '
+                    <div class="customize-item d-flex mb-3">
+                        <div class="sv-image pr-3">
+                            <img src="' . $recImg . '" alt="' . $rec->title . '" />
+                        </div>
+                        <div class="customize-ct m-0">
+                            <h6 class="mb-0">
+                                <a href="' . $recLink . '">' . $rec->title . '</a>
+                            </h6>
+                            <span class="cust-meta"> ' . $recDate . '</span>
+                        </div>
+                    </div>';
                 }
             }
         }
 
-        // Only show gallery section if there are images
-        $gallerySection = '';
-        if (!empty($galleryHtml)) {
-            $gallerySection = '
-                <section class="main text-center">
-                    <div class="container-fluid">
-                        <h3 class="text-center" style="color:#d93431;">Memories / Gallery</h3>
-                        <div class="row" id="gallery">
-                            ' . $galleryHtml . '
+        // Detail Content Section
+        $blog_detail_content = '
+        <section class="blog__details p-0">
+            <div class="container">  
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="bg__contents">
+                            <div class="author__datetime">
+                                <ul>
+                                    <li><a href="#"><i class="far fa-user-circle"></i> ' . ($Blogs->author ? $Blogs->author : 'Ideal Model School') . '</a></li>
+                                    <li><i class="far fa-calendar"></i> ' . $blogDate . '</li>
+                                </ul>
+                            </div>
+                            <div class="bg__only_detail">
+                                ' . $Blogs->content . '
+                            </div>
                         </div>
                     </div>
-                </section>';
-        }
 
-        $blog_detail .= '
-
-
-
-        <section class="ul-service-details ul-section-spacing">
-            <div class="ul-container">
-                <div>
-                    <div class="ul-service-details-txt">
-                        <h3 class="ul-service-details-inner-title">' . date('M jS Y', strtotime($Blogs->blog_date)) . '</h3>
-                         ' . $Blogs->content . '                    
+                    <div class="col-lg-4 col-md-12 aside-sidebar customize-wrap wow fadeInUp">
+                        <div class="sidebar-course mb-4">
+                            <div class="sidebar-title">
+                                <h4>YOU MIGHT ALSO ENJOY</h4>
+                            </div>
+                            ' . $recent_posts_html . '
+                        </div>
                     </div>
                 </div>
-
-                ' . $gallerySection . '
             </div>
-        </section>
-
-   ';
-        $jVars['module:blog-detail'] = $blog_detail;
-
-
-        // Recent Posts Sidebar
-        $recent_posts = '';
-        $recents = Blog::get_latestblog_by(3);
-
-        if (!empty($recents)) {
-            $recent_posts .= '<div class="widget recent-post">
-        <h5 class="widget-title">Recent Posts</h5>';
-
-            foreach ($recents as $Blogs) {
-                // Skip current blog
-                if ($recent->title != $Blogs->title) {
-                    $recent_posts .= '
-            <div class="recent-post-single">
-                <div class="recent-post-img">
-                    <img src="' . IMAGE_PATH . 'blog/' . $Blogs->image . '" alt="thumb">
-                </div>
-                <div class="recent-post-bio">
-                    <h6><a href="' . BASE_URL . 'blog/' . $Blogs->slug . '">' . $Blogs->title . '</a></h6>
-                    <span><i class="far fa-clock"></i>' . date("d M Y", strtotime($Blogs->blog_date)) . '</span>
-                </div>
-            </div>';
-                }
-            }
-
-            $recent_posts .= '</div>'; // close widget
-        }
-
-        $jVars['module:blog-recent-posts'] = $recent_posts;
+        </section>';
     } else {
-        $blog_detail .= '
-        <!--================ Breadcrumb ================-->
-        <div class="mad-breadcrumb with-bg-img with-overlay" data-bg-image-src="' . BASE_URL . 'template/web/images/default.jpg">
-            <div class="container wide">
-                <h1 class="mad-page-title">About Us</h1>
-                <nav class="mad-breadcrumb-path">
-                    <span><a href="' . BASE_URL . 'home" class="mad-link">Home</a></span> /
-                    <span>Blogs</span>
-                </nav>
-            </div>
-        </div>
-        
-        <div class="mad-title-wrap align-center">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="mad-pre-title">Make memories happen</div>
-                            <h2 class="mad-page-title">Club Himalaya Experience</h2>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div class="mad-section no-pt mad-section-pb-mobile mad-section--stretched-content-no-px mad__colorizer--scheme-color-2">
-                <div class="mad-entities mad-owl-center mad-pricing type-3 with-img-border mad-grid owl__carousel mad-owl__moving mad-grid--cols-2 nav-size-2 no-dots d-flex flex-wrap">
-                  
-                ';
-        $Blogs = Blog::get_allblog();
-        //pr($Blogs);
-        foreach ($Blogs as $homebl) {
-
-            if (!empty($homebl->linksrc)) {
-                // $pagelink = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-                $linkTarget = ($homebl->linktype == 1) ? ' target="_blank" ' : '';
-                $linksrc = ($homebl->linktype == 1) ? $homebl->linksrc : BASE_URL . $homebl->linksrc;
-            } else {
-                $linksrc = BASE_URL . 'blog/' . $homebl->slug;
-            }
-            $blog_detail .= '
-                            <!--================ Entity ================-->
-                                <div class="mad-entity-media mad-owl-center-img">
-                                    <a href="' . $linksrc . '" ' . $linkTarget . '>
-                                        <img src="' . IMAGE_PATH . 'blog/' . $homebl->image . '" alt="' . $homebl->title . '" />
-                                    </a>
-                                </div>
-                                <div class="mad-entity__content mad-owl-center-element">
-                                    <div class="mad-entity-inner">
-                                        <h4 class="mad__entity-title">' . $homebl->title . '</h4>
-                                        <h4 class="mad__entity-title">' . date("d M Y", strtotime($homebl->blog_date)) . '</h4>
-                                        <p>
-                                            A Rare Blend Of Nature And Modern Amenities and has become synonymous with Nagarkot.
-                                        </p>
-                                        <div class="mad-entity-footer">
-                                            <a href="' . $linksrc . '" ' . $linkTarget . ' class="btn btn-big">View More</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-           ';
-        }
-        $blog_detail .= '
-    </div>
-    
-                </div>
-            ';
+        redirect_to(BASE_URL);
     }
 }
 
-
-$jVars['module:blog-detail'] = $blog_detail;
-$jVars['module:blog-recent-posts'] = $recent_posts;
+$jVars['module:blog-detail-header'] = $blog_detail_header;
+$jVars['module:blog-detail-content'] = $blog_detail_content;

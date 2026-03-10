@@ -55,10 +55,10 @@
 				endif;
 			}
 
-			if(empty($_REQUEST['imageArrayname'])):				
-				echo json_encode(array("action"=>"warning","message"=>"Required Upload Image !"));
-				exit;					
-			endif;
+			// if(empty($_REQUEST['imageArrayname'])):				
+			// 	echo json_encode(array("action"=>"warning","message"=>"Required Upload Image !"));
+			// 	exit;					
+			// endif;
 			
 			// $Gallery->image	= $_REQUEST['imageArrayname']; 
 			$Gallery->slug 	= create_slug($_REQUEST['title']);		

@@ -1,20 +1,22 @@
 <?php
 
-if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) && $_GET['mode'] == "subpackageImageList"):
+if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) && ($_GET['mode'] == "subpackageImageList" || $_GET['mode'] == "packageImageList")):
     $id = intval(addslashes($_GET['id']));
-    $glRec = Subpackage::find_by_id($id);
+    $glRec = Package::find_by_id($id);
     $pkgId = $glRec->type;
 
     ?>
     <h3>
-        List SubPackage Galleries Images ["<?php echo $glRec->title; ?>"]
+                <!-- onClick="viewSubpackagelist(<?php echo $pkgId; ?>);"> -->
+
+        List Package Galleries Images ["<?php echo $glRec->title; ?>"]
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
-           onClick="viewSubpackagelist(<?php echo $pkgId; ?>);">
+           onClick="viewPackagelist();">
     <span class="glyph-icon icon-separator">
         <i class="glyph-icon icon-arrow-circle-left"></i>
     </span>
             <span class="button-content"> Back </span>
-        </a>
+        </a>    
     </h3>
     <div class="divider"></div>
     <div class="my-msg"></div>

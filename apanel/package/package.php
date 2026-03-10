@@ -34,9 +34,9 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <th style="display:none;"></th>
                         <th class="text-center"><input class="check-all" type="checkbox" /></th>
                         <th class="text-center">Title</th>
-                        <!-- <th class="text-center">Images</th> -->
+                        <th class="text-center">Images</th> 
 
-                        <th>Sub Package</th>
+                        <!-- <th>Sub Package</th> -->
                         <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                     </tr>
                 </thead>
@@ -53,7 +53,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                     <span><?php echo $record->title; ?></span>
                                 </a>
                             </td>
-                            <!-- <td>
+                            <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewsubimagelist(<?php echo $record->id; ?>);" href="javascript:void(0);">
                                     <span class="button-content">
@@ -65,8 +65,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                         <span class="text-transform-upr font-bold font-size-11">View Lists</span>
                                     </span>
                                 </a>
-                            </td> -->
-                            <td>
+                            </td> 
+                            <!-- <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewSubpackagelist(<?php echo $record->id; ?>);" href="javascript:void(0);">
                                     <span class="button-content">
@@ -76,11 +76,11 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                     </span>
                                 </a>
                                 <?php $makasroom = ($record->type == 1) ? "icon-circle" : "icon-circle-o"; ?>
-                                <!-- <a href="javascript:void(0);" class="btn small tooltip-button" data-placement="top"
+                                <a href="javascript:void(0);" class="btn small tooltip-button" data-placement="top"
                                     title="">
                                     <i class="glyph-icon <?php echo $makasroom; ?>"></i>
-                                </a> -->
-                            </td>
+                                </a>
+                            </td> -->
 
                             <td class="text-center">
                                 <?php
@@ -663,6 +663,6 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 
 <?php endif;
 
-include("sub_package.php");
+include("subpackage_images.php");
 
 ?>

@@ -30,7 +30,8 @@ switch ($action) {
 
 		$record->slug 			= create_slug($_REQUEST['title']);
 		$record->title 			= $_REQUEST['title'];
-		// $record->sub_title 			= $_REQUEST['sub_title'];
+		$record->sub_title 			= $_REQUEST['sub_title'];
+		$record->heading 			= $_REQUEST['heading'];
 		// $record->image			= !empty($_REQUEST['imageArrayname']) ? serialize(array_values(array_filter($_REQUEST['imageArrayname']))) : '';
 		$record->icon		= !empty($_REQUEST['icon']) ? $_REQUEST['icon'] : '';
 		$record->linksrc 	= !empty($_REQUEST['linksrc']) ? $_REQUEST['linksrc'] : '';
@@ -99,7 +100,8 @@ switch ($action) {
 
 		$record->slug 			= create_slug($_REQUEST['title']);
 		$record->title 			= $_REQUEST['title'];
-		// $record->sub_title 			= $_REQUEST['sub_title'];
+		$record->sub_title 			= $_REQUEST['sub_title'];
+		$record->heading 			= $_REQUEST['heading'];
 		// $record->image			= !empty($_REQUEST['imageArrayname']) ? serialize(array_values(array_filter($_REQUEST['imageArrayname']))) : '';
 		$record->icon		= !empty($_REQUEST['icon']) ? $_REQUEST['icon'] : '';
 		$record->linksrc 	= !empty($_REQUEST['linksrc']) ? $_REQUEST['linksrc'] : '';
@@ -238,4 +240,83 @@ switch ($action) {
 			echo json_encode(array("action" => "notice", "message" => $GLOBALS['basic']['noChanges']));
 		endif;
 		break;
+
+	/*************************** Services Image Functions ***************************/
+	case "addServicesImage":
+		$servicesid = intval($_REQUEST['servicesid']);
+		$imageArrayname = isset($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : array();
+		$titleArray = isset($_REQUEST['title']) ? $_REQUEST['title'] : array();
+		
+		if(!empty($imageArrayname)):
+			$db->begin();
+			$i = 0;
+			foreach($imageArrayname as $imagename):
+				$ServicesImage = new ServicesImage();
+				$ServicesImage->servicesid = $servicesid;
+				$ServicesImage->title = isset($titleArray[$i]) ? addslashes($titleArray[$i]) : '';
+				$ServicesImage->detail = '';
+				$ServicesImage->status = 1;
+				$ServicesImage->sortorder = ServicesImage::find_maximum_byparent("sortorder", $servicesid);
+				$ServicesImage->registered = registered();
+				$ServicesImage->image = $imagename;
+				$ServicesImage->save();
+				$i++;
+			endforeach;
+			$db->commit();
+			$message = sprintf($GLOBALS['basic']['addedSuccess_'], "Services Image(s)");
+			echo json_encode(array("action"=>"success","message"=>$message));
+		else:
+			echo json_encode(array("action"=>"error","message"=>"No images to save"));
+		endif;
+		break;
+
+	case "deleteServicesSubimage":
+		$id = intval($_REQUEST['id']);
+		$record = ServicesImage::find_by_id($id);
+		if($record):
+			// Delete the image files
+			if(file_exists(SITE_ROOT."images/services/servicesimages/".$record->image)):
+				unlink(SITE_ROOT."images/services/servicesimages/".$record->image);
+			endif;
+			if(file_exists(SITE_ROOT."images/services/servicesimages/thumbnails/".$record->image)):
+				unlink(SITE_ROOT."images/services/servicesimages/thumbnails/".$record->image);
+			endif;
+			
+			$db->begin();
+			$res = $db->query("DELETE FROM tbl_services_images WHERE id='{$id}'");
+			if($res): $db->commit();
+				reOrderSub("tbl_services_images", "sortorder", "servicesid", $record->servicesid);
+				$message = sprintf($GLOBALS['basic']['deletedSuccess_'], "Services Image");
+				echo json_encode(array("action"=>"success","message"=>$message));
+			else: $db->rollback();
+				echo json_encode(array("action"=>"error","message"=>$GLOBALS['basic']['unableToDelete']));
+			endif;
+		else:
+			echo json_encode(array("action"=>"error","message"=>"Image not found"));
+		endif;
+		break;
+
+	case "updateServicesImageTitle":
+		$id = intval($_REQUEST['id']);
+		$title = addslashes($_REQUEST['title']);
+		$db->query("UPDATE tbl_services_images SET title='{$title}' WHERE id='{$id}'");
+		echo json_encode(array("action"=>"success","title"=>$title));
+		break;
+
+	case "toggleServicesImageStatus":
+		$id = intval($_REQUEST['id']);
+		$status = intval($_REQUEST['status']);
+		$newStatus = ($status == 1) ? 0 : 1;
+		$db->query("UPDATE tbl_services_images SET status='{$newStatus}' WHERE id='{$id}'");
+		echo json_encode(array("action"=>"success","status"=>$newStatus));
+		break;
+
+	case "sortServicesImages":
+		$sortIds = $_REQUEST['sortIds'];
+		$record = ServicesImage::find_by_id(intval(explode(";", $sortIds)[1]));
+		datatableReordering('tbl_services_images', $sortIds, "sortorder", 'servicesid', $record->servicesid);
+		$message = sprintf($GLOBALS['basic']['sorted_'], "Services Images");
+		echo json_encode(array("action"=>"success","message"=>$message));
+		break;
 }
+?>

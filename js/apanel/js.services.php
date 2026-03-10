@@ -476,4 +476,172 @@ $(document).on('blur', 'input[name="title"], input[name="slug"]', function() {
 
 
 //***************************************************************** */
+/***************************************** View Services Image List *******************************************/
+function viewServiceImages(Re) {
+    window.location.href = "<?php echo ADMIN_URL?>services/servicesImageList/" + Re;
+}
+
+/******************************** Remove temp upload services sub image ********************************/
+function deleteTempServicesimage(Re) {
+    $('#previewUserimage' + Re).fadeOut(1000, function () {
+        $('#previewUserimage' + Re).remove();
+    });
+}
+
+/******************************** Remove saved services sub images ********************************/
+function deleteSavedServicesSubimage(Re) {
+    $('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'], "image")?>');
+    $('.pText').html('Click on yes button to delete this image permanently.!!');
+    $('.divMessageBox').fadeIn();
+    $('.MessageBoxContainer').fadeIn(1000);
+
+    $(".botTempo").on("click", function () {
+        var popAct = $(this).attr("id");
+        if (popAct == 'yes') {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: getLocation(),
+                data: 'action=deleteServicesSubimage&id=' + Re,
+                success: function (data) {
+                    var msg = eval(data);
+                    if (msg.action == 'success') {
+                        $('.removeSavedimg' + Re).fadeOut(1000, function () {
+                            $('.removeSavedimg' + Re).remove();
+                        });
+                    }
+                }
+            });
+        } else {
+            Re = '';
+        }
+        $('.divMessageBox').fadeOut();
+        $('.MessageBoxContainer').fadeOut(1000);
+    });
+}
+
+/******************************** Edit Services Image Title ********************************/
+function editServicesImageTitle(Re) {
+    var curTitle = $('.clicked' + Re).text();
+    var content = '<input type="text" id="uptitle' + Re + '" name="ne-title" class="validate[required,length[0,250]] col-md-9" value="' + curTitle + '" imgid="' + Re + '">';
+    content += ' <button type="button" class="col-md-3 updateServicesImageTitle" rowId="' + Re + '">Save</button>';
+    $('.clicked' + Re).html(content);
+}
+
+/******************************** Update Services Image Title ********************************/
+$(document).on("click", ".updateServicesImageTitle", function () {
+    var getId = $(this).attr('rowId');
+    var getVal = $('#uptitle' + getId).val();
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: getLocation(),
+        data: 'action=updateServicesImageTitle&id=' + getId + '&title=' + getVal,
+        success: function (data) {
+            var msg = eval(data);
+            $('.clicked' + getId).html(msg.title);
+        }
+    });
+});
+
+/******************************** Toggle Services Image Status ********************************/
+$(document).on("click", ".servicesImageStatusToggle", function () {
+    var getId = $(this).attr('rowId');
+    var getStatus = $(this).attr('status');
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: getLocation(),
+        data: 'action=toggleServicesImageStatus&id=' + getId + '&status=' + getStatus,
+        success: function (data) {
+            var msg = eval(data);
+            if (msg.status == 1) {
+                $('#toggleImg' + getId).removeClass('icon-clock-os-circle-o').addClass('icon-check-circle-o');
+            } else {
+                $('#toggleImg' + getId).removeClass('icon-check-circle-o').addClass('icon-clock-os-circle-o');
+            }
+            $('.servicesImageStatusToggle[rowId="' + getId + '"]').attr('status', msg.status);
+        }
+    });
+});
+
+/*************************** Sorting Sub Image Services Position *******************************/
+$(document).ready(function () {
+    $(function () {
+        $(".subImageservices-sort").sortable({
+            start: function (event, ui) {
+                var start_pos = ui.item.index();
+                ui.item.data('start_pos', start_pos);
+            },
+            update: function (event, ui) {
+                var mySel = "";
+                $('div.oldsort').each(function (i) {
+                    mySel = mySel + ';' + $(this).attr('csort');
+                });
+                var id = ui.item.context.id;
+                var end_pos = ui.item.index();
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: getLocation(),
+                    data: 'action=sortServicesImages&sortIds=' + mySel,
+                    success: function (data) {
+                        var msg = eval(data);
+                        showMessage(msg.action, msg.message);
+                    }
+                });
+            }
+        });
+    });
+});
+
+/*************************** Services Sub Image Form Submit *******************************/
+$(document).ready(function () {
+    jQuery('#subservices_frm').validationEngine({
+        autoHidePrompt: true,
+        scroll: false,
+        onValidationComplete: function(form, status) {
+            if (status == true) {
+                $('#btn-submit').attr('disabled', 'true');
+                var action = "action=addServicesImage&";
+                var data = $('#subservices_frm').serialize();
+                queryString = action + data;
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: getLocation(),
+                    data: queryString,
+                    success: function(data) {
+                        var msg = eval(data);
+                        if (msg.action == 'warning') {
+                            showMessage(msg.action, msg.message);
+                            $('#btn-submit').removeAttr('disabled');
+                            $('.formButtons').show();
+                            return false
+                        }
+                        if (msg.action == 'success') {
+                            showMessage(msg.action, msg.message);
+                            setTimeout(function() {
+                                window.location.href = window.location.href;
+                            }, 1000);
+                        }
+                        if (msg.action == 'notice') {
+                            showMessage(msg.action, msg.message);
+                            setTimeout(function() {
+                                window.location.href = window.location.href;
+                            }, 1000);
+                        }
+                        if (msg.action == 'error') {
+                            showMessage(msg.action, msg.message);
+                            $('#btn-submit').removeAttr('disabled');
+                            $('.formButtons').show();
+                            return false;
+                        }
+                    }
+                });
+                return false;
+            }
+        }
+    });
+});
 </script>

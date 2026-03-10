@@ -70,48 +70,81 @@ if (defined('CONTACT_PAGE')) {
     // Section HTML
     $rescont .= '
 
+        <section class="contact-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="contact-info text-center">
+                        <i class="far fa-map"></i>
+                        <h3>Location</h3>
+                        <div class="ct__atdetail">
+                            <p>' . $siteRegulars->fiscal_address . '</p>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="ul-contact-infos">
-            <div class="ul-section-spacing ul-container">
-                <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row">
-                    <!-- single info -->
-                    <div class="col">
-                        <div class="ul-contact-info">
-                            <div class="icon"><i class="flaticon-location"></i></div>
-                            <div class="txt">
-                                <span class="title">Office Address</span>
-                                <span class="descr">' . $siteRegulars->fiscal_address . '</span>
-                            </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="contact-info text-center">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Phone No.</h3>
+                        <div class="ct__atdetail">
+                            <p>' . $tellinked . '</p>
                         </div>
                     </div>
-                    <!-- single info -->
-                    <div class="col">
-                        <div class="ul-contact-info">
-                            <div class="icon"><i class="flaticon-phone-call"></i></div>
-                            <div class="txt">
-                                <span class="title">Phone number</span>
-                                ' . $tellinked . '
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single info -->
-                    <div class="col">
-                        <div class="ul-contact-info">
-                            <div class="icon"><i class="flaticon-comment"></i></div>
-                            <div class="txt">
-                                <span class="title">Email address</span>
-                                ' . $emailinked . '
-                            </div>
-                        </div>
-                    </div>
+                </div>
 
+                <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                    <div class="contact-info">
+                        <i class="fas fa-envelope-square"></i>
+                        <h3>E-mail</h3>
+                        <div class="ct__atdetail">
+                            <p>' . $emailinked . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-form">
+                        <form class="m-auto text-center">
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input type="text" id="form6Example1" class="form-control" placeholder="Name" />
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="form-outline mb-4">
+                                <input type="email" id="form6Example5" class="form-control" placeholder="Email" />
+                            </div>
+        
+                            <div class="form-outline mb-4">
+                                <input type="number" id="form6Example6" class="form-control" placeholder="Phone No." />
+                            </div>
+        
+                            <div class="form-outline mb-4">
+                                <textarea class="form-control" id="form6Example7" placeholder="Message" rows="4"></textarea>
+                            </div>
+        
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="contact-map">
+                        <iframe src="' . $siteRegulars->location_map . '" width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 ';
     $map = '
                         <div class="ul-contact-map">
-                        <iframe src="' . $siteRegulars->location_map . '" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             
                         </div>
 ';

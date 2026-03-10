@@ -19,16 +19,16 @@ ErrorDocument 404 /404.php
 RewriteRule ^book/([a-zA-Z0-9-]+)/?$ book.php?slug=$1 [L]
 
 #For inner pages.
-RewriteRule ^about-us/?$ inner.php?slug=about-us [L]
-RewriteRule ^team/?$ teams.php?slug=team [L]
-RewriteRule ^partners/?$ partners.php?slug=partners [L]
+RewriteRule ^introduction/?$ inner.php?slug=introduction [L]
+RewriteRule ^our-philosophy/?$ inner.php?slug=our-philosophy [L]
 
 
 
 
 
 #For service pages.
-RewriteRule ^services/?$ service_list.php [L]
+RewriteRule ^(primary-level|lower-secondary-level|secondary-level)/?$ service_list.php?slug=$1 [L,QSA]
+
 RewriteRule ^services/([a-zA-Z0-9-]+)$ service_list.php?slug=$1 [L]
 
 
@@ -38,7 +38,7 @@ RewriteRule ^services/([a-zA-Z0-9-]+)$ service_list.php?slug=$1 [L]
 #RewriteRule ^page/([a-zA-Z0-9-=_.]+)$ inner.php?slug=$1 [L]
 
 #For gallery pages.
-RewriteRule ^gallery-list/?$ gallery.php [L]
+RewriteRule ^gallery/?$ gallery.php [L]
 
 #For gallery pages.
 RewriteRule ^video/?$ video.php [L]
@@ -76,7 +76,7 @@ RewriteRule ^offer-list/?$ offers.php [L]
 
 
 #For facilities pages.
-RewriteRule ^facilities-list/?$ facilities.php [L]
+#RewriteRule ^facilities/?$ facilities.php [L]
 
 #For facq pages.
 RewriteRule ^faq/?$ faq.php [L]
@@ -95,12 +95,12 @@ RewriteCond %{REQUEST_URI} ^/synhawk/blog/enquery_mail\.php$ [NC]
 RewriteRule ^ - [L]
 
 #For BLOG pages.
-RewriteRule ^impact/?$ blog.php [L]
-RewriteRule ^impact/([a-zA-Z0-9-=]+)$ blog_detail.php?slug=$1 [L]
+RewriteRule ^blog/?$ blog.php [L]
+RewriteRule ^blog/([a-zA-Z0-9-=]+)$ blog_detail.php?slug=$1 [L]
 
 #For Program/Package pages.
-RewriteRule ^program/?$ package.php [L]
-RewriteRule ^program/([a-zA-Z0-9-=]+)$ package_detail.php?slug=$1 [L]
+RewriteRule ^facilities/?$ package.php [L]
+RewriteRule ^facilities/([a-zA-Z0-9-=]+)$ package_detail.php?slug=$1 [L]
 
 #For Subpackage Details
 RewriteRule ^subpackage/([a-zA-Z0-9-]+)$ subpkgdetail.php?slug=$1 [L]

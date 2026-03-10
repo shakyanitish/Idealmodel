@@ -88,42 +88,7 @@ $jVars['module:testimonialList123'] = $result_last;
 /*
 * Testimonial Header Title
 */
-$tstHtitle = '';
 
-if (defined('HOME_PAGE')) {
-    $tstHtitle .= '<section class="promo_full">
-    <div class="promo_full_wp">
-        <div>
-            <h3>What Guest say</h3>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="carousel_testimonials">';
-    $tstRec = Testimonial::get_alltestimonial();
-    if (!empty($tstRec)) {
-        foreach ($tstRec as $tstRow) {
-            $tstHtitle .= '<div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="' . IMAGE_PATH . 'testimonial/' . $tstRow->image . '" alt="' . $tstRow->name . '" class="img-circle"></figure>
-                                        <h4>' . $tstRow->name . '</h4>
-                                    </div>
-                                    <div class="comment">
-                                       ' . strip_tags($tstRow->content) . '
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div>';
-        }
-        $tstHtitle .= '</div><!-- End carousel_testimonials -->
-                    </div><!-- End col-md-8 -->
-                </div><!-- End row -->
-            </div><!-- End container -->
-        </div><!-- End promo_full_wp -->
-    </div><!-- End promo_full -->
-    </section><!-- End section -->';
-    }
-}
-$jVars['module:testimonial-title'] = $tstHtitle;
 
 
 /*
@@ -194,3 +159,51 @@ if (!empty($tstRec)) {
     $restst .= '</div>';
 }
 $jVars['module:testimonialList'] = $restst;
+
+
+
+// New Home Page Testimonial Structure for Ideal Model
+$hometst = '';
+if (defined('HOME_PAGE')) {
+    $tstRec = Testimonial::get_alltestimonial(10);
+    if (!empty($tstRec)) {
+        $tstItems = '';
+        foreach ($tstRec as $tstRow) {
+            $imgsrc = IMAGE_PATH . 'testimonial/' . $tstRow->image;
+            $tstItems .= '
+            <div class="col-md-6">
+                <div class="feedback-inner">
+                    <div class="consult-content">
+                        <p class="mb-0">"' . strip_tags($tstRow->content) . '"</p>
+                    </div>
+                    <div class="consult-title mt-3 d-flex justify-content-start">
+                        <img src="' . $imgsrc . '" alt="' . $tstRow->name . '" />
+                        <div class="ps-name">
+                            <h5 class="mb-0">' . $tstRow->name . '</h5>
+                            <span class="cl-orange">' . $tstRow->via_type . '</span>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+        }
+
+        $hometst = '
+        <section class="testimonial">
+            <div class="container">
+                <div class="section-title sc-center justify-content-center text-center borderline">
+                    <div class="title-top">
+                        <div class="title-quote">
+                            <span>Our Reviews</span>
+                        </div>
+                        <h2>Student & Alumni <span class="cl-blue">Testimonials</span></h2>
+                    </div>
+                </div>
+
+                <div class="row review-slider feedback-main wow fadeInUp">
+                    ' . $tstItems . '
+                </div>
+            </div>
+        </section>';
+    }
+}
+$jVars['module:home-testimonial'] = $hometst;

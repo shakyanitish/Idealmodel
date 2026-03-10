@@ -31,6 +31,43 @@ if (!empty($socialRec)) {
 $jVars['module:socilaLinkbtm'] = $resocl;
 
 
+$resfooter = '';
+if (!empty($socialRec)) {
+    foreach ($socialRec as $socialRow) {
+        if (empty($socialRow->linksrc) || $socialRow->linksrc === '#') {
+            continue;
+        }
+
+        $sname = strtolower($socialRow->title);
+        $sclass = '';
+        $sicon = $socialRow->icon;
+
+        if (strpos($sname, 'facebook') !== false) {
+            $sclass = 'bg-fb';
+            $sicon = 'fab fa-facebook-f';
+        } else if (strpos($sname, 'youtube') !== false) {
+            $sclass = 'bg-youtube';
+            $sicon = 'fab fa-youtube';
+        } else if (strpos($sname, 'instagram') !== false) {
+            $sclass = 'bg-linkedin'; // Following template quirk
+            $sicon = 'fab fa-instagram';
+        } else if (strpos($sname, 'linkedin') !== false) {
+            $sclass = 'bg-linkedin';
+            $sicon = 'fab fa-linkedin-in';
+        } else if (strpos($sname, 'twitter') !== false) {
+            $sclass = 'bg-twitter';
+            $sicon = 'fab fa-twitter';
+        }
+
+        $resfooter .= '
+            <li class="pr-2">
+                <a href="' . $socialRow->linksrc . '" target="_blank" class="' . $sclass . '"><i class="' . $sicon . '"></i></a>
+            </li>';
+    }
+}
+$jVars['module:socilaLinkFooter'] = $resfooter;
+
+
 /*
 * Home social link
 */

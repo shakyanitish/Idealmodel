@@ -48,6 +48,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                         <th style="display:none;"></th>
                         <th class="text-center"><input class="check-all" type="checkbox" /></th>
                         <th>Title</th>
+                        <th class="text-center">Images</th>
                         <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                     </tr>
                 </thead>
@@ -65,6 +66,19 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                                         title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
                                 </div>
                             </td>
+
+                        <td class="text-center">
+                            <a class="primary-bg medium btn loadingbar-demo" title=""
+                               onClick="viewServiceImages(<?php echo $record->id; ?>);" href="javascript:void(0);">
+                                <span class="button-content">
+                                    <span class="badge bg-orange radius-all-4 mrg5R" title=""
+                                          data-original-title="Badge with tooltip"><?php echo ServicesImage::getTotalImages($record->id); ?></span>
+                                    <span class="text-transform-upr font-bold font-size-11">View Lists</span>
+                                </span>
+                            </a>
+                        </td>
+
+
                             <td class="text-center">
                                 <?php
                                 $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
@@ -227,7 +241,23 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
 
 
 
-                <!-- <div class="form-row">
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Heading :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-8">
+                        <input placeholder="Heading" class="col-md-6 validate" type="text" name="heading"
+                            id="heading"
+                            value="<?php echo !empty($advInfo->heading) ? $advInfo->heading : ""; ?>">
+                    </div>
+                </div> 
+
+
+
+              <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Sub Title :
@@ -238,7 +268,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                             id="sub_title"
                             value="<?php echo !empty($advInfo->sub_title) ? $advInfo->sub_title : ""; ?>">
                     </div>
-                </div> -->
+                </div> 
 
 
 
@@ -358,7 +388,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
 
                 <!-- //  icon image upload -->
 
-                <div class="form-row add-image">
+                <div class="form-row add-image hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Logo Image :
@@ -753,4 +783,5 @@ document.getElementById('services_frm').addEventListener('submit', function () {
 
 
 
-<?php endif; ?>
+<?php endif;
+include("services_images.php"); ?>

@@ -92,6 +92,7 @@ require_once("views/module.booking.php");
 require_once("views/module.contact.php");
 require_once("views/module.download.php");
 require_once("views/module.gallery.php");
+require_once("views/module.services.php");
 
 // SITE MODULES
 $modulesList = Module::getAllmode();

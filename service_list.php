@@ -1,21 +1,35 @@
 <?php
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
-//include ("jpcache/jpcache.php");
 
-define('COMPANY_PAGE', 1); // Track homepage.
-define('JCMSTYPE', 0); // Track Current site language.
+define('SCHOOL_PAGE', 1);
+define('JCMSTYPE', 0);
 
 require_once("includes/initialize.php");
-// pr($_REQUEST);
 
+$currentTemplate = Config::getCurrentTemplate('template');
+$jVars = array();
 
-$currentTemplate	= Config::getCurrentTemplate('template');
-$jVars 				= array();
-$template 			= "template/{$currentTemplate}/company.html";
+$slug = $_GET['slug'] ?? '';
+
+switch ($slug) {
+    case 'primary-level':
+        $template = "template/{$currentTemplate}/primary.html";
+        break;
+
+    case 'lower-secondary-level':
+         $template = "template/{$currentTemplate}/lower-secondary.html";
+        break;
+
+    case 'secondary-level':
+        $template = "template/{$currentTemplate}/secondary.html";
+        break;
+
+    default:
+        $template = "template/{$currentTemplate}/primary.html";
+}
 
 require_once('views/modules.php');
 
 template($template, $jVars, $currentTemplate);
-
 ?>

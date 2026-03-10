@@ -221,6 +221,15 @@ endif;
 
 $jVars['module:footer-menu'] = $result;
 
+$resfooter = '';
+$FmenuRec = Menu::getMenuByParent(0, 2);
+if ($FmenuRec) {
+    foreach ($FmenuRec as $FmenuRow) {
+        $resfooter .= '<li><a href="' . BASE_URL . $FmenuRow->linksrc . '">' . $FmenuRow->name . '</a></li>';
+    }
+}
+$jVars['module:footer-menu-list'] = $resfooter;
+
 
 //menu for uc
 $result_uc = '';
@@ -333,6 +342,70 @@ if ($menuRec_uc):
 endif;
 
 $jVars['module:res-menu-uc'] = $result_uc;
+
+
+$result = '';
+$menuRec = Menu::getMenuByParent(0, 1);
+
+$tot = strlen(SITE_FOLDER) + 2;
+$currentPath = substr($_SERVER['REQUEST_URI'], $tot);
+
+if ($menuRec) {
+    $result .= '<ul class="nav navbar-nav" id="responsive-menu">';
+    foreach ($menuRec as $menuRow) {
+        $linkActive = '';
+        $isHomePage = (empty($currentPath) || $currentPath == '/' || $currentPath == 'index.php');
+        $isHomeMenu = ($menuRow->linksrc == 'home' || $menuRow->linksrc == '' || $menuRow->linksrc == '/');
+
+        if ($isHomePage && $isHomeMenu) {
+            $linkActive = "active";
+        } elseif (!empty($currentPath)) {
+            $linkActive = ($menuRow->linksrc == $currentPath) ? "active" : "";
+            
+            // Check if parent is active (when a submenu item is selected)
+            if (empty($linkActive)) {
+                $parentInfo = Menu::find_by_linksrc($currentPath);
+                if ($parentInfo) {
+                    $linkActive = ($menuRow->id == $parentInfo->parentOf) ? "active" : "";
+                }
+            }
+            
+            // Also check if any child menu is active (to highlight parent)
+            if (empty($linkActive)) {
+                $childMenus = Menu::getMenuByParent($menuRow->id, 1);
+                if ($childMenus) {
+                    foreach ($childMenus as $child) {
+                        if ($child->linksrc == $currentPath || (!empty($child->linksrc) && strpos($currentPath, $child->linksrc) === 0)) {
+                            $linkActive = "active";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        $menusubRec = Menu::getMenuByParent($menuRow->id, 1);
+        if ($menusubRec) {
+            $result .= '<li class="dropdown submenu ' . $linkActive . '">';
+            $result .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . $menuRow->name . ' <i class="fas fa-chevron-down"></i></a>';
+            $result .= '<ul class="dropdown-menu">';
+            foreach ($menusubRec as $subRow) {
+                // Determine if it's an external link or a local link
+                $subLink = ($subRow->linktype == 'external') ? $subRow->linksrc : (($subRow->linksrc == 'home' || $subRow->linksrc == '' || $subRow->linksrc == '/') ? BASE_URL : BASE_URL . $subRow->linksrc);
+                $result .= '<li><a href="' . $subLink . '">' . $subRow->name . '</a></li>';
+            }
+            $result .= '</ul>';
+            $result .= '</li>';
+        } else {
+            $menuLink = ($menuRow->linktype == 'external') ? $menuRow->linksrc : (($menuRow->linksrc == 'home' || $menuRow->linksrc == '' || $menuRow->linksrc == '/') ? BASE_URL : BASE_URL . $menuRow->linksrc);
+            $result .= '<li class="' . $linkActive . '"><a href="' . $menuLink . '">' . $menuRow->name . '</a></li>';
+        }
+    }
+    $result .= '</ul>';
+}
+
+$jVars['module:main-menu'] = $result;
+
 
 // Mobile menu toggle script
 ?>

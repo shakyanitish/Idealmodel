@@ -24,7 +24,7 @@
 			$record->status = $_REQUEST['status'] ?? 0;   // default 0 or your preferred default
 			$record->sortorder		= Menu::find_maximum_byparent("sortorder",$_REQUEST['parentOf']);
 			$record->image			= !empty($_REQUEST['imageArrayname'])?$_REQUEST['imageArrayname']:'';
-			$record->logo			= !empty($_REQUEST['logoArrayname']) ? $_REQUEST['logoArrayname'] : '';
+			// $record->logo			= !empty($_REQUEST['logoArrayname']) ? $_REQUEST['logoArrayname'] : '';
 
 			$record->added_date 	= registered();
 			
@@ -51,7 +51,7 @@
 			// $record->status		= $_REQUEST['status'];
 			$record->upcoming 		= $_REQUEST['upcoming'];
 			$record->image			= !empty($_REQUEST['imageArrayname'])?$_REQUEST['imageArrayname']:'';
-			$record->logo			= !empty($_REQUEST['logoArrayname']) ? $_REQUEST['logoArrayname'] : '';
+			// $record->logo			= !empty($_REQUEST['logoArrayname']) ? $_REQUEST['logoArrayname'] : '';
 			
 			
 			$db->begin();

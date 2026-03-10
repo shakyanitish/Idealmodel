@@ -146,7 +146,37 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
 
         
 
-        $aboutdetail .= $content;
+        $aboutdetail .=  '       
+        <section class="breadcrumb-main">
+            <div class="container">
+                <div class="breadcrumb-inner">
+                    <h2>' . $recRow->title . '</h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-company inner-about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 wow fadeInLeftBig">
+                        <div class="about-wrap-img">
+                            <img src="' . $imglink . '" alt="' . $recRow->title . '" />
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-12 wow fadeInRightBig">
+                        <div class="about-us-wrap">
+                            <div class="about-title">
+                                <h4 class="top-title mb-3">' . $recRow->sub_title . '</h4>
+                                <h3 class="mb-3 pb-3">' . $recRow->brief . '</h3>
+                            </div>
+                            <div class="about-content">
+                                ' . $recRow->content . '
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>';
 
 
 
@@ -158,6 +188,9 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
 
 $jVars['module:inner-about-detail'] = $aboutdetail;
 $jVars['module:inner-about-bread'] = $abouttbred;
+
+
+
 
 
 

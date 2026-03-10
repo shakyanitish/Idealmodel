@@ -1,51 +1,52 @@
     <?php
-    /*
-    * Service home list
-    */
+/*
+ * Service home list
+ */
 
-    $rescont = $res = '';
-
-
-    $subpkgRec = Services::getservice_list(1000, 2); 
-
-    if (!empty($subpkgRec)) {
-
-        foreach ($subpkgRec as $k => $v) {
+$rescont = $res = '';
 
 
-                // Main image
-                $imglink = '';
-                if ($v->image != "a:0:{}") {
-                    $imageList = unserialize($v->image);
-                    $file_path = SITE_ROOT . 'images/services/' . $imageList[0];
-                    if (file_exists($file_path)) {
-                        $imglink = IMAGE_PATH . 'services/' . $imageList[0];
-                    }
-                }
+$subpkgRec = Services::getservice_list(1000, 2);
 
-                // Icon image
-                $iconlink = '';
-                if (!empty($v->iconimage) && $v->iconimage != "a:0:{}") {
-                    $iconList = unserialize($v->iconimage);
-                    $file_path_icon = SITE_ROOT . 'images/services/icon/' . $iconList[0];
-                    if (file_exists($file_path_icon)) {
-                        $iconlink = IMAGE_PATH . 'services/icon/' . $iconList[0];
-                    }
-                }
-                // Only create link if linksrc exists in database
-                if (!empty($v->linksrc)) {
-                    $linkTarget = ($v->linktype == 1) ? ' target="_blank" ' : '';
-                    $linksrc = ($v->linktype == 1) ? $v->linksrc : BASE_URL . $v->linksrc;
-                    $titleHtml = '<a href="' . $linksrc . '"' . $linkTarget . '>
+if (!empty($subpkgRec)) {
+
+    foreach ($subpkgRec as $k => $v) {
+
+
+        // Main image
+        $imglink = '';
+        if ($v->image != "a:0:{}") {
+            $imageList = unserialize($v->image);
+            $file_path = SITE_ROOT . 'images/services/' . $imageList[0];
+            if (file_exists($file_path)) {
+                $imglink = IMAGE_PATH . 'services/' . $imageList[0];
+            }
+        }
+
+        // Icon image
+        $iconlink = '';
+        if (!empty($v->iconimage) && $v->iconimage != "a:0:{}") {
+            $iconList = unserialize($v->iconimage);
+            $file_path_icon = SITE_ROOT . 'images/services/icon/' . $iconList[0];
+            if (file_exists($file_path_icon)) {
+                $iconlink = IMAGE_PATH . 'services/icon/' . $iconList[0];
+            }
+        }
+        // Only create link if linksrc exists in database
+        if (!empty($v->linksrc)) {
+            $linkTarget = ($v->linktype == 1) ? ' target="_blank" ' : '';
+            $linksrc = ($v->linktype == 1) ? $v->linksrc : BASE_URL . $v->linksrc;
+            $titleHtml = '<a href="' . $linksrc . '"' . $linkTarget . '>
                             <h3 class="ul-feature-title">' . $v->title . '</h3>
                             </a>';
-                } else {
-                    // No link - just display the title without anchor
-                    $titleHtml = '
+        }
+        else {
+            // No link - just display the title without anchor
+            $titleHtml = '
                     <h3 class="ul-feature-title">' . $v->title . '</h3>';
-                }
+        }
 
-                $res .= '
+        $res .= '
 
                             <!-- single slide -->
                         <div class="swiper-slide">
@@ -57,12 +58,11 @@
                             </div>
                         </div>
                 ';
+    }
+}
 
-            }
-        }
-
-    // Wrap the features in the section structure
-    $rescont = '
+// Wrap the features in the section structure
+$rescont = '
 
             <section class="ul-features ul-section-spacing">
             <div class="ul-container">
@@ -75,23 +75,24 @@
         </section>
     ';
 
-    $jVars['module:home-service-list'] = $rescont;       
+$jVars['module:home-service-list'] = $rescont;
 
 
 
-    $restscont = '';
+$restscont = '';
 
-    $servpkgRec = Services::find_all();
-    // var_dump($subpkgRec); die();
-    if (isset($_REQUEST['slug']) and !empty($_REQUEST['slug'])) {
-        $slug = $_REQUEST['slug'];
-    } else {
-        $slug = 'health-club';
-    }
-    if (!empty($subpkgRec)) {
-        $i = 0;
-        $j = 0;
-        $restscont .= '<div class="tab-section bg-gray body-room-5">
+$servpkgRec = Services::find_all();
+// var_dump($subpkgRec); die();
+if (isset($_REQUEST['slug']) and !empty($_REQUEST['slug'])) {
+    $slug = $_REQUEST['slug'];
+}
+else {
+    $slug = 'health-club';
+}
+if (!empty($subpkgRec)) {
+    $i = 0;
+    $j = 0;
+    $restscont .= '<div class="tab-section bg-gray body-room-5">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
@@ -108,19 +109,20 @@
                     <div class="row">
                         <div class="dining-tabs">
                             <ul class="nav nav-tabs">';
-        foreach ($servpkgRec as $key => $serRec) {
-            if ($slug == $serRec->slug) {
-                $class = "active";
-            } else {
-                $class = "";
-            }
-            $actv = ($i == 0) ? 'active' : '';
-            $restscont .= '<li class="' . $class . '">
+    foreach ($servpkgRec as $key => $serRec) {
+        if ($slug == $serRec->slug) {
+            $class = "active";
+        }
+        else {
+            $class = "";
+        }
+        $actv = ($i == 0) ? 'active' : '';
+        $restscont .= '<li class="' . $class . '">
                                     <a href="#Sauna' . $serRec->id . '" id="' . $serRec->slug . '" role="tab" data-toggle="tab">' . $serRec->title . '<small class="d-block">' . $serRec->sub_title . '</small></a>
                                 </li>';
-            $i++;
-        }
-        $restscont .= '  </ul>
+        $i++;
+    }
+    $restscont .= '  </ul>
                         </div>
                     </div>
                 </div>
@@ -130,31 +132,32 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="tab-content">';
-        foreach ($servpkgRec as $key => $serRec) {
-            $imageList = '';
-            if ($serRec->image != "a:0:{}") {
-                $imageList = unserialize($serRec->image);
-            }
-            if ($slug == $serRec->slug) {
-                $class1 = "active";
-            } else {
-                $class1 = "";
-            }
-            $actv = ($j == 0) ? 'active' : '';
-            $restscont .= '<div role="tabpanel" class="tab-pane fade in ' . $class1 . '" id="Sauna' . $serRec->id . '">
+    foreach ($servpkgRec as $key => $serRec) {
+        $imageList = '';
+        if ($serRec->image != "a:0:{}") {
+            $imageList = unserialize($serRec->image);
+        }
+        if ($slug == $serRec->slug) {
+            $class1 = "active";
+        }
+        else {
+            $class1 = "";
+        }
+        $actv = ($j == 0) ? 'active' : '';
+        $restscont .= '<div role="tabpanel" class="tab-pane fade in ' . $class1 . '" id="Sauna' . $serRec->id . '">
                                     <div class="dining-detail">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="dining-detail-carousel">';
-            // var_dump($imageList); die();
-            if ($serRec->image != "a:0:{}") {
-                foreach ($imageList as $key => $imgServ) {
-                    $restscont .= ' <div class="item">
+        // var_dump($imageList); die();
+        if ($serRec->image != "a:0:{}") {
+            foreach ($imageList as $key => $imgServ) {
+                $restscont .= ' <div class="item">
                                                 <img src="' . IMAGE_PATH . 'services/' . $imgServ . '" alt="' . $serRec->title . '" />
                                             </div>';
-                }
             }
-            $restscont .= ' </div>
+        }
+        $restscont .= ' </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="service-content">
@@ -164,29 +167,30 @@
                                         </div>
                                     </div>
                                 </div>';
-            $j++;
-        }
-        $restscont .= '</div>
+        $j++;
+    }
+    $restscont .= '</div>
                         </div>
                     </div>
                 </div><!-- container -->
             </div><!-- block -->';
+}
+
+$jVars['module:service-detail-list'] = $restscont;
+
+$facility_bread = '';
+if (defined('FACILITY_PAGE')) {
+    $siteRegulars = Config::find_by_id(1);
+    $imglink = $siteRegulars->facility_upload;
+    // pr($imglink);
+    if (!empty($imglink)) {
+        $img = IMAGE_PATH . 'preference/facility/' . $siteRegulars->facility_upload;
+    }
+    else {
+        $img = '';
     }
 
-    $jVars['module:service-detail-list'] = $restscont;
-
-    $facility_bread = '';
-    if (defined('FACILITY_PAGE')) {
-        $siteRegulars = Config::find_by_id(1);
-        $imglink = $siteRegulars->facility_upload;
-        // pr($imglink);
-        if (!empty($imglink)) {
-            $img = IMAGE_PATH . 'preference/facility/' . $siteRegulars->facility_upload;
-        } else {
-            $img = '';
-        }
-
-        $facility_bread = '<div class="mad-breadcrumb with-bg-img with-overlay" data-bg-image-src="' . $img . '">
+    $facility_bread = '<div class="mad-breadcrumb with-bg-img with-overlay" data-bg-image-src="' . $img . '">
         <div class="container wide">
             <h1 class="mad-page-title">Hotel Amenities</h1>
             <nav class="mad-breadcrumb-path">
@@ -195,90 +199,83 @@
             </nav>
         </div>
     </div>';
-    }
-    $jVars['module:facilitybread'] = $facility_bread;
+}
+$jVars['module:facilitybread'] = $facility_bread;
 
-    $facility = "";
-    if (defined('FACILITY_PAGE')) {
+$facility = "";
+if (defined('FACILITY_PAGE')) {
 
-
-        $record = Services::getservice_list();
-        if (!empty($record)) {
-            $count = $countsec = 0;
-            foreach ($record as $recRow) {
-                if (!empty($recRow->icon)) {
-                    $facility .= ' 
-                    <div class="mad-col">
-                                    <!--================ Icon Box ================-->
-                                    <article class="mad-icon-box">
-                                    span class="' . $recRow->icon . '"></span>
-                                        <div class="mad-icon-box-content">
-                                            <h6 class="mad-icon-box-title">
-                                            ' . $recRow->title . '
-                                            </h6>
-                                        </div>
-                                    </article>
-                                    <!--================ End of Icon Box ================-->
+    $record = Services::getservice_list(1000, 2);
+    if (!empty($record)) {
+        $count = $countsec = 0;
+        foreach ($record as $recRow) {
+            if (!empty($recRow->icon)) {
+                $facility .= ' 
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="mad-col">
+                            <!--================ Icon Box ================-->
+                            <article class="mad-icon-box">
+                                <span class="' . $recRow->icon . '"></span>
+                                <div class="mad-icon-box-content">
+                                    <h6 class="mad-icon-box-title">' . $recRow->title . '</h6>
                                 </div>
-                    
+                            </article>
+                            <!--================ End of Icon Box ================-->
+                        </div>
+                    </div>
                     ';
-                } else {
-
-                    $img = unserialize($recRow->image);
+            }
+            else {
+                $img = unserialize($recRow->image);
+                if (!empty($img) && isset($img[0])) {
                     $file_path = SITE_ROOT . 'images/services/' . $img[0];
-                    if (file_exists($file_path) && $img[0] != NULL) {
+                    if (file_exists($file_path)) {
                         $imglink = IMAGE_PATH . 'services/' . $img[0];
                         $facility .= ' 
-                        <div class="mad-col">
-                                    <!--================ Icon Box ================-->
-                                    <article class="mad-icon-box">
-                                        <img src="' . $imglink . '" alt = ' . $recRow->title . '>
-                                        <div class="mad-icon-box-content">
-                                            <h6 class="mad-icon-box-title">
-                                            ' . $recRow->title . '
-                                            </h6>
-                                        </div>
-                                    </article>
-                                    <!--================ End of Icon Box ================-->
-                                </div>
-
-
-                        ';
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="ins-main-list">
+                        <img src="' . $imglink . '" alt="' . $recRow->title . '">
+                        <div class="ins-names">
+                            <h4><a href="facility-details.html">' . $recRow->title . '</a></h4>
+                        </div>  
+                    </div>
+                </div>';
                     }
                 }
             }
         }
     }
+}
 
-    $jVars['module:facility-list'] = $facility;
-
-
-
-    /*
-    * Service Page
-    */
-    $rescont = '';
+$jVars['module:facility-list'] = $facility;
 
 
+
+/*
+ * Service Page
+ */
+$rescont = '';
+
+
+$rescont .= '';
+
+
+$subpkgRec = services::find_8();
+
+if (!empty($subpkgRec)) {
     $rescont .= '';
-
-
-    $subpkgRec = services::find_8();
-
-    if (!empty($subpkgRec)) {
-        $rescont .= '';
-        foreach ($subpkgRec as $k => $v) {
-            $img_nm = unserialize($v->image);
-            $rescont .= '
+    foreach ($subpkgRec as $k => $v) {
+        $img_nm = unserialize($v->image);
+        $rescont .= '
                 
                             
                             ';
-        }
-        $rescont .= '';
     }
+    $rescont .= '';
+}
 
-    // pr($rescont_left);
-    $rescont_final = '
+// pr($rescont_left);
+$rescont_final = '
                         <!-- detail features starts -->
                         <div class="mad-section mad-section.no-pb">
                         <div class="row justify-content-center">
@@ -295,147 +292,164 @@
                                     </div>
                                 </div>
                             </div>';
-    $jVars['module:service-homepage'] = $rescont_final;
+$jVars['module:service-homepage'] = $rescont_final;
 
 
 
-    $facilityhome = "";
+$facilityhome = "";
 
-    if (defined('COMPANY_PAGE') && isset($_GET['slug'])) {
+if (isset($_GET['slug']) && !empty($_GET['slug'])) {
+    $slug = trim($_GET['slug']);
+    $recRow = Services::find_by_slugs($slug);
 
-        $slug   = trim($_GET['slug']);
-        $recRow = Services::find_by_slugs($slug);
+    if ($recRow) {
+        $service_slider = '';
+        // Fetch services images
+        $servicesImages = ServicesImage::find_by_sql("SELECT * FROM tbl_services_images WHERE servicesid='{$recRow->id}' AND status=1 ORDER BY sortorder ASC");
 
-        if ($recRow) {
-
-            // Set main image
-            $imglink = '';
+        if (!empty($servicesImages)) {
+            foreach ($servicesImages as $serviceImg) {
+                $serviceImgPath = SITE_ROOT . 'images/services/servicesimages/' . $serviceImg->image;
+                if (file_exists($serviceImgPath)) {
+                    $service_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/servicesimages/' . $serviceImg->image . '" alt="' . htmlspecialchars($serviceImg->title) . '" />
+                            </div>
+                        </div>';
+                }
+            }
+        }
+        else {
+            // Fallback to main image if no gallery images
             if (!empty($recRow->image) && $recRow->image != "a:0:{}") {
                 $img = unserialize($recRow->image);
                 $file_path = SITE_ROOT . 'images/services/' . $img[0];
-                if (file_exists($file_path) && $img[0] != NULL) {
-                    $imglink = IMAGE_PATH . 'services/' . $img[0];
-                }
-            }
-
-            // Set icon image
-            $iconlink = '';
-            if (!empty($recRow->iconimage) && $recRow->iconimage != "a:0:{}") {
-                $iconList = unserialize($recRow->iconimage);
-                $file_path_icon = SITE_ROOT . 'images/services/icon/' . $iconList[0];
-                if (file_exists($file_path_icon)) {
-                    $iconlink = IMAGE_PATH . 'services/icon/' . $iconList[0];
-                }
-            }
-            $bannerlink = '';
-
-            if (!empty($recRow->bannerimage) && $recRow->bannerimage != "a:0:{}") {
-
-                $iconList = unserialize($recRow->bannerimage);
-
-                if (!empty($iconList[0])) {
-                    $file_path_icon = SITE_ROOT . 'images/services/banner/' . $iconList[0];
-
-                    if (file_exists($file_path_icon)) {
-                        $bannerlink = IMAGE_PATH . 'services/banner/' . $iconList[0];
-                    }
-                }
-            }
-
-            /* fallback default image */
-            if (empty($bannerlink) && !empty($siteRegulars->other_upload)) {
-
-                $default_path = SITE_ROOT . 'images/preference/other/' . $siteRegulars->other_upload;
-
-                if (file_exists($default_path)) {
-                    $bannerlink = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
-                }
-            }
-
-
-
-            $exploreLink = $recRow->explorelinksrc;
-
-            // If external link → leave it
-            if (strpos($exploreLink, 'http') === 0) {
-                $finalExploreLink = $exploreLink;
-            }
-            // If internal file/link → make absolute
-            else {
-                $finalExploreLink = BASE_URL . ltrim($exploreLink, '/');
-            }
-
-
-
-            $facilityhome .= ' 
-            <section class="no-top no-bottom jarallax vertical-center" >
-                <img src="' . $bannerlink . '" alt="Main Image" class="img-fluid vh-100 w-100 opacity-75" style="object-fit: cover;">
-
-                    <div class="de-overlay v-center t5">
-                        <div class="container">
-                            <div class="mx-auto text-center">
-                                <a href="#" class="d-block mb-4"></a>
-                                        <img src=" ' . $iconlink . ' " class="img-fluid mb-3 wow fadeInUp" width="250" height="250" data-wow-duration="1s" alt="Main Logo">
-                                    </a>
+                if (file_exists($file_path)) {
+                    $service_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/' . $img[0] . '" alt="' . htmlspecialchars($recRow->title) . '" />
                             </div>
-                            <div class="row mb30">
-                                <div class="col-lg-6 offset-lg-3 text-center text__responsive">
-                                    <h1>' . $recRow->sub_title . '</h1>
-                                    <p class="lead">' . strip_tags($recRow->content) . '</p>
-                                    <div class="mx-auto gap-3 d-flex justify-content-center">
+                        </div>';
+                }
+            }
+        }
 
-                                            <a class="btn-line wow fadeInUp animated" href="' . $finalExploreLink . '" target="_blank"><span>Explore</span></a>
-                                        <a class="btn-line book" href="' . BASE_URL . 'contact-us"><span>Contact Us</span></a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="white-border-bottom"></div>
-                        
-                        <div class="row mt10">
-                            <div class="col-md-6 text-md-start text-center">' . $recRow->fiscal_address . ' | <a href="tel:' . $recRow->contact_info . '">' . $recRow->contact_info . '</a></div>
-                            <div class="col-md-6 text-md-end text-center">
-                                <div class="social-icons">
-                                    ' . (!empty($recRow->facebook_link) ? '<a href="' . htmlspecialchars($recRow->facebook_link) . '" target="_blank" rel="noreferrer noopener"><i class="fab fa-facebook-f"></i></a>' : '') . '
-                                    ' . (!empty($recRow->x_link) ? '<a href="' . htmlspecialchars($recRow->x_link) . '" target="_blank" rel="noreferrer noopener"><i class="fab fa-x-twitter"></i></a>' : '') . '
-                                    ' . (!empty($recRow->instagram_link) ? '<a href="' . htmlspecialchars($recRow->instagram_link) . '" target="_blank" rel="noreferrer noopener"><i class="fab fa-instagram"></i></a>' : '') . '
-                                    ' . (!empty($recRow->linkedin_link) ? '<a href="' . htmlspecialchars($recRow->linkedin_link) . '" target="_blank" rel="noreferrer noopener"><i class="fab fa-linkedin-in"></i></a>' : '') . '
-                                    ' . (!empty($recRow->tiktok_link) ? '<a href="' . htmlspecialchars($recRow->tiktok_link) . '" target="_blank" rel="noreferrer noopener"><i class="fab fa-tiktok"></i></a>' : '') . '
-                                    ' . (!empty($recRow->youtube_link) ? '<a href="' . htmlspecialchars($recRow->youtube_link) . '" target="_blank" rel="noreferrer noopener"><i class="fab fa-youtube"></i></a>' : '') . '
+        $facilityhome .= '
+            <section class="course-detail shape_big2">
+                <div class="container">
+                    <div class="row pb-5">
+                        <div class="col-lg-6">
+                            <div class="home-2 testimonial p-0 cs-detail-im">
+                                <div class="row review-slider2 wow fadeInUp">
+                                    ' . $service_slider . '
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="cs-detail-info d-flex flex-column justify-content-center align-items-start h-100">
+                                <h3>' . htmlspecialchars($recRow->title) . '</h3>
+                                <div class="customize-bottom">
+                                    <ul class="d-flex justify-content-start">
+                                        <li class="mr-3">' . htmlspecialchars($recRow->sub_title) . '</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="course-content">
+                            ' .$recRow->content. '
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section> 
-
-
+            </section>';
+    }
+} else {
+    // No slug - show all services list
+    $records = Services::find_by_sql("SELECT * FROM tbl_services WHERE status=1 ORDER BY sortorder ASC");
+    $service_items = '';
+    
+    if (!empty($records)) {
+        foreach ($records as $rec) {
+            $imglink = '';
+            if (!empty($rec->image) && $rec->image != "a:0:{}") {
+                $img = unserialize($rec->image);
+                if (!empty($img[0])) {
+                    $file_path = SITE_ROOT . 'images/services/' . $img[0];
+                    if (file_exists($file_path)) {
+                        $imglink = IMAGE_PATH . 'services/' . $img[0];
+                    }
+                }
+            }
             
-
-
-
-
-
-
+            // Fallback to icon image if main image is missing
+            if (empty($imglink) && !empty($rec->iconimage) && $rec->iconimage != "a:0:{}") {
+                $iconList = unserialize($rec->iconimage);
+                if (!empty($iconList[0])) {
+                    $file_path = SITE_ROOT . 'images/services/icon/' . $iconList[0];
+                    if (file_exists($file_path)) {
+                        $imglink = IMAGE_PATH . 'services/icon/' . $iconList[0];
+                    }
+                }
+            }
             
-            <!--================ End of Icon Box ================-->
-            ';
+            // Use placeholder if no image found
+            if (empty($imglink)) {
+                $imglink = IMAGE_PATH . 'placeholder.jpg';
+            }
+            
+            $service_items .= '
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="course-item">
+                    <div class="course-img">
+                        <a href="' . BASE_URL . 'service_list.php?slug=' . htmlspecialchars($rec->slug) . '">
+                            <img src="' . $imglink . '" alt="' . htmlspecialchars($rec->title) . '" class="img-fluid" style="height:250px; width:100%; object-fit:cover;">
+                        </a>
+                    </div>
+                    <div class="course-content p-3 border">
+                        <h4><a href="' . BASE_URL . 'service_list.php?slug=' . htmlspecialchars($rec->slug) . '">' . htmlspecialchars($rec->title) . '</a></h4>
+                        <p>' . htmlspecialchars($rec->sub_title) . '</p>
+                        <a href="' . BASE_URL . 'service_list.php?slug=' . htmlspecialchars($rec->slug) . '" class="btn btn-primary btn-sm">Read More</a>
+                    </div>
+                </div>
+            </div>';
         }
     }
+    
+    $facilityhome .= '
+    <section class="services-list py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2>Our Services & Programs</h2>
+                </div>
+                ' . $service_items . '
+            </div>
+        </div>
+    </section>';
+}
 
 
-    $jVars['module:facility-list-home'] = $facilityhome;
-
-    $destinationhome = "";
-    if (defined('FACILITY_PAGE')) {
 
 
-        $record = Services::getservice_list(30);
-        if (!empty($record)) {
-            foreach ($record as $recRow) {
-                if (!empty($recRow->icon)) {
-                    $facilityhome .= ' 
+
+$jVars['module:facility-list-home'] = $facilityhome;
+
+$destinationhome = "";
+if (defined('FACILITY_PAGE')) {
+
+
+    $record = Services::getservice_list(30);
+    if (!empty($record)) {
+        foreach ($record as $recRow) {
+            if (!empty($recRow->icon)) {
+                $facilityhome .= ' 
                         <a href="destination.html" class="destination-item wow fadeInUp" data-wow-delay=".25s">
                             <div class="destination-img">
                                 <img src="' . $imglink . '" alt="">
@@ -447,13 +461,14 @@
                         </a>
                     </div>
                 ';
-                } else {
+            }
+            else {
 
-                    $img = unserialize($recRow->image);
-                    $file_path = SITE_ROOT . 'images/services/' . $img[0];
-                    if (file_exists($file_path) && $img[0] != NULL) {
-                        $imglink = IMAGE_PATH . 'services/' . $img[0];
-                        $facilityhome .= '        
+                $img = unserialize($recRow->image);
+                $file_path = SITE_ROOT . 'images/services/' . $img[0];
+                if (file_exists($file_path) && $img[0] != NULL) {
+                    $imglink = IMAGE_PATH . 'services/' . $img[0];
+                    $facilityhome .= '        
                         <a href="destination.html" class="destination-item wow fadeInUp" data-wow-delay=".25s">
                             <div class="destination-img">
                                 <img src="' . $imglink . '" alt="">
@@ -464,15 +479,279 @@
                             </div>
                         </a>
                     ';
-                    }
                 }
             }
         }
     }
-    $jVars['module:destination-page'] = $destinationhome;
+}
+$jVars['module:destination-page'] = $destinationhome;
 
 
 
+/*
+* Primary Level Detail Page
+*/
+$primaryLevelDetail = "";
+
+$primaryService = Services::find_by_sql("SELECT * FROM tbl_services WHERE slug='primary-level' LIMIT 1");
+if (!empty($primaryService)) {
+    $primaryRecord = $primaryService[0];
+    
+    // Build image slider
+    $primary_slider = '';
+    
+    // Fetch services images
+    $servicesImages = ServicesImage::find_by_sql("SELECT * FROM tbl_services_images WHERE servicesid='{$primaryRecord->id}' AND status=1 ORDER BY sortorder ASC");
+    
+    if (!empty($servicesImages)) {
+        foreach ($servicesImages as $serviceImg) {
+            $serviceImgPath = SITE_ROOT . 'images/services/servicesimages/' . $serviceImg->image;
+            if (file_exists($serviceImgPath)) {
+                $primary_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/servicesimages/' . $serviceImg->image . '" alt="' . htmlspecialchars($serviceImg->title) . '" />
+                            </div>
+                        </div>';
+            }
+        }
+    } else {
+        // Fallback to main image if no gallery images
+        if (!empty($primaryRecord->image) && $primaryRecord->image != "a:0:{}") {
+            $img = unserialize($primaryRecord->image);
+            $file_path = SITE_ROOT . 'images/services/' . $img[0];
+            if (file_exists($file_path)) {
+                $primary_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/' . $img[0] . '" alt="' . htmlspecialchars($primaryRecord->title) . '" />
+                            </div>
+                        </div>';
+            }
+        }
+    }
+    
+    $primaryLevelDetail .= '
+
+    <section class="breadcrumb-main">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <h2>' . htmlspecialchars($primaryRecord->title) . '</h2>
+            </div>
+        </div>
+    </section>
+    <section class="course-detail shape_big2">
+        <div class="container">
+            <div class="row pb-5">
+                <div class="col-lg-6">
+                    <div class="home-2 testimonial p-0 cs-detail-im">
+                        <div class="row review-slider2 wow fadeInUp">
+                            ' . $primary_slider . '
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="cs-detail-info d-flex flex-column justify-content-center align-items-start h-100">
+                        <h3>' . htmlspecialchars($primaryRecord->heading) . '</h3>
+                        <div class="customize-bottom">
+                            <ul class="d-flex justify-content-start">
+                                <li class="mr-3">' . htmlspecialchars($primaryRecord->sub_title) . '</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="course-content">
+                            ' . $primaryRecord->content. '
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>';
+}
+
+$jVars['module:primary-level'] = $primaryLevelDetail;
 
 
-// End of Service Page
+
+/*
+* Secondary Level Detail Page
+*/
+$secondaryLevelDetail = "";
+
+$secondaryService = Services::find_by_sql("SELECT * FROM tbl_services WHERE slug='secondary-level' LIMIT 1");
+if (!empty($secondaryService)) {
+    $secondaryRecord = $secondaryService[0];
+    
+    // Build image slider
+    $secondary_slider = '';
+    
+    // Fetch services images
+    $servicesImages = ServicesImage::find_by_sql("SELECT * FROM tbl_services_images WHERE servicesid='{$secondaryRecord->id}' AND status=1 ORDER BY sortorder ASC");
+    
+    if (!empty($servicesImages)) {
+        foreach ($servicesImages as $serviceImg) {
+            $serviceImgPath = SITE_ROOT . 'images/services/servicesimages/' . $serviceImg->image;
+            if (file_exists($serviceImgPath)) {
+                $secondary_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/servicesimages/' . $serviceImg->image . '" alt="' . htmlspecialchars($serviceImg->title) . '" />
+                            </div>
+                        </div>';
+            }
+        }
+    } else {
+        // Fallback to main image if no gallery images
+        if (!empty($secondaryRecord->image) && $secondaryRecord->image != "a:0:{}") {
+            $img = unserialize($secondaryRecord->image);
+            $file_path = SITE_ROOT . 'images/services/' . $img[0];
+            if (file_exists($file_path)) {
+                $secondary_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/' . $img[0] . '" alt="' . htmlspecialchars($secondaryRecord->title) . '" />
+                            </div>
+                        </div>';
+            }
+        }
+    }
+    
+    $secondaryLevelDetail .= '
+
+    <section class="breadcrumb-main">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <h2>' . htmlspecialchars($secondaryRecord->title) . '</h2>
+            </div>
+        </div>
+    </section>
+    <section class="course-detail shape_big2">
+        <div class="container">
+            <div class="row pb-5">
+                <div class="col-lg-6">
+                    <div class="home-2 testimonial p-0 cs-detail-im">
+                        <div class="row review-slider2 wow fadeInUp">
+                            ' . $secondary_slider . '
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="cs-detail-info d-flex flex-column justify-content-center align-items-start h-100">
+                        <h3>' . htmlspecialchars($secondaryRecord->heading) . '</h3>
+                        <div class="customize-bottom">
+                            <ul class="d-flex justify-content-start">
+                                <li class="mr-3">' . htmlspecialchars($secondaryRecord->sub_title) . '</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="course-content">
+                            ' . $secondaryRecord->content. '
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>';
+}
+
+$jVars['module:secondary-level'] = $secondaryLevelDetail;
+
+
+
+/*
+* Lower Secondary Level Detail Page
+*/
+$lowerSecondaryLevelDetail = "";
+
+$lowerSecondaryService = Services::find_by_sql("SELECT * FROM tbl_services WHERE slug='lower-secondary-level' LIMIT 1");
+if (!empty($lowerSecondaryService)) {
+    $lowerSecondaryRecord = $lowerSecondaryService[0];
+    
+    // Build image slider
+    $lower_secondary_slider = '';
+    
+    // Fetch services images
+    $servicesImages = ServicesImage::find_by_sql("SELECT * FROM tbl_services_images WHERE servicesid='{$lowerSecondaryRecord->id}' AND status=1 ORDER BY sortorder ASC");
+    
+    if (!empty($servicesImages)) {
+        foreach ($servicesImages as $serviceImg) {
+            $serviceImgPath = SITE_ROOT . 'images/services/servicesimages/' . $serviceImg->image;
+            if (file_exists($serviceImgPath)) {
+                $lower_secondary_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/servicesimages/' . $serviceImg->image . '" alt="' . htmlspecialchars($serviceImg->title) . '" />
+                            </div>
+                        </div>';
+            }
+        }
+    } else {
+        // Fallback to main image if no gallery images
+        if (!empty($lowerSecondaryRecord->image) && $lowerSecondaryRecord->image != "a:0:{}") {
+            $img = unserialize($lowerSecondaryRecord->image);
+            $file_path = SITE_ROOT . 'images/services/' . $img[0];
+            if (file_exists($file_path)) {
+                $lower_secondary_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/' . $img[0] . '" alt="' . htmlspecialchars($lowerSecondaryRecord->title) . '" />
+                            </div>
+                        </div>';
+            }
+        }
+    }
+    
+    $lowerSecondaryLevelDetail .= '
+
+    <section class="breadcrumb-main">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <h2>' . htmlspecialchars($lowerSecondaryRecord->title) . '</h2>
+            </div>
+        </div>
+    </section>
+    <section class="course-detail shape_big2">
+        <div class="container">
+            <div class="row pb-5">
+                <div class="col-lg-6">
+                    <div class="home-2 testimonial p-0 cs-detail-im">
+                        <div class="row review-slider2 wow fadeInUp">
+                            ' . $lower_secondary_slider . '
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="cs-detail-info d-flex flex-column justify-content-center align-items-start h-100">
+                        <h3>' . htmlspecialchars($lowerSecondaryRecord->heading) . '</h3>
+                        <div class="customize-bottom">
+                            <ul class="d-flex justify-content-start">
+                                <li class="mr-3">' . htmlspecialchars($lowerSecondaryRecord->sub_title) . '</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="course-content">
+                            ' . $lowerSecondaryRecord->content. '
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>';
+}
+
+$jVars['module:lower-secondary-level'] = $lowerSecondaryLevelDetail;
+
+
+
