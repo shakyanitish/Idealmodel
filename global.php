@@ -16,6 +16,9 @@ if(!empty($mRec)) {
 		case 'Subpackage':
 			require_once ('subpkgdetail.php');
 			break;	
+		case 'Services':
+			require_once ('service_list.php');
+			break;	
 
 		default:
 			require_once ('index.php');

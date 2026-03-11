@@ -463,102 +463,61 @@ if (isset($_GET['slug']) && !empty($_GET['slug'])) {
 
 $jVars['module:facility-list-home'] = $facilityhome;
 
-$destinationhome = "";
-if (defined('FACILITY_PAGE')) {
 
 
-    $record = Services::getservice_list(30);
-    if (!empty($record)) {
-        foreach ($record as $recRow) {
-            if (!empty($recRow->icon)) {
-                $facilityhome .= ' 
-                        <a href="destination.html" class="destination-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="destination-img">
-                                <img src="' . $imglink . '" alt="">
+
+
+/*
+* Service Level Detail Page (slug-driven)
+*/
+$serviceLevelDetail = "";
+
+if (defined('SCHOOL_PAGE') and isset($_REQUEST['slug'])) {
+    $slug = addslashes($_REQUEST['slug']);
+    $serviceLevel = Services::find_by_sql("SELECT * FROM tbl_services WHERE slug='{$slug}' LIMIT 1");
+    if (!empty($serviceLevel)) {
+        $service = $serviceLevel[0];
+
+        // Build image slider
+        $service_level_slider = '';
+
+        // Fetch services images
+        $servicesImages = ServicesImage::find_by_sql("SELECT * FROM tbl_services_images WHERE servicesid='{$service->id}' AND status=1 ORDER BY sortorder ASC");
+
+        if (!empty($servicesImages)) {
+            foreach ($servicesImages as $serviceImg) {
+                $serviceImgPath = SITE_ROOT . 'images/services/servicesimages/' . $serviceImg->image;
+                if (file_exists($serviceImgPath)) {
+                    $service_level_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/servicesimages/' . $serviceImg->image . '" alt="' . htmlspecialchars($serviceImg->title) . '" />
                             </div>
-                            <div class="destination-info">
-                                <h4>' . $recRow->title . '</h4>
-                                <span><i class="far fa-destination-dot"></i>Nepal</span>
-                            </div>
-                        </a>
-                    </div>
-                ';
+                        </div>';
+                }
             }
-            else {
-
-                $img = unserialize($recRow->image);
+        } else {
+            // Fallback to main image if no gallery images
+            if (!empty($service->image) && $service->image != "a:0:{}") {
+                $img = unserialize($service->image);
                 $file_path = SITE_ROOT . 'images/services/' . $img[0];
-                if (file_exists($file_path) && $img[0] != NULL) {
-                    $imglink = IMAGE_PATH . 'services/' . $img[0];
-                    $facilityhome .= '        
-                        <a href="destination.html" class="destination-item wow fadeInUp" data-wow-delay=".25s">
-                            <div class="destination-img">
-                                <img src="' . $imglink . '" alt="">
+                if (file_exists($file_path)) {
+                    $service_level_slider .= '
+                        <div class="col-md-12">
+                            <div class="feedback-inner">
+                                <img src="' . IMAGE_PATH . 'services/' . $img[0] . '" alt="' . htmlspecialchars($service->title) . '" />
                             </div>
-                            <div class="destination-info">
-                                <h4>' . $recRow->title . '</h4>
-                                <span><i class="far fa-destination-dot"></i>Nepal</span>
-                            </div>
-                        </a>
-                    ';
+                        </div>';
                 }
             }
         }
-    }
-}
-$jVars['module:destination-page'] = $destinationhome;
 
-
-
-/*
-* Primary Level Detail Page
-*/
-$primaryLevelDetail = "";
-
-$primaryService = Services::find_by_sql("SELECT * FROM tbl_services WHERE slug='primary-level' LIMIT 1");
-if (!empty($primaryService)) {
-    $primaryRecord = $primaryService[0];
-    
-    // Build image slider
-    $primary_slider = '';
-    
-    // Fetch services images
-    $servicesImages = ServicesImage::find_by_sql("SELECT * FROM tbl_services_images WHERE servicesid='{$primaryRecord->id}' AND status=1 ORDER BY sortorder ASC");
-    
-    if (!empty($servicesImages)) {
-        foreach ($servicesImages as $serviceImg) {
-            $serviceImgPath = SITE_ROOT . 'images/services/servicesimages/' . $serviceImg->image;
-            if (file_exists($serviceImgPath)) {
-                $primary_slider .= '
-                        <div class="col-md-12">
-                            <div class="feedback-inner">
-                                <img src="' . IMAGE_PATH . 'services/servicesimages/' . $serviceImg->image . '" alt="' . htmlspecialchars($serviceImg->title) . '" />
-                            </div>
-                        </div>';
-            }
-        }
-    } else {
-        // Fallback to main image if no gallery images
-        if (!empty($primaryRecord->image) && $primaryRecord->image != "a:0:{}") {
-            $img = unserialize($primaryRecord->image);
-            $file_path = SITE_ROOT . 'images/services/' . $img[0];
-            if (file_exists($file_path)) {
-                $primary_slider .= '
-                        <div class="col-md-12">
-                            <div class="feedback-inner">
-                                <img src="' . IMAGE_PATH . 'services/' . $img[0] . '" alt="' . htmlspecialchars($primaryRecord->title) . '" />
-                            </div>
-                        </div>';
-            }
-        }
-    }
-    
-    $primaryLevelDetail .= '
+        $serviceLevelDetail .= '
 
     <section class="breadcrumb-main">
         <div class="container">
             <div class="breadcrumb-inner">
-                <h2>' . htmlspecialchars($primaryRecord->title) . '</h2>
+                <h2>' . htmlspecialchars($service->title) . '</h2>
             </div>
         </div>
     </section>
@@ -568,16 +527,16 @@ if (!empty($primaryService)) {
                 <div class="col-lg-6">
                     <div class="home-2 testimonial p-0 cs-detail-im">
                         <div class="row review-slider2 wow fadeInUp">
-                            ' . $primary_slider . '
+                            ' . $service_level_slider . '
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="cs-detail-info d-flex flex-column justify-content-center align-items-start h-100">
-                        <h3>' . htmlspecialchars($primaryRecord->sub_title) . '</h3>
+                        <h3>' . htmlspecialchars($service->sub_title) . '</h3>
                         <div class="customize-bottom">
                             <ul class="d-flex justify-content-start">
-                                <li class="mr-3">' . htmlspecialchars($primaryRecord->brief) . '</li>
+                                <li class="mr-3">' . htmlspecialchars($service->brief) . '</li>
                             </ul>
                         </div>
                     </div>
@@ -587,193 +546,17 @@ if (!empty($primaryService)) {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="course-content">
-                            ' . $primaryRecord->content. '
+                            ' . $service->content . '
                     </div>
                 </div>
             </div>
         </div>
     </section>';
-}
-
-$jVars['module:primary-level'] = $primaryLevelDetail;
-
-
-
-/*
-* Secondary Level Detail Page
-*/
-$secondaryLevelDetail = "";
-
-$secondaryService = Services::find_by_sql("SELECT * FROM tbl_services WHERE slug='secondary-level' LIMIT 1");
-if (!empty($secondaryService)) {
-    $secondaryRecord = $secondaryService[0];
-    
-    // Build image slider
-    $secondary_slider = '';
-    
-    // Fetch services images
-    $servicesImages = ServicesImage::find_by_sql("SELECT * FROM tbl_services_images WHERE servicesid='{$secondaryRecord->id}' AND status=1 ORDER BY sortorder ASC");
-    
-    if (!empty($servicesImages)) {
-        foreach ($servicesImages as $serviceImg) {
-            $serviceImgPath = SITE_ROOT . 'images/services/servicesimages/' . $serviceImg->image;
-            if (file_exists($serviceImgPath)) {
-                $secondary_slider .= '
-                        <div class="col-md-12">
-                            <div class="feedback-inner">
-                                <img src="' . IMAGE_PATH . 'services/servicesimages/' . $serviceImg->image . '" alt="' . htmlspecialchars($serviceImg->title) . '" />
-                            </div>
-                        </div>';
-            }
-        }
-    } else {
-        // Fallback to main image if no gallery images
-        if (!empty($secondaryRecord->image) && $secondaryRecord->image != "a:0:{}") {
-            $img = unserialize($secondaryRecord->image);
-            $file_path = SITE_ROOT . 'images/services/' . $img[0];
-            if (file_exists($file_path)) {
-                $secondary_slider .= '
-                        <div class="col-md-12">
-                            <div class="feedback-inner">
-                                <img src="' . IMAGE_PATH . 'services/' . $img[0] . '" alt="' . htmlspecialchars($secondaryRecord->title) . '" />
-                            </div>
-                        </div>';
-            }
-        }
     }
-    
-    $secondaryLevelDetail .= '
-
-    <section class="breadcrumb-main">
-        <div class="container">
-            <div class="breadcrumb-inner">
-                <h2>' . htmlspecialchars($secondaryRecord->title) . '</h2>
-            </div>
-        </div>
-    </section>
-    <section class="course-detail shape_big2">
-        <div class="container">
-            <div class="row pb-5">
-                <div class="col-lg-6">
-                    <div class="home-2 testimonial p-0 cs-detail-im">
-                        <div class="row review-slider2 wow fadeInUp">
-                            ' . $secondary_slider . '
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="cs-detail-info d-flex flex-column justify-content-center align-items-start h-100">
-                        <h3>' . htmlspecialchars($secondaryRecord->heading) . '</h3>
-                        <div class="customize-bottom">
-                            <ul class="d-flex justify-content-start">
-                                <li class="mr-3">' . htmlspecialchars($secondaryRecord->sub_title) . '</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="course-content">
-                            ' . $secondaryRecord->content. '
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>';
 }
 
-$jVars['module:secondary-level'] = $secondaryLevelDetail;
+$jVars['module:primary-level'] = $serviceLevelDetail;
 
-
-
-/*
-* Lower Secondary Level Detail Page
-*/
-$lowerSecondaryLevelDetail = "";
-
-$lowerSecondaryService = Services::find_by_sql("SELECT * FROM tbl_services WHERE slug='lower-secondary-level' LIMIT 1");
-if (!empty($lowerSecondaryService)) {
-    $lowerSecondaryRecord = $lowerSecondaryService[0];
-    
-    // Build image slider
-    $lower_secondary_slider = '';
-    
-    // Fetch services images
-    $servicesImages = ServicesImage::find_by_sql("SELECT * FROM tbl_services_images WHERE servicesid='{$lowerSecondaryRecord->id}' AND status=1 ORDER BY sortorder ASC");
-    
-    if (!empty($servicesImages)) {
-        foreach ($servicesImages as $serviceImg) {
-            $serviceImgPath = SITE_ROOT . 'images/services/servicesimages/' . $serviceImg->image;
-            if (file_exists($serviceImgPath)) {
-                $lower_secondary_slider .= '
-                        <div class="col-md-12">
-                            <div class="feedback-inner">
-                                <img src="' . IMAGE_PATH . 'services/servicesimages/' . $serviceImg->image . '" alt="' . htmlspecialchars($serviceImg->title) . '" />
-                            </div>
-                        </div>';
-            }
-        }
-    } else {
-        // Fallback to main image if no gallery images
-        if (!empty($lowerSecondaryRecord->image) && $lowerSecondaryRecord->image != "a:0:{}") {
-            $img = unserialize($lowerSecondaryRecord->image);
-            $file_path = SITE_ROOT . 'images/services/' . $img[0];
-            if (file_exists($file_path)) {
-                $lower_secondary_slider .= '
-                        <div class="col-md-12">
-                            <div class="feedback-inner">
-                                <img src="' . IMAGE_PATH . 'services/' . $img[0] . '" alt="' . htmlspecialchars($lowerSecondaryRecord->title) . '" />
-                            </div>
-                        </div>';
-            }
-        }
-    }
-    
-    $lowerSecondaryLevelDetail .= '
-
-    <section class="breadcrumb-main">
-        <div class="container">
-            <div class="breadcrumb-inner">
-                <h2>' . htmlspecialchars($lowerSecondaryRecord->title) . '</h2>
-            </div>
-        </div>
-    </section>
-    <section class="course-detail shape_big2">
-        <div class="container">
-            <div class="row pb-5">
-                <div class="col-lg-6">
-                    <div class="home-2 testimonial p-0 cs-detail-im">
-                        <div class="row review-slider2 wow fadeInUp">
-                            ' . $lower_secondary_slider . '
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="cs-detail-info d-flex flex-column justify-content-center align-items-start h-100">
-                        <h3>' . htmlspecialchars($lowerSecondaryRecord->heading) . '</h3>
-                        <div class="customize-bottom">
-                            <ul class="d-flex justify-content-start">
-                                <li class="mr-3">' . htmlspecialchars($lowerSecondaryRecord->sub_title) . '</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="course-content">
-                            ' . $lowerSecondaryRecord->content. '
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>';
-}
-
-$jVars['module:lower-secondary-level'] = $lowerSecondaryLevelDetail;
 
 
 

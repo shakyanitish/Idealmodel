@@ -19,15 +19,15 @@ ErrorDocument 404 /404.php
 RewriteRule ^book/([a-zA-Z0-9-]+)/?$ book.php?slug=$1 [L]
 
 #For inner pages.
-RewriteRule ^introduction/?$ inner.php?slug=introduction [L]
-RewriteRule ^our-philosophy/?$ inner.php?slug=our-philosophy [L]
+#RewriteRule ^introduction/?$ inner.php?slug=introduction [L]
+#RewriteRule ^our-philosophy/?$ inner.php?slug=our-philosophy [L]
 
 
 
 
 
 #For service pages.
-RewriteRule ^(primary-level|lower-secondary-level|secondary-level)/?$ service_list.php?slug=$1 [L,QSA]
+#RewriteRule ^(primary-level|lower-secondary-level|secondary-level)/?$ service_list.php?slug=$1 [L,QSA]
 
 RewriteRule ^services/([a-zA-Z0-9-]+)$ service_list.php?slug=$1 [L]
 

@@ -109,7 +109,7 @@ endif;
 //Career***************************************************************************************
 if ($_POST['action'] == "forCareer"):
 
-    $career_title = isset($_POST['career_title']) ? $_POST['career_title'] : 'General Application';
+    $career_title = isset($_POST['career_title']) ? $_POST['career_title'] : '';
     $messageText = isset($_POST['message']) ? $_POST['message'] : '';
     $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
 
@@ -129,7 +129,7 @@ if ($_POST['action'] == "forCareer"):
                         <strong>Name</strong> : ' . $name . '<br />		
                         <strong>E-mail Address</strong>: ' . $email . '<br />
                         <strong>Phone No.</strong>: ' . $phone . '<br />
-                        <strong>Message</strong>: ' . nl2br($messageText) . '<br />
+                        <strong>Message</strong>: ' . $messageText . '<br />
                     </p>
                 </td>
             </tr>

@@ -77,6 +77,12 @@ switch ($action) {
 
 		$db->begin();
 		if ($record->save()): $db->commit();
+			// Global slug table storeSlug(class name, main slug, store id);
+			$qry = $db->query("SELECT LAST_INSERT_ID() as lastId");
+			$row = $db->fetch_object($qry);
+			$act_id = $row->lastId;
+			storeSlug('Services', $record->slug, $act_id);
+			// End function
 			$message  = sprintf($GLOBALS['basic']['addedSuccess_'], "Services '" . $record->title . "'");
 			echo json_encode(array("action" => "success", "message" => $message));
 			log_action("Services [" . $record->title . "]" . $GLOBALS['basic']['addedSuccess'], 1, 3);
@@ -134,6 +140,10 @@ switch ($action) {
 
 		$db->begin();
 		if ($record->save()): $db->commit();
+			// Global slug table storeSlug(class name, main slug, store id);
+			$act_id = $_REQUEST['idValue'];
+			storeSlug('Services', $record->slug, $act_id);
+			// End function
 			$message  = sprintf($GLOBALS['basic']['changesSaved_'], "Services '" . $record->title . "'");
 			echo json_encode(array("action" => "success", "message" => $message));
 
@@ -147,6 +157,9 @@ switch ($action) {
 		$id = $_REQUEST['id'];
 		$record = Services::find_by_id($id);
 		log_action("Servicess  [" . $record->title . "]" . $GLOBALS['basic']['deletedSuccess'], 1, 6);
+		// Global slug table deleteSlug(class name, store id);
+		deleteSlug('Services', $id);
+		// End function
 		$db->query("DELETE FROM tbl_services WHERE id='{$id}'");
 
 		reOrder("tbl_services", "sortorder");
@@ -317,6 +330,18 @@ switch ($action) {
 		datatableReordering('tbl_services_images', $sortIds, "sortorder", 'servicesid', $record->servicesid);
 		$message = sprintf($GLOBALS['basic']['sorted_'], "Services Images");
 		echo json_encode(array("action"=>"success","message"=>$message));
+		break;
+
+	case "syncMlink":
+		// Remove any legacy entries stored under the old singular mod_class
+		$db->query("DELETE FROM tbl_mlink WHERE mod_class='Service'");
+		$services = Services::find_by_sql("SELECT id, slug FROM tbl_services WHERE status='1' AND slug != '' ORDER BY id ASC");
+		$count = 0;
+		foreach ($services as $svc) {
+			storeSlug('Services', $svc->slug, $svc->id);
+			$count++;
+		}
+		echo json_encode(array("action" => "success", "message" => "Synced {$count} service(s) to tbl_mlink"));
 		break;
 }
 ?>
