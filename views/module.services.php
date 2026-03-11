@@ -46,17 +46,29 @@ if (!empty($subpkgRec)) {
                     <h3 class="ul-feature-title">' . $v->title . '</h3>';
         }
 
-        $res .= '
+        $isLeft    = ($k % 2 === 0);
+        $sideClass = $isLeft ? 'style1-left'  : 'style1-right';
+        $wowClass  = $isLeft ? 'wow fadeInLeftBig'  : 'wow fadeInRightBig';
+        $pbClass   = $isLeft ? 'pb-170 ' : '';
 
-                            <!-- single slide -->
-                        <div class="swiper-slide">
-                            <div class="ul-feature">
-                                <div class="ul-feature-icon">
-                                    <img src="' . $iconlink . '">
-                                </div>
-                                ' . $titleHtml . '
+        // Build the h4 link from linksrc or fall back to slug-based URL
+        $itemLink  = !empty($v->linksrc)
+            ? (($v->linktype == 1) ? $v->linksrc : BASE_URL . $v->linksrc)
+            : BASE_URL . 'service_list.php?slug=' . $v->slug;
+        $linkTarget = ($v->linktype == 1 && !empty($v->linksrc)) ? ' target="_blank"' : '';
+
+        $res .= '
+                    <div class="col-lg-6 col-md-6 ' . $pbClass . 'customize-wrap ' . $wowClass . '">
+                        <div class="customize-item ' . $sideClass . '">
+                            <div class="sv-image">
+                                <img src="' . $iconlink . '" alt="' . htmlspecialchars($v->title) . '" />
+                            </div>
+                            <div class="customize-ct">
+                                <h4><a href="' . $itemLink . '"' . $linkTarget . '>' . htmlspecialchars($v->title) . '</a></h4>
+                                <p>' . htmlspecialchars($v->sub_title) . '</p>
                             </div>
                         </div>
+                    </div>
                 ';
     }
 }
@@ -64,15 +76,25 @@ if (!empty($subpkgRec)) {
 // Wrap the features in the section structure
 $rescont = '
 
-            <section class="ul-features ul-section-spacing">
-            <div class="ul-container">
-                <div class="ul-testimonial-2-slider-home swiper">
-                    <div class="swiper-wrapper">
-                     ' . $res . '
+    <section class="courses programs34">
+        <div class="container">
+            <div class="section-title sc-center justify-content-center text-center borderline">
+                <div class="title-top">
+                    <div class="title-quote">
+                        <span>Find More Courses</span>
                     </div>
+                    <h2>ACADEMICS OF IMS</h2>
                 </div>
             </div>
-        </section>
+
+            <div class="wrap-customize">
+                <div class="row">
+                ' . $res . '
+                </div>
+            </div>
+        </div>
+    </section>
+
     ';
 
 $jVars['module:home-service-list'] = $rescont;
@@ -552,10 +574,10 @@ if (!empty($primaryService)) {
                 </div>
                 <div class="col-lg-6">
                     <div class="cs-detail-info d-flex flex-column justify-content-center align-items-start h-100">
-                        <h3>' . htmlspecialchars($primaryRecord->heading) . '</h3>
+                        <h3>' . htmlspecialchars($primaryRecord->sub_title) . '</h3>
                         <div class="customize-bottom">
                             <ul class="d-flex justify-content-start">
-                                <li class="mr-3">' . htmlspecialchars($primaryRecord->sub_title) . '</li>
+                                <li class="mr-3">' . htmlspecialchars($primaryRecord->brief) . '</li>
                             </ul>
                         </div>
                     </div>

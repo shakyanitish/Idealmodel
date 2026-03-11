@@ -146,14 +146,21 @@
     ---------------------------------------------------- */
 
     $(document).ready(function() {
+        $('.btn-submit').on('click', function() {
+            var actVal = $(this).attr('btn-action');
+            $('#idValue').attr('myaction', actVal);
+        });
+
         // form submisstion actions
         jQuery('#pages_frm').validationEngine({
             autoHidePrompt: true,
             scroll: false,
             onValidationComplete: function(form, status) {
                 if (status == true) {
-                    $('#btn-submit').attr('disabled', 'true');
+                    $('.btn-submit').attr('disabled', 'true');
                     var action = ($('#idValue').val() == 0) ? "action=add&" : "action=edit&";
+                    for (instance in CKEDITOR.instances)
+                        CKEDITOR.instances[instance].updateElement();
                     var data = $('#pages_frm').serialize();
                     queryString = action + data;
                     $.ajax({
@@ -165,18 +172,19 @@
                             var msg = eval(data);
                             if (msg.action == 'warning') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
-                                    $('.my-msg').html('');
-                                }, 3000);
-                                $('#btn-submit').removeAttr('disabled');
+                                $('.btn-submit').removeAttr('disabled');
                                 $('.formButtons').show();
                                 return false
                             }
                             if (msg.action == 'success') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
-                                    window.location.href = "<?php echo ADMIN_URL ?>pages/list";
-                                }, 3000);
+                                var actionId = $('#idValue').attr('myaction');
+                                if (actionId == 2)
+                                    setTimeout(function() { window.location.href = "<?php echo ADMIN_URL?>pages/list"; }, 3000);
+                                if (actionId == 1)
+                                    setTimeout(function() { window.location.href = "<?php echo ADMIN_URL?>pages/addEdit"; }, 3000);
+                                if (actionId == 0)
+                                    setTimeout(function() { window.location.href = ""; }, 3000);
                             }
                             if (msg.action == 'notice') {
                                 showMessage(msg.action, msg.message);

@@ -2,7 +2,7 @@
 class Page extends DatabaseObject {
 
 	protected static $table_name = "tbl_pages";
-	protected static $db_fields = array('id', 'parent_id', 'slug', 'title', 'sub_title', 'linksrc', 'linktype', 'content', 'upcoming', 'status', 'sortorder', 'meta_title','date','meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date','homepage', 'image','gallery_images');
+	protected static $db_fields = array('id', 'parent_id', 'slug', 'title', 'sub_title', 'linksrc', 'linktype', 'content', 'content2', 'upcoming', 'status', 'sortorder', 'meta_title','date','meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date','homepage', 'image','gallery_images');
 	
 	public $id;
 	public $parent_id;
@@ -12,6 +12,8 @@ class Page extends DatabaseObject {
 	public $linksrc;
 	public $linktype;
 	public $content;
+
+	public $content2;
 	public $status;
 	public $sortorder;
 	public $meta_title;
@@ -42,7 +44,7 @@ class Page extends DatabaseObject {
 	
 	public static function get_by_Parent($parent=0){
 		global $db;
-		$sql = "SELECT id, slug, title, linksrc, linktype, content, image FROM ".self::$table_name." WHERE status=1 AND parent_id='".$parent."' ORDER BY sortorder ASC";
+		$sql = "SELECT id, slug, title, linksrc, linktype, content, content2, image FROM ".self::$table_name." WHERE status=1 AND parent_id='".$parent."' ORDER BY sortorder ASC";
 		return self::find_by_sql($sql);
 	}
 	

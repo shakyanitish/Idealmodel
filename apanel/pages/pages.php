@@ -14,7 +14,7 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
     clearImages($moduleTablename, $moduleFoldername . "/thumbnails");
     ?>
     <h3>
-        List Pages
+        List Homepage
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="AddNewPages();">
     <span class="glyph-icon icon-separator">
@@ -99,11 +99,13 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
         $pagesInfo = Page::find_by_id($pagesId);
         $status = ($pagesInfo->status == 1) ? "checked" : " ";
         $unstatus = ($pagesInfo->status == 0) ? "checked" : " ";
+        $homepage = ($pagesInfo->homepage == 1) ? "checked" : " ";
+        $nothomepage = ($pagesInfo->homepage == 0) ? "checked" : " ";
 
     endif;
     ?>
     <h3>
-        <?php echo (isset($_GET['id'])) ? 'Edit Page' : 'Add Page'; ?>
+        <?php echo (isset($_GET['id'])) ? 'Edit Homepage' : 'Add Homepage'; ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="viewPageslist();">
     <span class="glyph-icon icon-separator">
@@ -146,7 +148,7 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
                 </div>
 
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Date :
@@ -161,7 +163,7 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
 
 
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Banner Image :
@@ -203,7 +205,7 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
                 <!-- *****************************************************************************************
                 Image multi
                     ***************************************************************************************** -->
-                    <div class="form-row add-image">
+                    <div class="form-row add-image hide">
                         <div class="form-label col-md-2">
                             <label for="">
                                 Gallery Image :
@@ -274,6 +276,34 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
                            href="javascript:void(0);">
                             <span class="button-content">Read More</span>
                         </a>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-12">
+                        <label for="">
+                            Content 2 :
+                        </label>
+                        <textarea name="content2" id="content2"
+                                  class="large-textarea validate[required]"><?php echo !empty($pagesInfo->content2) ? $pagesInfo->content2 : ""; ?></textarea>
+                        <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore"
+                           href="javascript:void(0);">
+                            <span class="button-content">Read More</span>
+                        </a>
+                    </div>
+                </div>
+
+
+
+                
+                <div class="form-row">
+                    <div class="form-checkbox-radio col-md-9">
+                        <input type="radio" class="custom-radio" name="homepage" id="homepage1"
+                               value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>
+                        <label for="">Homepage</label>
+                        <input type="radio" class="custom-radio" name="homepage" id="homepage0"
+                               value="0" <?php echo !empty($nothomepage) ? $nothomepage : "checked"; ?>>
+                        <label for="">Not at Homepage</label>
                     </div>
                 </div>
 
@@ -358,7 +388,7 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
     
     <script>
         var base_url = "<?php echo ASSETS_PATH; ?>";
-        var editor_arr = ["content"];
+        var editor_arr = ["content", "content2"];
         create_editor(base_url, editor_arr);
     </script>
 

@@ -43,7 +43,7 @@ switch ($action) {
 		$record->content		= !empty($_REQUEST['content']) ? $_REQUEST['content'] : '';
 		$record->status			= $_REQUEST['status'];
 		$record->service_type 		    = $_REQUEST['type'];
-		// $record->brief 		= $_REQUEST['brief'];		
+		$record->brief 		= $_REQUEST['brief'];		
 		$record->youtube_link 		= !empty($_REQUEST['youtube_link']) ? $_REQUEST['youtube_link'] : '';
 		$record->instagram_link		= !empty($_REQUEST['instagram_link']) ? $_REQUEST['instagram_link'] : '';
 		$record->x_link 			= !empty($_REQUEST['x_link']) ? $_REQUEST['x_link'] : '';
@@ -113,7 +113,7 @@ switch ($action) {
 		$record->content		= !empty($_REQUEST['content']) ? $_REQUEST['content'] : '';
 		$record->status			= $_REQUEST['status'];
 		$record->service_type 		    = $_REQUEST['type'];
-		// $record->brief 		= $_REQUEST['brief'];	
+		$record->brief 		= $_REQUEST['brief'];	
 		$record->youtube_link 		= !empty($_REQUEST['youtube_link']) ? $_REQUEST['youtube_link'] : '';
 		$record->instagram_link		= !empty($_REQUEST['instagram_link']) ? $_REQUEST['instagram_link'] : '';
 

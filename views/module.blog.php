@@ -94,7 +94,7 @@ $jVars['module:bloglist'] = $bl;
 // New Home Page Blog List for Ideal Model
 $homelatestblog = '';
 if (defined('HOME_PAGE')) {
-    $latestBlogs = Blog::get_latestblog_by(3);
+    $latestBlogs = Blog::get_latestblog_by(1000);
     if (!empty($latestBlogs)) {
         $blogItems = '';
         foreach ($latestBlogs as $blog) {
@@ -109,7 +109,7 @@ if (defined('HOME_PAGE')) {
                         <a href="' . $linksrc . '">
                             <img src="' . $imgsrc . '" alt="' . $blog->title . '" />
                         </a>
-                        <span class="blog-tag"> Education </span>
+                        <span class="blog-tag"> ' . $blog->category . ' </span>
                     </div>
                     <div class="article-content">
                         <div class="artl-bottom">

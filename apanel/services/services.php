@@ -242,7 +242,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
 
 
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Heading :
@@ -388,10 +388,10 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
 
                 <!-- //  icon image upload -->
 
-                <div class="form-row add-image hide">
+                <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Logo Image :
+                            Image :
                         </label>
                     </div>
                     <div class="form-input col-md-10 uploader">
@@ -457,7 +457,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
 
 
                 <!-- //brief -->
-                <!-- <div class="form-row">
+                <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Brief :
@@ -468,7 +468,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                                   class="medium-textarea character-brief validate[required]"><?php echo !empty($advInfo->brief) ? $advInfo->brief : ""; ?></textarea>
                         <div class="brief-remaining clear input-description">250 characters left</div>
                     </div>
-                </div> -->
+                </div> 
 
                 <!-- brief end -->
                 <?php if (($typeid == 2) || ($typeid == 3)) { ?>

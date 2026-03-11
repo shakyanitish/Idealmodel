@@ -128,6 +128,7 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
 
         // Start with default banner
         $imglink = $defaultImg;
+        $hasImage = false;
 
         // If the article has images
         if (!empty($recRow->image) && $recRow->image != "a:0:{}") {
@@ -139,6 +140,7 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
 
             if (file_exists($file_path)) {
                 $imglink = IMAGE_PATH . 'articles/' . $imageList[$imgno];
+                $hasImage = true;
             }
         }
         $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($recRow->content));
@@ -158,12 +160,14 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
         <section class="about-company inner-about">
             <div class="container">
                 <div class="row">
+                    ' . ($hasImage ? '
                     <div class="col-lg-5 col-md-12 wow fadeInLeftBig">
                         <div class="about-wrap-img">
                             <img src="' . $imglink . '" alt="' . $recRow->title . '" />
                         </div>
                     </div>
-                    <div class="col-lg-7 col-md-12 wow fadeInRightBig">
+                    <div class="col-lg-7 col-md-12 wow fadeInRightBig">' : '
+                    <div class="col-lg-12 col-md-12 wow fadeInRightBig">') . '
                         <div class="about-us-wrap">
                             <div class="about-title">
                                 <h4 class="top-title mb-3">' . $recRow->sub_title . '</h4>

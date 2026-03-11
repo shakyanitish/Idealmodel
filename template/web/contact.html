@@ -39,6 +39,82 @@
     <script src="js/main.js"></script>
     <script src="js/custom-swiper.js"></script>
     <script src="js/custom-nav.js"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js'></script>
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#contactform').validate({
+                errorElement: 'span',
+                errorClass: 'validate-has-error',
+                // --- FIX IS HERE ---
+                errorPlacement: function (error, element) {
+                    // Find the closest parent with class 'input-group'
+                    // and insert the error element *after* it.
+                    if (element.closest('.input-group').length) {
+                        error.insertAfter(element.closest('.input-group'));
+                    } else {
+                        // Fallback for fields not in an input-group (if any)
+                        error.insertAfter(element);
+                    }
+                },
+                rules: {
+                    name: { required: true },
+                    phone: { required: true, number: true },
+                    address: { required: true },
+                    email: { required: true, email: true },
+                    // message: { required: true }  
+                },
+                messages: {
+                    name: { required: "Please enter your Full Name." },
+                    phone: { required: "Please enter your Phone Number." },
+                    address: { required: "Please enter your Address." },
+                    email: { required: "Please enter your Email Address." },
+                    // message: { required: "Please enter your Message." }
+                },
+                submitHandler: function (form) {
+                    var recaptcha = $("#g-recaptcha-response").val();
+                    if (recaptcha === "") {
+                        event.preventDefault();
+                        alert("Please check the recaptcha");
+                        return false;
+                    }
+
+                    const formData = new FormData(form);
+                    formData.append("action", "forContact");
+
+                    $("#btn").attr("disabled", true).text('Processing...');
+
+                    $.ajax({
+                        type: "POST",
+                        url: "enquery_mail.php",
+                        data: formData,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            $("#btn").removeAttr("disabled").text('Send Message');
+                            $('div#result_msg').html(data.message).css('display', 'block').fadeOut(8000);
+                            form.reset();
+                            grecaptcha.reset(0);
+                        }
+                    });
+
+                    return false;
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
     <script>(function(){var js = "window['__CF$cv$params']={r:'84b7cb1e1ebe2f9e',t:'MTcwNjI2MjAxNi4yMDEwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script>
 </body>
 </html>

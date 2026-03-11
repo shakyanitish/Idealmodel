@@ -30,8 +30,11 @@ switch ($action) {
 		$record->slug 		= $_REQUEST['slug'];
 		$record->title 		= $_REQUEST['title'];
 		$record->image			= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';
+		$record->homepage	= $_REQUEST['homepage'];
+
 		$record->gallery_images = serialize(array_values(array_filter($_REQUEST['galleryArrayname']))); // for gallery images serialize	
 		$record->content	= $_REQUEST['content'];
+		$record->content2	= $_REQUEST['content2'];
 		$record->status		= $_REQUEST['status'];
 		$record->meta_title		= $_REQUEST['meta_title'];
 		$record->meta_keywords		= $_REQUEST['meta_keywords'];
@@ -80,8 +83,11 @@ switch ($action) {
 		$record->slug 		= $_REQUEST['slug'];
 		$record->title 		= $_REQUEST['title'];
 		$record->upcoming 		= $_REQUEST['upcoming'];
+		$record->homepage	= $_REQUEST['homepage'];
+
 		$record->image			= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';
 		$record->content	= $_REQUEST['content'];
+		$record->content2	= $_REQUEST['content2'];
 		$record->status		= $_REQUEST['status'];
 		$record->meta_title		= $_REQUEST['meta_title'];
 		$record->meta_keywords		= $_REQUEST['meta_keywords'];

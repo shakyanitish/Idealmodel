@@ -8245,3 +8245,8 @@ footer .footer-upper .copyright-main .copyright-text {
 	width: 40px;
 	height: 40px
 }
+
+
+.validate-has-error {
+    color: #d32f2f !important;
+}

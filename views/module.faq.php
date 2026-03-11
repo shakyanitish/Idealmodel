@@ -68,13 +68,13 @@ if (defined('HOME_PAGE')) {
             $collapsed = ($i == 0) ? 'mad-panels-active' : '';
             $show = ($i == 0) ? 'show' : '';
             $faq_details .= '
-            <dt class="mad-panels-title '. $collapsed .'">
+            <dt class="mad-panels-title ' . $collapsed . '">
                 <button id="' . $faq->id . '-button" type="button" aria-expanded="false" aria-controls="' . $faq->id . '" aria-disabled="false">
-                '. $faq->title .'
+                ' . $faq->title . '
                 </button>
             </dt>
             <dd id="' . $faq->id . '" class="mad-panels-definition">
-                <p> '. $faq->content .'</p>
+                <p> ' . $faq->content . '</p>
             </dd>
 
                 
@@ -82,7 +82,8 @@ if (defined('HOME_PAGE')) {
         }
 
         $faq_details .= '';
-    } else {
+    }
+    else {
         $faq_details .= '<h3 class="text-center p-4">No FAQ Found</h3>';
     }
 }
@@ -129,7 +130,7 @@ if (defined('CAREER_PAGE')) {
                                 ' . $vacancy->content . '
                             </div>
                             <div class="call-btn">
-                                <div class="btn" data-toggle="modal" data-target="#exampleModal">Apply</div>
+                                <div class="btn" data-toggle="modal" data-target="#exampleModal" data-title="' . htmlspecialchars($vacancy->title, ENT_QUOTES) . '">Apply</div>
                             </div>
                         </div>
                     </div>

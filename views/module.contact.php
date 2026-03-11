@@ -107,28 +107,37 @@ if (defined('CONTACT_PAGE')) {
             <div class="row">
                 <div class="col-md-6">
                     <div class="contact-form">
-                        <form class="m-auto text-center">
+                        <form class="m-auto text-center" id="contactform">
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="form6Example1" class="form-control" placeholder="Name" />
+                                        <input type="text" name="name" id="form6Example1" class="form-control" placeholder="Name*" />
                                     </div>
                                 </div>
                             </div>
         
                             <div class="form-outline mb-4">
-                                <input type="email" id="form6Example5" class="form-control" placeholder="Email" />
+                                <input type="email" name="email" id="form6Example5" class="form-control" placeholder="Email*" />
                             </div>
         
                             <div class="form-outline mb-4">
-                                <input type="number" id="form6Example6" class="form-control" placeholder="Phone No." />
+                                <input type="text" name="phone" id="form6Example6" class="form-control" placeholder="Phone No.*" /oninput="this.value = this.value.replace(/[^0-9]/g, \'\');">
                             </div>
         
                             <div class="form-outline mb-4">
-                                <textarea class="form-control" id="form6Example7" placeholder="Message" rows="4"></textarea>
+                                <textarea class="form-control" name="message" id="form6Example7" placeholder="Message" rows="4"></textarea>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <div class="g-recaptcha"
+                                                data-sitekey="6Lf5y4YsAAAAADK6EUEgiOMYkpq4jT0VBWemrX5a"></div>
                             </div>
         
-                            <button type="submit" class="btn">Send Message</button>
+                            <button type="submit" id="btn" class="btn">Send Message</button>
+
+                            <div class="col-12 text-center">
+                                <div id="result_msg" class="mt-3" style="display:none;"></div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -142,15 +151,8 @@ if (defined('CONTACT_PAGE')) {
         </div>
     </section>
 ';
-    $map = '
-                        <div class="ul-contact-map">
-                        <iframe src="" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            
-                        </div>
-';
-
-    $jVars['module:contact-us'] = $rescont;
-    $jVars['module:contact-map'] = $map;
+   
+$jVars['module:contact-us'] = $rescont;
 
 
 

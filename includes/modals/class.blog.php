@@ -4,7 +4,7 @@ class Blog extends DatabaseObject
 {
 
     protected static $table_name = "tbl_blog";
-    protected static $db_fields = array('id', 'slug', 'title', 'author', 'brief', 'content', 'status', 'meta_keywords', 'meta_description', 'blog_date','linksrc','linktype', 'archive_date', 'sortorder', 'type', 'viewcount', 'added_date', 'image', 'source');
+    protected static $db_fields = array('id', 'slug', 'title', 'author', 'brief', 'content', 'status', 'meta_keywords', 'meta_description', 'blog_date','linksrc','linktype', 'archive_date', 'sortorder', 'type', 'viewcount', 'added_date', 'image', 'source', 'category');
 
     public $id;
     public $slug;
@@ -25,13 +25,14 @@ class Blog extends DatabaseObject
     public $added_date;
     public $image;
     public $source;
+    public $category;
 
     //get latest blog
     public static function get_latestblog_by($limit = '')
     {
         global $db;
         $cond = !empty($limit) ? 'LIMIT ' . $limit : '';
-        $sql = "SELECT id, slug, title, author, brief, image, blog_date, source, viewcount, linksrc, linktype FROM " . self::$table_name . " WHERE status='1' ORDER BY blog_date DESC $cond";
+        $sql = "SELECT id, slug, title, author, brief, image, blog_date, source, viewcount, linksrc, linktype, category FROM " . self::$table_name . " WHERE status='1' ORDER BY blog_date DESC $cond";
         // $sql = "SELECT id, slug, title, author, brief, content, image, blog_date, source, viewcount, linksrc, linktype FROM " . self::$table_name . " WHERE status='1' ORDER BY blog_date DESC $cond";
 
         $result = self::find_by_sql($sql);
