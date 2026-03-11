@@ -21,84 +21,43 @@ if (!empty($records)) {
         $file_path = BASE_URL . "images/download/docs/" . $record->image;
 
         $downloadRows .= '
-                                <tr data-category="' . $record->category . '">
+                                <tr>
                                     <th scope="row">' . $sn++ . '</th>
                                     <td>' . $record->title . '</td>
-                                    <td>' . $file_date . '</td>
                                     <td>' . $file_ext . '</td>
-                                    <td><button><a href="' . $file_path . '" download><img src="template/web/assets/img/icon/download.png" alt="download">Download</a></button></td>
+                                    <td><button><a href="' . $file_path . '" download><img src="' . BASE_URL . 'template/web/images/download.png" alt="download">Download</a></button></td>
                                 </tr>';
     }
-} else {
+}
+else {
     $downloadRows = '
                                 <tr>
-                                    <td colspan="5" class="text-center">No downloads available</td>
+                                    <td colspan="4" class="text-center">No downloads available</td>
                                 </tr>';
 }
 
-$case = '
-        <section class="ul-about ul-section-spacing wow animate__fadeInUp">
-            <div class="ul-container">
-                <div class="row justify-content-center gy-4">
-                    <div class="col-md-4">
-                        <div class="case-inner">
-                            <h6 class="mt-2 me-2">Category:</h6>
-                            <select class="form-select" id="categoryFilter" aria-label="Filter by category" onchange="filterByCategory(this.value)">
-                                <option value="">All Categories</option>
-                                <option value="1">Research</option>
-                                <option value="2">Case Study</option>
-                                <option value="3">Medical Study</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row justify-content-center gy-4">
-
-                    <div class="col-md-8">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">S.N</th>
-                                    <th scope="col">Case Study</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Download</th>
-                                </tr>
-                            </thead>
-                            <tbody id="downloadTableBody">
-                                ' . $downloadRows . '
-                            </tbody>
-                        </table>
-                    </div>
+$resource_list = '
+    <section class="about-company inner-about">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-8">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.N</th>
+                                <th scope="col">Resources</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ' . $downloadRows . '
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </section>
-        
-        <script>
-            function filterByCategory(categoryId) {
-                const rows = document.querySelectorAll("#downloadTableBody tr");
-                let visibleCount = 0;
-                
-                rows.forEach(row => {
-                    if (categoryId === "" || categoryId === undefined || categoryId === null) {
-                        row.style.display = "";
-                        visibleCount++;
-                        // Update serial number
-                        row.querySelector("th").textContent = visibleCount;
-                    } else {
-                        const rowCategory = row.getAttribute("data-category");
-                        if (rowCategory === categoryId) {
-                            row.style.display = "";
-                            visibleCount++;
-                            // Update serial number
-                            row.querySelector("th").textContent = visibleCount;
-                        } else {
-                            row.style.display = "none";
-                        }
-                    }
-                });
-            }
-        </script>';
+        </div>
+    </section>';
 
-$jVars['module:case-study'] = $case;
+$jVars['module:resource-list'] = $resource_list;
+$jVars['module:case-study'] = $resource_list;

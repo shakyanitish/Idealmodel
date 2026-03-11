@@ -84,7 +84,7 @@ $footer = '
                 <div class="row">
                     <div class="col-lg-10">
                         <div class="f-maincontent">
-                            <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt />
+                            <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->fb_upload . '" alt />
                         </div>
                     </div>
 

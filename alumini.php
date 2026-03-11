@@ -1,18 +1,14 @@
 <?php
-ini_set('display_startup_errors', 1);
-ini_set('display_errors', 1);
-//include ("jpcache/jpcache.php");
 
-define('COMPANY_PAGE', 1); // Track homepage.
+define('HOMEPAGE', 0); // Track homepage.
+define('ALUMINI_PAGE', 1);// Track Article page.
 define('JCMSTYPE', 0); // Track Current site language.
 
 require_once("includes/initialize.php");
 
-// pr($_REQUEST);
-
 $currentTemplate	= Config::getCurrentTemplate('template');
 $jVars 				= array();
-$template 			= "template/{$currentTemplate}/company123.html";
+$template 			= "template/web/alumini.html";
 
 require_once('views/modules.php');
 

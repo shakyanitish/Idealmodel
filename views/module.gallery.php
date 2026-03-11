@@ -66,7 +66,8 @@ $siteRegulars = Config::find_by_id(1);
 $imglink = $siteRegulars->gallery_upload;
 if (!empty($imglink)) {
     $img = IMAGE_PATH . 'preference/gallery/' . $siteRegulars->gallery_upload;
-} else {
+}
+else {
     $img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
 }
 
@@ -132,26 +133,44 @@ $jVars['module:gallery-nav'] = $thegalnav;
 
 
 $videomain = '';
-if (defined('VIDEO_PAGE')) {
+if (defined('HOME_PAGE')) {
     $videodatas = Video::getAllVideos();
     if (!empty($videodatas)) {
-        $videomain .= '  <section class="section-padding bg-darkbrown">
-        <div class="container">
-            <div class="row">';
-
+        $videoitems = '';
         foreach ($videodatas as $videodata) {
-
-            $videomain .= ' 
-                        <div class="col-md-6">
-                            <div class="video-info">
-                                <iframe width="560" height="315" src="' . $videodata->url . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
+            $videoitems .= ' 
+                    <div class="col-lg-4 col-md-6 col-sm-12 customize-wrap mb-4 wow fadeInUp">
+                        <div class="customize-item">
+                            <h4>' . $videodata->title . '</h4>
+                            <iframe width="560" height="315" src="' . $videodata->url . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
+                    </div>
+
 ';
         }
+
+        $videomain .= '  
+            <section class="courses">
+        <div class="container">
+            <div class="section-title borderline">
+                <div class="title-top">
+                    <h3>OUR <span class="cl-blue">STORIES</span></h3>
+                    <p>Experience transformative education at Ideal Model School, shaping brighter future.</p>
+                </div>
+            </div>
+
+            <div class="wrap-customize">
+                <div class="row">
+                ' . $videoitems . '
+                </div>
+            </div>
+        </div>
+    </section>
+        
+        ';
     }
 
-    // pr($videodatas);
+// pr($videodatas);
 
 
 }

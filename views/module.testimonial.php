@@ -174,7 +174,7 @@ if (defined('HOME_PAGE')) {
             <div class="col-md-6">
                 <div class="feedback-inner">
                     <div class="consult-content">
-                        <p class="mb-0">"' . strip_tags($tstRow->content) . '"</p>
+                        <p class="mb-0">' . strip_tags($tstRow->content) . '</p>
                     </div>
                     <div class="consult-title mt-3 d-flex justify-content-start">
                         <img src="' . $imgsrc . '" alt="' . $tstRow->name . '" />

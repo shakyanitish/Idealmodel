@@ -5331,7 +5331,7 @@ header #navbar {
 }
 
 .header_menu.header_menu_detail .navbar.navbar-default .nav.navbar-nav li.active a {
-    color: #06bbcc;
+    color: #f26723;
 }
 
 .header_menu .navbar.navbar-default .nav.navbar-nav li a i {
@@ -5355,7 +5355,7 @@ header #navbar {
 
 .header_menu .navbar.navbar-default .nav.navbar-nav li:hover a,
 .header_menu .navbar.navbar-default .nav.navbar-nav li.active a {
-	color: #06bbcc;
+	color:#f26723;
 	background: 0 0
 }
 
@@ -5409,7 +5409,7 @@ header #navbar {
 }
 
 .header_menu .navbar.navbar-default .nav.navbar-nav li.submenu .dropdown-menu li a:hover {
-	background: #06bbcc;
+	background: #005ea2;
 	color: #fff
 }
 
@@ -6454,6 +6454,10 @@ nav.navbar.navbar-default.navbar-sticky-in .logo-black {
 	background-color: #2196f317;
 } 
 
+.career-form2 input[type=file] {
+    height:50px;
+}
+
 .call-action .call-wrap {
 	background: #fff;
 	/*padding: 40px;*/
@@ -6481,8 +6485,8 @@ nav.navbar.navbar-default.navbar-sticky-in .logo-black {
 }
 
 .call-action .call-wrap .call-btn .btn {
-	width: 60%;
-	font-size: 18px
+	    width: 35%;
+    font-size: 16px;
 }
 
 @media(max-width:991px) {

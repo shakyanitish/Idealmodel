@@ -213,6 +213,52 @@ jQuery('#videos_frm').validationEngine({
     }
 
     // Edit records
+    function editVideoTitle(Re) {
+        var clicked = $('.vidclicked' + Re);
+        $(clicked).html("");
+        $('<input/>').attr({
+            type: 'text',
+            id: 'ne-title',
+            name: 'ne-title',
+            class: 'validate[required,length[0,250]] col-md-9',
+            'vidId': Re
+        }).appendTo($(clicked)).focus();
+        $(clicked).append(' <button type="submit" id="ne-submit" class="col-md-3">Save</button>');
+
+        $('.up-title').on("click", "#ne-submit", function (e) {
+            var data = $("#ne-title");
+            var id = $(data).attr("vidId");
+            var title = $(data).val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: getLocation(),
+                data: 'action=editVideoTitle&id=' + id + '&title=' + title,
+                success: function (data) {
+                    var msg = eval(data);
+                    if (msg.action == 'success') {
+                        showMessage(msg.action, msg.message);
+                        setTimeout(function () {
+                            window.location.href = window.location.href;
+                        }, 3000);
+                    }
+                    if (msg.action == 'error') {
+                        showMessage(msg.action, msg.message);
+                        setTimeout(function () {
+                            window.location.href = window.location.href;
+                        }, 3000);
+                    }
+                    if (msg.action == 'notice') {
+                        showMessage(msg.action, msg.message);
+                        setTimeout(function () {
+                            window.location.href = window.location.href;
+                        }, 3000);
+                    }
+                }
+            });
+        });
+    }
+
     function editRecord(Re) {
         $.ajax({
             type: "POST",
@@ -223,7 +269,10 @@ jQuery('#videos_frm').validationEngine({
                 var msg = eval(data);
                 $("#title").val(msg.title);
                 $("#source").val(msg.vsource);
+                $("#url_type").val(msg.url_type);
                 $("#idValue").val(msg.editId);
+                $('html, body').animate({ scrollTop: $("#video_frm").offset().top - 50 }, 500);
+                $("#title").focus();
             }
         });
     }

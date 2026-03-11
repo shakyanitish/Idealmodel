@@ -37,15 +37,24 @@ function check_url($value)
 
 function get_youtube_code($url)
 {
-		$parse = parse_url($url);
-		if(!empty($parse['query'])) {
-		  preg_match("/v=([^&]+)/i", $url, $matches);
-		  return $matches[1];
-		} else {
-		  //to get basename
-		  $info = pathinfo($url);
-		  return $info['basename'];
-		}
+	// Handle youtu.be shortlinks
+	if (preg_match('/youtu\.be\/([a-zA-Z0-9_-]{11})/', $url, $matches)) {
+		return $matches[1];
+	}
+	// Handle youtube.com/watch?v= and youtube.com/embed/
+	if (preg_match('/(youtube\.com|youtube-nocookie\.com)\/(?:watch\?v=|embed\/)([a-zA-Z0-9_-]{11})/', $url, $matches)) {
+		return $matches[2];
+	}
+	// Fallback to old method
+	$parse = parse_url($url);
+	if(!empty($parse['query'])) {
+		preg_match("/v=([^&]+)/i", $url, $matches);
+		return !empty($matches[1]) ? $matches[1] : '';
+	} else {
+		//to get basename
+		$info = pathinfo($url);
+		return $info['basename'];
+	}
 }
 
 function getHost($Address) 
@@ -56,16 +65,8 @@ function getHost($Address)
 
 function get_youtube_thumbnail($url)
 {
-	$parse = parse_url($url);
-	if(!empty($parse['query'])) {
-	preg_match("/v=([^&]+)/i", $url, $matches);
-	$id = $matches[1];
-	} else {
-	//to get basename
-	$info = pathinfo($url);
-	$id = $info['basename'];
-	}	
-	$img = "http://img.youtube.com/vi/$id/1.jpg";
+	$id = get_youtube_code($url);
+	$img = "https://img.youtube.com/vi/$id/1.jpg";
 	return $img;
 }
 

@@ -16,6 +16,7 @@
 			$record = new CombinedNews();		
 			$record->slug 		= create_slug($_REQUEST['title']);
 			$record->title 		= $_REQUEST['title'];
+			$record->subtitle 	= $_REQUEST['subtitle'];
 			$record->author 	= $_REQUEST['author'];	
 //			$record->brief 		= $_REQUEST['brief'];
 			$record->content	= $_REQUEST['content'];
@@ -59,6 +60,7 @@
 			
 			$record->slug 		= create_slug($_REQUEST['title']);				
 			$record->title 		= $_REQUEST['title'];
+			$record->subtitle 	= $_REQUEST['subtitle'];
 			$record->author 	= $_REQUEST['author'];	
 //			$record->brief 		= $_REQUEST['brief'];
 			$record->content	= $_REQUEST['content'];

@@ -41,7 +41,7 @@ RewriteRule ^services/([a-zA-Z0-9-]+)$ service_list.php?slug=$1 [L]
 RewriteRule ^gallery/?$ gallery.php [L]
 
 #For gallery pages.
-RewriteRule ^video/?$ video.php [L]
+#RewriteRule ^video/?$ video.php [L]
 
 
 RewriteRule ^program-details.html/?$ subpkgdetail.php [L]
@@ -57,7 +57,7 @@ RewriteRule ^room/?$ destination_list.php [L]
 RewriteRule ^contact-us/?$ contact.php [L]
 
 #For reservation pages.
-RewriteRule ^case/?$ case.php [L]
+RewriteRule ^resources/?$ case.php [L]
 
 #For news pages
 RewriteRule ^news/?$ news_list.php [L]
@@ -70,7 +70,7 @@ RewriteRule ^offer-list/?$ offers.php [L]
 
 
 #For inner pages.
-#RewriteRule ^company/?$ company.php?slug=$1  [L]
+RewriteRule ^alumini/?$ alumini.php?slug=$1  [L]
 #RewriteRule ^company/([a-zA-Z0-9-]+)$ company.php?slug=$1 [L]
 
 
@@ -79,7 +79,7 @@ RewriteRule ^offer-list/?$ offers.php [L]
 #RewriteRule ^facilities/?$ facilities.php [L]
 
 #For facq pages.
-RewriteRule ^faq/?$ faq.php [L]
+RewriteRule ^career/?$ faq.php [L]
 
 #For career pages.
 RewriteRule ^career-form/([a-zA-Z0-9-]+)?$ career-form.php?slug=$1 [L]

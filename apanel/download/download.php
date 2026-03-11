@@ -39,7 +39,7 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
                         <th style="display:none;"></th>
                         <th class="text-center"><input class="check-all" type="checkbox" /></th>
                         <th class="text-center">Title</th>
-                        <th class="text-center">Category</th>
+                        <!-- <th class="text-center">Category</th> -->
                         <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                     </tr>
                 </thead>
@@ -59,9 +59,9 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
                                 </div>
                             </td>
 
-                            <td>
+                            <!-- <td>
                                 <?php echo $download_categories[$record->category] ?? 'N/A'; ?>
-                            </td>
+                            </td> -->
 
 
                             <td class="text-center">
@@ -132,7 +132,7 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
             <form action="" class="col-md-12 center-margin" id="download_frm">
                 <input type="hidden" name="category" value="<?php echo $categoryid; ?>" />
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Category :
@@ -158,7 +158,7 @@ if (isset($_GET['page']) && $_GET['page'] == "download" && isset($_GET['mode']) 
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Date :

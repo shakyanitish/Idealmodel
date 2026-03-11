@@ -131,8 +131,8 @@ if ($saveVideo): ?>
                                         <i class="glyph-icon <?php echo $imageStatus; ?>"
                                            id="toggleImg<?php echo $videoRow->id; ?>"></i>
                                     </a>
-                                    <a class="loadingbar-demo btn small float-right" href="javascript:void(0);"
-                                       onclick="editRecord(<?php echo $videoRow->id; ?>);">
+                                    <a class="btn small float-right" href="javascript:void(0);"
+                                       onclick="editVideoTitle(<?php echo $videoRow->id; ?>);" title="Edit Title">
                                         <i class="glyph-icon icon-edit"></i>
                                     </a>
                                     <span><?php echo $videoRow->host; ?></span>
@@ -145,7 +145,9 @@ if ($saveVideo): ?>
                                              alt="Play"/>
                                     </a>
                                 </div>
-                                <span><?php echo $videoRow->title; ?></span>
+                                <div class="button-group" data-toggle="buttons">
+                                    <span class="up-title vidclicked<?php echo $videoRow->id; ?>" vid-id="<?php echo $videoRow->id; ?>"><?php echo $videoRow->title; ?></span>
+                                </div>
                                 <!--<span><?php echo $videoRow->content; ?></span>-->
                             </div>
                         </div>

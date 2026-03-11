@@ -1,12 +1,11 @@
 <link href="<?php echo ASSETS_PATH; ?>uploadify/uploadify.css" rel="stylesheet" type="text/css"/>
 <?php
 $moduleTablename = "tbl_conbined_news"; // Database table name
-$moduleId = 29;                // module id >>>>> tbl_modules
-$moduleFoldername = "combinednews";        // Image folder name
+$moduleId = 29; // module id >>>>> tbl_modules
+$moduleFoldername = "combinednews"; // Image folder name
 //$position = array(1=>'News Page', 2=>'Workshop Page', 3=>'Both Page');
 
-if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode']) && $_GET['mode'] == "list"):
-//    clearImages($moduleTablename, $moduleFoldername);
+if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode']) && $_GET['mode'] == "list"):    //    clearImages($moduleTablename, $moduleFoldername);
 //    clearImages($moduleTablename, $moduleFoldername . "/thumbnails");
     SerclearImages($moduleTablename, $moduleFoldername);
     SerclearImages($moduleTablename, $moduleFoldername . "/thumbnails");
@@ -20,7 +19,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
     clearImages($moduleTablename, $moduleFoldername . "/banner", "banner_image");
     clearImages($moduleTablename, $moduleFoldername . "/banner/thumbnails", "banner_image");
 
-    ?>
+?>
     <style>
         .divContent a {
             position: relative;
@@ -64,7 +63,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
 
                 <tbody>
                 <?php $records = CombinedNews::find_by_sql("SELECT * FROM " . $moduleTablename . " ORDER BY sortorder DESC ");
-                foreach ($records as $key => $record): ?>
+    foreach ($records as $key => $record): ?>
                     <tr id="<?php echo $record->id; ?>">
                         <td style="display:none;"><?php echo $key + 1; ?></td>
                         <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/></td>
@@ -91,9 +90,9 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                         <!-- <td><?php //echo $position[$record->display];?></td>   -->
                         <td class="text-center">
                             <?php
-                            $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
-                            $statusText = ($record->status == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub'];
-                            ?>
+        $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
+        $statusText = ($record->status == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub'];
+?>
                             <a href="javascript:void(0);"
                                class="btn small <?php echo $statusImage; ?> tooltip-button statusToggler"
                                data-placement="top" title="<?php echo $statusText; ?>"
@@ -112,7 +111,8 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                             <input name="sortId" type="hidden" value="<?php echo $record->id; ?>">
                         </td>
                     </tr>
-                <?php endforeach; ?>
+                <?php
+    endforeach; ?>
                 </tbody>
             </table>
         </div>
@@ -131,22 +131,22 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
         </a>
     </div>
 
-<?php elseif (isset($_GET['mode']) && $_GET['mode'] == "addEdit"):
+<?php
+elseif (isset($_GET['mode']) && $_GET['mode'] == "addEdit"):
     if (isset($_GET['id']) && !empty($_GET['id'])):
         $combinednewsId = addslashes($_REQUEST['id']);
         $combinednewsInfo = CombinedNews::find_by_id($combinednewsId);
         $status = ($combinednewsInfo->status == 1) ? "checked" : " ";
         $unstatus = ($combinednewsInfo->status == 0) ? "checked" : " ";
-
-//        $addtype = ($combinednewsInfo->type == 1) ? "checked" : " ";
+    //        $addtype = ($combinednewsInfo->type == 1) ? "checked" : " ";
 //        $unaddtype = ($combinednewsInfo->type == 0) ? "checked" : " ";
 //        $imghide = ($combinednewsInfo->type == 0) ? 'hide' : ' ';
 //        $videohide = ($combinednewsInfo->type == 1) ? 'hide' : ' ';
 
     endif;
-    ?>
+?>
     <h3>
-        <?php echo (isset($_GET['id'])) ? 'Edit News' : 'Add News'; ?>
+        <?php echo(isset($_GET['id'])) ? 'Edit News' : 'Add News'; ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="viewcombinednewslist();">
     <span class="glyph-icon icon-separator">
@@ -172,7 +172,25 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                                value="<?php echo !empty($combinednewsInfo->title) ? $combinednewsInfo->title : ""; ?>">
                     </div>
                 </div>
+
+
                 <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Sub title :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-6">
+                        <input placeholder=" Sub title" class="col-md-6 validate[required,length[0,200]]" type="text"
+                               name="subtitle" id="subtitle"
+                               value="<?php echo !empty($combinednewsInfo->subtitle) ? $combinednewsInfo->subtitle : ""; ?>">
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Author :
@@ -182,10 +200,10 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                         <input placeholder="News Author Name" class="col-md-6 validate[required,length[0,200]]"
                                type="text" name="author" id="author"
                                value="<?php $adminName = User::get_user_shotInfo_byId(1);
-                               echo !empty($combinednewsInfo->author) ? $combinednewsInfo->author : $adminName->first_name; ?>">
+    echo !empty($combinednewsInfo->author) ? $combinednewsInfo->author : $adminName->first_name; ?>">
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Date :
@@ -208,7 +226,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                 <div class="form-row add-home-image">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Home/Posts Image :
+                        Image :
                         </label>
                     </div>
                     <?php if (!empty($combinednewsInfo->home_image)): ?>
@@ -217,11 +235,11 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                                 <div class="button-group" data-toggle="buttons">
                                     <span class="float-left">
                                         <?php
-                                        if (file_exists(SITE_ROOT . "images/combinednews/home/" . $combinednewsInfo->home_image)):
-                                            $filesize = filesize(SITE_ROOT . "images/combinednews/home/" . $combinednewsInfo->home_image);
-                                            echo 'Size : ' . getFileFormattedSize($filesize);
-                                        endif;
-                                        ?>
+        if (file_exists(SITE_ROOT . "images/combinednews/home/" . $combinednewsInfo->home_image)):
+            $filesize = filesize(SITE_ROOT . "images/combinednews/home/" . $combinednewsInfo->home_image);
+            echo 'Size : ' . getFileFormattedSize($filesize);
+        endif;
+?>
                                     </span>
                                     <a class="btn small float-right" href="javascript:void(0);"
                                        onclick="deleteSavedCombinedNewsHomeimage(<?php echo $combinednewsInfo->id; ?>);">
@@ -234,7 +252,8 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                                        value="<?php echo !empty($combinednewsInfo->home_image) ? $combinednewsInfo->home_image : ""; ?>"/>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php
+    endif; ?>
                     <div class="form-input col-md-10 home_uploader <?php echo !empty($combinednewsInfo->home_image) ? "hide" : ""; ?>">
                         <input type="file" name="home_upload" id="home_upload" class="transparent no-shadow">
                         <label><small>Image Dimensions (1000 px X 665 px)</small></label>
@@ -266,20 +285,20 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                         </label>
                     </div>-->
                     <?php if (!empty($combinednewsInfo->image)):
-                        $imgall = unserialize($combinednewsInfo->image);
-                        if ($imgall) {
-                            foreach ($imgall as $imgk => $imgv) {
-                                $deleteid = rand(0, 99999); ?>
+        $imgall = unserialize($combinednewsInfo->image);
+        if ($imgall) {
+            foreach ($imgall as $imgk => $imgv) {
+                $deleteid = rand(0, 99999); ?>
                                 <div class="col-md-3" id="removeSavedimg<?php echo $deleteid; ?>">
                                     <div class="infobox info-bg">
                                         <div class="button-group" data-toggle="buttons">
                                             <span class="float-left">
                                                 <?php
-                                                if (file_exists(SITE_ROOT . "images/combinednews/" . $imgv)):
-                                                    $filesize = filesize(SITE_ROOT . "images/combinednews/" . $imgv);
-                                                    echo 'Size : ' . getFileFormattedSize($filesize);
-                                                endif;
-                                                ?>
+                if (file_exists(SITE_ROOT . "images/combinednews/" . $imgv)):
+                    $filesize = filesize(SITE_ROOT . "images/combinednews/" . $imgv);
+                    echo 'Size : ' . getFileFormattedSize($filesize);
+                endif;
+?>
                                             </span>
                                             <a class="btn small float-right" href="javascript:void(0);"
                                                onclick="deleteSavedCombinedNewsimage('<?php echo $deleteid; ?>');">
@@ -292,9 +311,10 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                                                class=""/>
                                     </div>
                                 </div>
-                            <?php }
-                        }
-                    endif; ?>
+                            <?php
+            }
+        }
+    endif; ?>
                     <!--<div class="form-input col-md-10 uploader <?php echo !empty($combinednewsInfo->image) ? "hide" : ""; ?>">-->
                     <!--<div class="form-input col-md-10 uploader">
                         <input type="file" name="gallery_upload" id="gallery_upload" class="transparent no-shadow">
@@ -304,7 +324,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                 </div>-->
 
                 <div class="form-row <?php echo !empty($videohide) ? $videohide : '';
-                echo isset($_GET['id']) ? '' : 'hide'; ?> hide videolink">
+    echo isset($_GET['id']) ? '' : 'hide'; ?> hide videolink">
                     <div class="form-label col-md-2">
                         <label for="">
                             Listing Video link :
@@ -321,7 +341,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Banner Image :
@@ -336,18 +356,18 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                     <!-- Upload user image preview -->
                     <div id="preview_Image2"><input type="hidden" name="imageArrayname2"/></div>
                     <!-- <div id="preview_Image2"><input type="hidden" name="imageArrayname2" value="<?php //echo !empty($combinednewsInfo->banner_image)?$combinednewsInfo->banner_image:"";
-                    ?>" class="" /></div> -->
+?>" class="" /></div> -->
                     <?php if (!empty($combinednewsInfo->banner_image)): ?>
                         <div class="col-md-3" id="removeSavedimgb<?php echo $combinednewsInfo->id; ?>">
                             <div class="infobox info-bg">
                                 <div class="button-group" data-toggle="buttons">
                             <span class="float-left">
                                 <?php
-                                if (file_exists(SITE_ROOT . "images/combinednews/banner/" . $combinednewsInfo->banner_image)):
-                                    $filesize = filesize(SITE_ROOT . "images/combinednews/banner/" . $combinednewsInfo->banner_image);
-                                    echo 'Size : ' . getFileFormattedSize($filesize);
-                                endif;
-                                ?>
+        if (file_exists(SITE_ROOT . "images/combinednews/banner/" . $combinednewsInfo->banner_image)):
+            $filesize = filesize(SITE_ROOT . "images/combinednews/banner/" . $combinednewsInfo->banner_image);
+            echo 'Size : ' . getFileFormattedSize($filesize);
+        endif;
+?>
                             </span>
                                     <a class="btn small float-right" href="javascript:void(0);"
                                        onclick="deleteSavedActiimage('b<?php echo $combinednewsInfo->id; ?>');">
@@ -359,7 +379,8 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                                                                  value="<?php echo $combinednewsInfo->banner_image; ?>"/>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php
+    endif; ?>
 
                 </div>
 
@@ -406,19 +427,19 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
 
                 <div class="form-row ">
                     <?php if (!empty($combinednewsInfo->gallery)):
-                        $imgall = unserialize($combinednewsInfo->gallery);
-                        if ($imgall) {
-                            foreach ($imgall as $imgk => $imgv) { ?>
+        $imgall = unserialize($combinednewsInfo->gallery);
+        if ($imgall) {
+            foreach ($imgall as $imgk => $imgv) { ?>
                                 <div class="col-md-3" id="removeSavedimg<?php echo $imgk; ?>">
                                     <div class="infobox info-bg">
                                         <div class="button-group" data-toggle="buttons">
                                         <span class="float-left">
                                             <?php
-                                            if (file_exists(SITE_ROOT . "images/combinednews/gallery/" . $imgv)):
-                                                $filesize = filesize(SITE_ROOT . "images/combinednews/gallery/" . $imgv);
-                                                echo 'Size : ' . getFileFormattedSize($filesize);
-                                            endif;
-                                            ?>
+                if (file_exists(SITE_ROOT . "images/combinednews/gallery/" . $imgv)):
+                    $filesize = filesize(SITE_ROOT . "images/combinednews/gallery/" . $imgv);
+                    echo 'Size : ' . getFileFormattedSize($filesize);
+                endif;
+?>
                                         </span>
                                             <a class="btn small float-right" href="javascript:void(0);"
                                                onclick="deleteSavedgalimage('<?php echo $imgk; ?>');">
@@ -431,9 +452,10 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                                                class=""/>
                                     </div>
                                 </div>
-                            <?php }
-                        }
-                    endif; ?>
+                            <?php
+            }
+        }
+    endif; ?>
                 </div>-->
 
                 <div class="form-row">
@@ -462,7 +484,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                         </a>
                     </div>
                 </div>
-                <div class="form-row <?php echo (!empty($combinednewsInfo->meta_keywords) || !empty($combinednewsInfo->meta_description)) ? '' : 'hide'; ?> metadata">
+                <div class="form-row <?php echo(!empty($combinednewsInfo->meta_keywords) || !empty($combinednewsInfo->meta_description)) ? '' : 'hide'; ?> metadata">
                     <div class="col-md-6">
                         <textarea placeholder="Meta Keyword" name="meta_keywords" id="meta_keywords"
                                   class="character-keyword validate[required]"><?php echo !empty($combinednewsInfo->meta_keywords) ? $combinednewsInfo->meta_keywords : ""; ?></textarea>
@@ -490,7 +512,8 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                     Save & More
                 </span>
                     </button>
-                <?php } ?>
+                <?php
+    }?>
                 <button btn-action='2' type="submit" name="submit"
                         class="btn-submit btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
                         id="btn-submit" title="Save">
@@ -526,16 +549,16 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
         // <![CDATA[
         $(document).ready(function () {
             $('#home_upload').uploadify({
-                'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-                'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+                'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+                'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
                 'formData': {
-                    PROJECT: '<?php echo SITE_FOLDER;?>',
+                    PROJECT: '<?php echo SITE_FOLDER; ?>',
                     targetFolder: 'images/combinednews/home/',
                     thumb_width: 200,
                     thumb_height: 200
                 },
                 'method': 'post',
-                'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+                'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
                 'auto': true,
                 'multi': false,
                 'hideButton': false,
@@ -550,7 +573,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                 /* 'checkExisting' : '/uploadify/check-exists.php',*/
                 'onUploadSuccess': function (file, data, response) {
                     var filename = data;
-                    $.post('<?php echo BASE_URL;?>apanel/combinednews/uploaded_home_image.php', {imagefile: filename}, function (msg) {
+                    $.post('<?php echo BASE_URL; ?>apanel/combinednews/uploaded_home_image.php', {imagefile: filename}, function (msg) {
                         $('#preview_Home_Image').html(msg).show();
                     });
 
@@ -566,16 +589,16 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
             });
 
             $('#gallery_upload').uploadify({
-                'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-                'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+                'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+                'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
                 'formData': {
-                    PROJECT: '<?php echo SITE_FOLDER;?>',
+                    PROJECT: '<?php echo SITE_FOLDER; ?>',
                     targetFolder: 'images/combinednews/',
                     thumb_width: 200,
                     thumb_height: 200
                 },
                 'method': 'post',
-                'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+                'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
                 'auto': true,
                 'multi': true,
                 'hideButton': false,
@@ -591,7 +614,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                 'onUploadSuccess': function (file, data, response) {
                     $('#uploadedImageName').val('1');
                     var filename = data;
-                    $.post('<?php echo BASE_URL;?>apanel/combinednews/uploaded_image.php', {imagefile: filename}, function (msg) {
+                    $.post('<?php echo BASE_URL; ?>apanel/combinednews/uploaded_image.php', {imagefile: filename}, function (msg) {
                         $('#preview_Image').append(msg).show();
                     });
 
@@ -607,16 +630,16 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
             });
 
             $('#banner_upload').uploadify({
-                'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-                'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+                'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+                'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
                 'formData': {
-                    PROJECT: '<?php echo SITE_FOLDER;?>',
+                    PROJECT: '<?php echo SITE_FOLDER; ?>',
                     targetFolder: 'images/combinednews/banner/',
                     thumb_width: 200,
                     thumb_height: 200
                 },
                 'method': 'post',
-                'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+                'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
                 'auto': true,
                 'multi': true,
                 'hideButton': false,
@@ -632,7 +655,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                 'onUploadSuccess': function (file, data, response) {
                     $('#uploadedImageName2').val('1');
                     var filename = data;
-                    $.post('<?php echo BASE_URL;?>apanel/combinednews/banner_image.php', {imagefile: filename}, function (msg) {
+                    $.post('<?php echo BASE_URL; ?>apanel/combinednews/banner_image.php', {imagefile: filename}, function (msg) {
                         $('#preview_Image2').html(msg).show();
                     });
 
@@ -653,16 +676,16 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
     <script type="text/javascript">
         $(document).ready(function () {
             $('#gallery').uploadify({
-                'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-                'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+                'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+                'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
                 'formData': {
-                    PROJECT: '<?php echo SITE_FOLDER;?>',
+                    PROJECT: '<?php echo SITE_FOLDER; ?>',
                     targetFolder: 'images/combinednews/gallery/',
                     thumb_width: 200,
                     thumb_height: 200
                 },
                 'method': 'post',
-                'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+                'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
                 'auto': true,
                 'multi': true,
                 'hideButton': false,
@@ -678,7 +701,7 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                 'onUploadSuccess': function (file, data, response) {
                     $('#uploadedImageName3').val('1');
                     var filename = data;
-                    $.post('<?php echo BASE_URL;?>apanel/combinednews/uploaded_gallery.php', {imagefile: filename}, function (msg) {
+                    $.post('<?php echo BASE_URL; ?>apanel/combinednews/uploaded_gallery.php', {imagefile: filename}, function (msg) {
                         $('#preview_gallery').append(msg).show();
                     });
 
@@ -694,5 +717,6 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
             });
         });
     </script>
-<?php endif;
+<?php
+endif;
 //include("newscomment.php"); ?>

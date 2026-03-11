@@ -31,7 +31,7 @@ $jVars['site:logo']			= '
                         <img src="'.IMAGE_PATH.'preference/'.$siteRegulars->logo_upload.'" class="img-fluid mb-3 wow fadeInUp" width="250"
                             data-wow-duration="1s" alt="Main Logo">
                         </a>
-';	
+';
 
 
 
@@ -81,7 +81,7 @@ $jVars['site:blog']			= '
 ';
 
 
-			    
+
 $jVars['site:seotitle'] = MetaTagsFor_SEO();
 $jVars['site:googleanalatic'] = $siteRegulars->google_anlytics;
 
@@ -100,7 +100,7 @@ foreach($modulesList as $module):
 	$fileName = "module.".$module->mode.".php";
 	if(file_exists("views/".$fileName)){
 	  	require_once("views/".$fileName);
-	}
+    }
 endforeach;
 
 // view modules
@@ -109,6 +109,7 @@ require_once("views/module.contact.php");
 require_once("views/module.programs.php");
 
 require_once("views/module.reservation.php");
+require_once("views/module.faq.php");
 require_once("views/module.header.php");
 require_once("views/module.footer.php");
 

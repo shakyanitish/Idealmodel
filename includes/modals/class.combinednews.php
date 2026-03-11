@@ -4,12 +4,12 @@ class CombinedNews extends DatabaseObject
 {
 
     protected static $table_name = "tbl_conbined_news";
-    protected static $db_fields = array('id', 'slug', 'title', 'brief', 'content', 'image', 'home_image', 'gallery', 'status', 'sortorder', 'added_date', 'meta_keywords', 'display', 'event_stdate', 'event_endate', 'type', 'author', 'banner_image', 'source', 'meta_description');
+    protected static $db_fields = array('id', 'slug', 'title', 'subtitle', 'brief', 'content', 'image', 'home_image', 'gallery', 'status', 'sortorder', 'added_date', 'meta_keywords', 'display', 'event_stdate', 'event_endate', 'type', 'author', 'banner_image', 'source', 'meta_description');
 
     public $id;
     public $slug;
     public $title;
-    public $brief;
+    public $subtitle;
     public $content;
     public $image;
     public $home_image;
