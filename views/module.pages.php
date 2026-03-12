@@ -1,0 +1,42 @@
+<?php
+/*
+ * Homepage Page Section
+ * Renders the admission/services section from tbl_pages where homepage=1
+ */
+
+$homePageSection = '';
+
+if (defined('HOME_PAGE')) {
+    $pageRec = Page::homepagePage(1); // fetch first homepage page
+    if (!empty($pageRec)) {
+        $page = $pageRec[0];
+        $imgSrc = !empty($page->image)
+            ? IMAGE_PATH . 'pages/' . $page->image
+            : BASE_URL . 'images/inner/img1.jpg';
+        $subTitle  = !empty($page->sub_title) ? htmlspecialchars($page->sub_title) : '';
+        $title     = !empty($page->title)     ? htmlspecialchars($page->title)     : '';
+        $content   = !empty($page->content)   ? $page->content                     : '';
+        $content2  = !empty($page->content2)  ? $page->content2                    : '';
+
+        $homePageSection = '
+
+    <section class="home-3 services-main pb-0">
+        <div class="container">
+            <div class="service-full wow fadeInRight">
+            ' . $content . '
+            </div>
+        </div>
+    </section>
+
+
+    <section class="home-3 about-company">
+        <div class="container">
+            ' . $content2 . '
+        </div>
+        <div class="overlay-bl"></div>
+    </section>
+';
+    }
+}
+
+$jVars['module:home-pages'] = $homePageSection;
