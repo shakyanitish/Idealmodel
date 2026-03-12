@@ -268,7 +268,11 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
                 <div class="form-row">
                     <div class="form-label col-md-12">
                         <label for="">
+<<<<<<< HEAD
                             Content 1 :
+=======
+                            Content :
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                         </label>
                         <textarea name="content" id="content"
                                   class="large-textarea validate[required]"><?php echo !empty($pagesInfo->content) ? $pagesInfo->content : ""; ?></textarea>

@@ -96,6 +96,10 @@
     <script src="js/custom-nav.js"></script>
 
 
+<<<<<<< HEAD
+=======
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js'></script>
 <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     <script type="text/javascript">
@@ -166,7 +170,11 @@
                         contentType: false,
                         processData: false,
                         success: function (data) {
+<<<<<<< HEAD
                             $("#btn").removeAttr("disabled").text('Submit');
+=======
+                            $("#btn").removeAttr("disabled").text('Send Message');
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                             $('div#result_msg').html(data.message).css('display', 'block').fadeOut(8000);
                             form.reset();
                             grecaptcha.reset(0);

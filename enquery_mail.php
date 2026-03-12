@@ -162,12 +162,21 @@ if ($_POST['action'] == "forCareer"):
         }
     }
 
+<<<<<<< HEAD
     $mail->Subject =  'Career / Job Application mail from ' . $name . '';
+=======
+    $mail->Subject = 'New Job Application for: ' . $career_title . ' from ' . $name;
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
     $mail->MsgHTML($body);
 
     if (!$mail->Send()) {
         echo json_encode(array("action" => "unsuccess", "message" => "We could not send your application at this time. Please try again later."));
+<<<<<<< HEAD
     } else {
+=======
+    }
+    else {
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         echo json_encode(array("action" => "success", "message" => "Your application has been successfully submitted."));
     }
 endif;

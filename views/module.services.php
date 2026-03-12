@@ -52,12 +52,20 @@ if (!empty($subpkgRec)) {
         $pbClass   = $isLeft ? 'pb-170 ' : '';
 
         // Build the h4 link from linksrc or fall back to slug-based URL
+<<<<<<< HEAD
         $itemLink  = BASE_URL . '' . $v->slug;
+=======
+        $itemLink  = !empty($v->linksrc)
+            ? (($v->linktype == 1) ? $v->linksrc : BASE_URL . $v->linksrc)
+            : BASE_URL . 'service_list.php?slug=' . $v->slug;
+        $linkTarget = ($v->linktype == 1 && !empty($v->linksrc)) ? ' target="_blank"' : '';
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
 
         $res .= '
                     <div class="col-lg-6 col-md-6 ' . $pbClass . 'customize-wrap ' . $wowClass . '">
                         <div class="customize-item ' . $sideClass . '">
                             <div class="sv-image">
+<<<<<<< HEAD
                             <a href="' . $itemLink . '"' . $linkTarget . '>
                             <img src="' . $iconlink . '" alt="' . htmlspecialchars($v->title) . '" />
                             </a>     
@@ -65,6 +73,13 @@ if (!empty($subpkgRec)) {
                             <div class="customize-ct">
                                 <h4><a href="' . $itemLink . '"' . $linkTarget . '>' . $v->title . '</a></h4>
                                 <p>' . $v->sub_title . '</p>
+=======
+                                <img src="' . $iconlink . '" alt="' . htmlspecialchars($v->title) . '" />
+                            </div>
+                            <div class="customize-ct">
+                                <h4><a href="' . $itemLink . '"' . $linkTarget . '>' . htmlspecialchars($v->title) . '</a></h4>
+                                <p>' . htmlspecialchars($v->sub_title) . '</p>
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                             </div>
                         </div>
                     </div>

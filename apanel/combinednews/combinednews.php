@@ -36,7 +36,11 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
         }
     </style>
     <h3>
+<<<<<<< HEAD
         List Alumini
+=======
+        List CNews
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="AddCombinedNews();">
     <span class="glyph-icon icon-separator">
@@ -54,8 +58,13 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                     <th style="display:none;"></th>
                     <th class="text-center"><input class="check-all" type="checkbox"/></th>
                     <th>Title</th>
+<<<<<<< HEAD
                     <!-- <th class="text-center">Start Date</th> -->
                     <!-- <th class="text-center">Author</th> -->
+=======
+                    <th class="text-center">Start Date</th>
+                    <th class="text-center">Author</th>
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                     <!-- <th class="text-center">Comments</th> -->
                     <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                 </tr>
@@ -74,8 +83,13 @@ if (isset($_GET['page']) && $_GET['page'] == "combinednews" && isset($_GET['mode
                                    title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
                             </div>
                         </td>
+<<<<<<< HEAD
                         <!-- <td><?php echo $record->event_stdate; ?></td> -->
                         <!-- <td><?php echo $record->author; ?></td> -->
+=======
+                        <td><?php echo $record->event_stdate; ?></td>
+                        <td><?php echo $record->author; ?></td>
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                         <!--<td>
                             <a class="primary-bg medium btn loadingbar-demo" title=""
                                onClick="viewCommentlist(<?php echo $record->id; ?>);" href="javascript:void(0);">
@@ -146,7 +160,11 @@ elseif (isset($_GET['mode']) && $_GET['mode'] == "addEdit"):
     endif;
 ?>
     <h3>
+<<<<<<< HEAD
         <?php echo(isset($_GET['id'])) ? 'Edit Alumini' : 'Add Alumini'; ?>
+=======
+        <?php echo(isset($_GET['id'])) ? 'Edit News' : 'Add News'; ?>
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="viewcombinednewslist();">
     <span class="glyph-icon icon-separator">

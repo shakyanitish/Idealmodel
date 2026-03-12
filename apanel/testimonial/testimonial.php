@@ -201,11 +201,19 @@ $metadata = $metasql->fetch_object();
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
+<<<<<<< HEAD
                             Status :
                         </label>
                     </div>
                     <div class="form-input col-md-6">
                         <input placeholder="Student Status" class="col-md-6 " type="text" name="via_type" id="via_type"
+=======
+                            Address :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-6">
+                        <input placeholder="Address" class="col-md-6 " type="text" name="via_type" id="via_type"
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                                value="<?php echo !empty($testimonialInfo->via_type) ? $testimonialInfo->via_type : "";
                                ?>">
 

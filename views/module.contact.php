@@ -12,9 +12,15 @@ if (defined('CONTACT_PAGE')) {
     $tellinked = '';
     $telno = explode(",", $siteRegulars->contact_info);
     $lastElement = array_shift($telno);
+<<<<<<< HEAD
     $tellinked .= '<a href="tel:+977' . str_replace(' ', '', $lastElement) . '" target="_blank">(+977) ' . $lastElement . '</a><br>';
     foreach ($telno as $tel) {
         $tellinked .= '<a href="tel:+977' . str_replace(' ', '', $tel) . '" target="_blank">(+977) ' . $tel . '</a>';
+=======
+    $tellinked .= '<a href="tel:+977' . str_replace(' ', '', $lastElement) . '" target="_blank">+977 ' . $lastElement . '</a><br>';
+    foreach ($telno as $tel) {
+        $tellinked .= '<a href="tel:+977' . str_replace(' ', '', $tel) . '" target="_blank">+977 ' . $tel . '</a>';
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         if (end($telno) != $tel) {
             $tellinked .= '/';
         }

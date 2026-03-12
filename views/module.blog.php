@@ -177,7 +177,11 @@ if (defined("BLOG_DETAIL_PAGE")) {
 
         // Recent Posts (Sidebar)
         $recent_posts_html = '';
+<<<<<<< HEAD
         $recentBlogs = Blog::get_latestblog_by(5); // Get 4 to skip current
+=======
+        $recentBlogs = Blog::get_latestblog_by(4); // Get 4 to skip current
+>>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         if (!empty($recentBlogs)) {
             foreach ($recentBlogs as $rec) {
                 if ($rec->id != $Blogs->id) {
