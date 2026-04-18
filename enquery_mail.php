@@ -112,6 +112,39 @@ if ($_POST['action'] == "forCareer"):
     $career_title = isset($_POST['career_title']) ? $_POST['career_title'] : '';
     $messageText = isset($_POST['message']) ? $_POST['message'] : '';
     $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
+    $vacancy_id = isset($_POST['vacancy_id']) ? intval($_POST['vacancy_id']) : 0;
+    $file_name = '';
+
+    // Handle File Upload
+    $upload_dir = 'images/career/';
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+    }
+
+    if (isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
+        $file_tmp = $_FILES['file']['tmp_name'];
+        $file_name = basename($_FILES['file']['name']);
+        // Add timestamp to avoid filename conflicts
+        $file_name = time() . '_' . $file_name;
+        $file_path = $upload_dir . $file_name;
+        
+        if (!move_uploaded_file($file_tmp, $file_path)) {
+            $file_name = ''; // Reset if upload fails
+        }
+    }
+
+    // Save Applicant to Database
+    $applicant = new Applicant();
+    $applicant->fullname = $name;
+    $applicant->email = $email;
+    $applicant->mobile = $phone;
+    $applicant->phone = $phone;
+    $applicant->position = $vacancy_id;
+    $applicant->myfile = $file_name;
+    $applicant->qualification = $messageText;
+    $applicant->sortorder = Applicant::find_maximum('sortorder');
+
+    $save_result = $applicant->save();
 
     $body = '
         <table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
@@ -148,9 +181,9 @@ if ($_POST['action'] == "forCareer"):
     $mail->AddReplyTo($email, $name);
     $mail->AddAddress($usermail, $sitename);
 
-    // Handle File Attachment
-    if (isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
-        $mail->AddAttachment($_FILES['file']['tmp_name'], $_FILES['file']['name']);
+    // Handle File Attachment for Email
+    if (!empty($file_name) && file_exists($file_path)) {
+        $mail->AddAttachment($file_path, $_FILES['file']['name']);
     }
 
     if (!empty($ccusermail)) {
@@ -162,21 +195,12 @@ if ($_POST['action'] == "forCareer"):
         }
     }
 
-<<<<<<< HEAD
     $mail->Subject =  'Career / Job Application mail from ' . $name . '';
-=======
-    $mail->Subject = 'New Job Application for: ' . $career_title . ' from ' . $name;
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
     $mail->MsgHTML($body);
 
     if (!$mail->Send()) {
         echo json_encode(array("action" => "unsuccess", "message" => "We could not send your application at this time. Please try again later."));
-<<<<<<< HEAD
     } else {
-=======
-    }
-    else {
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         echo json_encode(array("action" => "success", "message" => "Your application has been successfully submitted."));
     }
 endif;

@@ -59,10 +59,17 @@ if (!empty($socialRec)) {
             $sicon = 'fab fa-twitter';
         }
 
-        $resfooter .= '
+        if (!empty($socialRow->image)) {
+            $resfooter .= '
+            <li class="pr-2">
+                <a href="' . $socialRow->linksrc . '" target="_blank" class="' . $sclass . '"><img src="' . IMAGE_PATH . 'social/' . $socialRow->image . '" alt="' . $socialRow->title . '" /></a>
+            </li>';
+        } else {
+            $resfooter .= '
             <li class="pr-2">
                 <a href="' . $socialRow->linksrc . '" target="_blank" class="' . $sclass . '"><i class="' . $sicon . '"></i></a>
             </li>';
+        }
     }
 }
 $jVars['module:socilaLinkFooter'] = $resfooter;

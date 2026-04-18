@@ -66,6 +66,7 @@ if (isset($_GET['page']) && $_GET['page'] == "testimonial" && isset($_GET['mode'
                                title="Remove" onclick="recordDelete(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-remove"></i>
                             </a>
+                            <input name="sortId" type="hidden" value="<?php echo $record->id; ?>">
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -87,7 +88,7 @@ if (isset($_GET['page']) && $_GET['page'] == "testimonial" && isset($_GET['mode'
         </a>
     </div>
          <!-- Meta Tags-->
-         <div class="form-row">
+         <div class="form-row hide">
         <div class="form-checkbox-radio col-md-9">
             <a class="btn medium bg-blue" href="javascript:void(0);" onClick="toggleMetadata();">
                 <span class="glyph-icon icon-separator float-right">
@@ -201,19 +202,11 @@ $metadata = $metasql->fetch_object();
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-<<<<<<< HEAD
-                            Status :
+                            Sub Title :
                         </label>
                     </div>
                     <div class="form-input col-md-6">
-                        <input placeholder="Student Status" class="col-md-6 " type="text" name="via_type" id="via_type"
-=======
-                            Address :
-                        </label>
-                    </div>
-                    <div class="form-input col-md-6">
-                        <input placeholder="Address" class="col-md-6 " type="text" name="via_type" id="via_type"
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
+                        <input placeholder="Sub Title" class="col-md-6 " type="text" name="via_type" id="via_type"
                                value="<?php echo !empty($testimonialInfo->via_type) ? $testimonialInfo->via_type : "";
                                ?>">
 
@@ -221,7 +214,7 @@ $metadata = $metasql->fetch_object();
                 </div>
 
                 <!-- <div class="form-row">
-                    <div class="form-label col-md-2">
+                    <div class="form-label col-md-2">   
                         <label for="">
                             Link :
                         </label>

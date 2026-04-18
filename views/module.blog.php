@@ -2,15 +2,14 @@
 $bl =  '';
 $singleblog = '';
 $singleblog_more = '';
+$blogItems = '';
 
 if (defined('BLOG_PAGE')) {
     $record = Blog::get_allblog();
     $linkTarget = '';
     $pagelink = '';
     if (!empty($record)) {
-
-        $counter = 0; // NEW: counter to track which blog we're on
-
+   
         foreach ($record as $homebl) {
 
             if (!empty($homebl->linksrc)) {
@@ -20,67 +19,53 @@ if (defined('BLOG_PAGE')) {
                 $linksrc = BASE_URL . 'blog/' . $homebl->slug;
             }
 
-            $blog_html = '
-                    <!-- single blog -->
-                    <div class="col">
-                        <div class="ul-blog ul-blog-2">
-                            <div class="ul-blog-img"><img src="' . IMAGE_PATH . 'blog/' . $homebl->image . '" alt="' . $homebl->title . '">
-                                <div class="date">
-                                    <span class="number">' . date('d', strtotime($homebl->blog_date)) . '</span>
-                                    <span class="txt">' . date('M Y', strtotime($homebl->blog_date)) . '</span>
-                                </div>
-                            </div>
-                            <div class="ul-blog-txt">
-                                <div class="ul-blog-infos">
-                                    <!-- single info -->
-                                    <div class="ul-blog-info">
-                                        <span class="icon"><i class="flaticon-account"></i></span>
-                                        <span class="text font-normal text-[14px] text-etGray">' . $homebl->author . '</span>
-                                    </div>
-                                </div>
-                                <a href="' . BASE_URL . 'impact/' . $homebl->slug . '" class="ul-blog-title">' . $homebl->title . '</a>
-                                <a href="' . BASE_URL . 'impact/' . $homebl->slug . '" class="ul-blog-btn">Read More <span class="icon"><i class="flaticon-next"></i></span></a>
-                            </div>
+            $blogDate = date('F d, Y', strtotime($homebl->blog_date));
+            $imgsrc = IMAGE_PATH . 'blog/' . $homebl->image;
+
+            $blogItems .= '
+            <div class="col-lg-4 col-md-6 wow fadeInRight">
+                <div class="article-list">
+                    <div class="at-thumbnail">
+                        <a href="' . $linksrc . '">
+                            <img src="' . $imgsrc . '" alt="' . $homebl->title . '" />
+                        </a>
+                        <span class="blog-tag"> ' . $homebl->category . ' </span>
+                    </div>
+                    <div class="article-content">
+                        <div class="artl-bottom">
+                            <ul class="d-flex justify-content-start">
+                                <li>' . $blogDate . '</li>
+                            </ul>
                         </div>
-                    </div>';
-
-            // NEW: Add to first 3 blogs OR to "load more" section
-            if ($counter < 3) {
-                $singleblog .= $blog_html;
-            } else {
-                $singleblog_more .= $blog_html;
-            }
-
-            $counter++; // Increment counter
+                        <div class="artl-detail">
+                            <a href="' . $linksrc . '"><h4>' . $homebl->title . '</h4></a>
+                            <p>' . $homebl->brief . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>';
         }
 
-        // Build the final HTML
         $bl = '
-        <section class="ul-blogs-2 ul-section-spacing">
-            <div class="ul-container wow animate__fadeInUp">
-                <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row justify-content-center">
-                    ' . $singleblog . '
-                </div>
-
-                <span id="dots">...</span>
-                <span id="more">
-                    <div class="row row-cols-md-3 row-cols-2 row-cols-xxs-1 ul-bs-row justify-content-center mt-4">
-                        ' . $singleblog_more . '
+        <section class="home-3 blog-article bg-white">
+            <div class="container">
+                <div class="blog-wrap">
+                    <div class="row">
+                        ' . $blogItems . '
                     </div>
-                </span>
-
-                <!-- pagination -->
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <div class="btns-block btns-center">
-                            <button onclick="myFunction()" id="myBtn1" class="ul-btn d-sm-inline-flex px-4 mt-4">Load More</button>
-                        </div>
-                    </div> 
                 </div>
             </div>
         </section>';
-    } else {
-        redirect_to(BASE_URL);
+    } 
+    else {
+        $bl = '
+        <section class="home-3 blog-article bg-white">
+            <div class="container">
+                <div class="blog-wrap">
+ <h2 class="text-center">No blogs available at the moment.</h2>
+                </div>
+            </div>
+        </section>';
     }
 }
 $jVars['module:bloglist'] = $bl;
@@ -94,7 +79,7 @@ $jVars['module:bloglist'] = $bl;
 // New Home Page Blog List for Ideal Model
 $homelatestblog = '';
 if (defined('HOME_PAGE')) {
-    $latestBlogs = Blog::get_latestblog_by(1000);
+    $latestBlogs = Blog::get_latestblog_by(3);
     if (!empty($latestBlogs)) {
         $blogItems = '';
         foreach ($latestBlogs as $blog) {
@@ -119,7 +104,7 @@ if (defined('HOME_PAGE')) {
                         </div>
                         <div class="artl-detail">
                             <a href="' . $linksrc . '"><h4>' . $blog->title . '</h4></a>
-                            <p>' . $blog->brief . '</p>
+                            ' . $blog->brief . '
                         </div>
                     </div>
                 </div>
@@ -177,11 +162,7 @@ if (defined("BLOG_DETAIL_PAGE")) {
 
         // Recent Posts (Sidebar)
         $recent_posts_html = '';
-<<<<<<< HEAD
-        $recentBlogs = Blog::get_latestblog_by(5); // Get 4 to skip current
-=======
-        $recentBlogs = Blog::get_latestblog_by(4); // Get 4 to skip current
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
+        $recentBlogs = Blog::get_latestblog_by(6); // Get 4 to skip current
         if (!empty($recentBlogs)) {
             foreach ($recentBlogs as $rec) {
                 if ($rec->id != $Blogs->id) {

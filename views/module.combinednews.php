@@ -176,49 +176,4 @@ $jVars["module:combinednews:blog-details"] = $blog_detail;
 $jVars["module:combinednews:blog-recent-blogs"] = $recent_blogs;
 
 
-/**
- * Alumini page
- **/
-$alumini_list = '';
-if (defined("ALUMINI_PAGE")) {
-    $sql = "SELECT * FROM tbl_conbined_news WHERE status='1' ORDER BY sortorder DESC";
-    $aluminiRecs = CombinedNews::find_by_sql($sql);
-    if (!empty($aluminiRecs)) {
-        foreach ($aluminiRecs as $alumini) {
-            $img = BASE_URL . "template/web/images/user-2.jpg";
-            if (!empty($alumini->home_image)) {
-                $file_path = SITE_ROOT . "images/combinednews/home/" . $alumini->home_image;
-                if (file_exists($file_path)) {
-                    $img = IMAGE_PATH . "combinednews/home/" . $alumini->home_image;
-                }
-            }
-
-            $alumini_list .= '
-            <div class="about-us-wrap-alumini">
-                <div class="row justify-content-md-center">
-                    <div class="col-lg-3 col-md-12 wow fadeInLeftBig">
-                        <div class="about-wrap-img">
-                            <img src="' . $img . '" alt="' . $alumini->title . '" />
-                        </div>
-                    </div>
-
-                    <div class="col-lg-9 col-md-12 wow fadeInRightBig">
-                        <div class="about-us-wrap">
-                            <div class="about-title">
-                                <div class="ps-name">
-                                    <h3 class="mb-0 text-start">' . $alumini->title . '</h3>
-                                    <span class="cl-orange">' . $alumini->subtitle . '</span>
-                                </div>
-                            </div>
-                            <div class="about-content">
-                                <p class="mb-0">' . strip_tags($alumini->content) . '</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>';
-        }
-    }
-}
-$jVars["module:combinednews:alumni"] = $alumini_list;
 ?>

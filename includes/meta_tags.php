@@ -228,6 +228,11 @@ function MetaTagsFor_SEO()
                             $img = !empty($images) ? $images[0] : null;
                             $imagePath = $img ? SITE_ROOT . 'images/subpackage/' . $img : null;
                             break;
+                        case 'Services':
+                            $images = unserialize($rec->iconimage);
+                            $img = !empty($images) ? $images[0] : null;
+                            $imagePath = $img ? SITE_ROOT . 'images/services/' . $img : null;
+                            break;
                         default:
                             $imagePath = null;
                     }

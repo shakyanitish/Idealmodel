@@ -14,45 +14,74 @@ else{
 }
 
 
-    $vacency_bread .= '
-    <!--================ Breadcrumb ================-->
-        <div class="mad-breadcrumb with-bg-img with-overlay" data-bg-image-src="'.$img.'">
-            <div class="container wide">
-                <h1 class="mad-page-title">Career Page</h1>
-                <nav class="mad-breadcrumb-path">
-                    <span><a href="' . BASE_URL . 'home" class="mad-link">Home</a></span> /
-                    <span>Career</span>
-                </nav>
-            </div>
-        </div>
-        <!--================ End of Breadcrumb ================-->=
+    // $vacency_bread .= '
+    // <!--================ Breadcrumb ================-->
+    //     <div class="mad-breadcrumb with-bg-img with-overlay" data-bg-image-src="'.$img.'">
+    //         <div class="container wide">
+    //             <h1 class="mad-page-title">Career Page</h1>
+    //             <nav class="mad-breadcrumb-path">
+    //                 <span><a href="' . BASE_URL . 'home" class="mad-link">Home</a></span> /
+    //                 <span>Career</span>
+    //             </nav>
+    //         </div>
+    //     </div>
+    //     <!--================ End of Breadcrumb ================-->=
        
-    ';
+    // ';
 
-    $vacencies = Vacency::get_allvacancy();
+    $vacencies = Vacency::find_all();
 
     // pr($vacencies);
     if (!empty($vacencies)) {
-        foreach ($vacencies as $vacency) {
+        foreach ($vacencies as $i => $vacancy) {
+            $collapseId = "collapseThree" . ($i + 1);
+            $headingId = "headingThree" . ($i + 1);
+            $show = ($i == 0) ? 'show' : '';
+            $collapsed = ($i == 0) ? '' : 'collapsed';
+            $expanded = ($i == 0) ? 'true' : 'false';
+
             $vacencylist .= '
-            <div class="career-bg row vr-size-2">
-                        <div class="col-lg-9 career-text">
-                        ' . $vacency->title . '- ' . $vacency->pax . '
-                        </div>
-                        <div class="col-lg-3">
-                            <a href="'. BASE_URL . 'career-form/' . $vacency->slug .'" class="btn btn-big" style="float:right;">Apply Now</a>
+
+
+
+                       <!-- Accordion card -->
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="' . $headingId . '">
+                    <a class="' . $collapsed . '" data-toggle="collapse" data-parent="#accordionEx1" href="#' . $collapseId . '" aria-expanded="' . $expanded . '" aria-controls="' . $collapseId . '">
+                        <h5 class="mb-0">' . $vacancy->title . ' <i class="fas fa-plus"></i></h5>
+                    </a>
+                </div>
+
+                <!-- Card body -->
+                <div id="' . $collapseId . '" class="collapse ' . $show . '" role="tabpanel" aria-labelledby="' . $headingId . '" data-parent="#accordionEx1">
+                    <div class="card-body call-action ">
+                        <div class="call-wrap">
+                            <div class="call-main">
+                                ' . $vacancy->content . '
+                            </div>
+                            <div class="call-btn">
+                                <div class="btn" data-toggle="modal" data-target="#exampleModal" data-title="'.$vacancy->title.'" data-vacancy-id="'.$vacancy->id.'">Apply</div>
+                            </div>
                         </div>
                     </div>
-                
+                </div>
+            </div>
+            
+            
             ';
         }
     } else {
-        $vacencylist .= '<h4 style="text-align: center;font-size: 50px;">SEND YOUR RESUME!!!! in our email<br> <a href="mailto:'.$hremail.'">'.$hremail.'</a></h4></br></br>';
+        $vacencylist .= '';
+        // <h4 style="text-align: center;font-size: 50px;">SEND YOUR RESUME!!!! in our email<br> <a href="mailto:'.$hremail.'">'.$hremail.'</a></h4></br></br>
     }
 }
 
 $jVars['module:vacencylist'] = $vacencylist;
 $jVars['module:vacency:list-bread'] = $vacency_bread;
+
+
+
 
 
 /**

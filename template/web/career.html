@@ -12,6 +12,16 @@
     <link rel="stylesheet" href="css/plugin.css"  type="text/css" />
     <link rel="stylesheet"  href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' />
     <link rel="stylesheet"  href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' />
+        <style>
+        span[class^="carousel-control"]{
+            filter: brightness(0) saturate(100%)
+        }
+        .popout-button{
+        z-index: 999;
+        right: 5px;
+        top:5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,12 +38,14 @@
     <section class="about-company inner-about">
         <div class="container">
             <div class="accordion md-accordion mb-3" id="accordionEx1" role="tablist" aria-multiselectable="true">
-                <jcms:module:career:list/>
+                <jcms:module:vacencylist/>
+
             </div>
         </div>
     </section>
 
     <jcms:module:footer/>
+     <jcms:module:popup/>
 
     <div id="back-to-top">
         <a href="#"></a>
@@ -52,6 +64,7 @@
                 <div class="modal-body career-form2">
                     <form class="m-auto text-center" id="contactform">
                         <input type="hidden" name="career_title" id="career_title" value="">
+                        <input type="hidden" name="vacancy_id" value="">
                         <div class="form-outline mb-4">
                             <input type="text" name="name" id="form6Example1" class="form-control" placeholder="Full Name*">
                         </div>
@@ -96,21 +109,26 @@
     <script src="js/custom-nav.js"></script>
 
 
-<<<<<<< HEAD
-=======
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js'></script>
 <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+
+    <script type="text/javascript">
+    $(window).on('load', function () {
+        $('#modal-popup-image').modal('show');
+    });
+    </script>
+
     <script type="text/javascript">
         $(document).ready(function () {
-            // Populate modal with career title
+            // Populate modal with career title and vacancy ID
             $('#exampleModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget); // Button that triggered the modal
                 var title = button.data('title'); // Extract info from data-* attributes
+                var vacancyId = button.data('vacancy-id'); // Extract vacancy ID
                 var modal = $(this);
                 modal.find('.modal-title').text('Apply for: ' + title);
                 modal.find('.modal-body #career_title').val(title);
+                modal.find('input[name="vacancy_id"]').val(vacancyId);
             });
 
             $('#contactform').validate({
@@ -170,12 +188,9 @@
                         contentType: false,
                         processData: false,
                         success: function (data) {
-<<<<<<< HEAD
                             $("#btn").removeAttr("disabled").text('Submit');
-=======
-                            $("#btn").removeAttr("disabled").text('Send Message');
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                             $('div#result_msg').html(data.message).css('display', 'block').fadeOut(8000);
+
                             form.reset();
                             grecaptcha.reset(0);
                         }

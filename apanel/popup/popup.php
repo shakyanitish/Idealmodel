@@ -168,7 +168,7 @@ if (isset($_GET['page']) && $_GET['page'] == "popup" && isset($_GET['mode']) && 
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Add Type :
@@ -186,7 +186,7 @@ if (isset($_GET['page']) && $_GET['page'] == "popup" && isset($_GET['mode']) && 
 
 
                 <div class="form-row add-image <?php echo !empty($imghide) ? $imghide : ''; ?>">
-                    <div class="form-row">
+                    <div class="form-row hide">
                         <div class="form-label col-md-2">
                             <label for="">
                                 Orientation :
@@ -263,7 +263,7 @@ if (isset($_GET['page']) && $_GET['page'] == "popup" && isset($_GET['mode']) && 
                         }
                     } ?>
                 </div>
-                <div class="form-row add-image <?php echo !empty($imghide) ? $imghide : ''; ?>">
+                <div class="form-row add-image hide <?php echo !empty($imghide) ? $imghide : ''; ?>">
                     <div class="form-label col-md-2">
                         <label for="">
                             Link Type :
@@ -278,7 +278,7 @@ if (isset($_GET['page']) && $_GET['page'] == "popup" && isset($_GET['mode']) && 
                         <label for="">External Link</label>
                     </div>
                 </div>
-                <div class="form-row add-image <?php echo !empty($imghide) ? $imghide : ''; ?>">
+                <div class="form-row add-image hide <?php echo !empty($imghide) ? $imghide : ''; ?>">
                     <div class="form-label col-md-2">
                         <label for="">
                             Link :

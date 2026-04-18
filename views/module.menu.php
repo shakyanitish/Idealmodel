@@ -354,7 +354,13 @@ if ($menuRec) {
     $result .= '<ul class="nav navbar-nav" id="responsive-menu">';
     foreach ($menuRec as $menuRow) {
         $linkActive = '';
+        // Check if we're on homepage - account for .htaccess rewrites
         $isHomePage = (empty($currentPath) || $currentPath == '/' || $currentPath == 'index.php');
+        // Also check if current URL is the home domain (handles .htaccess rewrites)
+        if (!$isHomePage && strpos($_SERVER['REQUEST_URI'], BASE_URL) === 0) {
+            $pathAfterBase = substr($_SERVER['REQUEST_URI'], strlen(BASE_URL));
+            $isHomePage = (empty($pathAfterBase) || $pathAfterBase == '/' || $pathAfterBase == 'index.php');
+        }
         $isHomeMenu = ($menuRow->linksrc == 'home' || $menuRow->linksrc == '' || $menuRow->linksrc == '/');
 
         if ($isHomePage && $isHomeMenu) {

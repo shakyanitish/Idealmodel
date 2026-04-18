@@ -16,11 +16,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 ?>
 
     <h3>
-<<<<<<< HEAD
         List Facilities
-=======
-        List Packages
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
             onClick="AddNewPackage();">
             <span class="glyph-icon icon-separator">
@@ -140,11 +136,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
     endif;
 ?>
     <h3>
-<<<<<<< HEAD
         <?php echo (isset($_GET['id'])) ? 'Edit Facility' : 'Add Facility'; ?>
-=======
-        <?php echo (isset($_GET['id'])) ? 'Edit Package' : 'Add Package'; ?>
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
             onClick="viewPackagelist();">
             <span class="glyph-icon icon-separator">
@@ -182,17 +174,10 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <span id="error"></span>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Sub Title :
-=======
-                <div class="form-row">
-                    <div class="form-label col-md-2">
-                        <label for="">
-                            Brief :
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                         </label>
                     </div>
                     <div class="form-input col-md-20">

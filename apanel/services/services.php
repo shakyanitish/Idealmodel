@@ -20,11 +20,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
     $pagename = strtolower($_GET['page']);
 ?>
     <h3>
-<<<<<<< HEAD
         List Academics
-=======
-        List Services
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         <?php
         if (!empty($service_types)) {
             $select_html = '<div class="pad0L col-md-3"><select class="user-hotel-select">';
@@ -200,11 +196,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
     $typeid = (!empty($session->get('type_id_service'))) ? $session->get('type_id_service') : 2;
 ?>
     <h3>
-<<<<<<< HEAD
         <?php echo (isset($_GET['id'])) ? 'Edit Academic' : 'Add Academic'; ?>
-=======
-        <?php echo (isset($_GET['id'])) ? 'Edit Services' : 'Add Services'; ?>
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
             onClick="viewServiceslist();">
             <span class="glyph-icon icon-separator">
@@ -473,22 +465,14 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                     </div>
                     <div class="form-input col-md-10">
                         <textarea name="brief" id="brief"
-<<<<<<< HEAD
                                   class="medium-textarea character-brief validate[]"><?php echo !empty($advInfo->brief) ? $advInfo->brief : ""; ?></textarea>
-=======
-                                  class="medium-textarea character-brief validate[required]"><?php echo !empty($advInfo->brief) ? $advInfo->brief : ""; ?></textarea>
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                         <div class="brief-remaining clear input-description">250 characters left</div>
                     </div>
                 </div> 
 
                 <!-- brief end -->
                 <?php if (($typeid == 2) || ($typeid == 3)) { ?>
-<<<<<<< HEAD
                     <div class="form-row hide">
-=======
-                    <div class="form-row">
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                         <div class="form-label col-md-2">
                             <label for="">
                                 Link Type :
@@ -504,11 +488,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                         </div>
                     </div>
 
-<<<<<<< HEAD
                     <div class="form-row hide">
-=======
-                    <div class="form-row">
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                         <div class="form-label col-md-2">
                             <label for="">
                                 Link :
@@ -529,11 +509,7 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                                     <?php
                                     // Article Page Link
                                     echo Article::get_internal_link($Lpageview, $LinkTypeview);
-<<<<<<< HEAD
                                     echo Services::get_internal_link($Lpageview, $LinkTypeview);
-=======
-                                    echo Package::get_internal_link($Lpageview, $LinkTypeview);
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                                     ?>
                                 </select>
                             </div>

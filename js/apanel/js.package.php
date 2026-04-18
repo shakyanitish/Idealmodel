@@ -553,8 +553,8 @@
     }
 
     function recordDelete(Re) {
-        $('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'], "Package") ?>');
-        $('.pText').html('Click on yes button to delete this package permanently.!!');
+        $('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'], "Facility") ?>');
+        $('.pText').html('Click on yes button to delete this facility permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
         $(".botTempo").on("click", function() {

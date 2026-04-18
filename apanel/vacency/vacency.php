@@ -5,7 +5,7 @@ $moduleFoldername = "";        // Image folder name
 
 
 if (isset($_GET['page']) && $_GET['page'] == "vacency" && isset($_GET['mode']) && $_GET['mode'] == "list"):
-    ?>
+?>
     <h3>
         List Vacency
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);" onClick="AddNewVacencys();">
@@ -18,63 +18,59 @@ if (isset($_GET['page']) && $_GET['page'] == "vacency" && isset($_GET['mode']) &
         <div class="example-code">
             <table cellpadding="0" cellspacing="0" border="0" class="table" id="example">
                 <thead>
-                <tr>
-                    <th style="display:none;"></th>
-                    <th class="text-center"><input class="check-all" type="checkbox"/></th>
-                    <th>Title</th>
-                    <th class="text-center">Applicants</th>
-                    <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
-                </tr>
+                    <tr>
+                        <th style="display:none;"></th>
+                        <th class="text-center"><input class="check-all" type="checkbox" /></th>
+                        <th>Title</th>
+                        <th class="text-center">Applicants</th>
+                        <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
+                    </tr>
                 </thead>
 
                 <tbody>
-                <?php $records = Vacency::find_by_sql("SELECT * FROM " . $moduleTablename . " ORDER BY sortorder DESC ");
-                foreach ($records as $record): ?>
-                    <tr id="<?php echo $record->id; ?>">
-                        <td style="display:none;"><?php echo $record->sortorder; ?></td>
-                        <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/></td>
-                        <td>
-                            <div class="col-md-7">
-                                <a href="javascript:void(0);" onClick="editRecord(<?php echo $record->id; ?>);" class="loadingbar-demo"
-                                   title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
-                            </div>
-                        </td>
-                        <td>
-                            <a class="primary-bg medium btn loadingbar-demo" title="" onClick="viewApplicantlist(<?php echo $record->id; ?>);"
-                               href="javascript:void(0);">
-                                <span class="button-content">
-                                    <span class="badge bg-orange radius-all-4 mrg5R" title=""
-                                          data-original-title="Badge with tooltip"><?php echo $countImages = Applicant::getTotalSub($record->id); ?></span>
-                                    <span class="text-transform-upr font-bold font-size-11">View Lists</span>
-                                </span>
-                            </a>
-                            <?php $makasroom = ($record->type == 1) ? "icon-circle" : "icon-circle-o"; ?>
-                            <a href="javascript:void(0);" class="btn small tooltip-button" data-placement="top" title="">
-                                <i class="glyph-icon <?php echo $makasroom; ?>"></i>
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <?php
-                            $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
-                            $statusText = ($record->status == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub'];
-                            ?>
-                            <a href="javascript:void(0);" class="btn small <?php echo $statusImage; ?> tooltip-button statusToggler" data-placement="top"
-                               title="<?php echo $statusText; ?>" status="<?php echo $record->status; ?>" id="imgHolder_<?php echo $record->id; ?>"
-                               moduleId="<?php echo $record->id; ?>">
-                                <i class="glyph-icon icon-flag"></i>
-                            </a>
-                            <a href="javascript:void(0);" class="loadingbar-demo btn small bg-blue-alt tooltip-button" data-placement="top" title="Edit"
-                               onclick="editRecord(<?php echo $record->id; ?>);">
-                                <i class="glyph-icon icon-edit"></i>
-                            </a>
-                            <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top" title="Remove"
-                               onclick="recordDelete(<?php echo $record->id; ?>);">
-                                <i class="glyph-icon icon-remove"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    <?php $records = Vacency::find_by_sql("SELECT * FROM " . $moduleTablename . " ORDER BY sortorder DESC ");
+                    foreach ($records as $record): ?>
+                        <tr id="<?php echo $record->id; ?>">
+                            <td style="display:none;"><?php echo $record->sortorder; ?></td>
+                            <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>" /></td>
+                            <td>
+                                <div class="col-md-7">
+                                    <a href="javascript:void(0);" onClick="editRecord(<?php echo $record->id; ?>);" class="loadingbar-demo"
+                                        title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="primary-bg medium btn loadingbar-demo" title="" onClick="viewApplicantlist(<?php echo $record->id; ?>);"
+                                    href="javascript:void(0);">
+                                    <span class="button-content">
+                                        <span class="badge bg-orange radius-all-4 mrg5R" title=""
+                                            data-original-title="Badge with tooltip"><?php echo $countImages = Applicant::getTotalSub($record->id); ?></span>
+                                        <span class="text-transform-upr font-bold font-size-11">View Lists</span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <?php
+                                $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
+                                $statusText = ($record->status == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub'];
+                                ?>
+                                <a href="javascript:void(0);" class="btn small <?php echo $statusImage; ?> tooltip-button statusToggler" data-placement="top"
+                                    title="<?php echo $statusText; ?>" status="<?php echo $record->status; ?>" id="imgHolder_<?php echo $record->id; ?>"
+                                    moduleId="<?php echo $record->id; ?>">
+                                    <i class="glyph-icon icon-flag"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="loadingbar-demo btn small bg-blue-alt tooltip-button" data-placement="top" title="Edit"
+                                    onclick="editRecord(<?php echo $record->id; ?>);">
+                                    <i class="glyph-icon icon-edit"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top" title="Remove"
+                                    onclick="recordDelete(<?php echo $record->id; ?>);">
+                                    <i class="glyph-icon icon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
 
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
 
                 </tbody>
             </table>
@@ -92,8 +88,8 @@ if (isset($_GET['page']) && $_GET['page'] == "vacency" && isset($_GET['mode']) &
         </a>
     </div>
 
-           <!-- Meta Tags-->
-           <div class="form-row">
+    <!-- Meta Tags-->
+    <div class="form-row">
         <div class="form-checkbox-radio col-md-9">
             <a class="btn medium bg-blue" href="javascript:void(0);" onClick="toggleMetadata();">
                 <span class="glyph-icon icon-separator float-right">
@@ -104,15 +100,15 @@ if (isset($_GET['page']) && $_GET['page'] == "vacency" && isset($_GET['mode']) &
         </div>
     </div>
     <?php
-$pagename = strtolower($_GET['page']);
-$metasql = $db->query("SELECT * FROM tbl_metadata WHERE page_name='$pagename'");
-$metadata = $metasql->fetch_object();
-// $metaexist= !empty($metadata) ? array_shift($metadata) : false;
-// pr($metadata);
+    $pagename = strtolower($_GET['page']);
+    $metasql = $db->query("SELECT * FROM tbl_metadata WHERE page_name='$pagename'");
+    $metadata = $metasql->fetch_object();
+    // $metaexist= !empty($metadata) ? array_shift($metadata) : false;
+    // pr($metadata);
 
-?>
+    ?>
     <div class="form-row show <?php echo (!empty($metadata->meta_keywords) || !empty($metadata->meta_description) || !empty($metadata->meta_title)) ? '' : 'hide'; ?>  metadata">
-       
+
         <form class="col-md-12 center-margin" id="offers_meta_frm">
             <input type="hidden" name="page_name" value="<?php echo $pagename ?>" />
             <input type="hidden" name="module_id" value="<?php echo $moduleId ?>" />
@@ -162,7 +158,7 @@ $metadata = $metasql->fetch_object();
         $status = ($vacencyInfo->status == 1) ? "checked" : "";
         $unstatus = ($vacencyInfo->status == 0) ? "checked" : "";
     endif;
-    ?>
+?>
     <h3>
         <?php echo (isset($_GET['id'])) ? 'Edit Vacency' : 'Add Vacency'; ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);" onClick="viewvacencylist();">
@@ -183,11 +179,11 @@ $metadata = $metasql->fetch_object();
                     </div>
                     <div class="form-input col-md-6">
                         <input placeholder="Vacency Title" class="col-md-6 validate[required,length[0,200]]" type="text" name="title" id="title"
-                               value="<?php echo !empty($vacencyInfo->title) ? $vacencyInfo->title : ""; ?>">
+                            value="<?php echo !empty($vacencyInfo->title) ? $vacencyInfo->title : ""; ?>">
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Post :
@@ -195,10 +191,10 @@ $metadata = $metasql->fetch_object();
                     </div>
                     <div class="form-input col-md-6">
                         <input placeholder="Post" class="col-md-6 validate[required,length[0,200]]" type="text" name="post" id="post"
-                               value="<?php echo !empty($vacencyInfo->post) ? $vacencyInfo->post : ""; ?>">
+                            value="<?php echo !empty($vacencyInfo->post) ? $vacencyInfo->post : ""; ?>">
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Location :
@@ -206,7 +202,7 @@ $metadata = $metasql->fetch_object();
                     </div>
                     <div class="form-input col-md-6">
                         <input placeholder="Location" class="col-md-6 validate[required,length[0,200]]" type="text" name="location" id="location"
-                               value="<?php echo !empty($vacencyInfo->location) ? $vacencyInfo->location : ""; ?>">
+                            value="<?php echo !empty($vacencyInfo->location) ? $vacencyInfo->location : ""; ?>">
                     </div>
                 </div>
                 <!-- <div class="form-row">
@@ -221,7 +217,7 @@ $metadata = $metasql->fetch_object();
                     </div>
                 </div> -->
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Deadline :
@@ -229,10 +225,10 @@ $metadata = $metasql->fetch_object();
                     </div>
                     <div class="form-input col-md-4">
                         <input placeholder="Deadline " class="col-md-6 validate[required] datepicker" type="text" name="vacency_date" id="vacency_date"
-                               value="<?php echo !empty($vacencyInfo->date2) ? $vacencyInfo->date2 : ""; ?>">
+                            value="<?php echo !empty($vacencyInfo->date2) ? $vacencyInfo->date2 : ""; ?>">
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             No.of Pax :
@@ -240,7 +236,7 @@ $metadata = $metasql->fetch_object();
                     </div>
                     <div class="form-input col-md-6">
                         <input placeholder="Pax" class="col-md-4 validate[required,length[0,200]]" type="text" name="pax" id="pax"
-                               value="<?php echo !empty($vacencyInfo->pax) ? $vacencyInfo->pax : ""; ?>">
+                            value="<?php echo !empty($vacencyInfo->pax) ? $vacencyInfo->pax : ""; ?>">
                     </div>
                 </div>
                 <div class="form-row">
@@ -249,7 +245,7 @@ $metadata = $metasql->fetch_object();
                             Content :
                         </label>
                         <textarea name="content" id="content"
-                                  class="large-textarea validate[required]"><?php echo !empty($vacencyInfo->content) ? $vacencyInfo->content : ""; ?></textarea>
+                            class="large-textarea validate[required]"><?php echo !empty($vacencyInfo->content) ? $vacencyInfo->content : ""; ?></textarea>
                     </div>
                 </div>
                 <div class="form-row">
@@ -260,10 +256,10 @@ $metadata = $metasql->fetch_object();
                     </div>
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="status" id="check1"
-                               value="1" <?php echo !empty($status) ? $status : "checked"; ?>>
+                            value="1" <?php echo !empty($status) ? $status : "checked"; ?>>
                         <label for="">Published</label>
                         <input type="radio" class="custom-radio" name="status" id="check0"
-                               value="0" <?php echo !empty($unstatus) ? $unstatus : ""; ?>>
+                            value="0" <?php echo !empty($unstatus) ? $unstatus : ""; ?>>
                         <label for="">Un-Published</label>
                     </div>
                 </div>
@@ -279,21 +275,21 @@ $metadata = $metasql->fetch_object();
                 <div class="form-row <?php echo (!empty($vacencyInfo->meta_keywords) || !empty($vacencyInfo->meta_description)) ? '' : 'hide'; ?> metadata">
                     <div class="col-md-6">
                         <textarea placeholder="Meta Keyword" name="meta_keywords" id="meta_keywords"
-                                  class="character-keyword validate[required]"><?php echo !empty($vacencyInfo->meta_keywords) ? $vacencyInfo->meta_keywords : ""; ?></textarea>
+                            class="character-keyword validate[required]"><?php echo !empty($vacencyInfo->meta_keywords) ? $vacencyInfo->meta_keywords : ""; ?></textarea>
                         <div class="keyword-remaining clear input-description">250 characters left</div>
                     </div>
                     <div class="col-md-6">
                         <textarea placeholder="Meta Description" name="meta_description" id="meta_description"
-                                  class="character-description validate[required]"><?php echo !empty($vacencyInfo->meta_description) ? $vacencyInfo->meta_description : ""; ?></textarea>
+                            class="character-description validate[required]"><?php echo !empty($vacencyInfo->meta_description) ? $vacencyInfo->meta_description : ""; ?></textarea>
                         <div class="description-remaining clear input-description">160 characters left</div>
                     </div>
                 </div>
 
                 <button type="submit" name="submit" class="btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4" id="btn-submit"
-                        title="Save">
+                    title="Save">
                     <span class="button-content">Save</span>
                 </button>
-                <input type="hidden" name="idValue" id="idValue" value="<?php echo !empty($vacencyInfo->id) ? $vacencyInfo->id : 0; ?>"/>
+                <input type="hidden" name="idValue" id="idValue" value="<?php echo !empty($vacencyInfo->id) ? $vacencyInfo->id : 0; ?>" />
             </form>
         </div>
     </div>

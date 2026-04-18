@@ -6,11 +6,7 @@ $moduleFoldername = "";        // Image folder name
 if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     ?>
     <h3>
-<<<<<<< HEAD
-        List Careers
-=======
-        List FAQs
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
+        List Faqs
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);" onClick="addNewFaq();">
     <span class="glyph-icon icon-separator">
     	<i class="glyph-icon icon-plus-square"></i>
@@ -157,11 +153,7 @@ $metadata = $metasql->fetch_object();
     endif;
     ?>
     <h3>
-<<<<<<< HEAD
-        <?php echo (isset($_GET['id'])) ? 'Edit Career' : 'Add Career'; ?>
-=======
-        <?php echo (isset($_GET['id'])) ? 'Edit FAQ' : 'Add FAQ'; ?>
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
+        <?php echo (isset($_GET['id'])) ? 'Edit Faq' : 'Add Faq'; ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="viewFaqList();">
     <span class="glyph-icon icon-separator">

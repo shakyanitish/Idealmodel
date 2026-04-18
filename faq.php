@@ -11,7 +11,7 @@ require_once("includes/initialize.php");
 
 $currentTemplate	= Config::getCurrentTemplate('template');
 $jVars 				= array();
-$template 			= "template/{$currentTemplate}/career.html";
+$template 			= "template/{$currentTemplate}/faq.html";
 
 require_once('views/modules.php');
 

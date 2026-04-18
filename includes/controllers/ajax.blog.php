@@ -18,7 +18,7 @@
 			$record->slug 		= create_slug($_REQUEST['title']);	
 			$record->title 		= $_REQUEST['title'];
 			$record->author 	= $_REQUEST['author'];	
-			// $record->brief 		= $_REQUEST['brief'];		
+			$record->brief 		= $_REQUEST['brief'];		
 			$record->content	= $_REQUEST['content'];
 			$record->category	= $_REQUEST['category'];
 			// $record->linksrc 		= $_REQUEST['linksrc'];
@@ -54,7 +54,7 @@
 			$record->title 		= $_REQUEST['title'];
 			$record->author 	= $_REQUEST['author'];
 			$record->category	= $_REQUEST['category'];
-			// $record->brief 		= $_REQUEST['brief'];		
+			$record->brief 		= $_REQUEST['brief'];		
 			$record->content	= $_REQUEST['content'];
 			// $record->linksrc 		= $_REQUEST['linksrc'];
 			// $record->linktype 		= $_REQUEST['linktype'];

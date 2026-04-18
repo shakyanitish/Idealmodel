@@ -5,6 +5,7 @@ $moduleFoldername = "";     // Image folder name
 if (isset($_GET['page']) && $_GET['page'] == "applicant" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     ?>
     <h3>List of Applicants</h3>
+    
     <div class="my-msg"></div>
     <div class="example-box">
         <div class="example-code">

@@ -24,7 +24,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
 <div class="example-box">
     <div class="example-code">
         <form action="" class="col-md-12 center-margin" id="Preference_frm">
-            <div class="form-row">
+            <div class="form-row hide">
                 <div class="form-label col-md-2">
                     <label for="">
                         Site Under Construction:
@@ -302,7 +302,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             <!-- <div id="preview_Image5"></div>
             </div> -->
 
-            <!-- <div class="form-row">
+            <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
                         Contact Image :
@@ -342,7 +342,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     </label>
                 </div>
                 <div id="preview_Image6"></div>
-            </div> -->
+            </div>
 
             <!-- <?php if ($PrefeRow->id == 1) { ?>
                 <div class="form-row">
@@ -521,7 +521,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 </div>
             </div> -->
 
-            <!-- <div class="form-row">
+            <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
                         Schema.org Code :
@@ -531,8 +531,8 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     <textarea placeholder="Schema.org Code" name="schema_code" id="schema_code"
                               class=""><?php echo !empty($PrefeRow->schema_code) ? $PrefeRow->schema_code : ""; ?></textarea>
                 </div>
-            </div> -->
-            <!-- 
+            </div> 
+            
             <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
@@ -543,8 +543,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     <textarea placeholder="Robot.txt Content Code" name="robot_txt" id="robot_txt"
                               class=""><?php echo !empty($PrefeRow->robot_txt) ? $PrefeRow->robot_txt : ""; ?></textarea>
                 </div>
-            </div> -->
-
+            </div> 
             <!-- <div class="form-row" style="">
                 <div class="form-label col-md-2">
                     <label>Booking Type :</label>

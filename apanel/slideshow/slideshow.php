@@ -3,11 +3,7 @@
 $moduleTablename = "tbl_slideshow"; // Database table name
 $moduleId = 4;                // module id >>>>> tbl_modules
 $position = array(1 => 'First', 2 => 'Second', 3 => 'Third', 4 => 'Four', 5 => 'Five');
-<<<<<<< HEAD
-$type= array(2=>'Video');//1=>'Image', 
-=======
-$type= array(1=>'Image', 2=>'Video');//
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
+$type= array(1=>'Image',2=>'Video');// 
 
 if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     clearImages($moduleTablename, "slideshow");
@@ -28,11 +24,7 @@ if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode'])
                 $type_select_html .= '<option value="' . $key . '" ' . ($key == $typeid ? ' selected' : '') . '>' . $types . '</option>';
             }
             $type_select_html .= '</select></div>';
-<<<<<<< HEAD
-            // echo $type_select_html;
-=======
             echo $type_select_html;
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
         }
         ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
@@ -162,7 +154,7 @@ if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode'])
                         </label>
                     </div>
                     <div class="form-input col-md-8">
-                        <input placeholder="Slideshow Title" class="col-md-6 validate[required,length[0,50]]"
+                        <input placeholder="Slideshow Title" class="col-md-6 validate[length[0,50]]"
                                type="text" name="title" id="title"
                                value="<?php echo !empty($advInfo->title) ? $advInfo->title : ""; ?>">
                     </div>

@@ -92,13 +92,13 @@ $metadata = $metasql->fetch_object();
                             Save
                         </span>
                     </button>
-                    <button btn-action='2' type="submit"
+                    <!-- <button btn-action='2' type="submit"
                         class="btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
                         onClick="toggleMetadata();" title="Save">
                         <span class="button-content">
                             Cancel
                         </span>
-                    </button>
+                    </button> -->
                     <input myaction='0' type="hidden" name="idValue" id="idValue" value="<?php echo !empty($metadata->id) ? $metadata->id : 0; ?>" />
                 </div>
             </div>

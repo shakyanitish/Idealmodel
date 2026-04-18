@@ -231,11 +231,13 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                                 // Article Page Link
                                 echo Article::get_internal_link($Lpageview, $LinkTypeview);
                                 // Package Page Link
-                                echo Package::get_internal_link($Lpageview, $LinkTypeview);
+                                //echo Package::get_internal_link($Lpageview, $LinkTypeview);
                                 // Download Page Link
                                 // echo Download::get_internal_link($Lpageview,$LinkTypeview);
 
                                 echo Services::get_internal_link($Lpageview, $LinkTypeview);
+                                //echo Blog::get_internal_link($Lpageview, $LinkTypeview);
+
                                 ?>
                             </select>
                         </div>

@@ -191,6 +191,7 @@ if (isset($_GET['page']) && $_GET['page'] == "social" && isset($_GET['mode']) &&
                         <input placeholder="fab fa-icon" class="col-md-4 validate[required,length[0,200]]" type="text"
                                name="icon" id="icon"
                                value="<?php echo !empty($socialInfo->icon) ? $socialInfo->icon : ""; ?>">
+                        <a href="https://fontawesome.com/" target="_blank" style="margin-left: 10px; color: #0065B3; text-decoration: none; font-weight: bold;">View Icon</a>
                     </div>
                 </div>
 

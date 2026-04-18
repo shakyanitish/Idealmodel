@@ -2,7 +2,7 @@
 class Page extends DatabaseObject {
 
 	protected static $table_name = "tbl_pages";
-	protected static $db_fields = array('id', 'parent_id', 'slug', 'title', 'sub_title', 'linksrc', 'linktype', 'content', 'content2', 'upcoming', 'status', 'sortorder', 'meta_title','date','meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date','homepage', 'image','gallery_images');
+	protected static $db_fields = array('id', 'parent_id', 'slug', 'title', 'sub_title', 'linksrc', 'linktype', 'content', 'content2','content3',  'upcoming', 'status', 'sortorder', 'meta_title','date','meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date','homepage', 'image','gallery_images');
 	
 	public $id;
 	public $parent_id;
@@ -14,6 +14,7 @@ class Page extends DatabaseObject {
 	public $content;
 
 	public $content2;
+	public $content3;
 	public $status;
 	public $sortorder;
 	public $meta_title;

@@ -84,7 +84,7 @@ $footer = '
                 <div class="row">
                     <div class="col-lg-10">
                         <div class="f-maincontent">
-                            <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->fb_upload . '" alt />
+                            ' .$jVars['site:blog'] . '
                         </div>
                     </div>
 
@@ -100,11 +100,7 @@ $footer = '
                     <div class="col-lg-7">
                         <div class="f-maincontent">
                             <h4>About</h4>
-<<<<<<< HEAD
                             ' . $breif[0] . '
-=======
-                            <p>' . $breif[0] . '</p>
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                         </div>
                     </div>
 
@@ -113,11 +109,7 @@ $footer = '
                             <h4>Contact</h4>
                             <ul>
                                 <li><a href="#">' . $siteRegulars->fiscal_address . '</a></li>
-<<<<<<< HEAD
                                 <li><a href="#">(+977)' . $siteRegulars->contact_info . '</a></li>
-=======
-                                <li><a href="#">' . $siteRegulars->contact_info . '</a></li>
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                                 <li><a href="#">' . $siteRegulars->email_address . '</a></li>
                             </ul>
                         </div>

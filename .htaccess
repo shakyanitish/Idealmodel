@@ -27,9 +27,9 @@ RewriteRule ^book/([a-zA-Z0-9-]+)/?$ book.php?slug=$1 [L]
 
 
 #For service pages.
-#RewriteRule ^(primary-level|lower-secondary-level|secondary-level)/?$ service_list.php?slug=$1 [L,QSA]
 
-RewriteRule ^services/([a-zA-Z0-9-]+)$ service_list.php?slug=$1 [L]
+
+#RewriteRule ^services/([a-zA-Z0-9-]+)$ service_list.php?slug=$1 [L]
 
 
 #For hospitality pages.
@@ -44,7 +44,7 @@ RewriteRule ^gallery/?$ gallery.php [L]
 #RewriteRule ^video/?$ video.php [L]
 
 
-RewriteRule ^program-details.html/?$ subpkgdetail.php [L]
+RewriteRule ^program/?$ subpkgdetail.php [L]
 
 
 
@@ -79,7 +79,7 @@ RewriteRule ^alumini/?$ alumini.php?slug=$1  [L]
 #RewriteRule ^facilities/?$ facilities.php [L]
 
 #For facq pages.
-RewriteRule ^career/?$ faq.php [L]
+RewriteRule ^faq/?$ faq.php [L]
 
 #For career pages.
 RewriteRule ^career-form/([a-zA-Z0-9-]+)?$ career-form.php?slug=$1 [L]

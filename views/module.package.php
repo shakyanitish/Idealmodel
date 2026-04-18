@@ -86,6 +86,14 @@ if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
     }
     $jVars['module:packages'] = $roombread;
 } else {
+    // Initialize pkgRow if not already set
+    $pkgRow = $pkgRow ?? null;
+    
+    if (!$pkgRow) {
+        $pkgRow = new stdClass();
+        $pkgRow->id = 0;
+    }
+    
     $sql = "SELECT *  FROM tbl_package_sub WHERE status='1' AND type = '{$pkgRow->id}' ORDER BY sortorder DESC ";
 
     $page = (isset($_REQUEST["pageno"]) and !empty($_REQUEST["pageno"])) ? $_REQUEST["pageno"] : 1;
@@ -257,29 +265,34 @@ if (isset($_REQUEST['slug'])) {
     </section>';
     }
 } else {
-    $imglink = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
-    $pkgRowImg = $pkgRow->banner_image;
-    if ($pkgRowImg != "a:0:{}") {
-        $pkgRowList = unserialize($pkgRowImg);
-        $file_path = SITE_ROOT . 'images/package/banner/' . $pkgRowList[0];
-        if (file_exists($file_path) and !empty($pkgRowList[0])) {
-            $imglink = IMAGE_PATH . 'package/banner/' . $pkgRowList[0];
-        } else {
-            $imglink = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
+    $siteRegulars = Config::find_by_id(1) ?? null;
+    $imglink = ($siteRegulars && !empty($siteRegulars->other_upload)) ? IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload : '';
+    
+    // Only proceed if pkgRow is properly defined
+    if ($pkgRow && isset($pkgRow->banner_image)) {
+        $pkgRowImg = $pkgRow->banner_image;
+        if ($pkgRowImg != "a:0:{}") {
+            $pkgRowList = unserialize($pkgRowImg);
+            if (is_array($pkgRowList) && isset($pkgRowList[0])) {
+                $file_path = SITE_ROOT . 'images/package/banner/' . $pkgRowList[0];
+                if (file_exists($file_path) and !empty($pkgRowList[0])) {
+                    $imglink = IMAGE_PATH . 'package/banner/' . $pkgRowList[0];
+                }
+            }
         }
     }
 
 
     // <div id="background" data-bgimage="url(' . $imglink . ') fixed"></div>  
 
-
+    $roombreads = '';
     $roombreads .= '
         <div id="background" data-bgimage="url(' . $imglink . ') fixed"></div>';
 
     $jVars['module:imagebanner'] = $roombreads;
 
-    $roombread .= '
-
+    if ($pkgRow && isset($pkgRow->title)) {
+        $roombread .= '
 
             <section id="subheader" class="no-bg">
         <div class="container">
@@ -291,6 +304,7 @@ if (isset($_REQUEST['slug'])) {
         </div>
     </section>
 ';
+    }
 
     $sql = "SELECT *  FROM tbl_package_sub WHERE status='1' AND type = '{$pkgRow->id}' ORDER BY sortorder DESC ";
 

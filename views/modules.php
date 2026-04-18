@@ -1,9 +1,9 @@
 
 <?php
 // SITE REGULARS
-$jVars['site:header'] 		= Config::getField('headers',true);
-$jVars['site:footer'] 		= Config::getField('footer',true);
-$siteRegulars 				= Config::find_by_id(1);
+$jVars['site:header'] = Config::getField('headers', true);
+$jVars['site:footer'] = Config::getField('footer', true);
+$siteRegulars = Config::find_by_id(1);
 // $jVars['site:copyright'] = str_replace(
 //     '{year}',
 //     date('Y'),
@@ -16,19 +16,19 @@ $siteRegulars 				= Config::find_by_id(1);
 $jVars['site:copyright'] = str_replace('{year}', date('Y'), $siteRegulars->copyright);
 
 $jVars['site:infoss'] = $siteRegulars->breif;
-$jVars['site:contact-header'] = '<span class="address"><a href="tel:'.$siteRegulars->contact_info.'" data-toggle="tooltip" data-placement="bottom" title="Call"><i class="fa fa-phone"></i></a></span>
-<span class="address"><a href="mailto:'.$siteRegulars->mail_address.'" data-toggle="tooltip" data-placement="bottom" title="Mail"><i class="fa fa-envelope-o"></i></a></span>';
+$jVars['site:contact-header'] = '<span class="address"><a href="tel:' . $siteRegulars->contact_info . '" data-toggle="tooltip" data-placement="bottom" title="Call"><i class="fa fa-phone"></i></a></span>
+<span class="address"><a href="mailto:' . $siteRegulars->mail_address . '" data-toggle="tooltip" data-placement="bottom" title="Mail"><i class="fa fa-envelope-o"></i></a></span>';
 
-$jVars['site:phone-news-side'] = '<a href="tel:'.$siteRegulars->contact_info.'" class="phone">'.$siteRegulars->contact_info.'</a>';
+$jVars['site:phone-news-side'] = '<a href="tel:' . $siteRegulars->contact_info . '" class="phone">' . $siteRegulars->contact_info . '</a>';
 
-$jVars['site:fevicon']		=  '<link rel="shortcut icon" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'"> 
-							    <link rel="apple-touch-icon" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'"> 
-							    <link rel="apple-touch-icon" sizes="72x72" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'"> 
-							    <link rel="apple-touch-icon" sizes="114x114" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'">';
-$jVars['site:logo']			= '
+$jVars['site:fevicon'] = '<link rel="shortcut icon" href="' . IMAGE_PATH . 'preference/' . $siteRegulars->icon_upload . '"> 
+							    <link rel="apple-touch-icon" href="' . IMAGE_PATH . 'preference/' . $siteRegulars->icon_upload . '"> 
+							    <link rel="apple-touch-icon" sizes="72x72" href="' . IMAGE_PATH . 'preference/' . $siteRegulars->icon_upload . '"> 
+							    <link rel="apple-touch-icon" sizes="114x114" href="' . IMAGE_PATH . 'preference/' . $siteRegulars->icon_upload . '">';
+$jVars['site:logo'] = '
 
-                        <a href="'.BASE_URL.'home" class="d-block mb-4"></a>
-                        <img src="'.IMAGE_PATH.'preference/'.$siteRegulars->logo_upload.'" class="img-fluid mb-3 wow fadeInUp" width="250"
+                        <a href="' . BASE_URL . 'home" class="d-block mb-4"></a>
+                        <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" class="img-fluid mb-3 wow fadeInUp" width="250"
                             data-wow-duration="1s" alt="Main Logo">
                         </a>
 ';
@@ -39,7 +39,8 @@ $imglink = $siteRegulars->offer_upload;
 
 if (!empty($imglink)) {
     $img = IMAGE_PATH . 'preference/offer/' . $siteRegulars->offer_upload;
-} else {
+}
+else {
     $img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
 }
 
@@ -52,8 +53,8 @@ $jVars['site:faq'] = '
                     <div class="col-md-12">
                         <!-- logo begin -->
                         <div id="logo">
-                            <a href="'. BASE_URL . 'home' .'">
-                                <img class="logo" src="'. $img .'" alt="">
+                            <a href="' . BASE_URL . 'home' . '">
+                                <img class="logo" src="' . $img . '" alt="">
                             </a>
                         </div>
                         <!-- logo close -->
@@ -71,13 +72,13 @@ $imglink = $siteRegulars->contact_upload;
 
 if (!empty($imglink)) {
     $img = IMAGE_PATH . 'preference/contact/' . $siteRegulars->contact_upload;
-} else {
+}
+else {
     $img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
 }
-$jVars['site:blog']			= ' 
+$jVars['site:blog'] = ' 
+                            <img src="' . $img . '" alt />
 
-
-        <div id="background" data-bgimage="url('. $img .') fixed"></div>
 ';
 
 
@@ -85,7 +86,8 @@ $jVars['site:blog']			= '
 $jVars['site:seotitle'] = MetaTagsFor_SEO();
 $jVars['site:googleanalatic'] = $siteRegulars->google_anlytics;
 
-$jVars['site:pixel-code']	= $siteRegulars->pixel_code;	 
+$jVars['site:pixel-code'] = $siteRegulars->pixel_code;
+
 
 
 require_once("views/module.booking.php");
@@ -96,10 +98,10 @@ require_once("views/module.services.php");
 
 // SITE MODULES
 $modulesList = Module::getAllmode();
-foreach($modulesList as $module):	
-	$fileName = "module.".$module->mode.".php";
-	if(file_exists("views/".$fileName)){
-	  	require_once("views/".$fileName);
+foreach ($modulesList as $module):
+    $fileName = "module." . $module->mode . ".php";
+    if (file_exists("views/" . $fileName)) {
+        require_once("views/" . $fileName);
     }
 endforeach;
 

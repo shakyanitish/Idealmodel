@@ -14,12 +14,23 @@ if (!empty($subpkgRec)) {
 
 
         // Main image
+        // $imglink = '';
+        // if ($v->image != "a:0:{}") {
+        //     $imageList = unserialize($v->image);
+        //     $file_path = SITE_ROOT . 'images/services/' . $imageList[0];
+        //     if (file_exists($file_path)) {
+        //         $imglink = IMAGE_PATH . 'services/' . $imageList[0];
+        //     }
+        // }
+                // Main image
         $imglink = '';
         if ($v->image != "a:0:{}") {
             $imageList = unserialize($v->image);
-            $file_path = SITE_ROOT . 'images/services/' . $imageList[0];
-            if (file_exists($file_path)) {
-                $imglink = IMAGE_PATH . 'services/' . $imageList[0];
+            if (is_array($imageList) && isset($imageList[0])) {
+                $file_path = SITE_ROOT . 'images/services/' . $imageList[0];
+                if (file_exists($file_path)) {
+                    $imglink = IMAGE_PATH . 'services/' . $imageList[0];
+                }
             }
         }
 
@@ -33,6 +44,7 @@ if (!empty($subpkgRec)) {
             }
         }
         // Only create link if linksrc exists in database
+        $linkTarget = '';
         if (!empty($v->linksrc)) {
             $linkTarget = ($v->linktype == 1) ? ' target="_blank" ' : '';
             $linksrc = ($v->linktype == 1) ? $v->linksrc : BASE_URL . $v->linksrc;
@@ -52,34 +64,19 @@ if (!empty($subpkgRec)) {
         $pbClass   = $isLeft ? 'pb-170 ' : '';
 
         // Build the h4 link from linksrc or fall back to slug-based URL
-<<<<<<< HEAD
         $itemLink  = BASE_URL . '' . $v->slug;
-=======
-        $itemLink  = !empty($v->linksrc)
-            ? (($v->linktype == 1) ? $v->linksrc : BASE_URL . $v->linksrc)
-            : BASE_URL . 'service_list.php?slug=' . $v->slug;
-        $linkTarget = ($v->linktype == 1 && !empty($v->linksrc)) ? ' target="_blank"' : '';
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
 
         $res .= '
                     <div class="col-lg-6 col-md-6 ' . $pbClass . 'customize-wrap ' . $wowClass . '">
                         <div class="customize-item ' . $sideClass . '">
                             <div class="sv-image">
-<<<<<<< HEAD
                             <a href="' . $itemLink . '"' . $linkTarget . '>
                             <img src="' . $iconlink . '" alt="' . htmlspecialchars($v->title) . '" />
                             </a>     
                             </div>
                             <div class="customize-ct">
                                 <h4><a href="' . $itemLink . '"' . $linkTarget . '>' . $v->title . '</a></h4>
-                                <p>' . $v->sub_title . '</p>
-=======
-                                <img src="' . $iconlink . '" alt="' . htmlspecialchars($v->title) . '" />
-                            </div>
-                            <div class="customize-ct">
-                                <h4><a href="' . $itemLink . '"' . $linkTarget . '>' . htmlspecialchars($v->title) . '</a></h4>
-                                <p>' . htmlspecialchars($v->sub_title) . '</p>
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
+                                
                             </div>
                         </div>
                     </div>
@@ -95,9 +92,9 @@ $rescont = '
             <div class="section-title sc-center justify-content-center text-center borderline">
                 <div class="title-top">
                     <div class="title-quote">
-                        <span>Find More Courses</span>
+                        <span>Learn | Grow | Succeed</span>
                     </div>
-                    <h2>ACADEMICS OF IMS</h2>
+                    <h2>Academic Distinction at IMS</h2>
                 </div>
             </div>
 
@@ -186,7 +183,7 @@ if (!empty($subpkgRec)) {
                                             <div class="col-sm-6">
                                                 <div class="dining-detail-carousel">';
         // var_dump($imageList); die();
-        if ($serRec->image != "a:0:{}") {
+        if ($serRec->image != "a:0:{}" && is_array($imageList)) {
             foreach ($imageList as $key => $imgServ) {
                 $restscont .= ' <div class="item">
                                                 <img src="' . IMAGE_PATH . 'services/' . $imgServ . '" alt="' . $serRec->title . '" />

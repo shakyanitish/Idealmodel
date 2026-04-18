@@ -67,10 +67,10 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
                                data-placement="top" title="Edit" onclick="editRecord(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-edit"></i>
                             </a>
-                            <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top"
+                            <!-- <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top"
                                title="Remove" onclick="recordDelete(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-remove"></i>
-                            </a>
+                            </a> -->
                             <input name="sortId" type="hidden" value="<?php echo $record->id; ?>">
                         </td>
                     </tr>
@@ -81,7 +81,7 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
         <div class="pad0L col-md-2">
             <select name="dropdown" id="groupTaskField" class="custom-select">
                 <option value="0"><?php echo $GLOBALS['basic']['choseAction']; ?></option>
-                <option value="delete"><?php echo $GLOBALS['basic']['delete']; ?></option>
+                <!-- <option value="delete"><?php echo $GLOBALS['basic']['delete']; ?></option> -->
                 <option value="toggleStatus"><?php echo $GLOBALS['basic']['toggleStatus']; ?></option>
             </select>
         </div>
@@ -268,11 +268,7 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
                 <div class="form-row">
                     <div class="form-label col-md-12">
                         <label for="">
-<<<<<<< HEAD
                             Content 1 :
-=======
-                            Content :
->>>>>>> d9ebb2d707b27fed4fd37ced6b17a62213a4478c
                         </label>
                         <textarea name="content" id="content"
                                   class="large-textarea validate[required]"><?php echo !empty($pagesInfo->content) ? $pagesInfo->content : ""; ?></textarea>
@@ -298,15 +294,30 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
                 </div>
 
 
+                <div class="form-row">
+                    <div class="form-label col-md-12">
+                        <label for="">
+                            Content 3 :
+                        </label>
+                        <textarea name="content3" id="content3"
+                                  class="large-textarea validate[required]"><?php echo !empty($pagesInfo->content3) ? $pagesInfo->content3 : ""; ?></textarea>
+                        <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore"
+                           href="javascript:void(0);">
+                            <span class="button-content">Read More</span>
+                        </a>
+                    </div>
+                </div>
+
+
 
                 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="homepage" id="homepage1"
-                               value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>
+                               value="1" <?php echo !empty($homepage) ? $homepage : "checked"; ?>>
                         <label for="">Homepage</label>
                         <input type="radio" class="custom-radio" name="homepage" id="homepage0"
-                               value="0" <?php echo !empty($nothomepage) ? $nothomepage : "checked"; ?>>
+                               value="0" <?php echo !empty($nothomepage) ? $nothomepage : ""; ?>>
                         <label for="">Not at Homepage</label>
                     </div>
                 </div>
@@ -392,7 +403,7 @@ if (isset($_GET['page']) && $_GET['page'] == "pages" && isset($_GET['mode']) && 
     
     <script>
         var base_url = "<?php echo ASSETS_PATH; ?>";
-        var editor_arr = ["content", "content2"];
+        var editor_arr = ["content", "content2", "content3"];
         create_editor(base_url, editor_arr);
     </script>
 

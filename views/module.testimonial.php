@@ -165,7 +165,7 @@ $jVars['module:testimonialList'] = $restst;
 // New Home Page Testimonial Structure for Ideal Model
 $hometst = '';
 if (defined('HOME_PAGE')) {
-    $tstRec = Testimonial::get_alltestimonial(10);
+    $tstRec = Testimonial::get_alltestimonial(5);
     if (!empty($tstRec)) {
         $tstItems = '';
         foreach ($tstRec as $tstRow) {
@@ -207,3 +207,48 @@ if (defined('HOME_PAGE')) {
     }
 }
 $jVars['module:home-testimonial'] = $hometst;
+
+
+
+$alumini_list = '';
+if (defined("ALUMINI_PAGE")) {
+    $sql = "SELECT * FROM tbl_testimonial WHERE status='1' ORDER BY sortorder DESC";
+    $aluminiRecs = Testimonial::find_by_sql($sql);
+    if (!empty($aluminiRecs)) {
+        foreach ($aluminiRecs as $alumini) {
+            $img = BASE_URL . "template/web/images/user-2.jpg";
+            if (!empty($alumini->image)) {
+                $file_path = SITE_ROOT . "images/testimonial/" . $alumini->image;
+                if (file_exists($file_path)) {
+                    $img = IMAGE_PATH . "testimonial/" . $alumini->image;
+                }
+            }
+
+            $alumini_list .= '
+            <div class="about-us-wrap-alumini">
+                <div class="row justify-content-md-center">
+                    <div class="col-lg-3 col-md-12 wow fadeInLeftBig">
+                        <div class="about-wrap-img">
+                            <img src="' . $img . '" alt="' . $alumini->name . '" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-12 wow fadeInRightBig">
+                        <div class="about-us-wrap">
+                            <div class="about-title">
+                                <div class="ps-name">
+                                    <h3 class="mb-0 text-start">' . $alumini->name . '</h3>
+                                    <span class="cl-orange">' . $alumini->via_type . '</span>
+                                </div>
+                            </div>
+                            <div class="about-content">
+                                <p class="mb-0">' . strip_tags($alumini->content) . '</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+        }
+    }
+}
+$jVars["module:combinednews:alumni"] = $alumini_list;

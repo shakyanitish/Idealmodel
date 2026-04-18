@@ -28,7 +28,7 @@ if (isset($_GET['page']) && $_GET['page'] == "gallery" && isset($_GET['mode']) &
                     <th class="text-center"><input class="check-all" type="checkbox"/></th>
                     <th class="text-center">Title</th>
                     <th class="text-center">Sub Images</th>
-                    <th class="text-center">Display</th>
+                    <!-- <th class="text-center">Display</th> -->
                     <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                 </tr>
                 </thead>
@@ -65,7 +65,7 @@ if (isset($_GET['page']) && $_GET['page'] == "gallery" && isset($_GET['mode']) &
                         </span>
                             </a>
                         </td>
-                        <td class="text-center"><?php echo ($record->type == '1') ? 'Inner Page' : 'Home Page'; ?></td>
+                        <!-- <td class="text-center"><?php echo ($record->type == '1') ? 'Inner Page' : 'Home Page'; ?></td> -->
                         <td class="text-center">
                             <?php
                             $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
@@ -246,7 +246,7 @@ $metadata = $metasql->fetch_object();
                                class="col-md-6">
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Display :

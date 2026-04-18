@@ -103,7 +103,7 @@ class Services extends DatabaseObject {
 		
 		$result='';		
 		if($pages):
-		$result.='<optgroup label="Main Services">';
+		$result.='<optgroup label="Academics">';
 			foreach($pages as $pageRow):
 				$chkChild  = Services::getTotalSub($pageRow->type);
 				$sel = ($Lsel==($pageRow->slug)) ?'selected':'';

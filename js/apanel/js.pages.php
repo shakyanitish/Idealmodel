@@ -213,8 +213,8 @@
        Delete Record completely
     ---------------------------------------------------- */
     function recordDelete(Re) {
-        $('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'], "Page") ?>');
-        $('.pText').html('Click on yes button to delete this page permanently!');
+        $('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'], "HomePage") ?>');
+        $('.pText').html('Click on yes button to delete this Homepage permanently!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
 

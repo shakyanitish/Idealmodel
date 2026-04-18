@@ -216,11 +216,11 @@ endif;
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Category :
+                            Tag :
                         </label>
                     </div>
                     <div class="form-input col-md-6">
-                        <input placeholder="Blog Category" class="col-md-6 validate[required,length[0,200]]" type="text"
+                        <input placeholder="Tag" class="col-md-6 validate[required,length[0,200]]" type="text"
                                name="category" id="category"
                                value="<?php echo !empty($blogInfo->category) ? $blogInfo->category : ""; ?>">
                     </div>
@@ -337,7 +337,7 @@ endif;
                 	                    
                 </div>
             </div> -->
-                <!-- <div class="form-row">
+            <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Brief :
@@ -348,7 +348,7 @@ endif;
                                   class="medium-textarea character-brief validate[required]"><?php echo !empty($blogInfo->brief) ? $blogInfo->brief : ""; ?></textarea>
                         <div class="brief-remaining clear input-description">250 characters left</div>
                     </div>
-                </div> -->
+                </div> 
                 <div class="form-row">
                     <div class="form-label col-md-12">
                         <label for="">

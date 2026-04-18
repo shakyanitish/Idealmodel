@@ -235,8 +235,8 @@ function editRecord(Re)
 		
 // Deleting Record
 function recordDelete(Re){
-	$('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'],"Slider image")?>');															
-	$('.pText').html('Click on yes button to delete this image permanently.!!');
+	$('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'],"Academics")?>');															
+	$('.pText').html('Click on yes button to delete this academic permanently.!!');
 	$('.divMessageBox').fadeIn();
 	$('.MessageBoxContainer').fadeIn(1000);
 	

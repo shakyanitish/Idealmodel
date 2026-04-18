@@ -5,6 +5,7 @@
  */
 
 $homePageSection = '';
+$homePageSection1 = '';
 
 if (defined('HOME_PAGE')) {
     $pageRec = Page::homepagePage(1); // fetch first homepage page
@@ -40,3 +41,32 @@ if (defined('HOME_PAGE')) {
 }
 
 $jVars['module:home-pages'] = $homePageSection;
+
+
+
+if (defined('HOME_PAGE')) {
+    $pageRec = Page::homepagePage(1); // fetch first homepage page
+    if (!empty($pageRec)) {
+        $page = $pageRec[0];
+        $imgSrc = !empty($page->image)
+            ? IMAGE_PATH . 'pages/' . $page->image
+            : BASE_URL . 'images/inner/img1.jpg';
+        $subTitle  = !empty($page->sub_title) ? htmlspecialchars($page->sub_title) : '';
+        $title     = !empty($page->title)     ? htmlspecialchars($page->title)     : '';
+        $content3  = !empty($page->content3)  ? $page->content3                    : '';
+
+        $homePageSection1 = '
+
+    <section class="join-now">
+        <div class="container">
+        ' . $content3 . '
+        </div>
+    </section>
+
+';
+    }
+}
+
+$jVars['module:home-content'] = $homePageSection1;
+
+

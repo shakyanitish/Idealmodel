@@ -1,4 +1,4 @@
-<link href="<?php echo ASSETS_PATH; ?>uploadify/uploadify.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo ASSETS_PATH; ?>uploadify/uploadify.css" rel="stylesheet" type="text/css" />
 <?php
 $moduleTablename = "tbl_articles"; // Database table name
 $moduleId = 3;                // module id >>>>> tbl_modules
@@ -7,14 +7,14 @@ $moduleFoldername = "articles";        // Image folder name
 if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     SerclearImages($moduleTablename, $moduleFoldername);
     SerclearImages($moduleTablename, $moduleFoldername . "/thumbnails");
-    ?>
+?>
     <h3>
         List Articles
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
-           onClick="AddNewArticles();">
-    <span class="glyph-icon icon-separator">
-    	<i class="glyph-icon icon-plus-square"></i>
-    </span>
+            onClick="AddNewArticles();">
+            <span class="glyph-icon icon-separator">
+                <i class="glyph-icon icon-plus-square"></i>
+            </span>
             <span class="button-content"> Add New </span>
         </a>
     </h3>
@@ -23,53 +23,53 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
         <div class="example-code">
             <table cellpadding="0" cellspacing="0" border="0" class="table" id="example">
                 <thead>
-                <tr>
-                    <th style="display:none;"></th>
-                    <th class="text-center"><input class="check-all" type="checkbox"/></th>
-                    <th class="text-center">Title</th>
-                    <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
-                </tr>
+                    <tr>
+                        <th style="display:none;"></th>
+                        <th class="text-center"><input class="check-all" type="checkbox" /></th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
+                    </tr>
                 </thead>
 
                 <tbody>
-                <?php 
-                $maintenance =  Config::find_by_field('upcoming');
-                $records = Article::find_by_sql("SELECT * FROM " . $moduleTablename . " WHERE upcoming=$maintenance ORDER BY sortorder DESC ");
-                foreach ($records as $key => $record): ?>
-                    <tr id="<?php echo $record->id; ?>">
-                        <td style="display:none;"><?php echo $key + 1; ?></td>
-                        <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/></td>
-                        <td>
-                            <div class="col-md-7">
-                                <a href="javascript:void(0);" onClick="editRecord(<?php echo $record->id; ?>);"
-                                   class="loadingbar-demo"
-                                   title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <?php
-                            $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
-                            $statusText = ($record->status == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub'];
-                            ?>
-                            <a href="javascript:void(0);"
-                               class="btn small <?php echo $statusImage; ?> tooltip-button statusToggler"
-                               data-placement="top" title="<?php echo $statusText; ?>"
-                               status="<?php echo $record->status; ?>" id="imgHolder_<?php echo $record->id; ?>"
-                               moduleId="<?php echo $record->id; ?>">
-                                <i class="glyph-icon icon-flag"></i>
-                            </a>
-                            <a href="javascript:void(0);" class="loadingbar-demo btn small bg-blue-alt tooltip-button"
-                               data-placement="top" title="Edit" onclick="editRecord(<?php echo $record->id; ?>);">
-                                <i class="glyph-icon icon-edit"></i>
-                            </a>
-                            <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top"
-                               title="Remove" onclick="recordDelete(<?php echo $record->id; ?>);">
-                                <i class="glyph-icon icon-remove"></i>
-                            </a>
-                            <input name="sortId" type="hidden" value="<?php echo $record->id; ?>">
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
+                    <?php
+                    $maintenance =  Config::find_by_field('upcoming');
+                    $records = Article::find_by_sql("SELECT * FROM " . $moduleTablename . " WHERE upcoming=$maintenance ORDER BY sortorder DESC ");
+                    foreach ($records as $key => $record): ?>
+                        <tr id="<?php echo $record->id; ?>">
+                            <td style="display:none;"><?php echo $key + 1; ?></td>
+                            <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>" /></td>
+                            <td>
+                                <div class="col-md-7">
+                                    <a href="javascript:void(0);" onClick="editRecord(<?php echo $record->id; ?>);"
+                                        class="loadingbar-demo"
+                                        title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <?php
+                                $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
+                                $statusText = ($record->status == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub'];
+                                ?>
+                                <a href="javascript:void(0);"
+                                    class="btn small <?php echo $statusImage; ?> tooltip-button statusToggler"
+                                    data-placement="top" title="<?php echo $statusText; ?>"
+                                    status="<?php echo $record->status; ?>" id="imgHolder_<?php echo $record->id; ?>"
+                                    moduleId="<?php echo $record->id; ?>">
+                                    <i class="glyph-icon icon-flag"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="loadingbar-demo btn small bg-blue-alt tooltip-button"
+                                    data-placement="top" title="Edit" onclick="editRecord(<?php echo $record->id; ?>);">
+                                    <i class="glyph-icon icon-edit"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top"
+                                    title="Remove" onclick="recordDelete(<?php echo $record->id; ?>);">
+                                    <i class="glyph-icon icon-remove"></i>
+                                </a>
+                                <input name="sortId" type="hidden" value="<?php echo $record->id; ?>">
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
@@ -81,9 +81,9 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
             </select>
         </div>
         <a class="btn medium primary-bg" href="javascript:void(0);" id="applySelected_btn">
-        <span class="glyph-icon icon-separator float-right">
-          <i class="glyph-icon icon-cog"></i>
-        </span>
+            <span class="glyph-icon icon-separator float-right">
+                <i class="glyph-icon icon-cog"></i>
+            </span>
             <span class="button-content"> Click </span>
         </a>
     </div>
@@ -97,14 +97,14 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
         $homepage = ($articlesInfo->homepage == 1) ? "checked" : " ";
         $nothomepage = ($articlesInfo->homepage == 0) ? "checked" : " ";
     endif;
-    ?>
+?>
     <h3>
         <?php echo (isset($_GET['id'])) ? 'Edit Article' : 'Add Article'; ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
-           onClick="viewarticleslist();">
-    <span class="glyph-icon icon-separator">
-    	<i class="glyph-icon icon-arrow-circle-left"></i>
-    </span>
+            onClick="viewarticleslist();">
+            <span class="glyph-icon icon-separator">
+                <i class="glyph-icon icon-arrow-circle-left"></i>
+            </span>
             <span class="button-content"> Back </span>
         </a>
     </h3>
@@ -113,8 +113,9 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
     <div class="example-box">
         <div class="example-code">
             <form action="" class="col-md-12 center-margin" id="articles_frm">
-            <input type="hidden" value="<?php  $maintenance =  Config::find_by_field('upcoming'); echo $maintenance ?>" name="upcoming"/>
-            <div class="form-row">
+                <input type="hidden" value="<?php $maintenance =  Config::find_by_field('upcoming');
+                                            echo $maintenance ?>" name="upcoming" />
+                <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Title :
@@ -122,8 +123,8 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                     </div>
                     <div class="form-input col-md-20">
                         <input placeholder="Title" class="col-md-6 validate[required,length[0,200]]" type="text"
-                               name="title" id="title"
-                               value="<?php echo !empty($articlesInfo->title) ? $articlesInfo->title : ""; ?>">
+                            name="title" id="title"
+                            value="<?php echo !empty($articlesInfo->title) ? $articlesInfo->title : ""; ?>">
                     </div>
                 </div>
                 <div class="form-row">
@@ -133,11 +134,11 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                         </label>
                     </div>
                     <div class="form-input col-md-20">
-                        <input placeholder=" Sub Title" class="col-md-6 validate[length[0,200]]" type="text"
-                               name="sub_title" id="sub_title"
-                               value="<?php echo !empty($articlesInfo->sub_title) ? $articlesInfo->sub_title : ""; ?>">
+                        <input placeholder=" Sub Title" class="col-md-6 validate[required,length[0,200]]" type="text"
+                            name="sub_title" id="sub_title"
+                            value="<?php echo !empty($articlesInfo->sub_title) ? $articlesInfo->sub_title : ""; ?>">
                     </div>
-                </div> 
+                </div>
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
@@ -145,9 +146,9 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                     </div>
                     <div class="form-input col-md-20">
                         <?php echo BASE_URL; ?><input placeholder="Slug"
-                                                      class="col-md-3 validate[required,length[0,200]]" type="text"
-                                                      name="slug" id="slug"
-                                                      value="<?php echo !empty($articlesInfo->slug) ? $articlesInfo->slug : ""; ?>">
+                            class="col-md-3 validate[required,length[0,200]]" type="text"
+                            name="slug" id="slug"
+                            value="<?php echo !empty($articlesInfo->slug) ? $articlesInfo->slug : ""; ?>">
                         <span id="error"></span>
                     </div>
                 </div>
@@ -160,26 +161,26 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                 </div>                
                 <div class="form-input col-md-20">
                     <input placeholder="Sub Title" class="col-md-6 validate[required,length[0,200]]" type="text" name="sub_title" id="sub_title" value="<?php // echo !empty($articlesInfo->sub_title)?$articlesInfo->sub_title:"";
-                ?>">
+                                                                                                                                                        ?>">
                 </div>                
             </div>   -->
 
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
-                        Image :
+                            Image :
                         </label>
                     </div>
                     <div class="form-input col-md-10 uploader">
                         <input type="file" name="gallery_upload" id="gallery_upload" class="transparent no-shadow">
-                            <label>
+                        <label>
                             <small>Image Dimensions (<?php echo Module::get_properties($moduleId, 'imgwidth'); ?> px
                                 X <?php echo Module::get_properties($moduleId, 'imgheight'); ?> px)
                             </small>
                         </label>
-                        
+
                     </div>
-                    <div id="preview_Image"><input type="hidden" name="imageArrayname[]"/></div>
+                    <div id="preview_Image"><input type="hidden" name="imageArrayname[]" /></div>
                     <?php
                     if (!empty($articlesInfo->image)) {
                         $imgRec = unserialize($articlesInfo->image);
@@ -191,30 +192,30 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                                     <div class="col-md-3" id="removeSavedimg<?php echo $deleteid; ?>">
                                         <div class="infobox info-bg">
                                             <div class="button-group" data-toggle="buttons">
-                            <span class="float-left">
-                                <?php
-                                if (file_exists(SITE_ROOT . "images/articles/" . $recimg)):
-                                    $filesize = filesize(SITE_ROOT . "images/articles/" . $recimg);
-                                    echo 'Size : ' . getFileFormattedSize($filesize);
-                                endif;
-                                ?>
-                            </span>
+                                                <span class="float-left">
+                                                    <?php
+                                                    if (file_exists(SITE_ROOT . "images/articles/" . $recimg)):
+                                                        $filesize = filesize(SITE_ROOT . "images/articles/" . $recimg);
+                                                        echo 'Size : ' . getFileFormattedSize($filesize);
+                                                    endif;
+                                                    ?>
+                                                </span>
                                                 <a class="btn small float-right" href="javascript:void(0);"
-                                                   onclick="deleteSavedArticlesimage(<?php echo $deleteid; ?>);">
+                                                    onclick="deleteSavedArticlesimage(<?php echo $deleteid; ?>);">
                                                     <i class="glyph-icon icon-trash-o"></i>
                                                 </a>
                                             </div>
                                             <img src="<?php echo IMAGE_PATH . 'articles/thumbnails/' . $recimg; ?>"
-                                                 style="width:100%"/>
+                                                style="width:100%" />
                                             <input type="hidden" name="imageArrayname[]" value="<?php echo $recimg; ?>"
-                                                   class="validate[required,length[0,250]]"/>
+                                                class="validate[required,length[0,250]]" />
                                         </div>
                                     </div>
-                                <?php }
+                    <?php }
                             }
                         }
                     } ?>
-                </div> 
+                </div>
 
                 <!--<div class="form-row">
                     <div class="form-label col-md-2">
@@ -264,7 +265,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                     </div>
                     <div class="form-input col-md-10">
                         <textarea name="brief" id="brief"
-                                  class="medium-textarea character-brief validate"><?php echo !empty($articlesInfo->brief) ? $articlesInfo->brief : ""; ?></textarea>
+                            class="medium-textarea character-brief validate"><?php echo !empty($articlesInfo->brief) ? $articlesInfo->brief : ""; ?></textarea>
                         <div class="brief-remaining clear input-description">250 characters left</div>
                     </div>
                 </div>
@@ -275,9 +276,9 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                             Content :
                         </label>
                         <textarea name="content" id="content"
-                                  class="large-textarea validate[required]"><?php echo !empty($articlesInfo->content) ? $articlesInfo->content : ""; ?></textarea>
+                            class="large-textarea validate[required]"><?php echo !empty($articlesInfo->content) ? $articlesInfo->content : ""; ?></textarea>
                         <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore"
-                           href="javascript:void(0);">
+                            href="javascript:void(0);">
                             <span class="button-content">Read More</span>
                         </a>
                     </div>
@@ -290,26 +291,27 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                         </label>
                     </div>
                     <textarea name="sub_title" id="sub_title"
-                              class="large-textarea"><?php //echo !empty($articlesInfo->sub_title) ? $articlesInfo->sub_title : ""; ?></textarea>
+                              class="large-textarea"><?php //echo !empty($articlesInfo->sub_title) ? $articlesInfo->sub_title : ""; 
+                                                        ?></textarea>
                 </div>-->
 
                 <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="homepage" id="homepage1"
-                               value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>
+                            value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>
                         <label for="">Homepage</label>
                         <input type="radio" class="custom-radio" name="homepage" id="homepage0"
-                               value="0" <?php echo !empty($nothomepage) ? $nothomepage : "checked"; ?>>
+                            value="0" <?php echo !empty($nothomepage) ? $nothomepage : "checked"; ?>>
                         <label for="">Not at Homepage</label>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="status" id="check1"
-                               value="1" <?php echo !empty($status) ? $status : "checked"; ?>>
+                            value="1" <?php echo !empty($status) ? $status : "checked"; ?>>
                         <label for="">Published</label>
                         <input type="radio" class="custom-radio" name="status" id="check0"
-                               value="0" <?php echo !empty($unstatus) ? $unstatus : ""; ?>>
+                            value="0" <?php echo !empty($unstatus) ? $unstatus : ""; ?>>
                         <label for="">Un-Published</label>
                     </div>
                 </div>
@@ -318,34 +320,34 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                 <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">
                         <a class="btn medium bg-blue" href="javascript:void(0);" onClick="toggleMetadata();">
-                        <span class="glyph-icon icon-separator float-right">
-                        	<i class="glyph-icon icon-caret-down"></i>
-                        </span>
+                            <span class="glyph-icon icon-separator float-right">
+                                <i class="glyph-icon icon-caret-down"></i>
+                            </span>
                             <span class="button-content"> Metadata Info </span>
                         </a>
                     </div>
                 </div>
 
                 <div class="form-row <?php echo (!empty($articlesInfo->meta_keywords) || !empty($articlesInfo->meta_description) || !empty($articlesInfo->meta_title)) ? '' : 'hide'; ?> metadata">
-                    
+
                     <div class="col-md-12">
                         <div class="form-input col-md-12">
                             <input placeholder="Meta Title" class="col-md-6 validate[required]" type="text"
-                                   name="meta_title" id="meta_title"
-                                   value="<?php echo !empty($articlesInfo->meta_title) ? $articlesInfo->meta_title : ""; ?>">
+                                name="meta_title" id="meta_title"
+                                value="<?php echo !empty($articlesInfo->meta_title) ? $articlesInfo->meta_title : ""; ?>">
                         </div>
-                        <br/>
+                        <br />
                         <div class="form-input col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
                                     <textarea placeholder="Meta Keyword" name="meta_keywords" id="meta_keywords"
-                                              class="character-keyword validate[required]"><?php echo !empty($articlesInfo->meta_keywords) ? $articlesInfo->meta_keywords : ""; ?></textarea>
+                                        class="character-keyword validate[required]"><?php echo !empty($articlesInfo->meta_keywords) ? $articlesInfo->meta_keywords : ""; ?></textarea>
                                     <div class="keyword-remaining clear input-description">250 characters left</div>
                                 </div>
                                 <div class="col-md-6">
                                     <textarea placeholder="Meta Description" name="meta_description"
-                                              id="meta_description"
-                                              class="character-description validate[required]"><?php echo !empty($articlesInfo->meta_description) ? $articlesInfo->meta_description : ""; ?></textarea>
+                                        id="meta_description"
+                                        class="character-description validate[required]"><?php echo !empty($articlesInfo->meta_description) ? $articlesInfo->meta_description : ""; ?></textarea>
                                     <div class="description-remaining clear input-description">160 characters left</div>
                                 </div>
                             </div>
@@ -355,28 +357,28 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                 </div>
 
                 <button btn-action='0' type="submit" name="submit"
-                        class="btn-submit btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
-                        id="btn-submit" title="Save">
-                <span class="button-content">
-                    Save
-                </span>
+                    class="btn-submit btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
+                    id="btn-submit" title="Save">
+                    <span class="button-content">
+                        Save
+                    </span>
                 </button>
                 <button btn-action='1' type="submit" name="submit"
-                        class="btn-submit btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
-                        id="btn-submit" title="Save">
-                <span class="button-content">
-                    Save & More
-                </span>
+                    class="btn-submit btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
+                    id="btn-submit" title="Save">
+                    <span class="button-content">
+                        Save & More
+                    </span>
                 </button>
                 <button btn-action='2' type="submit" name="submit"
-                        class="btn-submit btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
-                        id="btn-submit" title="Save">
-                <span class="button-content">
-                    Save & quit
-                </span>
+                    class="btn-submit btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
+                    id="btn-submit" title="Save">
+                    <span class="button-content">
+                        Save & quit
+                    </span>
                 </button>
                 <input myaction='0' type="hidden" name="idValue" id="idValue"
-                       value="<?php echo !empty($articlesInfo->id) ? $articlesInfo->id : 0; ?>"/>
+                    value="<?php echo !empty($articlesInfo->id) ? $articlesInfo->id : 0; ?>" />
             </form>
         </div>
     </div>
@@ -389,18 +391,18 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
     <script type="text/javascript" src="<?php echo ASSETS_PATH; ?>uploadify/jquery.uploadify.min.js"></script>
     <script type="text/javascript">
         // <![CDATA[
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#gallery_upload').uploadify({
-                'swf': '<?php echo ASSETS_PATH;?>uploadify/uploadify.swf',
-                'uploader': '<?php echo ASSETS_PATH;?>uploadify/uploadify.php',
+                'swf': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.swf',
+                'uploader': '<?php echo ASSETS_PATH; ?>uploadify/uploadify.php',
                 'formData': {
-                    PROJECT: '<?php echo SITE_FOLDER;?>',
+                    PROJECT: '<?php echo SITE_FOLDER; ?>',
                     targetFolder: 'images/articles/',
                     thumb_width: 200,
                     thumb_height: 200
                 },
                 'method': 'post',
-                'cancelImg': '<?php echo BASE_URL;?>uploadify/cancel.png',
+                'cancelImg': '<?php echo BASE_URL; ?>uploadify/cancel.png',
                 'auto': true,
                 'multi': true,
                 'hideButton': false,
@@ -413,20 +415,21 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                 'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
                 'buttonClass': 'button formButtons',
                 /* 'checkExisting' : '/uploadify/check-exists.php',*/
-                'onUploadSuccess': function (file, data, response) {
+                'onUploadSuccess': function(file, data, response) {
                     $('#uploadedImageName').val('1');
                     var filename = data;
-                    $.post('<?php echo BASE_URL;?>apanel/articles/uploaded_image.php', {imagefile: filename}, function (msg) {
+                    $.post('<?php echo BASE_URL; ?>apanel/articles/uploaded_image.php', {
+                        imagefile: filename
+                    }, function(msg) {
                         $('#preview_Image').append(msg).show();
                     });
 
                 },
-                'onDialogOpen': function (event, ID, fileObj) {
-                },
-                'onUploadError': function (file, errorCode, errorMsg, errorString) {
+                'onDialogOpen': function(event, ID, fileObj) {},
+                'onUploadError': function(file, errorCode, errorMsg, errorString) {
                     alert(errorMsg);
                 },
-                'onUploadComplete': function (file) {
+                'onUploadComplete': function(file) {
                     //alert('The file ' + file.name + ' was successfully uploaded');
                 }
             });
@@ -437,7 +440,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
     $(document).ready(function() {
 /************************************ Editor for message *****************************************/
     var base_url =  "<?php // echo ASSETS_PATH;
-    ?>";
+                        ?>";
     CKEDITOR.replace( 'sub_title',{
             toolbar :
             [   

@@ -118,7 +118,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
             </div>
 
 
-            <div class="form-row">
+            <div class="form-row hide">
                 <div class="form-label col-md-2">
                     <label for="">
                         Footer Map Link :
@@ -130,7 +130,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                         value="<?php echo !empty($locationRow->mapping) ? $locationRow->mapping : ""; ?>">
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row hide">
                 <div class="form-label col-md-2">
                     <label for="">
                         Type :
@@ -264,13 +264,13 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                     Save
                 </span>
             </button>
-            <button btn-action='2' type="submit"
+            <!-- <button btn-action='2' type="submit"
                 class="btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
                 onClick="toggleMetadata();" title="Save">
                 <span class="button-content">
                     Cancel
                 </span>
-            </button>
+            </button> -->
 
             <!-- <button type="submit" name="submit"
                     class="btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4" id="btn-submit"
