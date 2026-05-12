@@ -217,7 +217,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                     } ?>
                 </div>
 
-                <!--<div class="form-row">
+                <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Link Type :
@@ -256,7 +256,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                             </select>
                         </div>
                     </div>
-                </div>-->
+                </div>
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">

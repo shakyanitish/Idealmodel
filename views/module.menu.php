@@ -154,8 +154,9 @@ if ($menuRec):
             
             foreach ($childMenus as $childMenu):
                 $childActive = ($childMenu->linksrc == $currentPath) ? ' class="active"' : '';
-                $childLink = ($childMenu->linksrc == 'home' || $childMenu->linksrc == '' || $childMenu->linksrc == '/') ? BASE_URL : BASE_URL . $childMenu->linksrc;
-                $result .= '                        <li><a href="' . $childLink . '"' . $childActive . '>' . $childMenu->name . '</a></li>';;
+                $childLink = ($childMenu->linktype == '1') ? $childMenu->linksrc : (($childMenu->linksrc == 'home' || $childMenu->linksrc == '' || $childMenu->linksrc == '/') ? BASE_URL : BASE_URL . $childMenu->linksrc);
+                $childTarget = ($childMenu->linktype == '1') ? ' target="_blank"' : '';
+                $result .= '                        <li><a href="' . $childLink . '"' . $childActive . $childTarget . '>' . $childMenu->name . '</a></li>';;
             endforeach;
             
             $result .= '                    </ul>';
@@ -163,7 +164,7 @@ if ($menuRec):
             $result .= '            </div>';
         else:
             // Simple menu link
-            $menuLink = ($menuRow->linksrc == 'home' || $menuRow->linksrc == '' || $menuRow->linksrc == '/') ? BASE_URL : BASE_URL . $menuRow->linksrc;
+            $menuLink = ($menuRow->linktype == '1') ? $menuRow->linksrc : (($menuRow->linksrc == 'home' || $menuRow->linksrc == '' || $menuRow->linksrc == '/') ? BASE_URL : BASE_URL . $menuRow->linksrc);
             $result .= '            <a href="' . $menuLink . '"' . ($linkActive ? ' class="' . trim($linkActive) . '"' : '') . '>' . $menuRow->name . '</a>';
         endif;
     
@@ -397,14 +398,16 @@ if ($menuRec) {
             $result .= '<ul class="dropdown-menu">';
             foreach ($menusubRec as $subRow) {
                 // Determine if it's an external link or a local link
-                $subLink = ($subRow->linktype == 'external') ? $subRow->linksrc : (($subRow->linksrc == 'home' || $subRow->linksrc == '' || $subRow->linksrc == '/') ? BASE_URL : BASE_URL . $subRow->linksrc);
-                $result .= '<li><a href="' . $subLink . '">' . $subRow->name . '</a></li>';
+                $subLink = ($subRow->linktype == '1') ? $subRow->linksrc : (($subRow->linksrc == 'home' || $subRow->linksrc == '' || $subRow->linksrc == '/') ? BASE_URL : BASE_URL . $subRow->linksrc);
+                $subTarget = ($subRow->linktype == '1') ? ' target="_blank"' : '';
+                $result .= '<li><a href="' . $subLink . '"' . $subTarget . '>' . $subRow->name . '</a></li>';
             }
             $result .= '</ul>';
             $result .= '</li>';
         } else {
-            $menuLink = ($menuRow->linktype == 'external') ? $menuRow->linksrc : (($menuRow->linksrc == 'home' || $menuRow->linksrc == '' || $menuRow->linksrc == '/') ? BASE_URL : BASE_URL . $menuRow->linksrc);
-            $result .= '<li class="' . $linkActive . '"><a href="' . $menuLink . '">' . $menuRow->name . '</a></li>';
+            $menuLink = ($menuRow->linktype == '1') ? $menuRow->linksrc : (($menuRow->linksrc == 'home' || $menuRow->linksrc == '' || $menuRow->linksrc == '/') ? BASE_URL : BASE_URL . $menuRow->linksrc);
+            $menuTarget = ($menuRow->linktype == '1') ? ' target="_blank"' : '';
+            $result .= '<li class="' . $linkActive . '"><a href="' . $menuLink . '"' . $menuTarget . '>' . $menuRow->name . '</a></li>';
         }
     }
     $result .= '</ul>';

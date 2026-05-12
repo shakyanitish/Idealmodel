@@ -136,12 +136,9 @@
                 errorClass: 'validate-has-error',
                 // --- FIX IS HERE ---
                 errorPlacement: function (error, element) {
-                    // Find the closest parent with class 'input-group'
-                    // and insert the error element *after* it.
-                    if (element.closest('.input-group').length) {
-                        error.insertAfter(element.closest('.input-group'));
+                    if (element.closest('.form-outline').length) {
+                        error.insertAfter(element.closest('.form-outline'));
                     } else {
-                        // Fallback for fields not in an input-group (if any)
                         error.insertAfter(element);
                     }
                 },
